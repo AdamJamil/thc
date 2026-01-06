@@ -12,6 +12,8 @@
 - `./gradlew build` compiles, runs checks, and produces the mod JARs in `build/libs`.
 - `./gradlew runClient` launches the Minecraft client with the mod loaded.
 - `./gradlew runServer` launches a local Minecraft server with the mod loaded.
+- `./gradlew runGametest` runs the headless GameTest suite (writes a report to `build/reports/gametest.xml`).
+- `./gradlew runSmokeServer` starts a server and auto-shuts down after a brief smoke test (`thc.smokeTest`).
 - `./gradlew runDatagen` generates data resources into the configured output directories.
 
 ## Coding Style & Naming Conventions
@@ -20,8 +22,8 @@
 - Name mixin classes with a descriptive suffix (e.g., `*Mixin`) and keep them in `thc.mixin` or `thc.mixin.client`.
 
 ## Testing Guidelines
-- No test source sets are present in this repository.
-- If you add tests, follow Gradle conventions (`src/test/kotlin` or `src/test/java`) and document the test runner you introduce.
+- Fabric GameTests live under `src/main/java/thc/gametest` and are discovered in dev/gametest runs.
+- Use `./gradlew runGametest` for mixin/boot smoke coverage, and `./gradlew runSmokeServer` for a fast server startup check.
 
 ## Commit & Pull Request Guidelines
 - No git history is available in this checkout, so there are no established commit conventions to follow.

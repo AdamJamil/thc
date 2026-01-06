@@ -29,6 +29,22 @@ loom {
 		}
 	}
 
+	runs {
+		gametest {
+			server()
+			name "Game Test"
+			runDir "run"
+			vmArg "-Dfabric-api.gametest=true"
+			vmArg "-Dfabric-api.gametest.report-file=${project.buildDir}/reports/gametest.xml"
+		}
+
+		smokeServer {
+			server()
+			name "Smoke Server"
+			runDir "run"
+			vmArg "-Dthc.smokeTest=true"
+		}
+	}
 }
 
 fabricApi {

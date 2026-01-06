@@ -3,8 +3,10 @@
 	"package": "thc.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
+		"AbstractVillagerMixin",
 		"ExampleMixin",
 		"FoodDataMixin",
+		"RecipeManagerMixin",
 		"ServerPlayerMixin"
 	],
 	"injectors": {

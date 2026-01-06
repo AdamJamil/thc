@@ -3,8 +3,10 @@ package thc
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
+import net.fabricmc.fabric.api.loot.v3.LootTableEvents
 import net.minecraft.server.MinecraftServer
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.item.Items
 import net.minecraft.world.level.gamerules.GameRules
 import org.slf4j.LoggerFactory
 
@@ -25,6 +27,10 @@ object THC : ModInitializer {
 			server.allLevels.forEach { world ->
 				lockWorldToNight(server, world)
 			}
+		})
+
+		LootTableEvents.MODIFY_DROPS.register(LootTableEvents.ModifyDrops { _, _, drops ->
+			drops.removeIf { stack -> stack.`is`(Items.SHIELD) }
 		})
 
 		if (java.lang.Boolean.getBoolean(SMOKE_TEST_PROPERTY)) {

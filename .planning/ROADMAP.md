@@ -17,7 +17,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3: Base Area Permissions** - Unrestricted building and combat restrictions in bases
 - [x] **Phase 4: World Restrictions** - Block placement/breaking restrictions and mining fatigue
 - [x] **Phase 4.1: Bug Fixes** - INSERTED: Fix bugs discovered during gameplay testing
-- [ ] **Phase 4.2: Bug Fixes 2** - INSERTED: Fix bell hardness and village detection
+- [x] **Phase 4.2: Bug Fixes 2** - INSERTED: Fix bell hardness and village detection
 - [ ] **Phase 5: Testing & Integration** - Comprehensive game tests and validation
 
 ## Phase Details
@@ -118,10 +118,10 @@ Plans:
   2. Village chunks are reliably detected across all chunks the village spans
 **Research**: Unlikely (mixin patterns established, structure API known)
 **Plans**: 1 plan in 1 wave
-**Status**: Not started
+**Status**: Complete (2026-01-16)
 
 Plans:
-- 04.2-01: Bell mixin, village detection fix (Wave 1)
+- 04.2-01: Bell mixin, village detection fix (Wave 1) - Complete
 
 ### Phase 5: Testing & Integration
 **Goal**: All mechanics validated through comprehensive automated tests
@@ -151,5 +151,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 4.1 → 4.2 → 5
 | 3. Base Area Permissions | 1/1 | Complete | 2026-01-16 |
 | 4. World Restrictions | 4/4 | Complete | 2026-01-16 |
 | 4.1 Bug Fixes | 1/1 | Complete | 2026-01-16 |
-| 4.2 Bug Fixes 2 | 0/1 | Not started | - |
+| 4.2 Bug Fixes 2 | 1/1 | Complete | 2026-01-16 |
 | 5. Testing & Integration | 0/TBD | Not started | - |

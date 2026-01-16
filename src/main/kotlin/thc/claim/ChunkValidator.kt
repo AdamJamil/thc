@@ -1,6 +1,8 @@
 package thc.claim
 
+import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.tags.StructureTags
 import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.levelgen.Heightmap
 
@@ -57,6 +59,52 @@ object ChunkValidator {
         } else {
             ValidationResult.Success(lowestSurfaceY = minY)
         }
+    }
+
+    /**
+     * Checks if a chunk contains any village structure pieces.
+     *
+     * Uses StructureTags.VILLAGE to detect all village types:
+     * - Plains village
+     * - Desert village
+     * - Savanna village
+     * - Snowy village
+     * - Taiga village
+     *
+     * Samples multiple positions within the chunk at different Y levels
+     * to reliably detect village structures.
+     *
+     * @param level The server level to check
+     * @param chunkPos The chunk position to validate
+     * @return true if the chunk contains village structure pieces
+     */
+    fun isVillageChunk(level: ServerLevel, chunkPos: ChunkPos): Boolean {
+        val structureManager = level.structureManager()
+
+        // Sample positions at chunk corners and center, at multiple Y levels
+        // Villages can be at different heights depending on terrain
+        val sampleXOffsets = listOf(0, 8, 15)
+        val sampleZOffsets = listOf(0, 8, 15)
+        val sampleYLevels = listOf(64, 70, 80, 90, 100, 110, 120)
+
+        for (xOffset in sampleXOffsets) {
+            for (zOffset in sampleZOffsets) {
+                for (y in sampleYLevels) {
+                    val pos = BlockPos(
+                        chunkPos.minBlockX + xOffset,
+                        y,
+                        chunkPos.minBlockZ + zOffset
+                    )
+
+                    val structureStart = structureManager.getStructureWithPieceAt(pos, StructureTags.VILLAGE)
+                    if (structureStart.isValid) {
+                        return true
+                    }
+                }
+            }
+        }
+
+        return false
     }
 }
 

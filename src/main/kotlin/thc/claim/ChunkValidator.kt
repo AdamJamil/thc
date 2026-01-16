@@ -62,46 +62,45 @@ object ChunkValidator {
     }
 
     /**
-     * Checks if a chunk contains any village structure pieces.
+     * Checks if a chunk contains any village structure.
      *
-     * Uses StructureTags.VILLAGE to detect all village types:
-     * - Plains village
-     * - Desert village
-     * - Savanna village
-     * - Snowy village
-     * - Taiga village
-     *
-     * Samples multiple positions within the chunk at different Y levels
-     * to reliably detect village structures.
+     * Uses chunk-level structure access to detect villages reliably.
+     * Checks for any structure tagged as VILLAGE that starts in this chunk.
      *
      * @param level The server level to check
      * @param chunkPos The chunk position to validate
-     * @return true if the chunk contains village structure pieces
+     * @return true if the chunk contains or is part of a village structure
      */
     fun isVillageChunk(level: ServerLevel, chunkPos: ChunkPos): Boolean {
         val structureManager = level.structureManager()
+        val chunk = level.getChunk(chunkPos.x, chunkPos.z)
 
-        // Sample positions at chunk corners and center, at multiple Y levels
-        // Villages can be at different heights depending on terrain
-        val sampleXOffsets = listOf(0, 8, 15)
-        val sampleZOffsets = listOf(0, 8, 15)
-        val sampleYLevels = listOf(64, 70, 80, 90, 100, 110, 120)
+        // Check all structure starts in this chunk
+        val structureStarts = chunk.allStarts
 
-        for (xOffset in sampleXOffsets) {
-            for (zOffset in sampleZOffsets) {
-                for (y in sampleYLevels) {
-                    val pos = BlockPos(
-                        chunkPos.minBlockX + xOffset,
-                        y,
-                        chunkPos.minBlockZ + zOffset
-                    )
+        for ((structure, structureStart) in structureStarts) {
+            // Check if this structure is tagged as a village
+            val structureKey = level.registryAccess()
+                .lookupOrThrow(net.minecraft.core.registries.Registries.STRUCTURE)
+                .getKey(structure)
 
-                    val structureStart = structureManager.getStructureWithPieceAt(pos, StructureTags.VILLAGE)
-                    if (structureStart.isValid) {
-                        return true
-                    }
+            if (structureKey != null) {
+                val holder = level.registryAccess()
+                    .lookupOrThrow(net.minecraft.core.registries.Registries.STRUCTURE)
+                    .get(structureKey)
+
+                if (holder.isPresent && holder.get().`is`(StructureTags.VILLAGE)) {
+                    return true
                 }
             }
+        }
+
+        // Also check if any village structure EXTENDS into this chunk (not just starts here)
+        // Use position sampling for structure pieces that might span from neighboring chunks
+        val centerPos = BlockPos(chunkPos.middleBlockX, 64, chunkPos.middleBlockZ)
+        val structureAt = structureManager.getStructureWithPieceAt(centerPos, StructureTags.VILLAGE)
+        if (structureAt.isValid) {
+            return true
         }
 
         return false

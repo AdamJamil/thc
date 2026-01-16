@@ -14,8 +14,9 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Land Plot System** - Bell mechanics and land plot item distribution
 - [x] **Phase 2: Chunk Claiming Core** - Chunk validation, claiming, and base area tracking
-- [ ] **Phase 3: Base Area Permissions** - Unrestricted building and combat restrictions in bases
-- [ ] **Phase 4: World Restrictions** - Block placement/breaking restrictions and mining fatigue
+- [x] **Phase 3: Base Area Permissions** - Unrestricted building and combat restrictions in bases
+- [x] **Phase 4: World Restrictions** - Block placement/breaking restrictions and mining fatigue
+- [ ] **Phase 4.1: Bug Fixes** - INSERTED: Fix bugs discovered during gameplay testing
 - [ ] **Phase 5: Testing & Integration** - Comprehensive game tests and validation
 
 ## Phase Details
@@ -91,9 +92,25 @@ Plans:
 Plans:
 - (To be created during plan-phase)
 
+### Phase 4.1: Bug Fixes (INSERTED)
+**Goal**: Fix bugs discovered during gameplay testing
+**Depends on**: Phase 4
+**Requirements**: None (fixes for existing requirements)
+**Success Criteria** (what must be TRUE):
+  1. Land plot item displays correct custom texture (land_plot.png) in inventory and when held
+  2. Bells cannot be broken by players (infinite hardness protection)
+  3. Block placement rejection does not cause inventory desync (count doesn't flicker)
+  4. Blocks in village chunks cannot be broken (except ores and allowlist blocks)
+**Research**: Unlikely (fixes to existing implementations)
+**Plans**: 1 plan in 1 wave
+**Status**: Not started
+
+Plans:
+- 04.1-01: Fix land plot icon, bell protection, inventory sync, village detection (Wave 1)
+
 ### Phase 5: Testing & Integration
 **Goal**: All mechanics validated through comprehensive automated tests
-**Depends on**: Phase 4
+**Depends on**: Phase 4.1
 **Requirements**: TEST-01, TEST-02, TEST-03, TEST-04, TEST-05, TEST-06
 **Success Criteria** (what must be TRUE):
   1. Game tests verify chunk claiming validation logic (all edge cases covered)
@@ -110,12 +127,13 @@ Plans:
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
+Phases execute in numeric order: 1 → 2 → 3 → 4 → 4.1 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Land Plot System | 2/2 | Complete | 2026-01-15 |
 | 2. Chunk Claiming Core | 3/3 | Complete | 2026-01-16 |
-| 3. Base Area Permissions | 0/TBD | Not started | - |
-| 4. World Restrictions | 0/TBD | Not started | - |
+| 3. Base Area Permissions | 1/1 | Complete | 2026-01-16 |
+| 4. World Restrictions | 4/4 | Complete | 2026-01-16 |
+| 4.1 Bug Fixes | 0/1 | Not started | - |
 | 5. Testing & Integration | 0/TBD | Not started | - |

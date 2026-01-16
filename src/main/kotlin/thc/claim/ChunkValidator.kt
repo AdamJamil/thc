@@ -64,8 +64,10 @@ object ChunkValidator {
     /**
      * Checks if a chunk contains any village structure.
      *
-     * Uses chunk-level structure access to detect villages reliably.
-     * Checks for any structure tagged as VILLAGE that starts in this chunk.
+     * Uses comprehensive structure detection:
+     * 1. Check if any village structure STARTS in this chunk
+     * 2. Check multiple positions across the chunk for village structure PIECES
+     *    (villages extend across multiple chunks)
      *
      * @param level The server level to check
      * @param chunkPos The chunk position to validate
@@ -75,11 +77,8 @@ object ChunkValidator {
         val structureManager = level.structureManager()
         val chunk = level.getChunk(chunkPos.x, chunkPos.z)
 
-        // Check all structure starts in this chunk
-        val structureStarts = chunk.allStarts
-
-        for ((structure, structureStart) in structureStarts) {
-            // Check if this structure is tagged as a village
+        // Method 1: Check structure starts in this chunk
+        for ((structure, _) in chunk.allStarts) {
             val structureKey = level.registryAccess()
                 .lookupOrThrow(net.minecraft.core.registries.Registries.STRUCTURE)
                 .getKey(structure)
@@ -95,12 +94,23 @@ object ChunkValidator {
             }
         }
 
-        // Also check if any village structure EXTENDS into this chunk (not just starts here)
-        // Use position sampling for structure pieces that might span from neighboring chunks
-        val centerPos = BlockPos(chunkPos.middleBlockX, 64, chunkPos.middleBlockZ)
-        val structureAt = structureManager.getStructureWithPieceAt(centerPos, StructureTags.VILLAGE)
-        if (structureAt.isValid) {
-            return true
+        // Method 2: Sample multiple positions across the chunk for structure pieces
+        // Villages typically generate at ground level, but sample multiple Y levels
+        // Sample a 3x3 grid of positions within the chunk, at multiple Y levels
+        val yLevels = listOf(64, 70, 75, 80, 63, 60, 55)  // Common village heights + variations
+        val xOffsets = listOf(2, 8, 14)  // Near edges and center
+        val zOffsets = listOf(2, 8, 14)
+
+        for (y in yLevels) {
+            for (xOff in xOffsets) {
+                for (zOff in zOffsets) {
+                    val checkPos = BlockPos(chunkPos.minBlockX + xOff, y, chunkPos.minBlockZ + zOff)
+                    val structureAt = structureManager.getStructureWithPieceAt(checkPos, StructureTags.VILLAGE)
+                    if (structureAt.isValid) {
+                        return true
+                    }
+                }
+            }
         }
 
         return false

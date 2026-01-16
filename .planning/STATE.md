@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-01-15)
 ## Current Position
 
 Phase: 4 of 5 (World Restrictions)
-Plan: 2 of 3 completed (04-02-PLAN.md)
-Status: In progress
-Last activity: 2026-01-16 - Completed 04-02-PLAN.md
+Plan: 3 of 3 completed (04-03-PLAN.md)
+Status: Phase complete
+Last activity: 2026-01-16 - Completed 04-03-PLAN.md
 
-Progress: ████████░░░░░ 62% (8/13 plans completed)
+Progress: █████████░░░░ 69% (9/13 plans completed)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 8
-- Average duration: 5.5 min
-- Total execution time: 0.73 hours
+- Total plans completed: 9
+- Average duration: 5.4 min
+- Total execution time: 0.81 hours
 
 **By Phase:**
 
@@ -30,11 +30,11 @@ Progress: ████████░░░░░ 62% (8/13 plans completed)
 | 01-land-plot-system | 2 | 6min | 3min |
 | 02-chunk-claiming-core | 3 | 16min | 5.3min |
 | 03-base-area-permissions | 1 | 6min | 6min |
-| 04-world-restrictions | 2 | 14min | 7min |
+| 04-world-restrictions | 3 | 19min | 6.3min |
 
 **Recent Trend:**
-- Last 5 plans: 02-02 (8min), 02-03 (3min), 03-01 (6min), 04-01 (8min), 04-02 (6min)
-- Trend: Stable (6.2min avg)
+- Last 5 plans: 02-03 (3min), 03-01 (6min), 04-01 (8min), 04-02 (6min), 04-03 (5min)
+- Trend: Stable (5.6min avg)
 
 ## Accumulated Context
 
@@ -66,6 +66,8 @@ Recent decisions affecting current work:
 | Silent failure for non-allowlist blocks | 04-01 | Per spec PLACE-02/03, return FAIL with no message, players learn through iteration |
 | MobEffects.MINING_FATIGUE (1.21 naming) | 04-02 | DIG_SLOWDOWN renamed in Minecraft 1.21, discovered via decompiled class |
 | 12-second (240 tick) fatigue duration | 04-02 | Natural decay interval - effect expires and level drops if player stops mining |
+| Ore detection via BlockTags | 04-03 | Vanilla tags cover all ore variants (regular + deepslate) without maintenance |
+| VillageProtection before MiningFatigue | 04-03 | Handler order matters - blocked breaks shouldn't trigger fatigue |
 
 ### Pending Todos
 
@@ -78,6 +80,6 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-01-16
-Stopped at: Completed 04-02-PLAN.md
+Stopped at: Completed 04-03-PLAN.md
 Resume file: None
-Next: Phase 04-03 (World Restrictions - Village Protections)
+Next: Phase 05 (Trading & Economy)

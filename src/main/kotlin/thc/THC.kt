@@ -11,6 +11,7 @@ import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.gamerules.GameRules
 import org.slf4j.LoggerFactory
+import thc.base.BasePermissions
 import thc.bell.BellHandler
 import thc.buckler.BucklerState
 import thc.buckler.BucklerStatsRegistry
@@ -36,6 +37,7 @@ object THC : ModInitializer {
 		THCItems.init()
 		THCSounds.init()
 		BellHandler.register()
+		BasePermissions.register()
 		PayloadTypeRegistry.playS2C().register(BucklerStatePayload.TYPE, BucklerStatePayload.STREAM_CODEC)
 
 		ServerTickEvents.END_SERVER_TICK.register(ServerTickEvents.EndTick { server ->

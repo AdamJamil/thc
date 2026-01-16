@@ -5,33 +5,34 @@
 See: .planning/PROJECT.md (updated 2026-01-15)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge - players face meaningful choices where reward demands exposure to danger.
-**Current focus:** Phase 1 — Land Plot System
+**Current focus:** Phase 2 — Chunk Claiming Core
 
 ## Current Position
 
-Phase: 1 of 5 (Land Plot System)
-Plan: 2 of 2 completed (01-02-PLAN.md)
-Status: Phase complete
-Last activity: 2026-01-15 — Completed 01-02-PLAN.md
+Phase: 2 of 5 (Chunk Claiming Core)
+Plan: 1 of 3 completed (02-01-PLAN.md)
+Status: In progress
+Last activity: 2026-01-16 — Completed 02-01-PLAN.md
 
-Progress: ██████████ 100% (2/2 plans completed)
+Progress: ██████░░░░ 60% (3/5 plans completed)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 2
-- Average duration: 3 min
-- Total execution time: 0.10 hours
+- Total plans completed: 3
+- Average duration: 4 min
+- Total execution time: 0.18 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-land-plot-system | 2 | 6min | 3min |
+| 02-chunk-claiming-core | 1 | 5min | 5min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (4min), 01-02 (2min)
-- Trend: Accelerating (2min vs 4min avg)
+- Last 5 plans: 01-01 (4min), 01-02 (2min), 02-01 (5min)
+- Trend: Stable (4min avg)
 
 ## Accumulated Context
 
@@ -48,6 +49,9 @@ Recent decisions affecting current work:
 | Bell activation stored on block entity | 01-02 | Follows attachment pattern, per-bell independence |
 | UseBlockCallback returns SUCCESS | 01-02 | Preserves vanilla bell behavior (sound, villagers) |
 | Book drops at bell center +1Y | 01-02 | Predictable item spawning location |
+| SavedDataType with Codec (1.21.11 pattern) | 02-01 | Modern API - no Factory, automatic serialization |
+| Chunks stored as Long via ChunkPos.toLong() | 02-01 | Compact storage, fast lookup |
+| DataFixTypes.LEVEL for claim data | 02-01 | Appropriate for world-scoped custom data |
 
 ### Pending Todos
 
@@ -59,6 +63,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-01-15
-Stopped at: Completed 01-02-PLAN.md (Phase 1 complete)
+Last session: 2026-01-16
+Stopped at: Completed 02-01-PLAN.md
 Resume file: None

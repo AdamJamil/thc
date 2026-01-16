@@ -20,6 +20,7 @@ import thc.item.THCBucklers
 import thc.item.THCItems
 import thc.network.BucklerSync
 import thc.network.BucklerStatePayload
+import thc.world.MiningFatigue
 import thc.world.WorldRestrictions
 
 object THC : ModInitializer {
@@ -39,6 +40,7 @@ object THC : ModInitializer {
 		THCSounds.init()
 		BellHandler.register()
 		BasePermissions.register()
+		MiningFatigue.register()
 		WorldRestrictions.register()
 		PayloadTypeRegistry.playS2C().register(BucklerStatePayload.TYPE, BucklerStatePayload.STREAM_CODEC)
 

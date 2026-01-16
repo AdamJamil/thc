@@ -20,6 +20,7 @@ import thc.item.THCBucklers
 import thc.item.THCItems
 import thc.network.BucklerSync
 import thc.network.BucklerStatePayload
+import thc.world.WorldRestrictions
 
 object THC : ModInitializer {
 	private val logger = LoggerFactory.getLogger("thc")
@@ -38,6 +39,7 @@ object THC : ModInitializer {
 		THCSounds.init()
 		BellHandler.register()
 		BasePermissions.register()
+		WorldRestrictions.register()
 		PayloadTypeRegistry.playS2C().register(BucklerStatePayload.TYPE, BucklerStatePayload.STREAM_CODEC)
 
 		ServerTickEvents.END_SERVER_TICK.register(ServerTickEvents.EndTick { server ->

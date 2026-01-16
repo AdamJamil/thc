@@ -17,6 +17,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 3: Base Area Permissions** - Unrestricted building and combat restrictions in bases
 - [x] **Phase 4: World Restrictions** - Block placement/breaking restrictions and mining fatigue
 - [x] **Phase 4.1: Bug Fixes** - INSERTED: Fix bugs discovered during gameplay testing
+- [ ] **Phase 4.2: Bug Fixes 2** - INSERTED: Fix bell hardness and village detection
 - [ ] **Phase 5: Testing & Integration** - Comprehensive game tests and validation
 
 ## Phase Details
@@ -108,9 +109,23 @@ Plans:
 Plans:
 - 04.1-01: Fix land plot icon, bell protection, inventory sync, village detection (Wave 1) - Complete
 
+### Phase 4.2: Bug Fixes 2 (INSERTED)
+**Goal**: Fix bell hardness (bedrock-like) and village chunk detection
+**Depends on**: Phase 4.1
+**Requirements**: None (fixes for existing requirements)
+**Success Criteria** (what must be TRUE):
+  1. Bells have bedrock-like hardness (mining never starts, 0 progress)
+  2. Village chunks are reliably detected across all chunks the village spans
+**Research**: Unlikely (mixin patterns established, structure API known)
+**Plans**: 1 plan in 1 wave
+**Status**: Not started
+
+Plans:
+- 04.2-01: Bell mixin, village detection fix (Wave 1)
+
 ### Phase 5: Testing & Integration
 **Goal**: All mechanics validated through comprehensive automated tests
-**Depends on**: Phase 4.1
+**Depends on**: Phase 4.2
 **Requirements**: TEST-01, TEST-02, TEST-03, TEST-04, TEST-05, TEST-06
 **Success Criteria** (what must be TRUE):
   1. Game tests verify chunk claiming validation logic (all edge cases covered)
@@ -127,7 +142,7 @@ Plans:
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 4.1 → 5
+Phases execute in numeric order: 1 → 2 → 3 → 4 → 4.1 → 4.2 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -136,4 +151,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 4.1 → 5
 | 3. Base Area Permissions | 1/1 | Complete | 2026-01-16 |
 | 4. World Restrictions | 4/4 | Complete | 2026-01-16 |
 | 4.1 Bug Fixes | 1/1 | Complete | 2026-01-16 |
+| 4.2 Bug Fixes 2 | 0/1 | Not started | - |
 | 5. Testing & Integration | 0/TBD | Not started | - |

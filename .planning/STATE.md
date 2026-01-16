@@ -10,18 +10,18 @@ See: .planning/PROJECT.md (updated 2026-01-15)
 ## Current Position
 
 Phase: 4 of 5 (World Restrictions)
-Plan: 1 of 3 completed (04-01-PLAN.md)
+Plan: 2 of 3 completed (04-02-PLAN.md)
 Status: In progress
-Last activity: 2026-01-16 - Completed 04-01-PLAN.md
+Last activity: 2026-01-16 - Completed 04-02-PLAN.md
 
-Progress: ███████░░░░░░ 54% (7/13 plans completed)
+Progress: ████████░░░░░ 62% (8/13 plans completed)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 7
-- Average duration: 5.4 min
-- Total execution time: 0.63 hours
+- Total plans completed: 8
+- Average duration: 5.5 min
+- Total execution time: 0.73 hours
 
 **By Phase:**
 
@@ -30,11 +30,11 @@ Progress: ███████░░░░░░ 54% (7/13 plans completed)
 | 01-land-plot-system | 2 | 6min | 3min |
 | 02-chunk-claiming-core | 3 | 16min | 5.3min |
 | 03-base-area-permissions | 1 | 6min | 6min |
-| 04-world-restrictions | 1 | 8min | 8min |
+| 04-world-restrictions | 2 | 14min | 7min |
 
 **Recent Trend:**
-- Last 5 plans: 02-01 (5min), 02-02 (8min), 02-03 (3min), 03-01 (6min), 04-01 (8min)
-- Trend: Stable (6.0min avg)
+- Last 5 plans: 02-02 (8min), 02-03 (3min), 03-01 (6min), 04-01 (8min), 04-02 (6min)
+- Trend: Stable (6.2min avg)
 
 ## Accumulated Context
 
@@ -62,8 +62,10 @@ Recent decisions affecting current work:
 | Server access via ServerLevel.server | 03-01 | player.server is private in 1.21.11, cast level instead |
 | UseItemCallback returns InteractionResult | 03-01 | Not InteractionResultHolder like item.use() |
 | Block allowlist strategy: 34 essential utility blocks | 04-01 | Crafting, storage, lighting across categories for meaningful out-of-base building |
-| Adjacency rule as Chebyshev distance (26 coords) | 04-01 | Exact interpretation = 53x53x53 cube, acceptable despite high check count |
+| Adjacency rule = 26 neighboring blocks | 04-01 | "26 coordinates" means 3x3x3 cube minus center, only 26 checks per placement |
 | Silent failure for non-allowlist blocks | 04-01 | Per spec PLACE-02/03, return FAIL with no message, players learn through iteration |
+| MobEffects.MINING_FATIGUE (1.21 naming) | 04-02 | DIG_SLOWDOWN renamed in Minecraft 1.21, discovered via decompiled class |
+| 12-second (240 tick) fatigue duration | 04-02 | Natural decay interval - effect expires and level drops if player stops mining |
 
 ### Pending Todos
 
@@ -76,6 +78,6 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-01-16
-Stopped at: Completed 04-01-PLAN.md
+Stopped at: Completed 04-02-PLAN.md
 Resume file: None
-Next: Phase 04-02 (World Restrictions - Terrain Verification)
+Next: Phase 04-03 (World Restrictions - Village Protections)

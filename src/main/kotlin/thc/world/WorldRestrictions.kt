@@ -21,8 +21,9 @@ object WorldRestrictions {
     /**
      * Blocks that can be placed outside base areas.
      * Includes crafting/utility stations and some building blocks.
+     * Also used by VillageProtection for break exceptions in village chunks.
      */
-    private val ALLOWED_BLOCKS = setOf(
+    val ALLOWED_BLOCKS = setOf(
         // Anvils
         Blocks.ANVIL,
         Blocks.CHIPPED_ANVIL,
@@ -109,12 +110,16 @@ object WorldRestrictions {
 
             // Outside base: check if block is in allowlist
             if (block !in ALLOWED_BLOCKS) {
+                // Sync inventory to fix client-side prediction desync
+                player.containerMenu.sendAllDataToRemote()
                 return@UseBlockCallback InteractionResult.FAIL
             }
 
             // Block is allowed: check adjacency for non-exempt blocks
             if (block !in ADJACENCY_EXEMPT_BLOCKS) {
                 if (!checkAdjacency(level, placementPos)) {
+                    // Sync inventory to fix client-side prediction desync
+                    player.containerMenu.sendAllDataToRemote()
                     return@UseBlockCallback InteractionResult.FAIL
                 }
             }

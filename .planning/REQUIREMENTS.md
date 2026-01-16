@@ -76,16 +76,49 @@
 
 ## Traceability
 
-Populated by create-roadmap.
-
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| (awaiting roadmap) | | |
+| PLOT-01 | Phase 1 | Pending |
+| PLOT-02 | Phase 1 | Pending |
+| PLOT-03 | Phase 1 | Pending |
+| PLOT-04 | Phase 1 | Pending |
+| CLAIM-01 | Phase 2 | Pending |
+| CLAIM-02 | Phase 2 | Pending |
+| CLAIM-03 | Phase 2 | Pending |
+| CLAIM-04 | Phase 2 | Pending |
+| CLAIM-05 | Phase 2 | Pending |
+| CLAIM-06 | Phase 2 | Pending |
+| CLAIM-07 | Phase 2 | Pending |
+| CLAIM-08 | Phase 2 | Pending |
+| BASE-01 | Phase 3 | Pending |
+| BASE-02 | Phase 3 | Pending |
+| BASE-03 | Phase 3 | Pending |
+| BASE-04 | Phase 3 | Pending |
+| BASE-05 | Phase 3 | Pending |
+| BASE-06 | Phase 3 | Pending |
+| PLACE-01 | Phase 4 | Pending |
+| PLACE-02 | Phase 4 | Pending |
+| PLACE-03 | Phase 4 | Pending |
+| PLACE-04 | Phase 4 | Pending |
+| PLACE-05 | Phase 4 | Pending |
+| BREAK-01 | Phase 4 | Pending |
+| BREAK-02 | Phase 4 | Pending |
+| BREAK-03 | Phase 4 | Pending |
+| BREAK-04 | Phase 4 | Pending |
+| BREAK-05 | Phase 4 | Pending |
+| BREAK-06 | Phase 4 | Pending |
+| BREAK-07 | Phase 4 | Pending |
+| TEST-01 | Phase 5 | Pending |
+| TEST-02 | Phase 5 | Pending |
+| TEST-03 | Phase 5 | Pending |
+| TEST-04 | Phase 5 | Pending |
+| TEST-05 | Phase 5 | Pending |
+| TEST-06 | Phase 5 | Pending |
 
 **Coverage:**
 - v1 requirements: 30 total
-- Mapped to phases: 0 (awaiting roadmap)
-- Unmapped: 30 ⚠️
+- Mapped to phases: 30
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-01-15*

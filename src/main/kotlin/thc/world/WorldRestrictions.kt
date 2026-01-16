@@ -129,18 +129,19 @@ object WorldRestrictions {
      * Returns true if placement is allowed (no nearby restricted allowlist blocks).
      * Returns false if placement should be blocked (too close to another restricted allowlist block).
      *
-     * Uses Chebyshev distance (max of |dx|,|dy|,|dz| <= 26).
+     * "26 coordinates" means the 26 neighboring blocks (3x3x3 cube minus center):
+     * face neighbors (6) + edge neighbors (12) + corner neighbors (8) = 26 total.
      *
      * @param level The server level
      * @param placementPos The position where the block would be placed
      * @return true if placement is allowed, false if blocked by adjacency rule
      */
     private fun checkAdjacency(level: ServerLevel, placementPos: BlockPos): Boolean {
-        // Check all blocks within Chebyshev distance of 26
-        for (dx in -26..26) {
-            for (dy in -26..26) {
-                for (dz in -26..26) {
-                    // Skip the placement position itself
+        // Check all 26 neighboring blocks (3x3x3 cube minus center)
+        for (dx in -1..1) {
+            for (dy in -1..1) {
+                for (dz in -1..1) {
+                    // Skip the placement position itself (center of the 3x3x3 cube)
                     if (dx == 0 && dy == 0 && dz == 0) {
                         continue
                     }

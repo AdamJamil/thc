@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-01-15)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge - players face meaningful choices where reward demands exposure to danger.
-**Current focus:** Phase 4 - World Restrictions
+**Current focus:** Phase 5 - Testing (after bugfix phase)
 
 ## Current Position
 
-Phase: 4.1 of 5 (Bug Fixes - INSERTED)
-Plan: 0 of 1 completed
-Status: Planning complete, ready to execute
-Last activity: 2026-01-16 - Created bugfix phase 4.1
+Phase: 4.1 of 5 (Bug Fixes - COMPLETE)
+Plan: 1 of 1 completed
+Status: Phase 4.1 complete, ready for Phase 5
+Last activity: 2026-01-16 - Completed 04.1-01 bugfix plan
 
-Progress: ██████████░░░ 77% (10/13 plans completed, +1 bugfix phase)
+Progress: ███████████░░ 85% (11/13 plans completed)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 10
-- Average duration: 5.1 min
-- Total execution time: 0.85 hours
+- Total plans completed: 11
+- Average duration: 4.9 min
+- Total execution time: 0.9 hours
 
 **By Phase:**
 
@@ -31,10 +31,11 @@ Progress: ██████████░░░ 77% (10/13 plans completed, +1
 | 02-chunk-claiming-core | 3 | 16min | 5.3min |
 | 03-base-area-permissions | 1 | 6min | 6min |
 | 04-world-restrictions | 4 | 21min | 5.25min |
+| 04.1-bugfixes | 1 | 3min | 3min |
 
 **Recent Trend:**
-- Last 5 plans: 03-01 (6min), 04-01 (8min), 04-02 (6min), 04-03 (5min), 04-04 (2min)
-- Trend: Stable (5.4min avg)
+- Last 5 plans: 04-01 (8min), 04-02 (6min), 04-03 (5min), 04-04 (2min), 04.1-01 (3min)
+- Trend: Stable (4.8min avg)
 
 ## Accumulated Context
 
@@ -70,6 +71,10 @@ Recent decisions affecting current work:
 | VillageProtection before MiningFatigue | 04-03 | Handler order matters - blocked breaks shouldn't trigger fatigue |
 | Check effect.duration <= 1 for expiration | 04-04 | Catches imminent expiration before effect is removed by game |
 | Remove/reapply for decay | 04-04 | Effect can't be modified in place, must remove and add new at lower amplifier |
+| MC 1.21+ items need both model and item definition | 04.1-01 | models/item/*.json for rendering, items/*.json for item system |
+| BellProtection registered before BellHandler | 04.1-01 | Early event chain interception ensures protection |
+| sendAllDataToRemote() for inventory sync | 04.1-01 | More reliable than broadcastChanges() for immediate correction |
+| chunk.allStarts + center sampling for village detection | 04.1-01 | Hybrid approach catches both origins and extended structures |
 
 ### Pending Todos
 
@@ -82,6 +87,6 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-01-16
-Stopped at: Created Phase 4.1 bugfix plan
+Stopped at: Completed 04.1-01 bugfix plan
 Resume file: None
-Next: Execute Phase 4.1 (Bug Fixes)
+Next: Phase 5 Testing

@@ -12,7 +12,7 @@ Implementation of the base claiming system that enforces risk-based territorial 
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Land Plot System** - Bell mechanics and land plot item distribution
+- [x] **Phase 1: Land Plot System** - Bell mechanics and land plot item distribution
 - [ ] **Phase 2: Chunk Claiming Core** - Chunk validation, claiming, and base area tracking
 - [ ] **Phase 3: Base Area Permissions** - Unrestricted building and combat restrictions in bases
 - [ ] **Phase 4: World Restrictions** - Block placement/breaking restrictions and mining fatigue
@@ -31,10 +31,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   4. Bell activation state persists across server restarts and world reloads
 **Research**: Likely (bell interaction events, custom items, trade modification)
 **Research topics**: Fabric event hooks for bell USE events in 1.21.11, custom item registration patterns, TradeOfferHelper API usage for removing bell trades, block entity data persistence
-**Plans**: TBD
+**Plans**: 2 plans in 2 waves
+**Status**: Complete (2026-01-15)
 
 Plans:
-- (To be created during plan-phase)
+- 01-01: Land plot item foundation (Wave 1) - Complete
+- 01-02: Bell interaction + state persistence (Wave 2) - Complete
 
 ### Phase 2: Chunk Claiming Core
 **Goal**: Players can use land plot books to claim valid chunks as base areas
@@ -109,7 +111,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Land Plot System | 0/TBD | Not started | - |
+| 1. Land Plot System | 2/2 | Complete | 2026-01-15 |
 | 2. Chunk Claiming Core | 0/TBD | Not started | - |
 | 3. Base Area Permissions | 0/TBD | Not started | - |
 | 4. World Restrictions | 0/TBD | Not started | - |

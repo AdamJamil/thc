@@ -13,7 +13,7 @@ Implementation of the base claiming system that enforces risk-based territorial 
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Land Plot System** - Bell mechanics and land plot item distribution
-- [ ] **Phase 2: Chunk Claiming Core** - Chunk validation, claiming, and base area tracking
+- [x] **Phase 2: Chunk Claiming Core** - Chunk validation, claiming, and base area tracking
 - [ ] **Phase 3: Base Area Permissions** - Unrestricted building and combat restrictions in bases
 - [ ] **Phase 4: World Restrictions** - Block placement/breaking restrictions and mining fatigue
 - [ ] **Phase 5: Testing & Integration** - Comprehensive game tests and validation
@@ -50,10 +50,13 @@ Plans:
   5. Land plot book is consumed on successful claim
 **Research**: Likely (chunk management APIs, structure detection, terrain analysis)
 **Research topics**: Chunk coordinate conversion and access patterns, ServerLevel chunk queries, Structure/FeatureDetection API in 1.21.11, heightmap queries for terrain flatness validation, attachment or world data storage for claimed chunks
-**Plans**: TBD
+**Plans**: 3 plans in 2 waves
+**Status**: Complete (2026-01-16)
 
 Plans:
-- (To be created during plan-phase)
+- 02-01: Claim data storage (Wave 1) - Complete
+- 02-02: Chunk validator (Wave 1) - Complete
+- 02-03: Land plot use action (Wave 2) - Complete
 
 ### Phase 3: Base Area Permissions
 **Goal**: Base areas provide unrestricted building with combat restrictions
@@ -112,7 +115,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Land Plot System | 2/2 | Complete | 2026-01-15 |
-| 2. Chunk Claiming Core | 0/TBD | Not started | - |
+| 2. Chunk Claiming Core | 3/3 | Complete | 2026-01-16 |
 | 3. Base Area Permissions | 0/TBD | Not started | - |
 | 4. World Restrictions | 0/TBD | Not started | - |
 | 5. Testing & Integration | 0/TBD | Not started | - |

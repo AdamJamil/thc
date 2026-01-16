@@ -82,14 +82,14 @@
 | PLOT-02 | Phase 1 | Complete |
 | PLOT-03 | Phase 1 | Complete |
 | PLOT-04 | Phase 1 | Complete |
-| CLAIM-01 | Phase 2 | Pending |
-| CLAIM-02 | Phase 2 | Pending |
-| CLAIM-03 | Phase 2 | Pending |
-| CLAIM-04 | Phase 2 | Pending |
-| CLAIM-05 | Phase 2 | Pending |
-| CLAIM-06 | Phase 2 | Pending |
-| CLAIM-07 | Phase 2 | Pending |
-| CLAIM-08 | Phase 2 | Pending |
+| CLAIM-01 | Phase 2 | Complete |
+| CLAIM-02 | Phase 2 | Complete |
+| CLAIM-03 | Phase 2 | Complete |
+| CLAIM-04 | Phase 2 | Complete |
+| CLAIM-05 | Phase 2 | Complete |
+| CLAIM-06 | Phase 2 | Complete |
+| CLAIM-07 | Phase 2 | Complete |
+| CLAIM-08 | Phase 2 | Complete |
 | BASE-01 | Phase 3 | Pending |
 | BASE-02 | Phase 3 | Pending |
 | BASE-03 | Phase 3 | Pending |
@@ -122,4 +122,4 @@
 
 ---
 *Requirements defined: 2026-01-15*
-*Last updated: 2026-01-15 — Phase 1 requirements complete*
+*Last updated: 2026-01-16 — Phase 2 requirements complete*

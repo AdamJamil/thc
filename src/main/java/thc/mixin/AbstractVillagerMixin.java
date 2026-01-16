@@ -17,5 +17,6 @@ public abstract class AbstractVillagerMixin {
 			return;
 		}
 		offers.removeIf(offer -> offer.getResult().is(Items.SHIELD));
+		offers.removeIf(offer -> offer.getResult().is(Items.BELL));
 	}
 }

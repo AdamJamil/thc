@@ -4,8 +4,10 @@
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
 		"AbstractVillagerMixin",
+		"BellBlockMixin",
 		"ExampleMixin",
 		"FoodDataMixin",
+		"LivingEntityMixin",
 		"RecipeManagerMixin",
 		"ServerPlayerMixin"
 	],

@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-01-15)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge - players face meaningful choices where reward demands exposure to danger.
-**Current focus:** Phase 5 - Testing (after bugfix phase)
+**Current focus:** Phase 5 - Testing (after bugfix phases)
 
 ## Current Position
 
-Phase: 4.1 of 5 (Bug Fixes - COMPLETE)
+Phase: 4.2 of 5 (Bug Fixes 2 - COMPLETE)
 Plan: 1 of 1 completed
-Status: Phase 4.1 complete, ready for Phase 5
-Last activity: 2026-01-16 - Completed 04.1-01 bugfix plan
+Status: Phase 4.2 complete, ready for Phase 5
+Last activity: 2026-01-16 - Completed 04.2-01 bugfix plan
 
-Progress: ███████████░░ 85% (11/13 plans completed)
+Progress: ████████████░ 92% (12/13 plans completed)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 11
-- Average duration: 4.9 min
-- Total execution time: 0.9 hours
+- Total plans completed: 12
+- Average duration: 4.8 min
+- Total execution time: 1.0 hours
 
 **By Phase:**
 
@@ -32,10 +32,11 @@ Progress: ███████████░░ 85% (11/13 plans completed)
 | 03-base-area-permissions | 1 | 6min | 6min |
 | 04-world-restrictions | 4 | 21min | 5.25min |
 | 04.1-bugfixes | 1 | 3min | 3min |
+| 04.2-bugfixes-2 | 1 | 4min | 4min |
 
 **Recent Trend:**
-- Last 5 plans: 04-01 (8min), 04-02 (6min), 04-03 (5min), 04-04 (2min), 04.1-01 (3min)
-- Trend: Stable (4.8min avg)
+- Last 5 plans: 04-02 (6min), 04-03 (5min), 04-04 (2min), 04.1-01 (3min), 04.2-01 (4min)
+- Trend: Stable (4.0min avg)
 
 ## Accumulated Context
 
@@ -75,6 +76,9 @@ Recent decisions affecting current work:
 | BellProtection registered before BellHandler | 04.1-01 | Early event chain interception ensures protection |
 | sendAllDataToRemote() for inventory sync | 04.1-01 | More reliable than broadcastChanges() for immediate correction |
 | chunk.allStarts + center sampling for village detection | 04.1-01 | Hybrid approach catches both origins and extended structures |
+| Target BlockBehaviour not BellBlock for getDestroyProgress | 04.2-01 | BellBlock doesn't override method, must inject at parent class |
+| 63-point sampling (9 positions x 7 Y levels) for villages | 04.2-01 | Comprehensive coverage of village chunks at all typical heights |
+| Mixin over event handler for bell protection | 04.2-01 | Prevents mining animation from starting rather than canceling mid-flight |
 
 ### Pending Todos
 
@@ -87,6 +91,6 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-01-16
-Stopped at: Completed 04.1-01 bugfix plan
+Stopped at: Completed 04.2-01 bugfix plan
 Resume file: None
 Next: Phase 5 Testing

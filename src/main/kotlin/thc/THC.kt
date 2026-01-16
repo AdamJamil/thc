@@ -13,6 +13,7 @@ import net.minecraft.world.level.gamerules.GameRules
 import org.slf4j.LoggerFactory
 import thc.base.BasePermissions
 import thc.bell.BellHandler
+import thc.bell.BellProtection
 import thc.buckler.BucklerState
 import thc.buckler.BucklerStatsRegistry
 import thc.item.BucklerItem
@@ -39,6 +40,7 @@ object THC : ModInitializer {
 		THCBucklers.init()
 		THCItems.init()
 		THCSounds.init()
+		BellProtection.register()
 		BellHandler.register()
 		BasePermissions.register()
 		WorldRestrictions.register()

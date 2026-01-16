@@ -16,7 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 2: Chunk Claiming Core** - Chunk validation, claiming, and base area tracking
 - [x] **Phase 3: Base Area Permissions** - Unrestricted building and combat restrictions in bases
 - [x] **Phase 4: World Restrictions** - Block placement/breaking restrictions and mining fatigue
-- [ ] **Phase 4.1: Bug Fixes** - INSERTED: Fix bugs discovered during gameplay testing
+- [x] **Phase 4.1: Bug Fixes** - INSERTED: Fix bugs discovered during gameplay testing
 - [ ] **Phase 5: Testing & Integration** - Comprehensive game tests and validation
 
 ## Phase Details
@@ -103,10 +103,10 @@ Plans:
   4. Blocks in village chunks cannot be broken (except ores and allowlist blocks)
 **Research**: Unlikely (fixes to existing implementations)
 **Plans**: 1 plan in 1 wave
-**Status**: Not started
+**Status**: Complete (2026-01-16)
 
 Plans:
-- 04.1-01: Fix land plot icon, bell protection, inventory sync, village detection (Wave 1)
+- 04.1-01: Fix land plot icon, bell protection, inventory sync, village detection (Wave 1) - Complete
 
 ### Phase 5: Testing & Integration
 **Goal**: All mechanics validated through comprehensive automated tests
@@ -135,5 +135,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 4.1 → 5
 | 2. Chunk Claiming Core | 3/3 | Complete | 2026-01-16 |
 | 3. Base Area Permissions | 1/1 | Complete | 2026-01-16 |
 | 4. World Restrictions | 4/4 | Complete | 2026-01-16 |
-| 4.1 Bug Fixes | 0/1 | Not started | - |
+| 4.1 Bug Fixes | 1/1 | Complete | 2026-01-16 |
 | 5. Testing & Integration | 0/TBD | Not started | - |

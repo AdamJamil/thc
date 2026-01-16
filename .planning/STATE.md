@@ -5,34 +5,34 @@
 See: .planning/PROJECT.md (updated 2026-01-15)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge - players face meaningful choices where reward demands exposure to danger.
-**Current focus:** Phase 2 — Chunk Claiming Core
+**Current focus:** Phase 2 Complete - Ready for Phase 3
 
 ## Current Position
 
 Phase: 2 of 5 (Chunk Claiming Core)
-Plan: 2 of 3 completed (02-02-PLAN.md)
-Status: In progress
-Last activity: 2026-01-16 — Completed 02-02-PLAN.md
+Plan: 3 of 3 completed (02-03-PLAN.md)
+Status: Phase complete
+Last activity: 2026-01-16 - Completed 02-03-PLAN.md
 
-Progress: ████████░░ 80% (4/5 plans completed)
+Progress: ██████████ 100% (5/5 plans completed in Phases 1-2)
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 4
+- Total plans completed: 5
 - Average duration: 5 min
-- Total execution time: 0.32 hours
+- Total execution time: 0.38 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-land-plot-system | 2 | 6min | 3min |
-| 02-chunk-claiming-core | 2 | 13min | 6.5min |
+| 02-chunk-claiming-core | 3 | 16min | 5.3min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (4min), 01-02 (2min), 02-01 (5min), 02-02 (8min)
-- Trend: Stable (5min avg)
+- Last 5 plans: 01-01 (4min), 01-02 (2min), 02-01 (5min), 02-02 (8min), 02-03 (3min)
+- Trend: Stable (4.4min avg)
 
 ## Accumulated Context
 
@@ -55,6 +55,8 @@ Recent decisions affecting current work:
 | StructureTags.VILLAGE for village detection | 02-02 | Single tag covers all village types without maintenance |
 | Multi-position sampling for village detection | 02-02 | Villages span chunks, need reliable detection |
 | ValidationResult sealed class | 02-02 | Type-safe results with exhaustive pattern matching |
+| Action bar for claim messages | 02-03 | Less intrusive than chat, appropriate for quick feedback |
+| Validation order: claimed->village->terrain | 02-03 | Fail fast on simple checks before expensive terrain scan |
 
 ### Pending Todos
 
@@ -67,5 +69,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-01-16
-Stopped at: Completed 02-02-PLAN.md
+Stopped at: Completed 02-03-PLAN.md (Phase 2 complete)
 Resume file: None

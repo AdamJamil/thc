@@ -1,5 +1,6 @@
 package thc.world
 
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
@@ -8,6 +9,7 @@ import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.level.ChunkPos
 import thc.claim.ChunkValidator
 import thc.claim.ClaimManager
+import java.util.UUID
 
 /**
  * Handles mining fatigue application for block breaking outside base areas.
@@ -28,9 +30,46 @@ object MiningFatigue {
     private const val DECAY_TICKS = 12 * 20
 
     /**
-     * Registers the block break event handler.
+     * Tracks players with mining fatigue.
+     * Maps player UUID to their current fatigue amplifier when effect was applied.
+     * Used for decay logic to know when to reapply at lower level.
+     */
+    private val trackedPlayers = mutableMapOf<UUID, Int>()
+
+    /**
+     * Registers the block break event handler and tick handler for decay.
      */
     fun register() {
+        // Register tick handler for fatigue decay
+        ServerTickEvents.END_SERVER_TICK.register(ServerTickEvents.EndTick { server ->
+            for (player in server.playerList.players) {
+                val effect = player.getEffect(MobEffects.MINING_FATIGUE)
+
+                if (effect == null) {
+                    // No effect, clean up tracking
+                    trackedPlayers.remove(player.uuid)
+                    continue
+                }
+
+                // Check if effect is about to expire (duration <= 1 tick)
+                if (effect.duration <= 1) {
+                    val currentAmplifier = effect.amplifier
+
+                    if (currentAmplifier > 0) {
+                        // Decay to lower level: remove and reapply at amplifier-1
+                        player.removeEffect(MobEffects.MINING_FATIGUE)
+                        val newAmplifier = currentAmplifier - 1
+                        player.addEffect(MobEffectInstance(MobEffects.MINING_FATIGUE, DECAY_TICKS, newAmplifier))
+                        trackedPlayers[player.uuid] = newAmplifier
+                    } else {
+                        // Amplifier 0 (Fatigue I) - let it expire naturally
+                        // Clean up tracking on next tick when effect is gone
+                    }
+                }
+            }
+        })
+
+        // Register block break handler for fatigue application
         PlayerBlockBreakEvents.BEFORE.register { level, player, pos, state, blockEntity ->
             // Skip client-side processing
             if (level.isClientSide) {
@@ -86,5 +125,8 @@ object MiningFatigue {
 
         // Apply new effect with incremented amplifier
         player.addEffect(MobEffectInstance(MobEffects.MINING_FATIGUE, DECAY_TICKS, newAmplifier))
+
+        // Track for decay logic
+        trackedPlayers[player.uuid] = newAmplifier
     }
 }

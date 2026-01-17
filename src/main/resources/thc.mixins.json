@@ -9,7 +9,9 @@
 		"FoodDataMixin",
 		"LivingEntityMixin",
 		"RecipeManagerMixin",
-		"ServerPlayerMixin"
+		"ServerPlayerMixin",
+		"SnowballItemMixin",
+		"access.ItemAccessor"
 	],
 	"injectors": {
 		"defaultRequire": 1

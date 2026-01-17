@@ -18,7 +18,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 4: World Restrictions** - Block placement/breaking restrictions and mining fatigue
 - [x] **Phase 4.1: Bug Fixes** - INSERTED: Fix bugs discovered during gameplay testing
 - [x] **Phase 4.2: Bug Fixes 2** - INSERTED: Fix bell hardness and village detection
-- [ ] **Phase 5: Testing & Integration** - Comprehensive game tests and validation
+- [ ] **Phase 5: Crafting Tweaks** - Ladder recipe buff, snowball stacking, snow block conversion
 
 ## Phase Details
 
@@ -123,18 +123,18 @@ Plans:
 Plans:
 - 04.2-01: Bell mixin, village detection fix (Wave 1) - Complete
 
-### Phase 5: Testing & Integration
-**Goal**: All mechanics validated through comprehensive automated tests
+### Phase 5: Crafting Tweaks
+**Goal**: Quality of life crafting and stacking changes for ladders and snow
 **Depends on**: Phase 4.2
-**Requirements**: TEST-01, TEST-02, TEST-03, TEST-04, TEST-05, TEST-06
+**Requirements**: CRAFT-01, CRAFT-02, CRAFT-03, CRAFT-04
 **Success Criteria** (what must be TRUE):
-  1. Game tests verify chunk claiming validation logic (all edge cases covered)
-  2. Game tests verify block placement restrictions and adjacency rules
-  3. Game tests verify block breaking restrictions and mining fatigue mechanics
-  4. Game tests verify base area permission boundaries and combat restrictions
-  5. Smoke tests complete successfully (100 tick validation)
-**Research**: Unlikely (Fabric GameTest patterns established in existing buckler tests)
-**Plans**: TBD
+  1. Ladder recipe yields 16 ladders from 7 sticks (instead of 3)
+  2. Snowballs stack to 64 (instead of 16)
+  3. Snow block can be crafted into 9 snowballs
+  4. 9 snowballs can be crafted into 1 snow block
+**Research**: Unlikely (recipe patterns and mixin patterns established)
+**Plans**: 1 plan in 1 wave
+**Status**: Not started
 
 Plans:
 - (To be created during plan-phase)
@@ -152,4 +152,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 4.1 → 4.2 → 5
 | 4. World Restrictions | 4/4 | Complete | 2026-01-16 |
 | 4.1 Bug Fixes | 1/1 | Complete | 2026-01-16 |
 | 4.2 Bug Fixes 2 | 1/1 | Complete | 2026-01-16 |
-| 5. Testing & Integration | 0/TBD | Not started | - |
+| 5. Crafting Tweaks | 0/1 | Not started | - |

@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-01-15)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge - players face meaningful choices where reward demands exposure to danger.
-**Current focus:** Phase 5 - Testing (after bugfix phases)
+**Current focus:** Phase 5 - Crafting Tweaks
 
 ## Current Position
 
-Phase: 4.2 of 5 (Bug Fixes 2 - COMPLETE)
-Plan: 1 of 1 completed
-Status: Phase 4.2 complete, ready for Phase 5
-Last activity: 2026-01-16 - Completed 04.2-01 bugfix plan
+Phase: 5 of 5 (Crafting Tweaks - NOT STARTED)
+Plan: 0 of 1 completed
+Status: Ready to plan Phase 5
+Last activity: 2026-01-17 - Added Phase 5 crafting tweaks
 
 Progress: ████████████░ 92% (12/13 plans completed)
 
@@ -90,7 +90,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-01-16
-Stopped at: Completed 04.2-01 bugfix plan
+Last session: 2026-01-17
+Stopped at: Added Phase 5 crafting tweaks
 Resume file: None
-Next: Phase 5 Testing
+Next: Plan and execute Phase 5

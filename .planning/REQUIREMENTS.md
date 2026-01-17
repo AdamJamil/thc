@@ -50,14 +50,12 @@
 - [ ] **BREAK-06**: Ores in village chunks can be broken (exception to village protection)
 - [ ] **BREAK-07**: Allowlist blocks in village chunks can be broken (exception to village protection)
 
-### Testing & Validation
+### Crafting Tweaks
 
-- [ ] **TEST-01**: Game tests verify chunk claiming validation logic (flatness, village detection, already claimed)
-- [ ] **TEST-02**: Game tests verify block placement restrictions and adjacency rules
-- [ ] **TEST-03**: Game tests verify block breaking restrictions and mining fatigue application
-- [ ] **TEST-04**: Game tests verify base area permission boundaries
-- [ ] **TEST-05**: Game tests verify combat restriction in base areas
-- [ ] **TEST-06**: Smoke tests pass after implementation
+- [ ] **CRAFT-01**: Ladder recipe yields 16 ladders from 7 sticks (instead of vanilla 3)
+- [ ] **CRAFT-02**: Snowballs stack to 64 (instead of vanilla 16)
+- [ ] **CRAFT-03**: Snow block can be converted into 9 snowballs via crafting
+- [ ] **CRAFT-04**: 9 snowballs can be crafted into 1 snow block
 
 ## v2 Requirements
 
@@ -108,18 +106,16 @@
 | BREAK-05 | Phase 4 | Complete |
 | BREAK-06 | Phase 4 | Complete |
 | BREAK-07 | Phase 4 | Complete |
-| TEST-01 | Phase 5 | Pending |
-| TEST-02 | Phase 5 | Pending |
-| TEST-03 | Phase 5 | Pending |
-| TEST-04 | Phase 5 | Pending |
-| TEST-05 | Phase 5 | Pending |
-| TEST-06 | Phase 5 | Pending |
+| CRAFT-01 | Phase 5 | Pending |
+| CRAFT-02 | Phase 5 | Pending |
+| CRAFT-03 | Phase 5 | Pending |
+| CRAFT-04 | Phase 5 | Pending |
 
 **Coverage:**
-- v1 requirements: 30 total
-- Mapped to phases: 30
+- v1 requirements: 28 total
+- Mapped to phases: 28
 - Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-01-15*
-*Last updated: 2026-01-16 — Phase 4 requirements complete*
+*Last updated: 2026-01-17 — Added Phase 5 crafting tweaks*

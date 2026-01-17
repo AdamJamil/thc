@@ -52,10 +52,10 @@
 
 ### Crafting Tweaks
 
-- [ ] **CRAFT-01**: Ladder recipe yields 16 ladders from 7 sticks (instead of vanilla 3)
-- [ ] **CRAFT-02**: Snowballs stack to 64 (instead of vanilla 16)
-- [ ] **CRAFT-03**: Snow block can be converted into 9 snowballs via crafting
-- [ ] **CRAFT-04**: 9 snowballs can be crafted into 1 snow block
+- [x] **CRAFT-01**: Ladder recipe yields 16 ladders from 7 sticks (instead of vanilla 3)
+- [x] **CRAFT-02**: Snowballs stack to 64 (instead of vanilla 16)
+- [x] **CRAFT-03**: Snow block can be converted into 9 snowballs via crafting
+- [x] **CRAFT-04**: 9 snowballs can be crafted into 1 snow block
 
 ## v2 Requirements
 
@@ -106,10 +106,10 @@
 | BREAK-05 | Phase 4 | Complete |
 | BREAK-06 | Phase 4 | Complete |
 | BREAK-07 | Phase 4 | Complete |
-| CRAFT-01 | Phase 5 | Pending |
-| CRAFT-02 | Phase 5 | Pending |
-| CRAFT-03 | Phase 5 | Pending |
-| CRAFT-04 | Phase 5 | Pending |
+| CRAFT-01 | Phase 5 | Complete |
+| CRAFT-02 | Phase 5 | Complete |
+| CRAFT-03 | Phase 5 | Complete |
+| CRAFT-04 | Phase 5 | Complete |
 
 **Coverage:**
 - v1 requirements: 28 total
@@ -118,4 +118,4 @@
 
 ---
 *Requirements defined: 2026-01-15*
-*Last updated: 2026-01-17 — Added Phase 5 crafting tweaks*
+*Last updated: 2026-01-17 — Phase 5 crafting tweaks complete*

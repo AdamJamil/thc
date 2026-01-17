@@ -27,18 +27,23 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
   - Smoke test system (100 tick validation)
   - Game tests for buckler mechanics
   - Debug output gated by tags
+- ✓ Base claiming system — v1.0
+  - Bell rings drop land plot books (first ring per bell)
+  - Land plots claim chunks with terrain flatness validation
+  - Base areas allow unrestricted building
+  - Combat blocked in bases ("No violence indoors!")
+  - Mining fatigue outside bases (1.4^x stacking, 12s decay)
+  - Village chunks protected (no breaking except ores/allowlist)
+  - Allowlist-only placement outside bases with adjacency rules
+  - Bells indestructible (bedrock-like hardness)
+- ✓ Crafting tweaks — v1.0
+  - Ladder recipe yields 16 (instead of 3)
+  - Snowballs stack to 64 (instead of 16)
+  - Snow block ↔ 9 snowballs conversion
 
 ### Active
 
-- [ ] Base claiming system (land plots via bells)
-  - First bell ring drops "land plot" book
-  - Land plot consumed to claim chunks with terrain restrictions
-  - Base chunks allow unrestricted building
-  - Village chunk protection (blocks cannot be destroyed except ores/allowlist)
-  - Restricted block placement outside bases (allowlist only)
-  - Placement separation rules (blocks cannot be adjacent)
-  - No violence within base chunks
-  - Adjacent chunk claiming support
+(None — v1.0 complete, planning next milestone)
 
 ### Out of Scope
 
@@ -82,9 +87,22 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 |----------|-----------|---------|
 | Buckler replaces shields entirely | Supports risk/reward philosophy - active defense (parry) vs passive (shield block) | ✓ Good - completed and tested |
 | Night-only world | Forces exposure to hostile mobs, eliminates safe periods | — Pending gameplay validation |
-| Iterative system design | Allows parallel design/implementation, faster iteration | — Pending - first iteration (base claiming) in progress |
+| Iterative system design | Allows parallel design/implementation, faster iteration | ✓ Good - v1.0 delivered in 3 days |
 | Attachments for player state | Fabric API standard for entity data persistence | ✓ Good - clean sync mechanism |
 | GameTest over manual testing | Automated verification prevents regressions | ✓ Good - catches bugs early |
 
+## Current State
+
+**Shipped:** v1.0 Base Claiming System (2026-01-17)
+
+**Codebase:**
+- ~2,500 LOC Kotlin/Java
+- 58 files in base claiming system
+- Mixed mixin + event-driven architecture
+
+**Known issues:** None currently tracked
+
+**Technical debt:** None identified
+
 ---
-*Last updated: 2026-01-15 after initialization*
+*Last updated: 2026-01-17 after v1.0 milestone*

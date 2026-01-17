@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    "S S",
+    "SSS",
+    "S S"
+  ],
+  "result": {
+    "count": 16,
+    "id": "minecraft:ladder"
+  }
+}

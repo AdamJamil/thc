@@ -2,17 +2,17 @@
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-01-17)
+See: .planning/PROJECT.md (updated 2026-01-18)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge - players face meaningful choices where reward demands exposure to danger.
-**Current focus:** Planning next milestone
+**Current focus:** v1.1 Extra Features Batch 1
 
 ## Current Position
 
-Phase: N/A (v1.0 complete, planning next milestone)
-Plan: N/A
-Status: Ready to plan v1.1
-Last activity: 2026-01-17 — v1.0 milestone complete
+Phase: Not started (run /gsd:create-roadmap)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-01-18 — Milestone v1.1 started
 
 Progress: v1.0 SHIPPED (7 phases, 13 plans)
 
@@ -58,7 +58,7 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-01-17
-Stopped at: v1.0 milestone complete
+Last session: 2026-01-18
+Stopped at: Milestone v1.1 initialized
 Resume file: None
-Next: /gsd:discuss-milestone to plan v1.1
+Next: /gsd:define-requirements or /gsd:create-roadmap

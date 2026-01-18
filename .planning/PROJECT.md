@@ -43,7 +43,14 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ### Active
 
-(None — v1.0 complete, planning next milestone)
+**Current Milestone: v1.1 Extra Features Batch 1**
+
+**Goal:** Combat and survival tweaks that reinforce risk/reward - projectiles create danger, drowning is forgiving, spears removed.
+
+- [ ] Drowning damage tick rate reduced 4x (more forgiving underwater)
+- [ ] Spear removal (crafting disabled, mob spawn equipment removed, loot tables cleared)
+- [ ] Player projectile aggro system (Speed II + Glowing 6s on hit, aggro redirects to shooter)
+- [ ] Player projectile physics overhaul (20% velocity boost, quadratic gravity after 8 blocks)
 
 ### Out of Scope
 
@@ -95,6 +102,8 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 **Shipped:** v1.0 Base Claiming System (2026-01-17)
 
+**In Progress:** v1.1 Extra Features Batch 1
+
 **Codebase:**
 - ~2,500 LOC Kotlin/Java
 - 58 files in base claiming system
@@ -105,4 +114,4 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 **Technical debt:** None identified
 
 ---
-*Last updated: 2026-01-17 after v1.0 milestone*
+*Last updated: 2026-01-18 after v1.1 milestone start*

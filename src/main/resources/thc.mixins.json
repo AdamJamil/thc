@@ -9,6 +9,7 @@
 		"FoodDataMixin",
 		"LivingEntityDrowningMixin",
 		"LivingEntityMixin",
+		"ProjectileEntityMixin",
 		"RecipeManagerMixin",
 		"ServerPlayerMixin",
 		"SnowballItemMixin",

@@ -13,9 +13,9 @@ Requirements for v1.1 release. Each maps to roadmap phases.
 
 ### Spear Removal
 
-- [ ] **SPEAR-01**: Player cannot craft any spear (wooden through netherite recipes disabled)
-- [ ] **SPEAR-02**: Spears do not appear in structure chest loot (ocean ruins, village weaponsmith, buried treasure, bastion, end city)
-- [ ] **SPEAR-03**: Mobs that spawn holding spears do not drop spears on death
+- [x] **SPEAR-01**: Player cannot craft any spear (wooden through netherite recipes disabled)
+- [x] **SPEAR-02**: Spears do not appear in structure chest loot (ocean ruins, village weaponsmith, buried treasure, bastion, end city)
+- [x] **SPEAR-03**: Mobs that spawn holding spears do not drop spears on death
 
 ### Projectile Aggro
 
@@ -47,9 +47,9 @@ Which phases cover which requirements. Updated by create-roadmap.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | DROWN-01 | Phase 6 | Complete |
-| SPEAR-01 | Phase 7 | Pending |
-| SPEAR-02 | Phase 7 | Pending |
-| SPEAR-03 | Phase 7 | Pending |
+| SPEAR-01 | Phase 7 | Complete |
+| SPEAR-02 | Phase 7 | Complete |
+| SPEAR-03 | Phase 7 | Complete |
 | PROJ-01 | Phase 8 | Pending |
 | PROJ-02 | Phase 8 | Pending |
 | PROJ-03 | Phase 8 | Pending |

@@ -45,7 +45,7 @@ Combat and survival tweaks that reinforce risk/reward philosophy. Drowning becom
 **Milestone Goal:** Combat and survival tweaks reinforcing risk/reward - projectiles create danger, drowning is forgiving, spears removed.
 
 - [x] **Phase 6: Drowning Modification** - Drowning damage 4x slower
-- [ ] **Phase 7: Spear Removal** - Spears removed from all player sources
+- [x] **Phase 7: Spear Removal** - Spears removed from all player sources
 - [ ] **Phase 8: Projectile Combat** - Hit effects, aggro redirect, enhanced physics
 
 ## Phase Details
@@ -74,8 +74,7 @@ Plans:
 **Plans**: TBD
 
 Plans:
-- [ ] 07-01: Spear crafting and loot removal
-- [ ] 07-02: Mob spear drop prevention
+- [x] 07-01: Spear crafting and loot removal
 
 ### Phase 8: Projectile Combat
 **Goal**: Player projectiles create danger and have enhanced physics
@@ -103,7 +102,7 @@ Phases execute in numeric order: 6 → 7 → 8
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 6. Drowning Modification | 1/1 | Complete | 2026-01-18 |
-| 7. Spear Removal | 0/2 | Not started | - |
+| 7. Spear Removal | 1/1 | Complete | 2026-01-18 |
 | 8. Projectile Combat | 0/2 | Not started | - |
 
 ---

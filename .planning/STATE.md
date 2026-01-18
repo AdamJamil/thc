@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-01-18)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** Phase 7 — Spear Removal
+**Current focus:** Phase 8 — Projectile Combat
 
 ## Current Position
 
-Phase: 7 of 8 (Spear Removal)
-Plan: 1 of 1 complete
-Status: Phase complete
-Last activity: 2026-01-18 — Completed 07-01-PLAN.md
+Phase: 8 of 8 (Projectile Combat)
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-01-18 — Phase 7 complete
 
 Progress: v1.1 phase 7 complete (2 of 3 phases)
 ```

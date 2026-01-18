@@ -3,35 +3,44 @@ package thc.mixin;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeMap;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(RecipeManager.class)
 public class RecipeManagerMixin {
+	@Unique
+	private static final Set<String> REMOVED_RECIPE_PATHS = Set.of(
+		"shield",
+		"wooden_spear",
+		"stone_spear",
+		"copper_spear",
+		"iron_spear",
+		"golden_spear",
+		"diamond_spear",
+		"netherite_spear_smithing"
+	);
+
 	@Inject(
 		method = "prepare(Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)Lnet/minecraft/world/item/crafting/RecipeMap;",
 		at = @At("RETURN"),
 		cancellable = true
 	)
-	private void thc$removeShieldRecipe(ResourceManager resourceManager, ProfilerFiller profiler, CallbackInfoReturnable<RecipeMap> cir) {
+	private void thc$removeDisabledRecipes(ResourceManager resourceManager, ProfilerFiller profiler, CallbackInfoReturnable<RecipeMap> cir) {
 		RecipeMap recipes = cir.getReturnValue();
-		ResourceKey<Recipe<?>> key = ResourceKey.create(Registries.RECIPE, Identifier.withDefaultNamespace("shield"));
 		Collection<RecipeHolder<?>> values = recipes.values();
 		List<RecipeHolder<?>> filtered = new ArrayList<>(values.size());
 		for (RecipeHolder<?> holder : values) {
-			if (!holder.id().equals(key)) {
+			if (!REMOVED_RECIPE_PATHS.contains(holder.id().identifier().getPath())) {
 				filtered.add(holder);
 			}
 		}

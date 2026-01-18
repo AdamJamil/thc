@@ -60,8 +60,18 @@ object THC : ModInitializer {
 			}
 		})
 
+		val removedItems = setOf(
+			Items.SHIELD,
+			Items.WOODEN_SPEAR,
+			Items.STONE_SPEAR,
+			Items.COPPER_SPEAR,
+			Items.IRON_SPEAR,
+			Items.GOLDEN_SPEAR,
+			Items.DIAMOND_SPEAR,
+			Items.NETHERITE_SPEAR
+		)
 		LootTableEvents.MODIFY_DROPS.register(LootTableEvents.ModifyDrops { _, _, drops ->
-			drops.removeIf { stack -> stack.`is`(Items.SHIELD) }
+			drops.removeIf { stack -> removedItems.any { stack.`is`(it) } }
 		})
 
 		if (java.lang.Boolean.getBoolean(SMOKE_TEST_PROPERTY)) {

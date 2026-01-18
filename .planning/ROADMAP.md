@@ -46,7 +46,7 @@ Combat and survival tweaks that reinforce risk/reward philosophy. Drowning becom
 
 - [x] **Phase 6: Drowning Modification** - Drowning damage 4x slower
 - [x] **Phase 7: Spear Removal** - Spears removed from all player sources
-- [ ] **Phase 8: Projectile Combat** - Hit effects, aggro redirect, enhanced physics
+- [x] **Phase 8: Projectile Combat** - Hit effects, aggro redirect, enhanced physics
 
 ## Phase Details
 
@@ -91,8 +91,8 @@ Plans:
 **Plans**: TBD
 
 Plans:
-- [ ] 08-01: Projectile hit effects and aggro
-- [ ] 08-02: Projectile physics overhaul
+- [x] 08-01: Projectile hit effects and aggro
+- [x] 08-02: Projectile physics overhaul
 
 ## Progress
 
@@ -103,7 +103,7 @@ Phases execute in numeric order: 6 → 7 → 8
 |-------|----------------|--------|-----------|
 | 6. Drowning Modification | 1/1 | Complete | 2026-01-18 |
 | 7. Spear Removal | 1/1 | Complete | 2026-01-18 |
-| 8. Projectile Combat | 0/2 | Not started | - |
+| 8. Projectile Combat | 2/2 | Complete | 2026-01-18 |
 
 ---
 *Created: 2026-01-18*

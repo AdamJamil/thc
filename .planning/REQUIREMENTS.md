@@ -19,14 +19,14 @@ Requirements for v1.1 release. Each maps to roadmap phases.
 
 ### Projectile Aggro
 
-- [ ] **PROJ-01**: Player projectile hit applies Speed II to target mob for 6 seconds
-- [ ] **PROJ-02**: Player projectile hit applies Glowing to target mob for 6 seconds
-- [ ] **PROJ-03**: Player projectile hit redirects mob aggro to the shooter
+- [x] **PROJ-01**: Player projectile hit applies Speed II to target mob for 6 seconds
+- [x] **PROJ-02**: Player projectile hit applies Glowing to target mob for 6 seconds
+- [x] **PROJ-03**: Player projectile hit redirects mob aggro to the shooter
 
 ### Projectile Physics
 
-- [ ] **PROJ-04**: Player projectiles travel 20% faster initially (velocity boost on launch)
-- [ ] **PROJ-05**: Player projectiles experience quadratic gravity after traveling 8 blocks (drop faster at range)
+- [x] **PROJ-04**: Player projectiles travel 20% faster initially (velocity boost on launch)
+- [x] **PROJ-05**: Player projectiles experience quadratic gravity after traveling 8 blocks (drop faster at range)
 
 ## v2 Requirements
 
@@ -50,11 +50,11 @@ Which phases cover which requirements. Updated by create-roadmap.
 | SPEAR-01 | Phase 7 | Complete |
 | SPEAR-02 | Phase 7 | Complete |
 | SPEAR-03 | Phase 7 | Complete |
-| PROJ-01 | Phase 8 | Pending |
-| PROJ-02 | Phase 8 | Pending |
-| PROJ-03 | Phase 8 | Pending |
-| PROJ-04 | Phase 8 | Pending |
-| PROJ-05 | Phase 8 | Pending |
+| PROJ-01 | Phase 8 | Complete |
+| PROJ-02 | Phase 8 | Complete |
+| PROJ-03 | Phase 8 | Complete |
+| PROJ-04 | Phase 8 | Complete |
+| PROJ-05 | Phase 8 | Complete |
 
 **Coverage:**
 - v1.1 requirements: 9 total

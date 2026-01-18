@@ -4,17 +4,17 @@
 
 See: .planning/PROJECT.md (updated 2026-01-18)
 
-**Core value:** Risk must be required for progress. No tedious grinding to avoid challenge - players face meaningful choices where reward demands exposure to danger.
-**Current focus:** v1.1 Extra Features Batch 1
+**Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
+**Current focus:** Phase 6 — Drowning Modification
 
 ## Current Position
 
-Phase: Not started (run /gsd:create-roadmap)
-Plan: —
-Status: Defining requirements
-Last activity: 2026-01-18 — Milestone v1.1 started
+Phase: 6 of 8 (Drowning Modification)
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-01-18 — v1.1 roadmap created
 
-Progress: v1.0 SHIPPED (7 phases, 13 plans)
+Progress: v1.0 complete, v1.1 starting (3 phases)
 
 ## Performance Metrics
 
@@ -59,6 +59,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-18
-Stopped at: Milestone v1.1 initialized
+Stopped at: v1.1 roadmap created
 Resume file: None
-Next: /gsd:define-requirements or /gsd:create-roadmap
+Next: /gsd:plan-phase 6

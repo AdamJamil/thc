@@ -46,21 +46,21 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DROWN-01 | — | Pending |
-| SPEAR-01 | — | Pending |
-| SPEAR-02 | — | Pending |
-| SPEAR-03 | — | Pending |
-| PROJ-01 | — | Pending |
-| PROJ-02 | — | Pending |
-| PROJ-03 | — | Pending |
-| PROJ-04 | — | Pending |
-| PROJ-05 | — | Pending |
+| DROWN-01 | Phase 6 | Pending |
+| SPEAR-01 | Phase 7 | Pending |
+| SPEAR-02 | Phase 7 | Pending |
+| SPEAR-03 | Phase 7 | Pending |
+| PROJ-01 | Phase 8 | Pending |
+| PROJ-02 | Phase 8 | Pending |
+| PROJ-03 | Phase 8 | Pending |
+| PROJ-04 | Phase 8 | Pending |
+| PROJ-05 | Phase 8 | Pending |
 
 **Coverage:**
 - v1.1 requirements: 9 total
-- Mapped to phases: 0
-- Unmapped: 9 ⚠️
+- Mapped to phases: 9
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-01-18*
-*Last updated: 2026-01-18 after initial definition*
+*Last updated: 2026-01-18 after roadmap creation*

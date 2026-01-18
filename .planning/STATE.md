@@ -5,18 +5,18 @@
 See: .planning/PROJECT.md (updated 2026-01-18)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** Phase 6 — Drowning Modification
+**Current focus:** Phase 7 — Spear Removal
 
 ## Current Position
 
-Phase: 6 of 8 (Drowning Modification)
-Plan: 1 of 1 complete
-Status: Phase complete
-Last activity: 2026-01-18 — Completed 06-01-PLAN.md
+Phase: 7 of 8 (Spear Removal)
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-01-18 — Phase 6 complete
 
 Progress: v1.1 phase 6 complete (1 of 3 phases)
 ```
-Phase 06: [========] 100% (1/1 plans)
+Phase 06: [========] 100% (1/1 plans) DONE
 v1.1:     [==------]  33% (1/3 phases)
 ```
 
@@ -65,6 +65,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-18
-Stopped at: Completed 06-01-PLAN.md (Phase 6 complete)
+Stopped at: Phase 6 complete
 Resume file: None
-Next: Phase 7 (Spawn Point Expansion) or Phase 8 (Beds)
+Next: /gsd:plan-phase 7

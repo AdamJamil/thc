@@ -9,7 +9,7 @@ Requirements for v1.1 release. Each maps to roadmap phases.
 
 ### Drowning
 
-- [ ] **DROWN-01**: Once drowning begins, damage ticks occur 4x less frequently (every 4 seconds instead of every 1 second)
+- [x] **DROWN-01**: Once drowning begins, damage ticks occur 4x less frequently (every 4 seconds instead of every 1 second)
 
 ### Spear Removal
 
@@ -46,7 +46,7 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DROWN-01 | Phase 6 | Pending |
+| DROWN-01 | Phase 6 | Complete |
 | SPEAR-01 | Phase 7 | Pending |
 | SPEAR-02 | Phase 7 | Pending |
 | SPEAR-03 | Phase 7 | Pending |

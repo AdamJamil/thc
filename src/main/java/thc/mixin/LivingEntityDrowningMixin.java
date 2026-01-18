@@ -1,5 +1,6 @@
 package thc.mixin;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.LivingEntity;
@@ -42,14 +43,15 @@ public abstract class LivingEntityDrowningMixin {
 	private int thc$lastAirSupply = 300;
 
 	/**
-	 * Intercepts damage application and blocks 3 out of 4 drowning damage ticks.
+	 * Intercepts server-side damage application and blocks 3 out of 4 drowning damage ticks.
 	 *
+	 * @param level The server level
 	 * @param source The damage source
 	 * @param amount The damage amount
 	 * @param cir Callback info for returning early
 	 */
-	@Inject(method = "hurt", at = @At("HEAD"), cancellable = true)
-	private void thc$slowDrowningDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+	@Inject(method = "hurtServer", at = @At("HEAD"), cancellable = true)
+	private void thc$slowDrowningDamage(ServerLevel level, DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
 		if (!source.is(DamageTypes.DROWN)) {
 			return;
 		}

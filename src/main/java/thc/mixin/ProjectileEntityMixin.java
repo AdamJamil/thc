@@ -67,4 +67,39 @@ public abstract class ProjectileEntityMixin {
 		Vec3 velocity = self.getDeltaMovement();
 		self.setDeltaMovement(velocity.scale(1.2));
 	}
+
+	@Inject(method = "tick", at = @At("HEAD"))
+	private void thc$applyEnhancedGravity(CallbackInfo ci) {
+		Projectile self = (Projectile) (Object) this;
+
+		// Only affect player-shot projectiles
+		if (!(self.getOwner() instanceof ServerPlayer)) {
+			return;
+		}
+
+		// Skip if spawn not recorded yet
+		if (!thc$spawnRecorded || Double.isNaN(thc$spawnX)) {
+			return;
+		}
+
+		// Calculate distance from spawn
+		double dx = self.getX() - thc$spawnX;
+		double dy = self.getY() - thc$spawnY;
+		double dz = self.getZ() - thc$spawnZ;
+		double distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
+
+		// After 8 blocks, apply additional downward velocity
+		if (distance >= 8.0) {
+			// Quadratic factor: the further past 8 blocks, the stronger the gravity
+			// Base gravity is ~0.05/tick for arrows. We add extra.
+			double extraBlocks = distance - 8.0;
+			// Quadratic scaling: 0.01 * (extraBlocks/8)^2 - gentle curve
+			double gravityMultiplier = 0.01 * Math.pow(extraBlocks / 8.0, 2);
+			// Cap at reasonable maximum (0.1 extra gravity)
+			gravityMultiplier = Math.min(gravityMultiplier, 0.1);
+
+			Vec3 velocity = self.getDeltaMovement();
+			self.setDeltaMovement(velocity.x, velocity.y - gravityMultiplier, velocity.z);
+		}
+	}
 }

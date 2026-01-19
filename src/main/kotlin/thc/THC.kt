@@ -16,6 +16,7 @@ import thc.bell.BellHandler
 import thc.buckler.BucklerState
 import thc.buckler.BucklerStatsRegistry
 import thc.item.BucklerItem
+import thc.item.THCArrows
 import thc.item.THCBucklers
 import thc.item.THCItems
 import thc.network.BucklerSync
@@ -36,6 +37,7 @@ object THC : ModInitializer {
 		// Proceed with mild caution.
 		logger.info("Hello Fabric world!")
 		THCAttachments.init()
+		THCArrows.init()
 		THCBucklers.init()
 		THCItems.init()
 		THCSounds.init()

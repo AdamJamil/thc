@@ -4,15 +4,20 @@
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
 		"AbstractVillagerMixin",
+		"AnimalBreedingXpMixin",
 		"BellBlockMixin",
+		"BlockXpMixin",
 		"ExampleMixin",
+		"FishingXpMixin",
 		"FoodDataMixin",
+		"FurnaceXpMixin",
 		"LivingEntityDrowningMixin",
 		"LivingEntityMixin",
 		"ProjectileEntityMixin",
 		"RecipeManagerMixin",
 		"ServerPlayerMixin",
 		"SnowballItemMixin",
+		"VillagerTradeXpMixin",
 		"access.ItemAccessor"
 	],
 	"injectors": {

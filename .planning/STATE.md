@@ -2,19 +2,19 @@
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-01-18)
+See: .planning/PROJECT.md (updated 2026-01-19)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v1.2 Extra Features Batch 2
+**Current focus:** Planning next milestone
 
 ## Current Position
 
-Phase: 11 of 11 (Tiered Arrows)
-Plan: 3 of 3 complete
-Status: Complete
-Last activity: 2026-01-19 — Phase 11 complete (Tiered Arrows)
+Phase: v1.2 milestone complete
+Plan: None active
+Status: Ready for v1.3 planning
+Last activity: 2026-01-19 — v1.2 milestone archived
 
-Progress: ██████████ 100%
+Progress: Ready for new milestone
 
 ## Performance Metrics
 
@@ -30,34 +30,24 @@ Progress: ██████████ 100%
 - Total execution time: ~15 min
 - Timeline: 1 day (Jan 18, 2026)
 
-**v1.2 Milestone (complete):**
-- Plans completed: 5/5
+**v1.2 Milestone:**
+- Plans completed: 5
 - Total execution time: 22 min
 - Timeline: 1 day (Jan 19, 2026)
 
-**By Phase:**
-
-| Phase | Plans | Total | Avg/Plan |
-|-------|-------|-------|----------|
-| 01-land-plot-system | 2 | 6min | 3min |
-| 02-chunk-claiming-core | 3 | 16min | 5.3min |
-| 03-base-area-permissions | 1 | 6min | 6min |
-| 04-world-restrictions | 4 | 21min | 5.25min |
-| 04.1-bugfixes | 1 | 3min | 3min |
-| 04.2-bugfixes-2 | 1 | 4min | 4min |
-| 05-crafting-tweaks | 1 | 3min | 3min |
-| 06-drowning-modification | 1 | 4min | 4min |
-| 07-spear-removal | 1 | 4min | 4min |
-| 08-projectile-combat | 2 | 7min | 3.5min |
-| 09-parry-stun | 1 | 3min | 3min |
-| 10-xp-economy | 1 | 6min | 6min |
-| 11-tiered-arrows | 3 | 13min | 4.3min |
+**Cumulative:**
+- 22 plans completed across 3 milestones
+- ~1.6 hours total execution time
+- 5 days from project start to v1.2 ship
 
 ## Accumulated Context
 
 ### Decisions
 
-See: .planning/milestones/v1.0-ROADMAP.md for full v1.0 decision log.
+See milestone archives for full decision logs:
+- .planning/milestones/v1.0-ROADMAP.md
+- .planning/milestones/v1.1-ROADMAP.md
+- .planning/milestones/v1.2-ROADMAP.md
 
 Key patterns established:
 - SavedDataType with Codec for persistent state
@@ -84,6 +74,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-19
-Stopped at: Phase 11 complete, v1.2 milestone complete
+Stopped at: v1.2 milestone complete
 Resume file: None
-Next: /gsd:audit-milestone or /gsd:new-milestone
+Next: /gsd:discuss-milestone then /gsd:new-milestone

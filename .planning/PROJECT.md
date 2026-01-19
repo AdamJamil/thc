@@ -40,19 +40,28 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
   - Ladder recipe yields 16 (instead of 3)
   - Snowballs stack to 64 (instead of 16)
   - Snow block ↔ 9 snowballs conversion
+- ✓ Drowning modification — v1.1
+  - Drowning damage ticks every 4 seconds (instead of 1)
+- ✓ Spear removal — v1.1
+  - Spears removed from crafting, loot tables, and mob drops
+- ✓ Projectile combat — v1.1
+  - Hit effects: Speed II and Glowing (6s) on target
+  - Aggro redirection to shooter
+  - Enhanced physics: 20% faster launch, gravity increase after 8 blocks
+- ✓ Parry stun improvements — v1.2
+  - Stun range increased to 3 blocks
+  - ~1 block knockback on stunned enemies
+- ✓ XP economy restriction — v1.2
+  - XP orbs only from mob deaths and experience bottles
+  - Blocked: ores, breeding, fishing, trading, smelting
+- ✓ Tiered arrows — v1.2
+  - Vanilla arrow renamed to "Flint Arrow" with custom texture
+  - Iron Arrow (+1 damage), Diamond Arrow (+2), Netherite Arrow (+3)
+  - Anvil crafting: 64 flint arrows + material = 64 tiered arrows
 
 ### Active
 
-**Current Milestone: v1.2 Extra Features Batch 2**
-
-**Goal:** Ranged combat depth through tiered arrows and parry improvements, plus XP economy tightening.
-
-- [ ] Parry stun improvements (range increased to 3 blocks, ~1 block knockback added)
-- [ ] XP orb restriction (only mob deaths spawn XP orbs)
-- [ ] Tiered arrows system
-  - [ ] Rename arrows to "Flint Arrow" with new texture
-  - [ ] Add Iron/Diamond/Netherite arrows (+1/+2/+3 damage)
-  - [ ] Anvil crafting: 64 flint arrows + 1 ingot/gem → 64 tiered arrows
+None - v1.2 complete. Ready for v1.3 planning.
 
 ### Out of Scope
 
@@ -102,18 +111,19 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ## Current State
 
-**Shipped:** v1.0 Base Claiming System (2026-01-17)
+**Shipped:** v1.2 Extra Features Batch 2 (2026-01-19)
 
-**In Progress:** v1.1 Extra Features Batch 1
+**In Progress:** None (ready for v1.3 planning)
 
 **Codebase:**
-- ~2,500 LOC Kotlin/Java
-- 58 files in base claiming system
+- ~3,000 LOC Kotlin/Java
 - Mixed mixin + event-driven architecture
+- Accessor mixin pattern for immutable field modification
+- XP blocking via HEAD cancellation and @Redirect patterns
 
 **Known issues:** None currently tracked
 
 **Technical debt:** None identified
 
 ---
-*Last updated: 2026-01-19 after v1.2 milestone start*
+*Last updated: 2026-01-19 after v1.2 milestone complete*

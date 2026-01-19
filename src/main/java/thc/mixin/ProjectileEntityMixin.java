@@ -38,7 +38,7 @@ public abstract class ProjectileEntityMixin {
 			return;
 		}
 
-		target.addEffect(new MobEffectInstance(MobEffects.SPEED, THC_EFFECT_DURATION_TICKS, 1), player);
+		target.addEffect(new MobEffectInstance(MobEffects.SPEED, THC_EFFECT_DURATION_TICKS, 3), player);
 		target.addEffect(new MobEffectInstance(MobEffects.GLOWING, THC_EFFECT_DURATION_TICKS, 0), player);
 
 		if (target instanceof Mob mob) {

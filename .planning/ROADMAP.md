@@ -125,9 +125,9 @@ Plans:
 - [x] 09-01: Parry stun range and knockback
 
 ### Phase 10: XP Economy Restriction
-**Goal**: XP orbs only come from combat (mob kills)
+**Goal**: XP orbs only come from combat (mob kills) and experience bottles
 **Depends on**: Phase 9
-**Requirements**: XP-01, XP-02, XP-03, XP-04, XP-05, XP-06, XP-07
+**Requirements**: XP-01, XP-02, XP-03, XP-04, XP-05, XP-06
 **Success Criteria** (what must be TRUE):
   1. Killing a mob spawns XP orbs as normal
   2. Mining ores (coal, lapis, redstone, emerald, diamond, nether quartz) does not spawn XP orbs
@@ -135,10 +135,9 @@ Plans:
   4. Fishing does not spawn XP orbs
   5. Trading with villagers does not spawn XP orbs
   6. Smelting items in furnaces does not accumulate/spawn XP
-  7. Throwing bottles o' enchanting does not spawn XP orbs
-**Research**: Likely (need to identify all XP spawn mechanisms and intercept points)
-**Research topics**: XP spawn events/methods for each source, mixin targets for blocking
-**Plans**: TBD
+  7. Throwing bottles o' enchanting spawns XP orbs normally (intentionally kept)
+**Research**: Unlikely (existing mixin patterns apply)
+**Plans**: 1
 
 Plans:
 - [ ] 10-01: XP spawn blocking system

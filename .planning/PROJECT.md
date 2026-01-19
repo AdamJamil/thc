@@ -43,14 +43,16 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ### Active
 
-**Current Milestone: v1.1 Extra Features Batch 1**
+**Current Milestone: v1.2 Extra Features Batch 2**
 
-**Goal:** Combat and survival tweaks that reinforce risk/reward - projectiles create danger, drowning is forgiving, spears removed.
+**Goal:** Ranged combat depth through tiered arrows and parry improvements, plus XP economy tightening.
 
-- [ ] Drowning damage tick rate reduced 4x (more forgiving underwater)
-- [ ] Spear removal (crafting disabled, mob spawn equipment removed, loot tables cleared)
-- [ ] Player projectile aggro system (Speed II + Glowing 6s on hit, aggro redirects to shooter)
-- [ ] Player projectile physics overhaul (20% velocity boost, quadratic gravity after 8 blocks)
+- [ ] Parry stun improvements (range increased to 3 blocks, ~1 block knockback added)
+- [ ] XP orb restriction (only mob deaths spawn XP orbs)
+- [ ] Tiered arrows system
+  - [ ] Rename arrows to "Flint Arrow" with new texture
+  - [ ] Add Iron/Diamond/Netherite arrows (+1/+2/+3 damage)
+  - [ ] Anvil crafting: 64 flint arrows + 1 ingot/gem → 64 tiered arrows
 
 ### Out of Scope
 
@@ -114,4 +116,4 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 **Technical debt:** None identified
 
 ---
-*Last updated: 2026-01-18 after v1.1 milestone start*
+*Last updated: 2026-01-19 after v1.2 milestone start*

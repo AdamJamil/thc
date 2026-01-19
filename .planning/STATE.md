@@ -5,22 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-01-18)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v1.1 Complete
+**Current focus:** v1.2 Extra Features Batch 2
 
 ## Current Position
 
-Phase: 8 of 8 (Projectile Combat)
-Plan: 2 of 2 complete
-Status: v1.1 Complete
-Last activity: 2026-01-18 — Completed 08-02-PLAN.md
-
-Progress: v1.1 complete (4 of 4 plans)
-```
-Phase 06: [========] 100% (1/1 plans) DONE
-Phase 07: [========] 100% (1/1 plans) DONE
-Phase 08: [========] 100% (2/2 plans) DONE
-v1.1:     [========] 100% (3/3 phases)
-```
+Phase: Not started (run /gsd:create-roadmap)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-01-19 — Milestone v1.2 started
 
 ## Performance Metrics
 
@@ -78,7 +70,7 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-01-18
-Stopped at: Completed phase 8 execution (all v1.1 phases complete)
+Last session: 2026-01-19
+Stopped at: Milestone v1.2 initialized
 Resume file: None
-Next: /gsd:audit-milestone
+Next: /gsd:create-roadmap or /gsd:define-requirements

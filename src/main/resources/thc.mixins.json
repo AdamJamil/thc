@@ -12,6 +12,7 @@
 		"LivingEntityDrowningMixin",
 		"LivingEntityMixin",
 		"PlayerAttackMixin",
+		"PlayerFallDamageMixin",
 		"ProjectileEntityMixin",
 		"RecipeManagerMixin",
 		"ServerPlayerMixin",

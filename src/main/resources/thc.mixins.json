@@ -11,6 +11,7 @@
 		"FoodDataMixin",
 		"LivingEntityDrowningMixin",
 		"LivingEntityMixin",
+		"PlayerAttackMixin",
 		"ProjectileEntityMixin",
 		"RecipeManagerMixin",
 		"ServerPlayerMixin",

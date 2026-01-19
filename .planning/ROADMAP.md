@@ -69,7 +69,7 @@ Combat and survival systems that reinforce risk/reward philosophy. Melee damage 
 **Milestone Goal:** Combat rebalancing (melee weakened, ranged gated), wind charge mobility system, threat-based aggro management, and world difficulty tuning.
 
 - [x] **Phase 12: Combat Rebalancing** — Melee damage reduced, arrow effects enhanced
-- [ ] **Phase 13: Wind Charge Mobility** — Enhanced wind charges as core mobility tool
+- [x] **Phase 13: Wind Charge Mobility** — Enhanced wind charges as core mobility tool
 - [ ] **Phase 14: Ranged Weapon Gating** — Bows/crossbows gated behind Trial Chambers
 - [ ] **Phase 15: Threat System** — Tactical aggro management across mob groups
 - [ ] **Phase 16: World Difficulty** — Max difficulty everywhere, safer bases
@@ -105,8 +105,8 @@ Plans:
 **Plans**: TBD
 
 Plans:
-- [ ] 13-01: Breeze rod yield modification
-- [ ] 13-02: Wind charge physics and fall negation
+- [x] 13-01: Breeze rod yield modification
+- [x] 13-02: Wind charge physics and fall negation
 
 ### Phase 14: Ranged Weapon Gating
 **Goal**: Bows and crossbows require Trial Chamber materials
@@ -173,7 +173,7 @@ Phases execute in numeric order: 12 → 13 → 14 → 15 → 16
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
 | 12. Combat Rebalancing | v1.3 | 2/2 | Complete | 2026-01-19 |
-| 13. Wind Charge Mobility | v1.3 | 0/2 | Not started | - |
+| 13. Wind Charge Mobility | v1.3 | 2/2 | Complete | 2026-01-19 |
 | 14. Ranged Weapon Gating | v1.3 | 0/2 | Not started | - |
 | 15. Threat System | v1.3 | 0/4 | Not started | - |
 | 16. World Difficulty | v1.3 | 0/3 | Not started | - |

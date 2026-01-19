@@ -16,9 +16,9 @@ Requirements for v1.3 release. Each maps to roadmap phases.
 
 ### Wind Charge / Mobility
 
-- [ ] **WIND-01**: Breeze rods yield 12 wind charges (up from 4)
-- [ ] **WIND-02**: Wind charges knock player 50% higher
-- [ ] **WIND-03**: Wind charge self-use negates fall damage on next landing (wind charge boost only)
+- [x] **WIND-01**: Breeze rods yield 12 wind charges (up from 4)
+- [x] **WIND-02**: Wind charges knock player 50% higher
+- [x] **WIND-03**: Wind charge self-use negates fall damage on next landing (wind charge boost only)
 
 ### Ranged Weapon Gating
 
@@ -69,9 +69,9 @@ Which phases cover which requirements. Updated by create-roadmap.
 | COMBAT-02 | Phase 12 | Complete |
 | COMBAT-03 | Phase 12 | Complete |
 | COMBAT-04 | Phase 12 | Complete |
-| WIND-01 | Phase 13 | Pending |
-| WIND-02 | Phase 13 | Pending |
-| WIND-03 | Phase 13 | Pending |
+| WIND-01 | Phase 13 | Complete |
+| WIND-02 | Phase 13 | Complete |
+| WIND-03 | Phase 13 | Complete |
 | RANGED-01 | Phase 14 | Pending |
 | RANGED-02 | Phase 14 | Pending |
 | RANGED-03 | Phase 14 | Pending |

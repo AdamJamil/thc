@@ -5,5 +5,8 @@
   "item.thc.diamond_buckler": "Diamond Buckler",
   "item.thc.netherite_buckler": "Netherite Buckler",
   "item.thc.land_plot": "Land Plot",
-  "item.minecraft.arrow": "Flint Arrow"
+  "item.minecraft.arrow": "Flint Arrow",
+  "item.thc.iron_arrow": "Iron Arrow",
+  "item.thc.diamond_arrow": "Diamond Arrow",
+  "item.thc.netherite_arrow": "Netherite Arrow"
 }

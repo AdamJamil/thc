@@ -18,7 +18,8 @@
 		"ServerPlayerMixin",
 		"SnowballItemMixin",
 		"VillagerTradeXpMixin",
-		"access.ItemAccessor"
+		"access.ItemAccessor",
+		"access.AbstractArrowAccessor"
 	],
 	"injectors": {
 		"defaultRequire": 1

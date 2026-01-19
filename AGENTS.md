@@ -24,6 +24,7 @@
 ## Testing Guidelines
 - Fabric GameTests live under `src/main/java/thc/gametest` and are discovered in dev/gametest runs.
 - Use `./gradlew runGametest` for mixin/boot smoke coverage, and `./gradlew runSmokeServer` for a fast server startup check.
+- When adding or modifying existing functionality, always run smoke tests (`./gradlew runSmokeServer`, and `./gradlew runGametest` if it exercises the changed behavior).
 
 ## Commit & Pull Request Guidelines
 - No git history is available in this checkout, so there are no established commit conventions to follow.

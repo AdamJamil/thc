@@ -4,9 +4,12 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
+import net.minecraft.tags.BlockTags
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.effect.MobEffects
 import net.minecraft.world.level.ChunkPos
+import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.block.state.BlockState
 import thc.claim.ChunkValidator
 import thc.claim.ClaimManager
 import java.util.UUID
@@ -89,6 +92,11 @@ object MiningFatigue {
                 return@register true
             }
 
+            // No fatigue for mining ores - allows resource gathering without penalty
+            if (isOre(state)) {
+                return@register true
+            }
+
             // Apply/stack mining fatigue
             applyFatigue(player as ServerPlayer)
 
@@ -128,5 +136,21 @@ object MiningFatigue {
 
         // Track for decay logic
         trackedPlayers[player.uuid] = newAmplifier
+    }
+
+    /**
+     * Checks if a block state is an ore block.
+     * Ores are exempt from mining fatigue to allow resource gathering.
+     */
+    private fun isOre(state: BlockState): Boolean {
+        return state.`is`(BlockTags.COAL_ORES) ||
+            state.`is`(BlockTags.IRON_ORES) ||
+            state.`is`(BlockTags.COPPER_ORES) ||
+            state.`is`(BlockTags.GOLD_ORES) ||
+            state.`is`(BlockTags.REDSTONE_ORES) ||
+            state.`is`(BlockTags.LAPIS_ORES) ||
+            state.`is`(BlockTags.DIAMOND_ORES) ||
+            state.`is`(BlockTags.EMERALD_ORES) ||
+            state.`is`(Blocks.NETHER_QUARTZ_ORE)
     }
 }

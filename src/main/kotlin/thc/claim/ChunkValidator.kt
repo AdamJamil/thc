@@ -16,6 +16,7 @@ import net.minecraft.world.level.levelgen.Heightmap
 object ChunkValidator {
 
     private const val MAX_HEIGHT_DIFFERENCE = 10
+    private val logger = org.slf4j.LoggerFactory.getLogger("thc.ChunkValidator")
 
     /**
      * Validates terrain flatness for chunk claiming.
@@ -77,11 +78,16 @@ object ChunkValidator {
         val structureManager = level.structureManager()
         val chunk = level.getChunk(chunkPos.x, chunkPos.z)
 
+        logger.info("Checking village for chunk ${chunkPos.x}, ${chunkPos.z}")
+
         // Method 1: Check structure starts in this chunk
-        for ((structure, _) in chunk.allStarts) {
+        logger.info("  allStarts count: ${chunk.allStarts.size}")
+        for ((structure, start) in chunk.allStarts) {
             val structureKey = level.registryAccess()
                 .lookupOrThrow(net.minecraft.core.registries.Registries.STRUCTURE)
                 .getKey(structure)
+
+            logger.info("  Found structure start: $structureKey")
 
             if (structureKey != null) {
                 val holder = level.registryAccess()
@@ -89,16 +95,36 @@ object ChunkValidator {
                     .get(structureKey)
 
                 if (holder.isPresent && holder.get().`is`(StructureTags.VILLAGE)) {
+                    logger.info("  -> Is a village! (via allStarts)")
                     return true
                 }
             }
         }
 
-        // Method 2: Sample multiple positions across the chunk for structure pieces
-        // Villages typically generate at ground level, but sample multiple Y levels
-        // Sample a 3x3 grid of positions within the chunk, at multiple Y levels
-        val yLevels = listOf(64, 70, 75, 80, 63, 60, 55)  // Common village heights + variations
-        val xOffsets = listOf(2, 8, 14)  // Near edges and center
+        // Method 2: Check structure references (structures that extend into this chunk)
+        logger.info("  allReferences count: ${chunk.allReferences.size}")
+        for ((structure, refs) in chunk.allReferences) {
+            val structureKey = level.registryAccess()
+                .lookupOrThrow(net.minecraft.core.registries.Registries.STRUCTURE)
+                .getKey(structure)
+
+            logger.info("  Found structure reference: $structureKey (${refs.size} refs)")
+
+            if (structureKey != null) {
+                val holder = level.registryAccess()
+                    .lookupOrThrow(net.minecraft.core.registries.Registries.STRUCTURE)
+                    .get(structureKey)
+
+                if (holder.isPresent && holder.get().`is`(StructureTags.VILLAGE)) {
+                    logger.info("  -> Is a village! (via allReferences)")
+                    return true
+                }
+            }
+        }
+
+        // Method 3: Sample multiple positions across the chunk for structure pieces
+        val yLevels = listOf(64, 70, 75, 80, 63, 60, 55)
+        val xOffsets = listOf(2, 8, 14)
         val zOffsets = listOf(2, 8, 14)
 
         for (y in yLevels) {
@@ -107,12 +133,14 @@ object ChunkValidator {
                     val checkPos = BlockPos(chunkPos.minBlockX + xOff, y, chunkPos.minBlockZ + zOff)
                     val structureAt = structureManager.getStructureWithPieceAt(checkPos, StructureTags.VILLAGE)
                     if (structureAt.isValid) {
+                        logger.info("  -> Is a village! (via getStructureWithPieceAt at $checkPos)")
                         return true
                     }
                 }
             }
         }
 
+        logger.info("  -> NOT a village chunk")
         return false
     }
 }

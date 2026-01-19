@@ -39,6 +39,9 @@
 			},
 			{
 				"value": "thc.gametest.THCShieldGameTests"
+			},
+			{
+				"value": "thc.gametest.THCBucklerGameTests"
 			}
 		]
 	},

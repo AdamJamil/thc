@@ -17,12 +17,15 @@ import thc.claim.ChunkValidator
  * This handler should be registered BEFORE MiningFatigue so that blocked breaks
  * don't trigger fatigue application.
  */
+private val logger = org.slf4j.LoggerFactory.getLogger("thc.VillageProtection")
+
 object VillageProtection {
 
     /**
      * Registers the village block break protection handler.
      */
     fun register() {
+        logger.info("VillageProtection handler registered!")
         PlayerBlockBreakEvents.BEFORE.register { level, player, pos, state, blockEntity ->
             // Skip client-side processing
             if (level.isClientSide) {
@@ -32,22 +35,31 @@ object VillageProtection {
             val serverLevel = level as ServerLevel
             val chunkPos = ChunkPos(pos)
 
+            logger.info("VillageProtection checking block break at $pos (chunk ${chunkPos.x}, ${chunkPos.z})")
+
             // Only apply protection in village chunks
-            if (!ChunkValidator.isVillageChunk(serverLevel, chunkPos)) {
+            val isVillage = ChunkValidator.isVillageChunk(serverLevel, chunkPos)
+            logger.info("  isVillageChunk result: $isVillage")
+
+            if (!isVillage) {
+                logger.info("  -> ALLOWING (not a village)")
                 return@register true
             }
 
             // BREAK-06: Allow breaking ores in village chunks
             if (isOre(state)) {
+                logger.info("  -> ALLOWING (is ore)")
                 return@register true
             }
 
             // BREAK-07: Allow breaking allowlist blocks in village chunks
             if (WorldRestrictions.ALLOWED_BLOCKS.contains(state.block)) {
+                logger.info("  -> ALLOWING (is allowlist block)")
                 return@register true
             }
 
             // BREAK-05: Block breaking in village chunks
+            logger.info("  -> BLOCKING break in village!")
             false
         }
     }

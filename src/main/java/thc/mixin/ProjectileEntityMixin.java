@@ -88,14 +88,12 @@ public abstract class ProjectileEntityMixin {
 		double dz = self.getZ() - thc$spawnZ;
 		double distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
 
-		// After 8 blocks, apply additional downward velocity
-		if (distance >= 8.0) {
-			// Quadratic factor: the further past 8 blocks, the stronger the gravity
-			// Base gravity is ~0.05/tick for arrows. We add extra.
-			double extraBlocks = distance - 8.0;
-			// Quadratic scaling: 0.01 * (extraBlocks/8)^2 - gentle curve
-			double gravityMultiplier = 0.01 * Math.pow(extraBlocks / 8.0, 2);
-			// Cap at reasonable maximum (0.1 extra gravity)
+		// After 4 blocks, apply additional downward velocity
+		if (distance >= 4.0) {
+			double extraBlocks = distance - 4.0;
+			// Enhanced gravity: 0.6 * (extraBlocks)^1.5
+			double gravityMultiplier = 0.6 * Math.pow(extraBlocks, 1.5);
+			// Cap at reasonable maximum
 			gravityMultiplier = Math.min(gravityMultiplier, 0.1);
 
 			Vec3 velocity = self.getDeltaMovement();

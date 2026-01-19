@@ -9,8 +9,8 @@ Requirements for v1.2 release. Each maps to roadmap phases.
 
 ### Parry Stun
 
-- [ ] **PARRY-01**: Successful buckler parry stuns enemies within 3 blocks (increased from current)
-- [ ] **PARRY-02**: Successful buckler parry applies ~1 block knockback to stunned enemies
+- [x] **PARRY-01**: Successful buckler parry stuns enemies within 3 blocks (increased from current)
+- [x] **PARRY-02**: Successful buckler parry applies ~1 block knockback to stunned enemies
 
 ### XP Economy
 
@@ -50,8 +50,8 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| PARRY-01 | Phase 9 | Pending |
-| PARRY-02 | Phase 9 | Pending |
+| PARRY-01 | Phase 9 | Complete |
+| PARRY-02 | Phase 9 | Complete |
 | XP-01 | Phase 10 | Pending |
 | XP-02 | Phase 10 | Pending |
 | XP-03 | Phase 10 | Pending |

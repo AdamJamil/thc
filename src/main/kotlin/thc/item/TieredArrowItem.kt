@@ -20,8 +20,9 @@ class TieredArrowItem(
     ): AbstractArrow {
         val arrow = super.createArrow(level, ammo, shooter, weapon)
         // Add damage bonus to vanilla base damage (2.0)
-        val accessor = arrow as AbstractArrowAccessor
-        accessor.setBaseDamage(accessor.baseDamage + damageBonus)
+        // Getter via accessor (field is private), setter is public in 1.21.11
+        val currentDamage = (arrow as AbstractArrowAccessor).baseDamage
+        arrow.setBaseDamage(currentDamage + damageBonus)
         return arrow
     }
 }

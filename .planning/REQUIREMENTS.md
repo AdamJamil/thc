@@ -65,34 +65,34 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| COMBAT-01 | TBD | Pending |
-| COMBAT-02 | TBD | Pending |
-| COMBAT-03 | TBD | Pending |
-| COMBAT-04 | TBD | Pending |
-| WIND-01 | TBD | Pending |
-| WIND-02 | TBD | Pending |
-| WIND-03 | TBD | Pending |
-| RANGED-01 | TBD | Pending |
-| RANGED-02 | TBD | Pending |
-| RANGED-03 | TBD | Pending |
-| RANGED-04 | TBD | Pending |
-| THREAT-01 | TBD | Pending |
-| THREAT-02 | TBD | Pending |
-| THREAT-03 | TBD | Pending |
-| THREAT-04 | TBD | Pending |
-| THREAT-05 | TBD | Pending |
-| THREAT-06 | TBD | Pending |
-| WORLD-01 | TBD | Pending |
-| WORLD-02 | TBD | Pending |
-| WORLD-03 | TBD | Pending |
-| WORLD-04 | TBD | Pending |
-| WORLD-05 | TBD | Pending |
+| COMBAT-01 | Phase 12 | Pending |
+| COMBAT-02 | Phase 12 | Pending |
+| COMBAT-03 | Phase 12 | Pending |
+| COMBAT-04 | Phase 12 | Pending |
+| WIND-01 | Phase 13 | Pending |
+| WIND-02 | Phase 13 | Pending |
+| WIND-03 | Phase 13 | Pending |
+| RANGED-01 | Phase 14 | Pending |
+| RANGED-02 | Phase 14 | Pending |
+| RANGED-03 | Phase 14 | Pending |
+| RANGED-04 | Phase 14 | Pending |
+| THREAT-01 | Phase 15 | Pending |
+| THREAT-02 | Phase 15 | Pending |
+| THREAT-03 | Phase 15 | Pending |
+| THREAT-04 | Phase 15 | Pending |
+| THREAT-05 | Phase 15 | Pending |
+| THREAT-06 | Phase 15 | Pending |
+| WORLD-01 | Phase 16 | Pending |
+| WORLD-02 | Phase 16 | Pending |
+| WORLD-03 | Phase 16 | Pending |
+| WORLD-04 | Phase 16 | Pending |
+| WORLD-05 | Phase 16 | Pending |
 
 **Coverage:**
 - v1.3 requirements: 22 total
-- Mapped to phases: 0
-- Unmapped: 22 (pending roadmap creation)
+- Mapped to phases: 22
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-01-19*
-*Last updated: 2026-01-19 after initial definition*
+*Last updated: 2026-01-19 after roadmap phase mapping*

@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-01-18)
 ## Current Position
 
 Phase: 9 of 11 (Parry Stun Improvements)
-Plan: Not started
-Status: Ready to plan
-Last activity: 2026-01-19 — Roadmap created (3 phases, 14 requirements)
+Plan: 1 of 1 (complete)
+Status: Phase complete
+Last activity: 2026-01-19 - Completed 09-01-PLAN.md
 
-Progress: ░░░░░░░░░░ 0%
+Progress: ███░░░░░░░ 20%
 
 ## Performance Metrics
 
@@ -30,6 +30,10 @@ Progress: ░░░░░░░░░░ 0%
 - Total execution time: ~15 min
 - Timeline: 1 day (Jan 18, 2026)
 
+**v1.2 Milestone (in progress):**
+- Plans completed: 1/5
+- Total execution time: 3 min
+
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
@@ -44,6 +48,7 @@ Progress: ░░░░░░░░░░ 0%
 | 06-drowning-modification | 1 | 4min | 4min |
 | 07-spear-removal | 1 | 4min | 4min |
 | 08-projectile-combat | 2 | 7min | 3.5min |
+| 09-parry-stun | 1 | 3min | 3min |
 
 ## Accumulated Context
 
@@ -61,6 +66,7 @@ Key patterns established:
 - removedItems: Combined set for multi-item loot table filtering
 - Projectile hit modification via onHitEntity inject with owner check
 - Projectile physics: shoot TAIL + tick HEAD injections with @Unique spawn tracking
+- Vec3 directional knockback with hurtMarked for velocity sync
 
 ### Pending Todos
 
@@ -73,6 +79,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-19
-Stopped at: Roadmap v1.2 created
+Stopped at: Completed 09-01-PLAN.md
 Resume file: None
-Next: /gsd:plan-phase 9
+Next: /gsd:plan-phase 10

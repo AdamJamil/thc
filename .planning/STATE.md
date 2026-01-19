@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-01-19)
 ## Current Position
 
 Phase: 12 of 16 (Combat Rebalancing)
-Plan: 1 of 2 complete
-Status: In progress
-Last activity: 2026-01-19 — Completed 12-01-PLAN.md (Arrow combat modifications)
+Plan: 2 of 2 complete
+Status: Phase complete
+Last activity: 2026-01-19 — Completed 12-02-PLAN.md (Melee damage reduction)
 
-Progress: ████░░░░░░░░░ 1/13 plans (8%)
+Progress: ████████░░░░░ 2/13 plans (15%)
 
 ## Performance Metrics
 
@@ -64,6 +64,8 @@ Key patterns established:
 - Anvil recipe interception: HEAD injection on createResult with @Shadow field access
 - Post-hit modification: TAIL injection on onHitEntity for velocity/knockback changes after vanilla processing
 - MobCategory filtering for monster-only effects
+- @ModifyVariable damage reduction: ordinal=0 STORE for first float in method
+- @Redirect enchantment nullification: intercept helper method to return 0
 
 ### Pending Todos
 
@@ -76,6 +78,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-19
-Stopped at: Completed 12-01-PLAN.md (Arrow combat modifications)
+Stopped at: Completed 12-02-PLAN.md (Melee damage reduction) - Phase 12 complete
 Resume file: None
-Next: /gsd:execute-plan 12-02 or continue with remaining v1.3 plans
+Next: /gsd:execute-phase 13 or /gsd:plan-phase 13

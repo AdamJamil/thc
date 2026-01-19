@@ -41,6 +41,10 @@ public final class THCAttachments {
 			builder.persistent(Codec.BOOL);
 		}
 	);
+	public static final AttachmentType<Boolean> WIND_CHARGE_BOOSTED = AttachmentRegistry.create(
+		Identifier.fromNamespaceAndPath("thc", "wind_charge_boosted"),
+		builder -> builder.initializer(() -> Boolean.FALSE)
+	);
 
 	private THCAttachments() {
 	}

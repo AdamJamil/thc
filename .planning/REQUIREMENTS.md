@@ -9,10 +9,10 @@ Requirements for v1.3 release. Each maps to roadmap phases.
 
 ### Combat Rebalancing
 
-- [ ] **COMBAT-01**: Arrow aggro causes Speed 4 (up from Speed 2) for 6 seconds
-- [ ] **COMBAT-02**: Remove knockback from arrow hits on enemy mobs
-- [ ] **COMBAT-03**: Sweeping edge no longer applies to weapon hits
-- [ ] **COMBAT-04**: All melee damage reduced by 75%
+- [x] **COMBAT-01**: Arrow aggro causes Speed 4 (up from Speed 2) for 6 seconds
+- [x] **COMBAT-02**: Remove knockback from arrow hits on enemy mobs
+- [x] **COMBAT-03**: Sweeping edge no longer applies to weapon hits
+- [x] **COMBAT-04**: All melee damage reduced by 75%
 
 ### Wind Charge / Mobility
 
@@ -65,10 +65,10 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| COMBAT-01 | Phase 12 | Pending |
-| COMBAT-02 | Phase 12 | Pending |
-| COMBAT-03 | Phase 12 | Pending |
-| COMBAT-04 | Phase 12 | Pending |
+| COMBAT-01 | Phase 12 | Complete |
+| COMBAT-02 | Phase 12 | Complete |
+| COMBAT-03 | Phase 12 | Complete |
+| COMBAT-04 | Phase 12 | Complete |
 | WIND-01 | Phase 13 | Pending |
 | WIND-02 | Phase 13 | Pending |
 | WIND-03 | Phase 13 | Pending |

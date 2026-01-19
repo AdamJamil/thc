@@ -1,36 +1,38 @@
-# Requirements: THC v1.1 Extra Features Batch 1
+# Requirements: THC v1.2 Extra Features Batch 2
 
-**Defined:** 2026-01-18
-**Core Value:** Risk must be required for progress. No tedious grinding to avoid challenge - players face meaningful choices where reward demands exposure to danger.
+**Defined:** 2026-01-19
+**Core Value:** Risk must be required for progress. No tedious grinding to avoid challenge.
 
-## v1.1 Requirements
+## v1.2 Requirements
 
-Requirements for v1.1 release. Each maps to roadmap phases.
+Requirements for v1.2 release. Each maps to roadmap phases.
 
-### Drowning
+### Parry Stun
 
-- [x] **DROWN-01**: Once drowning begins, damage ticks occur 4x less frequently (every 4 seconds instead of every 1 second)
+- [ ] **PARRY-01**: Successful buckler parry stuns enemies within 3 blocks (increased from current)
+- [ ] **PARRY-02**: Successful buckler parry applies ~1 block knockback to stunned enemies
 
-### Spear Removal
+### XP Economy
 
-- [x] **SPEAR-01**: Player cannot craft any spear (wooden through netherite recipes disabled)
-- [x] **SPEAR-02**: Spears do not appear in structure chest loot (ocean ruins, village weaponsmith, buried treasure, bastion, end city)
-- [x] **SPEAR-03**: Mobs that spawn holding spears do not drop spears on death
+- [ ] **XP-01**: XP orbs only spawn from mob deaths
+- [ ] **XP-02**: XP orbs blocked from mining ores
+- [ ] **XP-03**: XP orbs blocked from breeding animals
+- [ ] **XP-04**: XP orbs blocked from fishing
+- [ ] **XP-05**: XP orbs blocked from trading with villagers
+- [ ] **XP-06**: XP orbs blocked from smelting (furnace XP)
+- [ ] **XP-07**: XP orbs blocked from bottles o' enchanting
 
-### Projectile Aggro
+### Tiered Arrows
 
-- [x] **PROJ-01**: Player projectile hit applies Speed II to target mob for 6 seconds
-- [x] **PROJ-02**: Player projectile hit applies Glowing to target mob for 6 seconds
-- [x] **PROJ-03**: Player projectile hit redirects mob aggro to the shooter
-
-### Projectile Physics
-
-- [x] **PROJ-04**: Player projectiles travel 20% faster initially (velocity boost on launch)
-- [x] **PROJ-05**: Player projectiles experience quadratic gravity after traveling 8 blocks (drop faster at range)
+- [ ] **ARROW-01**: Vanilla arrow renamed to "Flint Arrow" with flint_arrow.png texture
+- [ ] **ARROW-02**: Iron Arrow added (+1 damage, crafted via anvil: 64 flint + 1 iron ingot)
+- [ ] **ARROW-03**: Diamond Arrow added (+2 damage, crafted via anvil: 64 flint + 1 diamond)
+- [ ] **ARROW-04**: Netherite Arrow added (+3 damage, crafted via anvil: 64 flint + 1 netherite ingot)
+- [ ] **ARROW-05**: All tiered arrows use corresponding textures (iron_arrow.png, diamond_arrow.png, netherite_arrow.png)
 
 ## v2 Requirements
 
-*No requirements deferred.*
+None deferred.
 
 ## Out of Scope
 
@@ -38,7 +40,9 @@ Explicitly excluded. Documented to prevent scope creep.
 
 | Feature | Reason |
 |---------|--------|
-| Remove mob spear equipment | Mobs keeping spears maintains difficulty; removing drops prevents player acquisition |
+| Tiered arrow loot tables | Not specified - arrows obtained via crafting only |
+| Crossbow-specific behavior | Uses same arrows, no special handling needed |
+| Tipped tiered arrows | Complexity - defer if needed later |
 
 ## Traceability
 
@@ -46,21 +50,26 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DROWN-01 | Phase 6 | Complete |
-| SPEAR-01 | Phase 7 | Complete |
-| SPEAR-02 | Phase 7 | Complete |
-| SPEAR-03 | Phase 7 | Complete |
-| PROJ-01 | Phase 8 | Complete |
-| PROJ-02 | Phase 8 | Complete |
-| PROJ-03 | Phase 8 | Complete |
-| PROJ-04 | Phase 8 | Complete |
-| PROJ-05 | Phase 8 | Complete |
+| PARRY-01 | — | Pending |
+| PARRY-02 | — | Pending |
+| XP-01 | — | Pending |
+| XP-02 | — | Pending |
+| XP-03 | — | Pending |
+| XP-04 | — | Pending |
+| XP-05 | — | Pending |
+| XP-06 | — | Pending |
+| XP-07 | — | Pending |
+| ARROW-01 | — | Pending |
+| ARROW-02 | — | Pending |
+| ARROW-03 | — | Pending |
+| ARROW-04 | — | Pending |
+| ARROW-05 | — | Pending |
 
 **Coverage:**
-- v1.1 requirements: 9 total
-- Mapped to phases: 9
-- Unmapped: 0 ✓
+- v1.2 requirements: 14 total
+- Mapped to phases: 0
+- Unmapped: 14 (pending roadmap)
 
 ---
-*Requirements defined: 2026-01-18*
-*Last updated: 2026-01-18 after roadmap creation*
+*Requirements defined: 2026-01-19*
+*Last updated: 2026-01-19 after initial definition*

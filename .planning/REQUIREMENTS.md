@@ -14,12 +14,12 @@ Requirements for v1.2 release. Each maps to roadmap phases.
 
 ### XP Economy
 
-- [ ] **XP-01**: XP orbs only spawn from mob deaths (and bottles o' enchanting)
-- [ ] **XP-02**: XP orbs blocked from mining ores
-- [ ] **XP-03**: XP orbs blocked from breeding animals
-- [ ] **XP-04**: XP orbs blocked from fishing
-- [ ] **XP-05**: XP orbs blocked from trading with villagers
-- [ ] **XP-06**: XP orbs blocked from smelting (furnace XP)
+- [x] **XP-01**: XP orbs only spawn from mob deaths (and bottles o' enchanting)
+- [x] **XP-02**: XP orbs blocked from mining ores
+- [x] **XP-03**: XP orbs blocked from breeding animals
+- [x] **XP-04**: XP orbs blocked from fishing
+- [x] **XP-05**: XP orbs blocked from trading with villagers
+- [x] **XP-06**: XP orbs blocked from smelting (furnace XP)
 
 ### Tiered Arrows
 
@@ -51,12 +51,12 @@ Which phases cover which requirements. Updated by create-roadmap.
 |-------------|-------|--------|
 | PARRY-01 | Phase 9 | Complete |
 | PARRY-02 | Phase 9 | Complete |
-| XP-01 | Phase 10 | Pending |
-| XP-02 | Phase 10 | Pending |
-| XP-03 | Phase 10 | Pending |
-| XP-04 | Phase 10 | Pending |
-| XP-05 | Phase 10 | Pending |
-| XP-06 | Phase 10 | Pending |
+| XP-01 | Phase 10 | Complete |
+| XP-02 | Phase 10 | Complete |
+| XP-03 | Phase 10 | Complete |
+| XP-04 | Phase 10 | Complete |
+| XP-05 | Phase 10 | Complete |
+| XP-06 | Phase 10 | Complete |
 | ARROW-01 | Phase 11 | Pending |
 | ARROW-02 | Phase 11 | Pending |
 | ARROW-03 | Phase 11 | Pending |

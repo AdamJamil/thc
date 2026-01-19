@@ -57,7 +57,7 @@ Combat and survival systems that reinforce risk/reward philosophy. Base claiming
 **Milestone Goal:** Ranged combat depth through tiered arrows and parry improvements, plus XP economy tightening.
 
 - [x] **Phase 9: Parry Stun Improvements** - Increased stun range (3 blocks) and knockback
-- [ ] **Phase 10: XP Economy Restriction** - XP orbs only from mob deaths
+- [x] **Phase 10: XP Economy Restriction** - XP orbs only from mob deaths
 - [ ] **Phase 11: Tiered Arrows** - Flint/Iron/Diamond/Netherite arrows with scaling damage
 
 ## Phase Details
@@ -140,7 +140,7 @@ Plans:
 **Plans**: 1
 
 Plans:
-- [ ] 10-01: XP spawn blocking system
+- [x] 10-01: XP spawn blocking system
 
 ### Phase 11: Tiered Arrows
 **Goal**: Ranged combat has progression through tiered arrow damage
@@ -172,7 +172,7 @@ Phases execute in numeric order: 9 → 10 → 11
 | 7. Spear Removal | v1.1 | 1/1 | Complete | 2026-01-18 |
 | 8. Projectile Combat | v1.1 | 2/2 | Complete | 2026-01-18 |
 | 9. Parry Stun Improvements | v1.2 | 1/1 | Complete | 2026-01-19 |
-| 10. XP Economy Restriction | v1.2 | 0/1 | Not started | - |
+| 10. XP Economy Restriction | v1.2 | 1/1 | Complete | 2026-01-19 |
 | 11. Tiered Arrows | v1.2 | 0/3 | Not started | - |
 
 ---

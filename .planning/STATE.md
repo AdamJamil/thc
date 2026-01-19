@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-01-19)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** Planning next milestone
+**Current focus:** v1.3 Extra Features Batch 3
 
 ## Current Position
 
-Phase: v1.2 milestone complete
-Plan: None active
-Status: Ready for v1.3 planning
-Last activity: 2026-01-19 — v1.2 milestone archived
+Phase: Not started (run /gsd:create-roadmap)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-01-19 — Milestone v1.3 started
 
-Progress: Ready for new milestone
+Progress: Requirements defined, ready for roadmap
 
 ## Performance Metrics
 
@@ -74,6 +74,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-19
-Stopped at: v1.2 milestone complete
+Stopped at: v1.3 milestone started
 Resume file: None
-Next: /gsd:discuss-milestone then /gsd:new-milestone
+Next: /gsd:define-requirements or /gsd:create-roadmap

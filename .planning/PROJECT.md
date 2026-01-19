@@ -61,7 +61,41 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ### Active
 
-None - v1.2 complete. Ready for v1.3 planning.
+**Current Milestone: v1.3 Extra Features Batch 3**
+
+**Goal:** Combat rebalancing (melee weakened, ranged gated), wind charge mobility system, threat-based aggro management, and world difficulty tuning.
+
+**Combat Rebalancing:**
+- [ ] Arrow aggro causes Speed 4 (up from Speed 2) for 6 seconds
+- [ ] Remove knockback from arrow hits on enemy mobs
+- [ ] Sweeping edge no longer applies to weapon hits
+- [ ] All melee damage reduced by 75%
+
+**Wind Charge / Mobility:**
+- [ ] Breeze rods yield 12 wind charges (up from 4)
+- [ ] Wind charges knock player 50% higher
+- [ ] Wind charge self-use negates fall damage on next landing (wind charge boost only)
+
+**Ranged Weapon Gating:**
+- [ ] Bows require 3 breeze rods + 3 string (replaces all sticks in recipe)
+- [ ] Crossbows require breeze rod + diamond instead of sticks + iron
+- [ ] Bows and crossbows don't spawn in overworld chests
+- [ ] Bows and crossbows don't drop from mobs
+
+**Threat System:**
+- [ ] Per-mob threat map (player → threat value as double)
+- [ ] Dealing X damage adds X threat to all hostile/neutral mobs within 15 blocks
+- [ ] Threat decays by 1 per second per mob per player
+- [ ] Arrow hits add +10 bonus threat to struck mob
+- [ ] Mobs target highest-threat player when threat ≥ 5 (unless revenge priority)
+- [ ] Target switch only on: (1) revenge strike, or (2) another player gains strictly higher threat
+
+**World Changes:**
+- [ ] Mob griefing disabled
+- [ ] Smooth stone drops cobblestone without silk touch
+- [ ] Always max regional difficulty & clamped regional difficulty in every chunk
+- [ ] Moon phase always "true" for mob/difficulty checks
+- [ ] Mobs cannot spawn in base chunks
 
 ### Out of Scope
 
@@ -113,7 +147,7 @@ None - v1.2 complete. Ready for v1.3 planning.
 
 **Shipped:** v1.2 Extra Features Batch 2 (2026-01-19)
 
-**In Progress:** None (ready for v1.3 planning)
+**In Progress:** v1.3 Extra Features Batch 3
 
 **Codebase:**
 - ~3,000 LOC Kotlin/Java
@@ -126,4 +160,4 @@ None - v1.2 complete. Ready for v1.3 planning.
 **Technical debt:** None identified
 
 ---
-*Last updated: 2026-01-19 after v1.2 milestone complete*
+*Last updated: 2026-01-19 after v1.3 milestone start*

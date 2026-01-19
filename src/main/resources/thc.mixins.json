@@ -16,6 +16,7 @@
 		"RecipeManagerMixin",
 		"ServerPlayerMixin",
 		"SnowballItemMixin",
+		"WindChargePlayerBoostMixin",
 		"access.ItemAccessor",
 		"access.AbstractArrowAccessor"
 	],

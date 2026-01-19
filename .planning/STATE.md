@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-01-19)
 ## Current Position
 
 Phase: 12 of 16 (Combat Rebalancing)
-Plan: Not started
-Status: Ready to plan
-Last activity: 2026-01-19 — Roadmap created (5 phases, 22 requirements)
+Plan: 1 of 2 complete
+Status: In progress
+Last activity: 2026-01-19 — Completed 12-01-PLAN.md (Arrow combat modifications)
 
-Progress: ░░░░░░░░░░ 0%
+Progress: ████░░░░░░░░░ 1/13 plans (8%)
 
 ## Performance Metrics
 
@@ -62,6 +62,8 @@ Key patterns established:
 - Vec3 directional knockback with hurtMarked for velocity sync
 - XP blocking: HEAD cancellation for method-level blocking, @Redirect for ExperienceOrb.award interception
 - Anvil recipe interception: HEAD injection on createResult with @Shadow field access
+- Post-hit modification: TAIL injection on onHitEntity for velocity/knockback changes after vanilla processing
+- MobCategory filtering for monster-only effects
 
 ### Pending Todos
 
@@ -74,6 +76,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-19
-Stopped at: Roadmap created for v1.3
+Stopped at: Completed 12-01-PLAN.md (Arrow combat modifications)
 Resume file: None
-Next: /gsd:plan-phase 12 or /gsd:execute-phase 12
+Next: /gsd:execute-plan 12-02 or continue with remaining v1.3 plans

@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-01-18)
 ## Current Position
 
 Phase: 11 of 11 (Tiered Arrows)
-Plan: 2 of 4 complete
+Plan: 3 of 4 complete
 Status: In progress
-Last activity: 2026-01-19 — Completed 11-02-PLAN.md (Tiered Arrow Items)
+Last activity: 2026-01-19 — Completed 11-03-PLAN.md (Anvil Crafting)
 
-Progress: ████████░░ 80%
+Progress: █████████░ 90%
 
 ## Performance Metrics
 
@@ -50,7 +50,7 @@ Progress: ████████░░ 80%
 | 08-projectile-combat | 2 | 7min | 3.5min |
 | 09-parry-stun | 1 | 3min | 3min |
 | 10-xp-economy | 1 | 6min | 6min |
-| 11-tiered-arrows | 2 | 9min | 4.5min |
+| 11-tiered-arrows | 3 | 13min | 4.3min |
 
 ## Accumulated Context
 
@@ -70,6 +70,7 @@ Key patterns established:
 - Projectile physics: shoot TAIL + tick HEAD injections with @Unique spawn tracking
 - Vec3 directional knockback with hurtMarked for velocity sync
 - XP blocking: HEAD cancellation for method-level blocking, @Redirect for ExperienceOrb.award interception
+- Anvil recipe interception: HEAD injection on createResult with @Shadow field access
 
 ### Pending Todos
 
@@ -82,6 +83,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-19
-Stopped at: Completed 11-02-PLAN.md
+Stopped at: Completed 11-03-PLAN.md
 Resume file: None
-Next: 11-03, 11-04 (wave 2 - can run in parallel)
+Next: 11-04 (flint arrow recipe)

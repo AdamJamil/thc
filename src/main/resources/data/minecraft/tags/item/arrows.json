@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "thc:iron_arrow",
+    "thc:diamond_arrow",
+    "thc:netherite_arrow"
+  ]
+}

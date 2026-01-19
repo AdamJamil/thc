@@ -50,26 +50,26 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| PARRY-01 | — | Pending |
-| PARRY-02 | — | Pending |
-| XP-01 | — | Pending |
-| XP-02 | — | Pending |
-| XP-03 | — | Pending |
-| XP-04 | — | Pending |
-| XP-05 | — | Pending |
-| XP-06 | — | Pending |
-| XP-07 | — | Pending |
-| ARROW-01 | — | Pending |
-| ARROW-02 | — | Pending |
-| ARROW-03 | — | Pending |
-| ARROW-04 | — | Pending |
-| ARROW-05 | — | Pending |
+| PARRY-01 | Phase 9 | Pending |
+| PARRY-02 | Phase 9 | Pending |
+| XP-01 | Phase 10 | Pending |
+| XP-02 | Phase 10 | Pending |
+| XP-03 | Phase 10 | Pending |
+| XP-04 | Phase 10 | Pending |
+| XP-05 | Phase 10 | Pending |
+| XP-06 | Phase 10 | Pending |
+| XP-07 | Phase 10 | Pending |
+| ARROW-01 | Phase 11 | Pending |
+| ARROW-02 | Phase 11 | Pending |
+| ARROW-03 | Phase 11 | Pending |
+| ARROW-04 | Phase 11 | Pending |
+| ARROW-05 | Phase 11 | Pending |
 
 **Coverage:**
 - v1.2 requirements: 14 total
-- Mapped to phases: 0
-- Unmapped: 14 (pending roadmap)
+- Mapped to phases: 14
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-01-19*
-*Last updated: 2026-01-19 after initial definition*
+*Last updated: 2026-01-19 after roadmap phase mapping*

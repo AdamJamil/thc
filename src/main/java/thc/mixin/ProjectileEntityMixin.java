@@ -6,6 +6,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -44,6 +45,31 @@ public abstract class ProjectileEntityMixin {
 		if (target instanceof Mob mob) {
 			mob.setTarget(player);
 		}
+	}
+
+	@Inject(method = "onHitEntity", at = @At("TAIL"))
+	private void thc$removeArrowKnockback(EntityHitResult entityHitResult, CallbackInfo ci) {
+		Projectile self = (Projectile) (Object) this;
+		Entity owner = self.getOwner();
+
+		if (!(owner instanceof ServerPlayer)) {
+			return;
+		}
+
+		Entity hitEntity = entityHitResult.getEntity();
+		if (!(hitEntity instanceof Mob mob)) {
+			return;
+		}
+
+		// Only remove knockback from enemy mobs (monsters)
+		if (mob.getType().getCategory() != MobCategory.MONSTER) {
+			return;
+		}
+
+		// Reset velocity to cancel knockback (preserve Y for gravity)
+		Vec3 velocity = mob.getDeltaMovement();
+		mob.setDeltaMovement(0, velocity.y, 0);
+		mob.hurtMarked = true;
 	}
 
 	@Inject(method = "shoot", at = @At("TAIL"))

@@ -23,11 +23,11 @@ Requirements for v1.2 release. Each maps to roadmap phases.
 
 ### Tiered Arrows
 
-- [ ] **ARROW-01**: Vanilla arrow renamed to "Flint Arrow" with flint_arrow.png texture
-- [ ] **ARROW-02**: Iron Arrow added (+1 damage, crafted via anvil: 64 flint + 1 iron ingot)
-- [ ] **ARROW-03**: Diamond Arrow added (+2 damage, crafted via anvil: 64 flint + 1 diamond)
-- [ ] **ARROW-04**: Netherite Arrow added (+3 damage, crafted via anvil: 64 flint + 1 netherite ingot)
-- [ ] **ARROW-05**: All tiered arrows use corresponding textures (iron_arrow.png, diamond_arrow.png, netherite_arrow.png)
+- [x] **ARROW-01**: Vanilla arrow renamed to "Flint Arrow" with flint_arrow.png texture
+- [x] **ARROW-02**: Iron Arrow added (+1 damage, crafted via anvil: 64 flint + 1 iron ingot)
+- [x] **ARROW-03**: Diamond Arrow added (+2 damage, crafted via anvil: 64 flint + 1 diamond)
+- [x] **ARROW-04**: Netherite Arrow added (+3 damage, crafted via anvil: 64 flint + 1 netherite ingot)
+- [x] **ARROW-05**: All tiered arrows use corresponding textures (iron_arrow.png, diamond_arrow.png, netherite_arrow.png)
 
 ## v2 Requirements
 
@@ -57,11 +57,11 @@ Which phases cover which requirements. Updated by create-roadmap.
 | XP-04 | Phase 10 | Complete |
 | XP-05 | Phase 10 | Complete |
 | XP-06 | Phase 10 | Complete |
-| ARROW-01 | Phase 11 | Pending |
-| ARROW-02 | Phase 11 | Pending |
-| ARROW-03 | Phase 11 | Pending |
-| ARROW-04 | Phase 11 | Pending |
-| ARROW-05 | Phase 11 | Pending |
+| ARROW-01 | Phase 11 | Complete |
+| ARROW-02 | Phase 11 | Complete |
+| ARROW-03 | Phase 11 | Complete |
+| ARROW-04 | Phase 11 | Complete |
+| ARROW-05 | Phase 11 | Complete |
 
 **Coverage:**
 - v1.2 requirements: 13 total

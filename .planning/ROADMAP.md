@@ -8,7 +8,7 @@ Combat and survival systems that reinforce risk/reward philosophy. Base claiming
 
 - ✅ **v1.0 MVP** - Phases 1-5 (shipped 2026-01-17)
 - ✅ **v1.1 Extra Features Batch 1** - Phases 6-8 (shipped 2026-01-18)
-- 🚧 **v1.2 Extra Features Batch 2** - Phases 9-11 (in progress)
+- ✅ **v1.2 Extra Features Batch 2** - Phases 9-11 (shipped 2026-01-19)
 
 ## Phases
 
@@ -52,13 +52,16 @@ Combat and survival systems that reinforce risk/reward philosophy. Base claiming
 
 </details>
 
-### 🚧 v1.2 Extra Features Batch 2 (In Progress)
+<details>
+<summary>✅ v1.2 Extra Features Batch 2 (Phases 9-11) - SHIPPED 2026-01-19</summary>
 
 **Milestone Goal:** Ranged combat depth through tiered arrows and parry improvements, plus XP economy tightening.
 
 - [x] **Phase 9: Parry Stun Improvements** - Increased stun range (3 blocks) and knockback
 - [x] **Phase 10: XP Economy Restriction** - XP orbs only from mob deaths
-- [ ] **Phase 11: Tiered Arrows** - Flint/Iron/Diamond/Netherite arrows with scaling damage
+- [x] **Phase 11: Tiered Arrows** - Flint/Iron/Diamond/Netherite arrows with scaling damage
+
+</details>
 
 ## Phase Details
 
@@ -157,9 +160,9 @@ Plans:
 **Plans**: TBD
 
 Plans:
-- [ ] 11-01: Flint arrow rename and texture
-- [ ] 11-02: Tiered arrow items and recipes
-- [ ] 11-03: Arrow damage modification
+- [x] 11-01: Flint arrow rename and texture
+- [x] 11-02: Tiered arrow items and recipes
+- [x] 11-03: Arrow damage modification
 
 ## Progress
 
@@ -173,9 +176,9 @@ Phases execute in numeric order: 9 → 10 → 11
 | 8. Projectile Combat | v1.1 | 2/2 | Complete | 2026-01-18 |
 | 9. Parry Stun Improvements | v1.2 | 1/1 | Complete | 2026-01-19 |
 | 10. XP Economy Restriction | v1.2 | 1/1 | Complete | 2026-01-19 |
-| 11. Tiered Arrows | v1.2 | 0/3 | Not started | - |
+| 11. Tiered Arrows | v1.2 | 3/3 | Complete | 2026-01-19 |
 
 ---
 *Created: 2026-01-18*
-*Updated: 2026-01-19 (added v1.2 phases)*
-*Current Milestone: v1.2 Extra Features Batch 2*
+*Updated: 2026-01-19 (v1.2 complete)*
+*Current Milestone: None (ready for v1.3)*

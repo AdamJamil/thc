@@ -1,9 +1,9 @@
 package thc.mixin;
 
-import net.minecraft.world.Container;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.AnvilMenu;
 import net.minecraft.world.inventory.DataSlot;
-import net.minecraft.world.inventory.ResultContainer;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import org.spongepowered.asm.mixin.Final;
@@ -14,17 +14,24 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import thc.item.THCArrows;
 
+import java.util.List;
+
 @Mixin(AnvilMenu.class)
-public abstract class AnvilMenuMixin {
+public abstract class AnvilMenuMixin extends AbstractContainerMenu {
 
     @Shadow @Final private DataSlot cost;
-    @Shadow protected Container inputSlots;
-    @Shadow protected ResultContainer resultSlots;
+
+    // Dummy constructor required for extending AbstractContainerMenu
+    protected AnvilMenuMixin() {
+        super(null, 0);
+    }
 
     @Inject(method = "createResult", at = @At("HEAD"), cancellable = true)
     private void thc$handleArrowCrafting(CallbackInfo ci) {
-        ItemStack left = this.inputSlots.getItem(0);
-        ItemStack right = this.inputSlots.getItem(1);
+        // ItemCombinerMenu slots: 0 = left input, 1 = right input, 2 = result
+        List<Slot> slots = this.slots;
+        ItemStack left = slots.get(0).getItem();
+        ItemStack right = slots.get(1).getItem();
 
         // Check for arrow upgrade recipe: 64 arrows in left slot
         if (!left.is(Items.ARROW) || left.getCount() < 64) {
@@ -51,7 +58,7 @@ public abstract class AnvilMenuMixin {
         }
 
         if (result != null) {
-            this.resultSlots.setItem(0, result);
+            slots.get(2).set(result);
             this.cost.set(levelCost);
             ci.cancel();
         }

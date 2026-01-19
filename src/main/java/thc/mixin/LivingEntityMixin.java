@@ -199,6 +199,9 @@ public abstract class LivingEntityMixin {
 			entity -> entity.getType().getCategory() == MobCategory.MONSTER)) {
 			mob.addEffect(slow, player);
 			mob.addEffect(weak, player);
+			Vec3 direction = mob.position().subtract(player.position()).normalize();
+			mob.setDeltaMovement(direction.x * 0.5, 0.2, direction.z * 0.5);
+			mob.hurtMarked = true;
 		}
 	}
 

@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import thc.threat.ThreatManager;
 
 @Mixin(Projectile.class)
 public abstract class ProjectileEntityMixin {
@@ -44,6 +45,8 @@ public abstract class ProjectileEntityMixin {
 
 		if (target instanceof Mob mob) {
 			mob.setTarget(player);
+			// Add +10 bonus threat to struck mob (THREAT-04)
+			ThreatManager.addThreat(mob, player.getUUID(), 10.0);
 		}
 	}
 

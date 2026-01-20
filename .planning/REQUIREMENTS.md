@@ -20,8 +20,8 @@ Requirements for the Twilight Hardcore release. Each maps to roadmap phases.
 - [x] **MOB-02**: Skeletons do not burn in sunlight
 - [x] **MOB-03**: Phantoms do not burn in sunlight
 - [x] **MOB-04**: Undead can still catch fire from fire aspect, lava, and other non-sun sources
-- [ ] **SPAWN-01**: Hostile mobs can spawn regardless of sky light level
-- [ ] **SPAWN-02**: Block light still affects spawn density (vanilla behavior preserved)
+- [x] **SPAWN-01**: Hostile mobs can spawn regardless of sky light level
+- [x] **SPAWN-02**: Block light still affects spawn density (vanilla behavior preserved)
 
 ### Passive Mobs
 
@@ -69,8 +69,8 @@ Which phases cover which requirements. Updated by create-roadmap.
 | MOB-02 | Phase 19 | Complete |
 | MOB-03 | Phase 19 | Complete |
 | MOB-04 | Phase 19 | Complete |
-| SPAWN-01 | Phase 20 | Pending |
-| SPAWN-02 | Phase 20 | Pending |
+| SPAWN-01 | Phase 20 | Complete |
+| SPAWN-02 | Phase 20 | Complete |
 | BEE-01 | Phase 21 | Pending |
 | BEE-02 | Phase 21 | Pending |
 | BEE-03 | Phase 21 | Pending |
@@ -87,4 +87,4 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 ---
 *Requirements defined: 2026-01-20*
-*Last updated: 2026-01-20 after phase 19 completion*
+*Last updated: 2026-01-20 after phase 20 completion*

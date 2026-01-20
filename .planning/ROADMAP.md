@@ -100,7 +100,7 @@ Combat and survival systems that reinforce risk/reward philosophy. Melee damage 
 - [x] **Phase 17: Remove Night Lock** — Delete existing time-lock code
 - [x] **Phase 18: Twilight Visuals** — Client sees perpetual dusk sky
 - [x] **Phase 19: Undead Sun Immunity** — Zombies/skeletons/phantoms don't burn
-- [ ] **Phase 20: Hostile Spawn Bypass** — Monsters spawn regardless of sky light
+- [x] **Phase 20: Hostile Spawn Bypass** — Monsters spawn regardless of sky light
 - [ ] **Phase 21: Bee Always-Work** — Bees work 24/7 regardless of time/weather
 - [ ] **Phase 22: Villager Twilight** — Villagers behave as if always night
 - [ ] **Phase 23: Bed Mechanics** — Beds always usable, don't skip time
@@ -195,11 +195,11 @@ Combat and survival systems that reinforce risk/reward philosophy. Melee damage 
 | 17. Remove Night Lock | 1/1 | Complete | 2026-01-20 |
 | 18. Twilight Visuals | 1/1 | Complete | 2026-01-20 |
 | 19. Undead Sun Immunity | 1/1 | Complete | 2026-01-20 |
-| 20. Hostile Spawn Bypass | 0/TBD | Not started | - |
+| 20. Hostile Spawn Bypass | 1/1 | Complete | 2026-01-20 |
 | 21. Bee Always-Work | 0/TBD | Not started | - |
 | 22. Villager Twilight | 0/TBD | Not started | - |
 | 23. Bed Mechanics | 0/TBD | Not started | - |
 
 ---
 *Created: 2026-01-19*
-*Last updated: 2026-01-20 after phase 19 completion*
+*Last updated: 2026-01-20 after phase 20 completion*

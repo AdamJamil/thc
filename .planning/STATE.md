@@ -11,10 +11,10 @@ See: .planning/PROJECT.md (updated 2026-01-19)
 
 Phase: 14 of 16 (Ranged Weapon Gating)
 Plan: 2 of 2
-Status: In progress
-Last activity: 2026-01-20 — Completed 14-02-PLAN.md (Bow/Crossbow Loot Removal)
+Status: Phase complete
+Last activity: 2026-01-19 — Completed 14-01-PLAN.md (Ranged Weapon Recipe Overrides)
 
-Progress: ████░░░░░░ 2/5 phases (40%)
+Progress: ██████░░░░ 3/5 phases (60%)
 
 ## Performance Metrics
 
@@ -36,11 +36,11 @@ Progress: ████░░░░░░ 2/5 phases (40%)
 - Timeline: 1 day (Jan 19, 2026)
 
 **v1.3 Milestone (in progress):**
-- Plans completed: 5
-- Total execution time: ~13 min
+- Plans completed: 6
+- Total execution time: ~16 min
 
 **Cumulative:**
-- 27 plans completed across 3+ milestones
+- 28 plans completed across 3+ milestones
 - ~2.0 hours total execution time
 - 5 days from project start to v1.2 ship
 
@@ -83,7 +83,7 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-01-20
-Stopped at: Completed 14-02-PLAN.md (Bow/Crossbow Loot Removal)
+Last session: 2026-01-19
+Stopped at: Phase 14 complete (both plans executed)
 Resume file: None
-Next: Execute 14-01-PLAN.md or verify phase complete
+Next: /gsd:plan-phase 15 or /gsd:execute-phase 15

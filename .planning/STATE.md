@@ -9,10 +9,10 @@ See: .planning/PROJECT.md (updated 2026-01-20)
 
 ## Current Position
 
-Phase: 19 of 23 (Undead Sun Immunity)
-Plan: 1 of 1 complete
-Status: Phase complete
-Last activity: 2026-01-20 — Completed 19-01-PLAN.md (sun immunity)
+Phase: 20 of 23 (Hostile Spawn Bypass)
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-01-20 — Phase 19 complete (undead sun immunity)
 
 Progress: ██████████████████░░ 83% (19/23 phases complete)
 
@@ -45,7 +45,7 @@ Progress: ██████████████████░░ 83% (19/2
 - Total execution time: ~6 min
 
 **Cumulative:**
-- 37 plans completed across 5 milestones
+- 38 plans completed across 5 milestones
 - ~2.5 hours total execution time
 - 6 days from project start to v1.3 ship
 
@@ -94,6 +94,7 @@ Key patterns established:
 - Difficulty override: HEAD inject on getCurrentDifficultyAt returning custom DifficultyInstance
 - Client visual override: Level mixin with instanceof ClientLevel check for client-only effects
 - Interface method targeting: Fabric Loom remapping warning expected when method from interface (LevelTimeAccess)
+- Sun burn prevention: HEAD inject on Mob.isSunBurnTick with cancellable=true returning false
 
 ### Pending Todos
 

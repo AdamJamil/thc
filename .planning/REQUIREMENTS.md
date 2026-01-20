@@ -16,10 +16,10 @@ Requirements for the Twilight Hardcore release. Each maps to roadmap phases.
 
 ### Mob Behavior
 
-- [ ] **MOB-01**: Zombies do not burn in sunlight
-- [ ] **MOB-02**: Skeletons do not burn in sunlight
-- [ ] **MOB-03**: Phantoms do not burn in sunlight
-- [ ] **MOB-04**: Undead can still catch fire from fire aspect, lava, and other non-sun sources
+- [x] **MOB-01**: Zombies do not burn in sunlight
+- [x] **MOB-02**: Skeletons do not burn in sunlight
+- [x] **MOB-03**: Phantoms do not burn in sunlight
+- [x] **MOB-04**: Undead can still catch fire from fire aspect, lava, and other non-sun sources
 - [ ] **SPAWN-01**: Hostile mobs can spawn regardless of sky light level
 - [ ] **SPAWN-02**: Block light still affects spawn density (vanilla behavior preserved)
 
@@ -65,10 +65,10 @@ Which phases cover which requirements. Updated by create-roadmap.
 | TIME-02 | Phase 17 | Complete |
 | SKY-01 | Phase 18 | Complete |
 | SKY-02 | Phase 18 | Complete |
-| MOB-01 | Phase 19 | Pending |
-| MOB-02 | Phase 19 | Pending |
-| MOB-03 | Phase 19 | Pending |
-| MOB-04 | Phase 19 | Pending |
+| MOB-01 | Phase 19 | Complete |
+| MOB-02 | Phase 19 | Complete |
+| MOB-03 | Phase 19 | Complete |
+| MOB-04 | Phase 19 | Complete |
 | SPAWN-01 | Phase 20 | Pending |
 | SPAWN-02 | Phase 20 | Pending |
 | BEE-01 | Phase 21 | Pending |
@@ -87,4 +87,4 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 ---
 *Requirements defined: 2026-01-20*
-*Last updated: 2026-01-20 after phase 18 completion*
+*Last updated: 2026-01-20 after phase 19 completion*

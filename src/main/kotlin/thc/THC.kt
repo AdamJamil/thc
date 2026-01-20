@@ -70,7 +70,9 @@ object THC : ModInitializer {
 			Items.IRON_SPEAR,
 			Items.GOLDEN_SPEAR,
 			Items.DIAMOND_SPEAR,
-			Items.NETHERITE_SPEAR
+			Items.NETHERITE_SPEAR,
+			Items.BOW,
+			Items.CROSSBOW
 		)
 		LootTableEvents.MODIFY_DROPS.register(LootTableEvents.ModifyDrops { _, _, drops ->
 			drops.removeIf { stack -> removedItems.any { stack.`is`(it) } }

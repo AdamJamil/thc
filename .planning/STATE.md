@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-01-20)
 ## Current Position
 
 Phase: 18 of 23 (Twilight Visuals)
-Plan: Not started
-Status: Ready to plan
-Last activity: 2026-01-20 — Phase 17 complete (night lock removed)
+Plan: 01 complete
+Status: Phase 18 in progress
+Last activity: 2026-01-20 — Completed 18-01 (client dusk sky)
 
-Progress: ████████████████░░░░ 74% (17/23 phases complete)
+Progress: █████████████████░░░ 78% (18/23 phases in progress)
 
 ## Performance Metrics
 
@@ -41,11 +41,11 @@ Progress: ████████████████░░░░ 74% (17/2
 - Timeline: 2 days (Jan 19-20, 2026)
 
 **v2.0 Milestone (in progress):**
-- Plans completed: 1
-- Total execution time: ~2 min
+- Plans completed: 2
+- Total execution time: ~5 min
 
 **Cumulative:**
-- 36 plans completed across 5 milestones
+- 37 plans completed across 5 milestones
 - ~2.5 hours total execution time
 - 6 days from project start to v1.3 ship
 
@@ -92,6 +92,8 @@ Key patterns established:
 - Natural spawn blocking: HEAD inject on NaturalSpawner.isValidSpawnPostitionForType
 - Chunk claim check from Java: ClaimManager.INSTANCE.isClaimed(server, chunkPos)
 - Difficulty override: HEAD inject on getCurrentDifficultyAt returning custom DifficultyInstance
+- Client visual override: Level mixin with instanceof ClientLevel check for client-only effects
+- Interface method targeting: Fabric Loom remapping warning expected when method from interface (LevelTimeAccess)
 
 ### Pending Todos
 
@@ -104,6 +106,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-20
-Stopped at: Completed 17-01-PLAN.md
+Stopped at: Completed 18-01-PLAN.md
 Resume file: None
-Next: Run /gsd:plan-phase 18
+Next: Continue phase 18 if more plans exist, or proceed to phase 19

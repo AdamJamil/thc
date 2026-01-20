@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-20)
 
 ## Current Position
 
-Phase: 18 of 23 (Twilight Visuals)
-Plan: 01 complete
-Status: Phase 18 in progress
-Last activity: 2026-01-20 — Completed 18-01 (client dusk sky)
+Phase: 19 of 23 (Undead Sun Immunity)
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-01-20 — Phase 18 complete (twilight visuals)
 
-Progress: █████████████████░░░ 78% (18/23 phases in progress)
+Progress: █████████████████░░░ 78% (18/23 phases complete)
 
 ## Performance Metrics
 
@@ -106,6 +106,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-20
-Stopped at: Completed 18-01-PLAN.md
+Stopped at: Phase 18 complete
 Resume file: None
-Next: Continue phase 18 if more plans exist, or proceed to phase 19
+Next: Run /gsd:plan-phase 19

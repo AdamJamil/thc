@@ -11,8 +11,8 @@ Requirements for the Twilight Hardcore release. Each maps to roadmap phases.
 
 - [x] **TIME-01**: Server time flows normally (doDaylightCycle continues)
 - [x] **TIME-02**: Existing night-lock code is removed
-- [ ] **SKY-01**: Client sees perpetual dusk sky (locked at ~13000 ticks)
-- [ ] **SKY-02**: Sky rendering works correctly in Overworld only (Nether/End unaffected)
+- [x] **SKY-01**: Client sees perpetual dusk sky (locked at ~13000 ticks)
+- [x] **SKY-02**: Sky rendering works correctly in Overworld only (Nether/End unaffected)
 
 ### Mob Behavior
 
@@ -63,8 +63,8 @@ Which phases cover which requirements. Updated by create-roadmap.
 |-------------|-------|--------|
 | TIME-01 | Phase 17 | Complete |
 | TIME-02 | Phase 17 | Complete |
-| SKY-01 | Phase 18 | Pending |
-| SKY-02 | Phase 18 | Pending |
+| SKY-01 | Phase 18 | Complete |
+| SKY-02 | Phase 18 | Complete |
 | MOB-01 | Phase 19 | Pending |
 | MOB-02 | Phase 19 | Pending |
 | MOB-03 | Phase 19 | Pending |
@@ -87,4 +87,4 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 ---
 *Requirements defined: 2026-01-20*
-*Last updated: 2026-01-20 after phase 17 completion*
+*Last updated: 2026-01-20 after phase 18 completion*

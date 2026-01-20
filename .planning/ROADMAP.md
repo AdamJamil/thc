@@ -71,7 +71,7 @@ Combat and survival systems that reinforce risk/reward philosophy. Melee damage 
 - [x] **Phase 12: Combat Rebalancing** — Melee damage reduced, arrow effects enhanced
 - [x] **Phase 13: Wind Charge Mobility** — Enhanced wind charges as core mobility tool
 - [x] **Phase 14: Ranged Weapon Gating** — Bows/crossbows gated behind Trial Chambers
-- [ ] **Phase 15: Threat System** — Tactical aggro management across mob groups
+- [x] **Phase 15: Threat System** — Tactical aggro management across mob groups
 - [ ] **Phase 16: World Difficulty** — Max difficulty everywhere, safer bases
 
 ## Phase Details
@@ -142,10 +142,10 @@ Plans:
 **Plans**: TBD
 
 Plans:
-- [ ] 15-01: Threat data structure and storage
-- [ ] 15-02: Threat propagation on damage
-- [ ] 15-03: Threat decay system
-- [ ] 15-04: Threat-based targeting behavior
+- [x] 15-01: Threat data structure and storage
+- [x] 15-02: Threat propagation on damage
+- [x] 15-03: Threat decay system
+- [x] 15-04: Threat-based targeting behavior
 
 ### Phase 16: World Difficulty
 **Goal**: Harder world outside bases, safer inside bases
@@ -175,7 +175,7 @@ Phases execute in numeric order: 12 → 13 → 14 → 15 → 16
 | 12. Combat Rebalancing | v1.3 | 2/2 | Complete | 2026-01-19 |
 | 13. Wind Charge Mobility | v1.3 | 2/2 | Complete | 2026-01-19 |
 | 14. Ranged Weapon Gating | v1.3 | 2/2 | Complete | 2026-01-19 |
-| 15. Threat System | v1.3 | 0/4 | Not started | - |
+| 15. Threat System | v1.3 | 4/4 | Complete | 2026-01-19 |
 | 16. World Difficulty | v1.3 | 0/3 | Not started | - |
 
 ---

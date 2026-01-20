@@ -29,12 +29,12 @@ Requirements for v1.3 release. Each maps to roadmap phases.
 
 ### Threat System
 
-- [ ] **THREAT-01**: Per-mob threat map (player → threat value as double)
-- [ ] **THREAT-02**: Dealing X damage adds X threat to all hostile/neutral mobs within 15 blocks
-- [ ] **THREAT-03**: Threat decays by 1 per second per mob per player
-- [ ] **THREAT-04**: Arrow hits add +10 bonus threat to struck mob
-- [ ] **THREAT-05**: Mobs target highest-threat player when threat ≥ 5 (unless revenge priority)
-- [ ] **THREAT-06**: Target switch only on: (1) revenge strike, or (2) another player gains strictly higher threat
+- [x] **THREAT-01**: Per-mob threat map (player → threat value as double)
+- [x] **THREAT-02**: Dealing X damage adds X threat to all hostile/neutral mobs within 15 blocks
+- [x] **THREAT-03**: Threat decays by 1 per second per mob per player
+- [x] **THREAT-04**: Arrow hits add +10 bonus threat to struck mob
+- [x] **THREAT-05**: Mobs target highest-threat player when threat ≥ 5 (unless revenge priority)
+- [x] **THREAT-06**: Target switch only on: (1) revenge strike, or (2) another player gains strictly higher threat
 
 ### World Changes
 
@@ -76,12 +76,12 @@ Which phases cover which requirements. Updated by create-roadmap.
 | RANGED-02 | Phase 14 | Complete |
 | RANGED-03 | Phase 14 | Complete |
 | RANGED-04 | Phase 14 | Complete |
-| THREAT-01 | Phase 15 | Pending |
-| THREAT-02 | Phase 15 | Pending |
-| THREAT-03 | Phase 15 | Pending |
-| THREAT-04 | Phase 15 | Pending |
-| THREAT-05 | Phase 15 | Pending |
-| THREAT-06 | Phase 15 | Pending |
+| THREAT-01 | Phase 15 | Complete |
+| THREAT-02 | Phase 15 | Complete |
+| THREAT-03 | Phase 15 | Complete |
+| THREAT-04 | Phase 15 | Complete |
+| THREAT-05 | Phase 15 | Complete |
+| THREAT-06 | Phase 15 | Complete |
 | WORLD-01 | Phase 16 | Pending |
 | WORLD-02 | Phase 16 | Pending |
 | WORLD-03 | Phase 16 | Pending |

@@ -9,10 +9,10 @@ See: .planning/PROJECT.md (updated 2026-01-19)
 
 ## Current Position
 
-Phase: 15 of 16 (Threat System)
-Plan: 4 of 4
-Status: Phase complete
-Last activity: 2026-01-19 — Completed 15-04-PLAN.md (Threat Targeting)
+Phase: 16 of 16 (World Difficulty)
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-01-19 — Phase 15 verified complete (Threat System)
 
 Progress: ████████░░ 4/5 phases (80%)
 
@@ -93,6 +93,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-19
-Stopped at: Completed 15-04-PLAN.md (Threat Targeting) - Phase 15 complete
+Stopped at: Phase 15 verified complete (Threat System)
 Resume file: None
-Next: Execute Phase 16 (World Difficulty)
+Next: /gsd:plan-phase 16

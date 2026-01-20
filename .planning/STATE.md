@@ -9,10 +9,10 @@ See: .planning/PROJECT.md (updated 2026-01-20)
 
 ## Current Position
 
-Phase: 17 of 23 (Remove Night Lock)
-Plan: 1 of 1 complete
-Status: Phase complete
-Last activity: 2026-01-20 - Completed 17-01-PLAN.md
+Phase: 18 of 23 (Twilight Visuals)
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-01-20 — Phase 17 complete (night lock removed)
 
 Progress: ████████████████░░░░ 74% (17/23 phases complete)
 

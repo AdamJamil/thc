@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "R": "minecraft:breeze_rod",
+    "D": "minecraft:diamond",
+    "S": "minecraft:string",
+    "T": "minecraft:tripwire_hook"
+  },
+  "pattern": [
+    "RDR",
+    "STS",
+    " R "
+  ],
+  "result": {
+    "id": "minecraft:crossbow"
+  }
+}

@@ -37,7 +37,7 @@ Progress: ██████████ 35/35 plans (100%)
 
 **v1.3 Milestone (in progress):**
 - Plans completed: 15
-- Total execution time: ~42 min
+- Total execution time: ~46 min
 
 **Cumulative:**
 - 34 plans completed across 3+ milestones
@@ -85,6 +85,7 @@ Key patterns established:
 - Silk touch conditional loot: minecraft:alternatives with match_tool predicate
 - Natural spawn blocking: HEAD inject on NaturalSpawner.isValidSpawnPostitionForType
 - Chunk claim check from Java: ClaimManager.INSTANCE.isClaimed(server, chunkPos)
+- Difficulty override: HEAD inject on getCurrentDifficultyAt returning custom DifficultyInstance
 
 ### Pending Todos
 

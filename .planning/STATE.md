@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-01-19)
 ## Current Position
 
 Phase: 15 of 16 (Threat System)
-Plan: 3 of 4
-Status: In progress
-Last activity: 2026-01-19 — Completed 15-03-PLAN.md (Threat Decay)
+Plan: 4 of 4
+Status: Phase complete
+Last activity: 2026-01-19 — Completed 15-04-PLAN.md (Threat Targeting)
 
-Progress: ██████░░░░ 3/5 phases (60%)
+Progress: ████████░░ 4/5 phases (80%)
 
 ## Performance Metrics
 
@@ -36,12 +36,12 @@ Progress: ██████░░░░ 3/5 phases (60%)
 - Timeline: 1 day (Jan 19, 2026)
 
 **v1.3 Milestone (in progress):**
-- Plans completed: 8
-- Total execution time: ~22 min
+- Plans completed: 12
+- Total execution time: ~35 min
 
 **Cumulative:**
-- 30 plans completed across 3+ milestones
-- ~2.1 hours total execution time
+- 34 plans completed across 3+ milestones
+- ~2.4 hours total execution time
 - 5 days from project start to v1.2 ship
 
 ## Accumulated Context
@@ -78,6 +78,9 @@ Key patterns established:
 - Lazy decay via method call (vs tick mixin) for efficient threat decay
 - LivingEntity mixin with Mob filter for inherited method targeting
 - AABB.inflate for area-based entity queries with MobCategory filtering
+- TargetGoal extension with Flag.TARGET for custom targeting AI
+- @Shadow @Final for protected GoalSelector access in Mob mixin
+- Type check in mixin callback for class-specific goal injection (Monster filter)
 
 ### Pending Todos
 
@@ -90,6 +93,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-19
-Stopped at: Completed 15-03-PLAN.md (Threat Decay)
+Stopped at: Completed 15-04-PLAN.md (Threat Targeting) - Phase 15 complete
 Resume file: None
-Next: Execute 15-04-PLAN.md (Threat Targeting)
+Next: Execute Phase 16 (World Difficulty)

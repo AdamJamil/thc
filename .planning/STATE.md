@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-01-20)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** Planning next milestone
+**Current focus:** v2.0 Twilight Hardcore
 
 ## Current Position
 
-Phase: 16 of 16 complete
-Plan: All complete
-Status: v1.3 milestone shipped
-Last activity: 2026-01-20 — v1.3 milestone complete
+Phase: Not started (run /gsd:create-roadmap)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-01-20 — Milestone v2.0 started
 
-Progress: ██████████ 35/35 plans (100%)
+Progress: —
 
 ## Performance Metrics
 
@@ -100,6 +100,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-20
-Stopped at: v1.3 milestone complete
+Stopped at: v2.0 milestone initialized
 Resume file: None
-Next: Run /gsd:discuss-milestone to plan next milestone
+Next: Run /gsd:define-requirements or /gsd:create-roadmap

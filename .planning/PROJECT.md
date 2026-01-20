@@ -21,8 +21,8 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 - ✓ Shield replacement — existing
   - Shields removed from all loot tables
   - Bucklers registered and craftable
-- ✓ World mechanics — existing
-  - Time locked to night
+- ✓ World mechanics — existing (modified in v2.0)
+  - ~~Time locked to night~~ → replaced by twilight system in v2.0
 - ✓ Testing infrastructure — existing
   - Smoke test system (100 tick validation)
   - Game tests for buckler mechanics
@@ -85,7 +85,17 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ### Active
 
-No active requirements. All v1.3 features shipped.
+**Current Milestone: v2.0 Twilight Hardcore**
+
+**Goal:** Replace night-lock with a twilight system where time flows normally but the world remains perpetually hostile — mobs spawn in daylight, undead don't burn, and clients see eternal dusk.
+
+**Target features:**
+- [ ] Remove night lock — server time flows normally again
+- [ ] Twilight visuals (client-only) — sky/ambient lighting fixed to dusk (~13000 ticks) regardless of actual time
+- [ ] Hostile spawn bypass — ignore sky light check for monster natural spawning
+- [ ] Undead sun immunity — zombies, skeletons, phantoms don't burn in daylight
+- [ ] Bees always work — ignore time/weather checks in bee AI so they produce honey 24/7
+- [ ] Preserve full moon difficulty — keep existing max regional difficulty implementation
 
 ### Out of Scope
 
@@ -130,7 +140,7 @@ No active requirements. All v1.3 features shipped.
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
 | Buckler replaces shields entirely | Supports risk/reward philosophy - active defense (parry) vs passive (shield block) | ✓ Good - completed and tested |
-| Night-only world | Forces exposure to hostile mobs, eliminates safe periods | — Pending gameplay validation |
+| Night-only world | Forces exposure to hostile mobs, eliminates safe periods | ⚠️ Revisit — replacing with twilight system in v2.0 |
 | Iterative system design | Allows parallel design/implementation, faster iteration | ✓ Good - v1.0 delivered in 3 days |
 | Attachments for player state | Fabric API standard for entity data persistence | ✓ Good - clean sync mechanism |
 | GameTest over manual testing | Automated verification prevents regressions | ✓ Good - catches bugs early |
@@ -142,7 +152,7 @@ No active requirements. All v1.3 features shipped.
 
 **Shipped:** v1.3 Extra Features Batch 3 (2026-01-20)
 
-**In Progress:** None - all milestones complete
+**In Progress:** v2.0 Twilight Hardcore — defining requirements
 
 **Codebase:**
 - ~3,582 LOC Kotlin/Java
@@ -155,4 +165,4 @@ No active requirements. All v1.3 features shipped.
 **Technical debt:** None identified
 
 ---
-*Last updated: 2026-01-20 after v1.3 milestone completion*
+*Last updated: 2026-01-20 after v2.0 milestone start*

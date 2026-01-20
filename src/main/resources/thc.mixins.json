@@ -12,6 +12,7 @@
 		"LivingEntityDrowningMixin",
 		"LivingEntityMixin",
 		"MobDamageThreatMixin",
+		"MonsterThreatGoalMixin",
 		"PlayerAttackMixin",
 		"PlayerFallDamageMixin",
 		"ProjectileEntityMixin",

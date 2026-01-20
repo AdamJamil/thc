@@ -22,10 +22,10 @@ Requirements for v1.3 release. Each maps to roadmap phases.
 
 ### Ranged Weapon Gating
 
-- [ ] **RANGED-01**: Bows require 3 breeze rods + 3 string (replaces all sticks in recipe)
-- [ ] **RANGED-02**: Crossbows require breeze rod + diamond instead of sticks + iron
-- [ ] **RANGED-03**: Bows and crossbows don't spawn in overworld chests
-- [ ] **RANGED-04**: Bows and crossbows don't drop from mobs
+- [x] **RANGED-01**: Bows require 3 breeze rods + 3 string (replaces all sticks in recipe)
+- [x] **RANGED-02**: Crossbows require breeze rod + diamond instead of sticks + iron
+- [x] **RANGED-03**: Bows and crossbows don't spawn in overworld chests
+- [x] **RANGED-04**: Bows and crossbows don't drop from mobs
 
 ### Threat System
 
@@ -72,10 +72,10 @@ Which phases cover which requirements. Updated by create-roadmap.
 | WIND-01 | Phase 13 | Complete |
 | WIND-02 | Phase 13 | Complete |
 | WIND-03 | Phase 13 | Complete |
-| RANGED-01 | Phase 14 | Pending |
-| RANGED-02 | Phase 14 | Pending |
-| RANGED-03 | Phase 14 | Pending |
-| RANGED-04 | Phase 14 | Pending |
+| RANGED-01 | Phase 14 | Complete |
+| RANGED-02 | Phase 14 | Complete |
+| RANGED-03 | Phase 14 | Complete |
+| RANGED-04 | Phase 14 | Complete |
 | THREAT-01 | Phase 15 | Pending |
 | THREAT-02 | Phase 15 | Pending |
 | THREAT-03 | Phase 15 | Pending |

@@ -9,10 +9,10 @@ See: .planning/PROJECT.md (updated 2026-01-19)
 
 ## Current Position
 
-Phase: 14 of 16 (Ranged Weapon Gating)
-Plan: 2 of 2
-Status: Phase complete
-Last activity: 2026-01-19 — Completed 14-01-PLAN.md (Ranged Weapon Recipe Overrides)
+Phase: 15 of 16 (Threat System)
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-01-19 — Phase 14 verified complete (Ranged Weapon Gating)
 
 Progress: ██████░░░░ 3/5 phases (60%)
 
@@ -84,6 +84,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-19
-Stopped at: Phase 14 complete (both plans executed)
+Stopped at: Phase 14 verified complete (Ranged Weapon Gating)
 Resume file: None
 Next: /gsd:plan-phase 15 or /gsd:execute-phase 15

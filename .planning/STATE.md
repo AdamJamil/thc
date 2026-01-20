@@ -10,9 +10,9 @@ See: .planning/PROJECT.md (updated 2026-01-19)
 ## Current Position
 
 Phase: 15 of 16 (Threat System)
-Plan: 1 of 4
+Plan: 3 of 4
 Status: In progress
-Last activity: 2026-01-19 — Completed 15-01-PLAN.md (Threat Data Foundation)
+Last activity: 2026-01-19 — Completed 15-03-PLAN.md (Threat Decay)
 
 Progress: ██████░░░░ 3/5 phases (60%)
 
@@ -36,11 +36,11 @@ Progress: ██████░░░░ 3/5 phases (60%)
 - Timeline: 1 day (Jan 19, 2026)
 
 **v1.3 Milestone (in progress):**
-- Plans completed: 7
-- Total execution time: ~19 min
+- Plans completed: 8
+- Total execution time: ~22 min
 
 **Cumulative:**
-- 29 plans completed across 3+ milestones
+- 30 plans completed across 3+ milestones
 - ~2.1 hours total execution time
 - 5 days from project start to v1.2 ship
 
@@ -74,6 +74,8 @@ Key patterns established:
 - Boolean attachment for one-time state tracking (wind charge boost)
 - Non-persistent Map<UUID, Double> attachment for session-scoped threat storage
 - Static utility class pattern for attachment CRUD operations (ThreatManager)
+- Timestamp attachment for rate-limiting operations (THREAT_LAST_DECAY pattern)
+- Lazy decay via method call (vs tick mixin) for efficient threat decay
 
 ### Pending Todos
 
@@ -86,6 +88,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-19
-Stopped at: Completed 15-01-PLAN.md (Threat Data Foundation)
+Stopped at: Completed 15-03-PLAN.md (Threat Decay)
 Resume file: None
-Next: Execute remaining Phase 15 plans (15-02 through 15-04)
+Next: Execute 15-04-PLAN.md (Threat Targeting)

@@ -53,6 +53,10 @@ public final class THCAttachments {
 		Identifier.fromNamespaceAndPath("thc", "mob_threat"),
 		builder -> builder.initializer(HashMap::new)
 	);
+	public static final AttachmentType<Long> THREAT_LAST_DECAY = AttachmentRegistry.create(
+		Identifier.fromNamespaceAndPath("thc", "threat_last_decay"),
+		builder -> builder.initializer(() -> 0L)
+	);
 
 	private THCAttachments() {
 	}

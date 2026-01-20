@@ -3,6 +3,7 @@
 	"package": "thc.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
+		"AbstractArrowMixin",
 		"AbstractVillagerMixin",
 		"AnvilMenuMixin",
 		"BellBlockMixin",
@@ -13,6 +14,7 @@
 		"LivingEntityMixin",
 		"MobDamageThreatMixin",
 		"MonsterThreatGoalMixin",
+		"NaturalSpawnerMixin",
 		"PlayerAttackMixin",
 		"PlayerFallDamageMixin",
 		"ProjectileEntityMixin",

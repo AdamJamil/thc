@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-01-19)
 ## Current Position
 
 Phase: 16 of 16 (World Difficulty)
-Plan: 1 of 3 complete
-Status: In progress
-Last activity: 2026-01-20 — Completed 16-01-PLAN.md
+Plan: 3 of 3 complete
+Status: Phase complete
+Last activity: 2026-01-20 — Completed 16-03-PLAN.md
 
-Progress: █████████░ 33/35 plans (94%)
+Progress: ██████████ 35/35 plans (100%)
 
 ## Performance Metrics
 
@@ -36,8 +36,8 @@ Progress: █████████░ 33/35 plans (94%)
 - Timeline: 1 day (Jan 19, 2026)
 
 **v1.3 Milestone (in progress):**
-- Plans completed: 13
-- Total execution time: ~38 min
+- Plans completed: 15
+- Total execution time: ~42 min
 
 **Cumulative:**
 - 34 plans completed across 3+ milestones
@@ -83,6 +83,8 @@ Key patterns established:
 - Type check in mixin callback for class-specific goal injection (Monster filter)
 - GameRules boolean modification: world.gameRules.set(GameRules.RULE_NAME, value, server)
 - Silk touch conditional loot: minecraft:alternatives with match_tool predicate
+- Natural spawn blocking: HEAD inject on NaturalSpawner.isValidSpawnPostitionForType
+- Chunk claim check from Java: ClaimManager.INSTANCE.isClaimed(server, chunkPos)
 
 ### Pending Todos
 
@@ -95,6 +97,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-20
-Stopped at: Completed 16-01-PLAN.md
+Stopped at: Completed 16-03-PLAN.md
 Resume file: None
-Next: Execute 16-02-PLAN.md
+Next: Phase 16 complete - all plans executed

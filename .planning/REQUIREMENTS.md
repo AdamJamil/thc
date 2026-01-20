@@ -61,30 +61,30 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| TIME-01 | TBD | Pending |
-| TIME-02 | TBD | Pending |
-| SKY-01 | TBD | Pending |
-| SKY-02 | TBD | Pending |
-| MOB-01 | TBD | Pending |
-| MOB-02 | TBD | Pending |
-| MOB-03 | TBD | Pending |
-| MOB-04 | TBD | Pending |
-| SPAWN-01 | TBD | Pending |
-| SPAWN-02 | TBD | Pending |
-| BEE-01 | TBD | Pending |
-| BEE-02 | TBD | Pending |
-| BEE-03 | TBD | Pending |
-| VILLAGER-01 | TBD | Pending |
-| VILLAGER-02 | TBD | Pending |
-| BED-01 | TBD | Pending |
-| BED-02 | TBD | Pending |
-| BED-03 | TBD | Pending |
+| TIME-01 | Phase 17 | Pending |
+| TIME-02 | Phase 17 | Pending |
+| SKY-01 | Phase 18 | Pending |
+| SKY-02 | Phase 18 | Pending |
+| MOB-01 | Phase 19 | Pending |
+| MOB-02 | Phase 19 | Pending |
+| MOB-03 | Phase 19 | Pending |
+| MOB-04 | Phase 19 | Pending |
+| SPAWN-01 | Phase 20 | Pending |
+| SPAWN-02 | Phase 20 | Pending |
+| BEE-01 | Phase 21 | Pending |
+| BEE-02 | Phase 21 | Pending |
+| BEE-03 | Phase 21 | Pending |
+| VILLAGER-01 | Phase 22 | Pending |
+| VILLAGER-02 | Phase 22 | Pending |
+| BED-01 | Phase 23 | Pending |
+| BED-02 | Phase 23 | Pending |
+| BED-03 | Phase 23 | Pending |
 
 **Coverage:**
 - v2.0 requirements: 18 total
-- Mapped to phases: 0 (pending roadmap creation)
-- Unmapped: 18 ⚠️
+- Mapped to phases: 18 ✓
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-01-20*
-*Last updated: 2026-01-20 after initial definition*
+*Last updated: 2026-01-20 after roadmap creation*

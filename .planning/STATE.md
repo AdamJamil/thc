@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-20)
 
 ## Current Position
 
-Phase: Not started (run /gsd:create-roadmap)
-Plan: —
-Status: Defining requirements
-Last activity: 2026-01-20 — Milestone v2.0 started
+Phase: 17 of 23 (Remove Night Lock)
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-01-20 — v2.0 roadmap created (7 phases, 18 requirements)
 
-Progress: —
+Progress: ████████████████░░░░ 70% (16/23 phases complete)
 
 ## Performance Metrics
 
@@ -100,6 +100,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-20
-Stopped at: v2.0 milestone initialized
+Stopped at: v2.0 roadmap created
 Resume file: None
-Next: Run /gsd:define-requirements or /gsd:create-roadmap
+Next: Run /gsd:plan-phase 17

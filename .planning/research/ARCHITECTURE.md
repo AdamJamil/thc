@@ -1,301 +1,425 @@
-# Architecture Research: v1.1 Extra Features Integration
+# Architecture Research: Time/Light Subsystems
 
-**Researched:** 2026-01-18
-**Confidence:** HIGH (based on existing THC codebase patterns)
+**Researched:** 2026-01-20
+**Domain:** Minecraft 1.21.11 time, spawning, mob burning, bee AI systems
+**Confidence:** HIGH (verified via Mojang mappings and existing mixin patterns)
 
 ## Summary
 
-The v1.1 features integrate into the existing THC architecture using established patterns. The codebase follows a consistent separation: Java mixins for Minecraft class modifications, Kotlin objects for business logic/event handlers, and data files (JSON) for recipe/loot modifications.
+Minecraft's time/light systems are decentralized - each subsystem queries `Level` or `ServerLevel` independently through specific methods. This creates natural isolation boundaries: modifying what one system "sees" does not cascade to others.
 
-**Key finding:** All four features fit naturally into existing patterns. No new infrastructure required.
+**Key finding:** Each system has a distinct entry point for time/light queries, making targeted interception straightforward with mixins.
 
-## Integration Strategy
+**Primary recommendation:** Use method-level mixins at each system's query point rather than modifying shared state.
 
-### 1. Drowning Modification
+---
 
-**Approach:** New mixin targeting `LivingEntity.baseTick()` or the `decreaseAirSupply()` method.
+## Time System Overview
 
-**Target class:** `net.minecraft.world.entity.LivingEntity`
+### How Minecraft Tracks Time
 
-**Method options:**
-- `baseTick()` - called every tick, contains drowning check logic
-- `decreaseAirSupply(int air)` - reduces air supply, called when underwater
+Time is stored in `LevelData` and accessed through `Level`:
 
-**Recommended:** Mixin into `baseTick()` using `@Inject` at the point where drowning damage is applied. Use a tick counter to apply damage every 4th tick instead of every tick.
+| Method | Class | Returns | Purpose |
+|--------|-------|---------|---------|
+| `getDayTime()` | `Level` | `long` | Current time in ticks (0-24000 cycle) |
+| `getGameTime()` | `Level` | `long` | Total elapsed time (never resets) |
+| `getSkyDarken()` | `Level` | `int` | Sky darkness level (0-15) |
+| `isRaining()` | `Level` | `boolean` | Weather state |
+| `isNight()` | `LevelData` | Derived | `getDayTime()` in night range |
 
-**Package location:** `thc.mixin.LivingEntityDrowningMixin.java`
+**Mapping (Mojang -> Intermediary):**
+- `getDayTime()` -> `method_8532` (Level), `method_217` (LevelData)
+- `getSkyDarken()` -> `method_8594`
+- `isRaining()` -> `method_8419`
 
-**Note:** Could be merged into existing `LivingEntityMixin.java`, but a separate mixin keeps concerns isolated (buckler vs drowning). Recommend separate file for clarity.
+### Time Flow
 
-**Why not extend existing LivingEntityMixin?**
-- Existing mixin is ~235 lines focused on buckler mechanics
-- Drowning is unrelated functionality
-- Separate mixins improve maintainability and testing
-
-### 2. Spear/Trident Removal
-
-**Approach:** Multi-pronged data + runtime removal.
-
-**Components:**
-
-1. **Recipe removal** - Empty JSON file at `data/minecraft/recipe/trident.json`
-   - Note: Trident has no vanilla recipe - this is defensive only
-
-2. **Loot table removal** - Modify Drowned loot tables
-   - Drowned hold tridents 6.25% of the time in Java Edition
-   - Loot table at `data/minecraft/loot_table/entities/drowned.json` can override drops
-   - Use LootTableEvents.MODIFY_DROPS (same pattern as shield removal in THC.kt)
-
-3. **Mob spawn equipment** - Mixin to remove tridents from Drowned spawn
-   - Target: `net.minecraft.world.entity.monster.Drowned`
-   - Method: `populateDefaultEquipmentSlots()` or inject into spawn logic
-   - Strip trident from equipment after natural spawn
-
-4. **Vault loot** (optional) - Trial vault loot tables if present in 1.21
-
-**Package location:**
-- Mixin: `thc.mixin.DrownedMixin.java`
-- Event handler: `thc.world.SpearRemoval.kt` or inline in `THC.kt`
-
-**Files:**
 ```
-src/main/resources/data/minecraft/loot_table/entities/drowned.json
-src/main/java/thc/mixin/DrownedMixin.java (equipment)
+Server tick
+    -> ServerLevel.advanceTime()
+        -> Updates LevelData.dayTime
+        -> Syncs to clients via packet
+
+Client receives
+    -> ClientLevel stores local dayTime
+    -> Used for rendering only
 ```
 
-### 3. Projectile System (Physics + Aggro)
+**Implication:** Client time rendering is already isolated from server mechanics. A client-side mixin can show different time than server tracks.
 
-**Approach:** Projectile physics and hit handling require mixins. Two separate concerns:
+---
 
-**A. Physics (velocity + gravity):**
+## Spawning System
 
-**Target class:** `net.minecraft.world.entity.projectile.AbstractArrow` (covers arrows and tridents)
+### Call Chain for Natural Spawns
 
-**Methods:**
-- `tick()` - modify velocity each tick
-- Initial velocity boost: inject at shoot/fire point
-- Quadratic gravity: modify vertical velocity component in tick
+```
+ServerLevel.tick()
+    -> NaturalSpawner.spawnForChunk()
+        -> spawnCategoryForPosition()
+            -> isValidSpawnPostitionForType()
+                -> SpawnPlacements.checkSpawnRules()
+                    -> Monster.checkMonsterSpawnRules()
+                        -> Level.getBrightness(LightLayer.BLOCK, pos)
+                        -> Level.getBrightness(LightLayer.SKY, pos)
+                        -> Level.getSkyDarken()
+```
 
-**Implementation:**
+### Key Methods
+
+**`NaturalSpawner.isValidSpawnPostitionForType()`**
+- Signature: `(ServerLevel, MobCategory, StructureManager, ChunkGenerator, MobSpawnSettings.SpawnerData, BlockPos.MutableBlockPos, double) -> boolean`
+- Mojang: `method_24934`
+- Purpose: Master spawn validation
+
+**`Monster.checkMonsterSpawnRules()`**
+- Signature: `(EntityType, ServerLevelAccessor, MobSpawnType, BlockPos, RandomSource) -> boolean`
+- Mojang: `method_20680`
+- Purpose: Light level check for monsters
+
+### Light Query Points
+
 ```java
-@Mixin(AbstractArrow.class)
-public class AbstractArrowPhysicsMixin {
-    // Boost initial velocity 20% at shoot
-    // After 8 blocks traveled, apply quadratic gravity
+// In Monster.checkMonsterSpawnRules():
+int blockLight = level.getBrightness(LightLayer.BLOCK, pos);
+int skyLight = level.getBrightness(LightLayer.SKY, pos);
+int skyDarken = level.getSkyDarken();
+
+// Effective sky light = max(0, skyLight - skyDarken)
+// Monster spawns if: blockLight == 0 AND effectiveSkyLight <= 7
+```
+
+### Interception Points
+
+| Goal | Target Class | Method | Injection |
+|------|--------------|--------|-----------|
+| Skip light check entirely | `Monster` | `checkMonsterSpawnRules` | `@Inject` HEAD, return true |
+| Modify light value | `Level` | `getBrightness` | `@Redirect` in spawn caller |
+| Per-category control | `NaturalSpawner` | `isValidSpawnPostitionForType` | `@Inject` based on category |
+
+**Existing THC pattern:** `NaturalSpawnerMixin` already intercepts `isValidSpawnPostitionForType` to block spawns in claimed chunks. Same pattern works for light override.
+
+### Isolation Analysis
+
+Modifying `checkMonsterSpawnRules()` or redirecting `getBrightness()` calls within spawn logic:
+- Does NOT affect client rendering (separate call chain)
+- Does NOT affect mob burning (different method: `isSunBurnTick`)
+- Does NOT affect bee AI (bees check `isNightOrRaining`, not spawn rules)
+
+---
+
+## Mob Burning System
+
+### Call Chain for Undead Burning
+
+```
+LivingEntity.aiStep()
+    -> Monster/Zombie/Skeleton.aiStep()
+        -> super.aiStep() [Mob.aiStep()]
+            -> isSunBurnTick()
+                -> Level.getSkyDarken()
+                -> Level.canSeeSky(pos)
+                -> Level.getBrightness(LightLayer.SKY, pos)
+            -> if true: setRemainingFireTicks(80)
+```
+
+### Key Methods
+
+**`Mob.isSunBurnTick()`**
+- Signature: `() -> boolean`
+- Mojang: `method_5972`
+- Purpose: Determine if mob should catch fire this tick
+
+**`Entity.setRemainingFireTicks()`**
+- Signature: `(int ticks) -> void`
+- Mojang: `method_20803`
+- Purpose: Set fire duration
+
+### Burn Conditions (from vanilla)
+
+```java
+protected boolean isSunBurnTick() {
+    if (level().isDay() && !level().isClientSide) {
+        float brightness = getLightLevelDependentMagicValue();
+        BlockPos pos = ... // adjusted for vehicle or eye position
+        boolean inOpenSky = level().canSeeSky(pos);
+        boolean bright = brightness > 0.5F;
+        boolean wearingHelmet = !getItemBySlot(EquipmentSlot.HEAD).isEmpty();
+
+        return inOpenSky && bright && !wearingHelmet && random.nextFloat() * 30 < brightness;
+    }
+    return false;
 }
 ```
 
-**Tracking travel distance:** Use `@Unique` field to track ticks/distance since launch.
+### Interception Points
 
-**B. Aggro + Effects on hit:**
+| Goal | Target Class | Method | Injection |
+|------|--------------|--------|-----------|
+| Never burn | `Mob` | `isSunBurnTick` | `@Inject` HEAD, return false |
+| Conditional burn | `Zombie`/`Skeleton` | `isSunBurnTick` | `@Overwrite` or `@Inject` |
+| Per-entity control | `Mob` | `isSunBurnTick` | `@Inject` with entity check |
 
-**Target class:** Same `AbstractArrow` or the `onHitEntity()` method
+**Simplest approach:** Mixin to `Mob.isSunBurnTick()` returning false unconditionally.
 
-**Method:** `onHitEntity(EntityHitResult)` - inject at HEAD or TAIL to apply effects
+### Isolation Analysis
 
-**Effects to apply:**
-- Speed II for 6 seconds (120 ticks)
-- Glowing for 6 seconds
-- Redirect mob aggro to shooter
+Modifying `isSunBurnTick()`:
+- Does NOT affect spawning (spawn rules check light directly, not burning)
+- Does NOT affect rendering (client sees normal day/night)
+- Does NOT affect bee AI (bees don't use this method)
 
-**Aggro redirection:** Use `Mob.setTarget()` for mobs in radius after hit
+---
 
-**Package location:**
-- `thc.mixin.AbstractArrowPhysicsMixin.java` (physics)
-- `thc.mixin.AbstractArrowAggroMixin.java` (effects) OR combine into single mixin
-- `thc.projectile.ProjectileEffects.kt` (helper for effect application)
+## Bee AI System
 
-**Recommendation:** Single mixin file `AbstractArrowMixin.java` with clear section separation via comments.
+### Bee Goal Classes
 
-### 4. Aggro + Effects
+From Mojang mappings:
+- `Bee$BeeGoToHiveGoal` (ctw$e) - Navigate to hive
+- `Bee$BeeEnterHiveGoal` (ctw$d) - Enter hive
+- `Bee$BeeGoToKnownFlowerGoal` (ctw$f) - Navigate to flower
+- `Bee$BeePollinateGoal` (ctw$k) - Pollinate
+- `Bee$ValidateHiveGoal` (ctw$n) - Check hive validity
+- `Bee$ValidateFlowerGoal` (ctw$m) - Check flower validity
 
-Already covered in section 3B above. The logic lives in:
-- Mixin for hook point (projectile hit detection)
-- Kotlin helper for effect application logic
-
-**Effect application pattern (from existing codebase):**
-```kotlin
-// Similar to LivingEntityMixin stun effect
-MobEffectInstance(MobEffects.SPEED, 120, 1)  // Speed II
-MobEffectInstance(MobEffects.GLOWING, 120, 0)  // Glowing
-```
-
-## Package Organization
+### Call Chain for Hive Return
 
 ```
-thc/
-  mixin/
-    LivingEntityMixin.java       # Existing - buckler damage reduction
-    LivingEntityDrowningMixin.java  # NEW - drowning tick rate
-    DrownedMixin.java            # NEW - remove trident equipment
-    AbstractArrowMixin.java      # NEW - physics + aggro effects
-    access/
-      ItemAccessor.java          # Existing
-
-  world/
-    MiningFatigue.kt             # Existing
-    VillageProtection.kt         # Existing
-    WorldRestrictions.kt         # Existing
-    SpearRemoval.kt              # NEW (optional, could be in THC.kt)
-
-  projectile/                    # NEW package
-    ProjectileEffects.kt         # Effect application + aggro redirect logic
-
-data/minecraft/
-  loot_table/entities/
-    drowned.json                 # NEW - strip trident drops
+Bee.aiStep()
+    -> Goal system evaluates goals
+        -> BeeGoToHiveGoal.canUse()
+            -> wantsToEnterHive()
+                -> isNightOrRaining(level)
+                    -> level.isRaining()
+                    -> level.isNight() [derived from getDayTime]
 ```
 
-**Alternative (minimal):** Skip `projectile/` package, put logic directly in mixin or `world/` package. Recommend new package for future expansion (snowballs, ender pearls, etc).
+### Key Methods
 
-## Mixin Map
+**`Bee.wantsToEnterHive()`**
+- Signature: `() -> boolean`
+- Mojang: `method_21789`
+- Purpose: Determine if bee should return to hive
 
-| Mixin | Target Class | Purpose | Injection Point |
-|-------|--------------|---------|-----------------|
-| LivingEntityMixin | LivingEntity | Buckler damage reduction | `hurtServer` HEAD/TAIL |
-| **LivingEntityDrowningMixin** | LivingEntity | Reduce drowning tick rate 4x | `baseTick` custom |
-| **DrownedMixin** | Drowned | Strip trident from spawn equipment | `populateDefaultEquipmentSlots` TAIL |
-| **AbstractArrowMixin** | AbstractArrow | Physics + aggro effects | `tick` + `onHitEntity` |
-| ServerPlayerMixin | ServerPlayer | Max health management | `tick` HEAD |
-| RecipeManagerMixin | RecipeManager | Shield recipe removal | `prepare` RETURN |
-| FoodDataMixin | FoodData | Halve natural regen | `tick` ModifyArg |
-| SnowballItemMixin | Items | Snowball stack size | `<clinit>` TAIL |
-| AbstractVillagerMixin | AbstractVillager | Remove shield/bell trades | `getOffers` RETURN |
-| BellBlockMixin | BellBlock | Land plot drops | (assumed) |
+**`Bee.isNightOrRaining(Level)`**
+- Static method checking world conditions
+- Uses `level.isRaining()` and time-based night check
 
-**New mixins in bold.** Total: 4 new mixins for v1.1 features.
+**`Bee.hasHivePos()` / `Bee.hasValidHive()`**
+- Check if bee has assigned hive
 
-## Build Order
+### Bee Work Cycle
 
-Dependencies between features determine implementation order:
+```
+Day + Clear weather:
+    -> Leave hive
+    -> Find flower (BeeGoToKnownFlowerGoal)
+    -> Pollinate (BeePollinateGoal)
+    -> Return to hive (BeeGoToHiveGoal when nectar full)
+    -> Stay in hive 2400 ticks (2 min)
 
-### Phase 1: Drowning Modification
-**Why first:**
-- Standalone feature, no dependencies
-- Simplest mixin (single injection point)
-- Quick win, easy to verify
+Night OR Rain:
+    -> wantsToEnterHive() returns true
+    -> BeeGoToHiveGoal activates
+    -> Bee enters hive
+    -> Stays until day + clear
+```
 
-**Depends on:** Nothing
+### Interception Points
 
-### Phase 2: Spear Removal
-**Why second:**
-- Mostly data files (JSON)
-- One simple mixin
-- Can use existing LootTableEvents pattern from shield removal
+| Goal | Target Class | Method | Injection |
+|------|--------------|--------|-----------|
+| Always work (ignore time/weather) | `Bee` | `wantsToEnterHive` | `@Inject` return false |
+| Never work | `Bee` | `wantsToEnterHive` | `@Inject` return true |
+| Custom conditions | `Bee` | `isNightOrRaining` | `@Overwrite` with custom logic |
 
-**Depends on:** Nothing (but benefits from Phase 1 pattern establishment)
+**For THC goal (always work):** Inject into `wantsToEnterHive()` to always return false (bee never wants to enter hive due to time/weather, only when full of nectar).
 
-### Phase 3: Projectile Physics
-**Why third:**
-- More complex mixin work
-- Need to track projectile state (distance traveled)
-- Foundation for Phase 4
+### Isolation Analysis
 
-**Depends on:** Nothing directly, but establishing tick tracking enables Phase 4
+Modifying `wantsToEnterHive()` or `isNightOrRaining()`:
+- Does NOT affect spawning (spawn rules don't check bee methods)
+- Does NOT affect mob burning (burning checks sky light, not bee logic)
+- Does NOT affect rendering (client sees real time)
 
-### Phase 4: Projectile Aggro/Effects
-**Why last:**
-- Depends on projectile hit detection
-- Most complex logic (mob targeting, radius search)
-- Builds on Phase 3 mixin infrastructure
+---
 
-**Depends on:** Phase 3 mixin exists (can share file)
+## Call Chain Diagrams
 
-**Alternative order:** Phases 3 and 4 could be combined into single implementation since they share the same mixin file and are logically coupled.
+### System Independence
 
-## Shared Infrastructure
+```
+                    +------------------+
+                    |   Level/World    |
+                    |   getDayTime()   |
+                    |   getBrightness()|
+                    |   isRaining()    |
+                    |   getSkyDarken() |
+                    +--------+---------+
+                             |
+         +-------------------+-------------------+
+         |                   |                   |
+         v                   v                   v
++----------------+  +----------------+  +----------------+
+|   SPAWNING     |  |  MOB BURNING   |  |    BEE AI      |
+| NaturalSpawner |  | Mob.isSunBurn  |  | Bee.wantsTo    |
+|                |  |     Tick()     |  |   EnterHive()  |
++-------+--------+  +-------+--------+  +-------+--------+
+        |                   |                   |
+        v                   v                   v
+  getBrightness()     getBrightness()    isNightOrRaining()
+  LightLayer.BLOCK    getLightLevel       isRaining()
+  LightLayer.SKY      DependentMagic      getDayTime()
+```
 
-### No new infrastructure required
+### Client Rendering (Separate)
 
-The existing codebase provides all needed patterns:
-- Mixin injection patterns (HEAD, TAIL, ModifyVariable, ModifyArg)
-- Effect application pattern (`MobEffectInstance`)
-- Event registration pattern (`THC.kt` initializer)
-- Loot table modification pattern (`LootTableEvents.MODIFY_DROPS`)
+```
+Server: ServerLevel.getDayTime() -> game mechanics
 
-### Potential shared utilities (optional)
+                    [Network Sync]
 
-If projectile system expands in future:
+Client: ClientLevel.setDayTime() -> rendering only
+        |
+        v
+   LevelRenderer.renderSky()
+   LightTexture calculations
+```
 
-```kotlin
-// thc/projectile/ProjectileUtils.kt
-object ProjectileUtils {
-    fun applyHitEffects(target: LivingEntity, shooter: Entity?)
-    fun redirectAggro(target: LivingEntity, shooter: Entity?, radius: Double)
+**Key insight:** Client rendering uses `ClientLevel`, which is separate from `ServerLevel`. Mixins can intercept `ClientLevel.getDayTime()` to show cosmetic time without affecting server mechanics.
+
+---
+
+## Isolation Analysis
+
+### Why Each Modification is Safe
+
+| System | Modifies | Does NOT Affect | Reason |
+|--------|----------|-----------------|--------|
+| Client rendering | `ClientLevel.getDayTime()` | Spawning, Burning, Bee AI | Server uses `ServerLevel` |
+| Spawning | `checkMonsterSpawnRules()` or redirect `getBrightness` | Burning, Bee AI, Rendering | Different call chain |
+| Mob burning | `Mob.isSunBurnTick()` | Spawning, Bee AI, Rendering | Method specific to burning |
+| Bee AI | `Bee.wantsToEnterHive()` | Spawning, Burning, Rendering | Bee-specific method |
+
+### No Shared State Modifications
+
+Each THC goal uses **method interception** rather than modifying shared `Level` state:
+
+1. **Client time:** Intercept `ClientLevel.getDayTime()` return value
+2. **Bee AI:** Intercept `Bee.wantsToEnterHive()` or `isNightOrRaining()`
+3. **Spawning:** Intercept light check in `checkMonsterSpawnRules()` or skip entirely
+4. **Burning:** Intercept `isSunBurnTick()` return value
+
+This ensures no cascading effects between systems.
+
+---
+
+## Recommended Mixin Strategy
+
+### Client Time Rendering (Cosmetic Dusk)
+
+```java
+@Mixin(ClientLevel.class)
+public class ClientLevelTimeMixin {
+    @Inject(method = "getDayTime", at = @At("HEAD"), cancellable = true)
+    private void thc$forceDuskVisuals(CallbackInfoReturnable<Long> cir) {
+        cir.setReturnValue(13000L); // Dusk time
+    }
 }
 ```
 
-For v1.1 scope, inline implementation in mixin is sufficient.
+**Location:** `src/client/java/thc/mixin/client/`
+**Config:** Add to client mixins in `thc.client.mixins.json`
 
-## Data Files Required
+### Bee AI (Always Daytime + Fair Weather)
 
-| File | Type | Purpose |
-|------|------|---------|
-| `data/minecraft/loot_table/entities/drowned.json` | Override | Remove trident drops |
+```java
+@Mixin(Bee.class)
+public class BeeAlwaysWorkMixin {
+    @Inject(method = "wantsToEnterHive", at = @At("HEAD"), cancellable = true)
+    private void thc$beeAlwaysWorks(CallbackInfoReturnable<Boolean> cir) {
+        // Only return to hive when nectar-full, not for time/weather
+        Bee self = (Bee) (Object) this;
+        if (self.hasNectar()) {
+            return; // Let vanilla logic run
+        }
+        cir.setReturnValue(false); // Don't want to enter hive
+    }
+}
+```
 
-**Note:** Trident has no vanilla crafting recipe in Java Edition, so no recipe override needed.
+### Monster Spawning (Ignore Sky Light)
 
-## Configuration Touchpoints
+```java
+@Mixin(Monster.class)
+public class MonsterSpawnLightMixin {
+    @Inject(method = "checkMonsterSpawnRules", at = @At("HEAD"), cancellable = true)
+    private static void thc$ignoreLight(
+        EntityType<?> type, ServerLevelAccessor level,
+        MobSpawnType spawnType, BlockPos pos, RandomSource random,
+        CallbackInfoReturnable<Boolean> cir
+    ) {
+        // Always allow monster spawns regardless of light
+        cir.setReturnValue(true);
+    }
+}
+```
 
-Files requiring modification:
+### Undead Burning (Never Burns)
 
-1. **thc.mixins.json** - Add new mixin classes:
-   ```json
-   "mixins": [
-     ...,
-     "LivingEntityDrowningMixin",
-     "DrownedMixin",
-     "AbstractArrowMixin"
-   ]
-   ```
+```java
+@Mixin(Mob.class)
+public class MobNoBurnMixin {
+    @Inject(method = "isSunBurnTick", at = @At("HEAD"), cancellable = true)
+    private void thc$neverBurn(CallbackInfoReturnable<Boolean> cir) {
+        cir.setReturnValue(false);
+    }
+}
+```
 
-2. **THC.kt** - Register SpearRemoval if using event handler approach
+---
 
-## Testing Strategy
+## Summary Table: Interception Points
 
-| Feature | Test Type | Method |
-|---------|-----------|--------|
-| Drowning | Game test | Spawn player underwater, verify damage timing |
-| Spear removal | Game test + manual | Spawn Drowned, verify no trident |
-| Projectile physics | Manual | Fire arrow, observe arc change |
-| Projectile aggro | Game test | Hit mob with arrow, verify effects + targeting |
+| THC Goal | Target Class | Method | Mixin Type | Isolation |
+|----------|--------------|--------|------------|-----------|
+| Client sees dusk (13000) | `ClientLevel` | `getDayTime()` | `@Inject` HEAD | Client-only |
+| Bees work 24/7 | `Bee` | `wantsToEnterHive()` | `@Inject` HEAD | Bee-only |
+| Monsters spawn any light | `Monster` | `checkMonsterSpawnRules()` | `@Inject` HEAD | Spawn-only |
+| Undead never burn | `Mob` | `isSunBurnTick()` | `@Inject` HEAD | Burn-only |
+| Max local difficulty | `ServerLevel` | `getCurrentDifficultyAt()` | `@Inject` HEAD | Already done |
 
-Game tests recommended for Drowned spawn and projectile effects (deterministic). Physics may require manual verification due to visual nature.
-
-## Risk Assessment
-
-| Feature | Risk | Mitigation |
-|---------|------|------------|
-| Drowning mixin | LOW | Simple injection, well-understood |
-| Drowned equipment | MEDIUM | Need to find exact spawn method in 1.21 |
-| Projectile physics | MEDIUM | Gravity calculation needs tuning |
-| Projectile aggro | LOW | Existing patterns from LivingEntityMixin |
-
-**Drowned equipment risk:** The exact method name may have changed between Minecraft versions. Need to verify against 1.21.11 source via IDE.
+---
 
 ## Sources
 
 ### Primary (HIGH confidence)
-- Existing THC codebase patterns (verified by reading source)
-- [LivingEntity NeoForge Javadocs](https://lexxie.dev/neoforge/1.21.1/net/minecraft/world/entity/LivingEntity.html) - drowning methods
-- [Minecraft Wiki - Drowned](https://minecraft.wiki/w/Drowned) - spawn rates, equipment chances
+- Mojang mappings via Fabric Loom (1.21.11, verified locally)
+- Existing THC mixin patterns (`NaturalSpawnerMixin.java`, `ServerLevelDifficultyMixin.java`)
+- [Minecraft Wiki - Mob spawning](https://minecraft.wiki/w/Mob_spawning)
+- [Minecraft Wiki - Bee](https://minecraft.wiki/w/Bee)
 
 ### Secondary (MEDIUM confidence)
-- [Fabric Wiki - Mixin Introduction](https://wiki.fabricmc.net/tutorial:mixin_introduction) - general patterns
-- [Fabric Wiki - Mixin Examples](https://fabricmc.net/wiki/tutorial:mixin_examples)
-- [Modding Tutorials - Projectiles](https://moddingtutorials.org/1.19.2/arrows/)
+- [Fabric Wiki - Mixin Examples](https://wiki.fabricmc.net/tutorial:mixin_examples)
+- [Forge Forums - aiStep concept](https://forums.minecraftforge.net/topic/118449-solved1192-concept-of-aistep/)
+- [Fabric Carpet NaturalSpawnerMixin](https://github.com/gnembon/fabric-carpet/blob/master/src/main/java/carpet/mixins/NaturalSpawnerMixin.java)
 
-### Tertiary (LOW confidence, need validation)
-- Exact method names for Drowned spawn equipment (verify in IDE)
-- AbstractArrow tick method structure (verify in IDE)
+### Verification Notes
+- Method mappings extracted from `/tmp/mappings/mappings.tiny`
+- Call chains inferred from method signatures and class hierarchy
+- Isolation analysis based on method independence (no shared mutable state)
+
+---
 
 ## Metadata
 
 **Confidence breakdown:**
-- Drowning approach: HIGH - well-documented LivingEntity methods
-- Spear removal: HIGH - uses existing loot table + mixin patterns
-- Projectile physics: MEDIUM - needs implementation verification
-- Aggro/effects: HIGH - similar to existing buckler stun code
+- Time system: HIGH - well-documented, verified mappings
+- Spawning system: HIGH - existing THC mixin validates approach
+- Mob burning: HIGH - single method entry point (`isSunBurnTick`)
+- Bee AI: HIGH - clear method (`wantsToEnterHive`), verified mappings
 
-**Research date:** 2026-01-18
-**Valid until:** Until Minecraft version change or major Fabric API update
+**Research date:** 2026-01-20
+**Valid until:** Minecraft 1.21.x (method names stable within minor versions)

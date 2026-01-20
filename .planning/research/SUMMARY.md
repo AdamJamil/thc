@@ -1,166 +1,156 @@
-# Research Summary: v1.1 Extra Features Batch 1
+# Research Summary: v2.0 Twilight Hardcore
 
-**Researched:** 2026-01-18
-**Milestone:** v1.1 Extra Features Batch 1
-**Overall Confidence:** MEDIUM-HIGH
+**Researched:** 2026-01-20
+**Milestone:** v2.0
+**Overall Confidence:** HIGH
 
 ## Executive Summary
 
-Research into four v1.1 features revealed clear implementation paths using existing codebase patterns. All features can be implemented with mixins and Fabric API events, no new infrastructure required.
+The v2.0 Twilight Hardcore system is technically feasible with clean isolation between subsystems. Each of the five target features (twilight visuals, undead immunity, bee AI, spawn bypass, time unlock) has a dedicated interception point with no cascading effects.
 
-**Key findings:**
+**Key insight:** Minecraft's time/light systems are decentralized. Client rendering queries `ClientLevel`, mob burning queries `isSunBurnTick()`, bee AI queries `wantsToEnterHive()`, and spawning queries `checkMonsterSpawnRules()`. Modifying one does not affect the others.
 
-| Feature | Approach | Difficulty | Confidence |
-|---------|----------|------------|------------|
-| Drowning 4x slower | Mixin `decreaseAirSupply` | LOW | HIGH |
-| Spear removal | Recipe mixin + loot JSON + mob mixin | MEDIUM | HIGH |
-| Projectile aggro + effects | Mixin `onHitEntity` | LOW | HIGH |
-| Projectile physics | Mixin projectile `tick` | MEDIUM | MEDIUM |
+**Risk assessment:** Client-side rendering is new territory for this codebase. All other features follow established THC mixin patterns.
 
-**Critical discovery:** Spears were added in Mounts of Mayhem (Dec 2025). Seven tiers exist (wooden through netherite). Spear removal requires three prongs: crafting recipes (7), loot tables (6), and mob spawn equipment (6+ mob types).
+---
 
-**Risk area:** Projectile physics modification requires state tracking for distance traveled. The "quadratic gravity after 8 blocks" formula needs careful implementation to avoid desync between client and server.
+## Key Findings by Dimension
 
-## Stack Findings
+### Stack (Mixin Targets)
 
-**Mixin targets identified:**
-- `LivingEntity.decreaseAirSupply()` - drowning tick rate
-- `Mob.finalizeSpawn()` - strip spear equipment from zombies/piglins
-- `Projectile.onHit()` / `AbstractArrow.onHitEntity()` - hit detection
-- `AbstractArrow.tick()` or `shootFromRotation()` - physics modification
+| Feature | Target | Method | Confidence |
+|---------|--------|--------|------------|
+| Twilight visuals | `ClientLevel` | `getDayTime()` | HIGH |
+| Undead immunity | `Mob` | `isSunBurnTick()` | HIGH |
+| Bee always-work | `Bee` | `wantsToEnterHive()` | HIGH |
+| Spawn bypass | `Monster` | `checkMonsterSpawnRules()` | HIGH |
+| Remove night lock | Delete existing mixin | — | HIGH |
 
-**Spear item IDs confirmed:**
-- `minecraft:wooden_spear`, `minecraft:stone_spear`, `minecraft:copper_spear`
-- `minecraft:iron_spear`, `minecraft:golden_spear`, `minecraft:diamond_spear`
-- `minecraft:netherite_spear`
+All methods verified via Mojang mappings. Client mixin goes in `thc.client.mixins.json`, server mixins in `thc.mixins.json`.
 
-**Existing patterns to reuse:**
-- `RecipeManagerMixin` - already removes shield recipes, extend for spears
-- `LootTableEvents.MODIFY` - already used in THC.kt
-- `MobEffectInstance` application - already used in LivingEntityMixin
+### Features (Expected Behavior)
 
-## Features Findings
+- **Twilight visuals:** Sky locked to dusk (~13000 ticks), sun low on horizon, stars emerging, warm ambient lighting
+- **Bees:** Work 24/7 regardless of time/weather, only return when nectar-full
+- **Undead:** Never burn in sunlight (fire aspect and lava still work)
+- **Spawning:** Monsters spawn regardless of sky light (block light still matters for spawn density)
+- **Time:** Server time flows normally, villagers/crops/beds use real time
 
-**Drowning mechanics:**
-- Air supply: 300 ticks (15 seconds), decreases 1/tick underwater
-- Damage at air = -20, then resets to 0 (1 damage/second cycle)
-- 4x slower = only decrement every 4th tick (randomized)
+### Architecture (Isolation)
 
-**Spear loot sources (6 tables):**
-- Ocean ruins (small + big) - stone spears
-- Village weaponsmith - copper/iron spears
-- Buried treasure - iron spears
-- Bastion remnant - diamond spears
-- End city - enchanted diamond spears
-
-**Mob spawn equipment:**
-- Zombies, husks, zombie horsemen - iron spears
-- Piglins, zombified piglins - golden spears
-
-**Projectile physics (vanilla):**
-- Arrow: gravity -0.05 blocks/tick², drag 0.99/tick
-- Snowball: gravity -0.03 blocks/tick², drag 0.99/tick
-- Order (1.21.2+): Acceleration → Drag → Position
-
-## Architecture Findings
-
-**Recommended package structure:**
 ```
-thc/mixin/
-  LivingEntityDrowningMixin.java  # NEW
-  MobEquipmentMixin.java          # NEW - strip spear equipment
-  ProjectileMixin.java            # NEW - physics + aggro
+            Level (shared queries)
+                    |
+    +-------+-------+-------+-------+
+    |       |       |       |       |
+ClientLevel Mob   Bee   Monster  ServerLevel
+getDayTime  isSun wants  check    getDifficulty
+(visuals)   Burn  ToEnter Spawn   (existing)
+            Tick  Hive    Rules
 ```
 
-**Build order (dependencies):**
-1. Drowning (standalone, simplest)
-2. Spear removal (data + mixin, no dependencies)
-3. Projectile aggro/effects (hit detection mixin)
-4. Projectile physics (builds on #3 mixin infrastructure)
+Each branch is independent. Modifying `isSunBurnTick` does not affect spawning or bee AI.
 
-**Note:** Phases 3 and 4 share the same mixin file - could be combined into single phase.
+### Pitfalls (Critical)
 
-## Pitfalls Identified
+1. **SKY-06: Client code in common mixin** — Server crash. Use separate mixin configs.
+2. **COMPAT-01: Mixin nesting** — Use `@WrapOperation` not `@Redirect` for chaining compatibility.
+3. **BURN-04: Multiple fire sources** — Target `isSunBurnTick()` specifically, not general fire.
+4. **BEE-01: Brain vs Goal AI** — Bees use Brain system for complex behavior; verify target.
 
-**Critical path (highest risk):**
-
-1. **PROJ-04: Quadratic gravity state tracking** - Must decide: distance from spawn vs ticks traveled
-2. **SPEAR-01: Incomplete removal** - Must enumerate ALL sources before coding
-3. **AGGRO-01: Goal vs Brain AI** - Zombies use Goal-based, Piglins use Brain-based
-4. **PROJ-06: Multiple projectile classes** - AbstractArrow vs ThrowableProjectile differ
-
-**Mitigations:**
-- Clarify gravity formula interpretation before implementation
-- Create checklist of spear sources, verify each independently
-- Test aggro on both zombie (Goal) and piglin (Brain)
-- May need separate mixins for arrow types vs thrown items
-
-## Confidence Assessment
-
-| Area | Level | Reason |
-|------|-------|--------|
-| Drowning | HIGH | Well-documented LivingEntity methods |
-| Spear item removal | HIGH | Existing patterns for recipe + loot |
-| Spear mob equipment | MEDIUM | Need to verify exact spawn method name |
-| Projectile hit detection | HIGH | Standard mixin pattern |
-| Projectile physics | MEDIUM | State tracking + gravity formula needs tuning |
-| Effect application | HIGH | Already used in codebase |
-| Aggro redirection | MEDIUM | Different AI systems need testing |
+---
 
 ## Implications for Roadmap
 
 Based on research, suggested phase structure:
 
-### Phase 1: Drowning Modification
-**Rationale:** Standalone feature, simplest mixin, quick win to establish pattern.
-- Implements: Drowning 4x slower requirement
-- Avoids: DROWN-01 (state persistence) by using built-in airSupply
-- Uses: Mixin to `decreaseAirSupply()`
-- Estimated: 1 plan
+### Phase 1: Remove Night Lock
+- **Rationale:** Prerequisite — current night lock conflicts with flowing time goal
+- **Implementation:** Delete or disable the existing time-lock mixin
+- **Risk:** Low — removal only
 
-### Phase 2: Spear Removal
-**Rationale:** Multi-source removal, uses existing recipe mixin pattern.
-- Implements: Spear removal from crafting, loot, mob equipment
-- Avoids: SPEAR-01 (incomplete removal) by explicit source checklist
-- Uses: RecipeManagerMixin extension, LootTableEvents, Mob.finalizeSpawn mixin
-- Estimated: 2-3 plans (crafting/loot vs mob equipment)
+### Phase 2: Client Twilight Visuals
+- **Rationale:** Highest risk, establishes client mixin patterns
+- **Implementation:** `ClientLevel.getDayTime()` → return 13000L
+- **Addresses:** Visual dusk requirement
+- **Avoids:** SKY-06 (separate mixin config), COMPAT-01 (use @Inject not @Redirect)
+- **Uses:** New client mixin infrastructure
 
-### Phase 3: Projectile Combat
-**Rationale:** Combined aggro + effects + physics as they share mixin infrastructure.
-- Implements: Speed II + Glowing on hit, aggro redirect, velocity boost, gravity curve
-- Avoids: PROJ-06 by identifying projectile scope upfront
-- Uses: Projectile.onHit mixin, AbstractArrow.tick mixin
-- Estimated: 2-3 plans (hit effects vs physics)
+### Phase 3: Undead Sun Immunity
+- **Rationale:** Clear injection point, isolated from other systems
+- **Implementation:** `Mob.isSunBurnTick()` → return false
+- **Addresses:** Undead never burn
+- **Avoids:** BURN-04 (target sun-specific method only)
+- **Uses:** Existing server mixin pattern
+
+### Phase 4: Hostile Spawn Bypass
+- **Rationale:** Extends existing `NaturalSpawnerMixin` pattern
+- **Implementation:** `Monster.checkMonsterSpawnRules()` → return true
+- **Addresses:** Monsters spawn in daylight
+- **Avoids:** SPAWN-01 (correct scope), SPAWN-03 (verified signature)
+- **Uses:** Pattern from existing spawn blocking code
+
+### Phase 5: Bee Always-Work
+- **Rationale:** Depends on understanding AI system (Brain vs Goal)
+- **Implementation:** `Bee.wantsToEnterHive()` → return false when no nectar
+- **Addresses:** Bees work 24/7
+- **Avoids:** BEE-01 (verify target method controls behavior)
+- **Uses:** Goal-level interception
 
 **Phase ordering rationale:**
-- Drowning first: isolated, no dependencies, validates mixin patterns
-- Spear removal second: uses existing patterns, prepares for projectile work
-- Projectile last: most complex, benefits from patterns established in earlier phases
+1. Night lock removal first — prerequisite for everything else
+2. Client visuals second — establishes new (client) mixin patterns, highest uncertainty
+3. Server mechanics last — follow established patterns, lower risk
+4. Bee AI last — most likely to need investigation if Brain system is involved
 
 **Research flags for phases:**
-- Phase 2: May need runtime verification of `#minecraft:spears` tag existence
-- Phase 3: Gravity formula needs design clarification (distance interpretation)
-
-## Open Questions
-
-1. **Quadratic gravity definition:** Does "after 8 blocks" mean distance from shooter at hit time, or cumulative distance traveled? Affects implementation complexity.
-
-2. **Projectile scope:** Requirement says "all player projectiles" - does this include fishing bobbers, wind charges, and lingering potions? Recommend: arrows, bolts, snowballs, eggs, ender pearls.
-
-3. **Spear tag accessibility:** Does `ItemTags.SPEARS` exist in 1.21.11 Fabric, or must we check items individually?
-
-## Sources
-
-### Primary
-- [Minecraft Wiki - Spear](https://minecraft.wiki/w/Spear)
-- [Minecraft Wiki - Projectile](https://minecraft.wiki/w/Projectile)
-- [Fabric API LootTableEvents](https://maven.fabricmc.net/docs/fabric-api-0.129.0+1.21.7/net/fabricmc/fabric/api/loot/v3/LootTableEvents.html)
-- [Yarn API - LivingEntity](https://maven.fabricmc.net/docs/yarn-1.21+build.9/net/minecraft/entity/LivingEntity.html)
-
-### Secondary
-- [Fabric Wiki - Mixin Examples](https://fabricmc.net/wiki/tutorial:mixin_examples)
-- [Minecraft Wiki - Damage](https://minecraft.wiki/w/Damage)
+- Phase 2 (Client Twilight): May need deeper research on shader compatibility if using Iris
+- Phase 5 (Bee AI): May need Brain system investigation if `wantsToEnterHive()` doesn't fully control behavior
+- Phases 3-4: Standard patterns, unlikely to need additional research
 
 ---
-*Synthesized: 2026-01-18*
-*Research valid: ~30 days (stable domain)*
+
+## Confidence Assessment
+
+| Area | Level | Reason |
+|------|-------|--------|
+| Client time override | HIGH | Multiple working mods demonstrate pattern (Evernight, Always Day) |
+| `isSunBurnTick` injection | HIGH | Single method entry point, verified in mappings |
+| Bee `wantsToEnterHive` | HIGH | Clear method, verified in mappings |
+| Spawn rule override | HIGH | Existing THC pattern validates approach |
+| System isolation | HIGH | Independent call chains, no shared mutable state |
+
+---
+
+## Open Questions (Resolved)
+
+| Question | Resolution |
+|----------|------------|
+| Rain during dusk? | Let rain darken naturally (atmospheric) |
+| Bees: 24/7 or server time? | 24/7 (simpler, requested) |
+| Shader compatibility? | Use @Inject for chaining, test with Iris |
+| Phantom burning? | Covered by `Mob.isSunBurnTick()` (Phantom inherits from FlyingMob → Mob) |
+
+---
+
+## Files Generated
+
+| File | Contents |
+|------|----------|
+| `STACK.md` | Mixin targets, method signatures, injection strategies |
+| `FEATURES.md` | Expected visual behavior, mechanic decoupling patterns |
+| `ARCHITECTURE.md` | Call chains, interception points, isolation analysis |
+| `PITFALLS.md` | 20+ cataloged pitfalls with prevention strategies |
+
+---
+
+## Next Steps
+
+1. **Define requirements** — `/gsd:define-requirements` to formalize acceptance criteria
+2. **Create roadmap** — `/gsd:create-roadmap` with 5 phases as outlined above
+3. **Plan phases** — Start with night lock removal, then client visuals
+
+---
+
+*Research completed: 2026-01-20*
+*Valid until: ~30 days (Minecraft 1.21.x stable)*

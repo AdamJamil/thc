@@ -1,572 +1,660 @@
-# Pitfalls Research: v1.1 Mechanics Modification
+# Pitfalls Research: v2.0 Twilight System
 
-**Researched:** 2026-01-18
-**Milestone:** v1.1 Extra Features Batch 1
-**Confidence:** MEDIUM (verified with official docs and community sources)
+**Researched:** 2026-01-20
+**Milestone:** v2.0 Twilight System
+**Confidence:** MEDIUM (verified with official docs, community sources, and existing codebase patterns)
 
 ## Summary
 
-This document catalogs common mistakes when implementing the v1.1 features:
-- Drowning damage tick rate modification
-- Spear/item removal from game systems
-- Projectile velocity/gravity physics changes
-- Mob aggro redirection on projectile hit
-- Effect application on projectile impact
+This document catalogs common mistakes when implementing the v2.0 features:
+- Client-side sky/lighting rendering modifications (first client mixins in this codebase)
+- Spawn mechanics enhancements (building on existing NaturalSpawnerMixin)
+- Undead mob burning behavior changes
+- Bee/mob AI modifications
 
-The project already has working patterns for mixins (LivingEntityMixin), recipe removal (RecipeManagerMixin), effect application (MiningFatigue.kt), and loot table modification. These pitfalls build on that experience.
-
----
-
-## Drowning Modification Pitfalls
-
-### DROWN-01: Tick Counter State Persistence
-
-**Risk:** Drowning uses an `airSupply` counter that decrements each tick underwater. Modifying damage tick rate without understanding the counter leads to inconsistent behavior across respawn, dimension change, or logout.
-
-**Warning signs:**
-- Drowning damage still happens at original rate after respawn
-- Air supply resets unexpectedly
-- Different behavior in multiplayer vs singleplayer
-
-**Prevention:**
-- Hook into `LivingEntity.baseTick()` where airSupply is decremented
-- Use `@ModifyVariable` or `@Redirect` on the damage interval check, not the counter itself
-- Test respawn and dimension changes explicitly
-
-**Phase:** Drowning damage phase - implement with explicit respawn test case
+The project has working server-side mixin patterns (MonsterThreatGoalMixin for AI, NaturalSpawnerMixin for spawning). v2.0 introduces client-side mixins for the first time, which requires additional care around client-server separation and rendering thread safety.
 
 ---
 
-### DROWN-02: Water Breathing Interaction
+## Client Rendering Pitfalls
 
-**Risk:** Water Breathing effect prevents drowning entirely. If you modify drowning logic with a mixin, the interaction with this effect may break or bypass your changes.
+### SKY-01: Wrong Thread for Render Operations
+
+**Risk:** Fabric requires render system calls to happen on the render thread. Client mixin code running on network thread or main thread causes crashes.
 
 **Warning signs:**
-- Water Breathing no longer works
-- Players still take modified drowning damage with Water Breathing
-- Effect duration/amplifier affects damage rate unexpectedly
+- `java.lang.IllegalStateException: RenderSystem called from wrong thread`
+- Crash during mixin apply in `MixinProcessor.applyMixins`
+- Works in singleplayer, crashes in multiplayer
 
 **Prevention:**
-- Check `hasEffect(MobEffects.WATER_BREATHING)` early in your injection
-- Study vanilla's condition order: effect check happens before air decrement
-- Respiration enchantment also affects air, test helmet interactions
+- Verify mixin targets render methods that naturally run on render thread
+- For sky rendering, target methods in `LevelRenderer` or `SkyRendering` (1.21.4+)
+- Never call RenderSystem methods from network packet handlers
+- Test both singleplayer and dedicated server connections
 
-**Phase:** Drowning damage phase - test with Water Breathing potion
+**Phase:** Sky rendering phase - verify thread context early
 
 ---
 
-### DROWN-03: Damage Source Type Matters
+### SKY-02: Resource Cleanup on Renderer Close
 
-**Risk:** Drowning damage uses `DamageTypes.DROWN` which bypasses armor (via damage type tags). Changing how/when damage is applied may accidentally bypass this or apply different damage type.
-
-**Warning signs:**
-- Drowning damage is now reduced by armor
-- Drowning damage kills differently than vanilla
-- Death messages are wrong
-
-**Prevention:**
-- Use `level.damageSources().drown()` to get proper damage source
-- Don't create custom damage sources for drowning modifications
-- Verify death messages in testing
-
-**Phase:** Drowning damage phase - verify death message unchanged
-
----
-
-### DROWN-04: Client-Server Desync on Air Display
-
-**Risk:** Air supply affects the HUD bubble display on client. If server modifies drowning rate but client isn't aware, bubbles display incorrectly.
+**Risk:** Custom render pipelines create GPU resources (vertex buffers, shaders). Failing to clean up causes memory leaks and crashes on world reload.
 
 **Warning signs:**
-- Bubbles disappear but damage doesn't happen
-- Bubbles show full air but player takes damage
-- Bubbles flicker or jump
+- Memory usage grows on each world load
+- Crash when joining different dimension
+- GPU memory warnings in logs
+- Crash on game exit
 
 **Prevention:**
-- Modifications to airSupply must happen on both client and server
-- Use `@Inject` at points that naturally sync (damage events auto-sync)
-- If modifying only server, ensure display reads actual airSupply value
-
-**Phase:** Drowning damage phase - visual verification in client
-
----
-
-## Spear Removal Pitfalls
-
-### SPEAR-01: Incomplete Removal Sources
-
-**Risk:** Items can enter the game through multiple channels. Removing from one but not others leaves items obtainable.
-
-**Sources to cover:**
-1. Crafting recipes (RecipeManager)
-2. Mob spawn equipment (Drowned naturally spawn with tridents)
-3. Loot tables (fishing, ocean monuments, buried treasure)
-4. Villager trades
-5. Creative menu (for complete removal)
-6. Existing world items (optional - despawn/delete)
-
-**Warning signs:**
-- Players still obtain item through unexpected source
-- Item appears in creative tabs despite "removal"
-- Mob drops still include item
-
-**Prevention:**
-- Enumerate ALL sources before implementation
-- Use existing patterns: `RecipeManagerMixin` for recipes, `AbstractVillagerMixin` for trades
-- Use `LootTableEvents.MODIFY` (v3 API) to filter loot pools
-- Mob equipment requires spawn event interception
-
-**Phase:** Spear removal phase - verify each source independently
-
----
-
-### SPEAR-02: Mob Equipment Spawn Timing
-
-**Risk:** Drowned spawn with tridents. Equipment is assigned during mob spawn finalization. Intercepting too early or too late misses equipment assignment.
-
-**Warning signs:**
-- Some drowned still spawn with tridents
-- Equipment removal works in game tests but not natural spawns
-- Different behavior in different biomes
-
-**Prevention:**
-- Hook `Mob.finalizeSpawn()` or `ENTITY_LOAD` events
-- Drowned specifically: check both `MAINHAND` and `OFFHAND` slots
-- Test natural ocean spawns, not just `/summon` commands
-
-**Phase:** Spear removal phase - test natural ocean spawns
-
----
-
-### SPEAR-03: Loot Table Source Filtering
-
-**Risk:** `LootTableEvents.MODIFY` fires for all loot tables including datapack overrides. Modifying user-provided tables can cause unexpected behavior.
-
-**Warning signs:**
-- Datapack loot tables also modified
-- Mod compatibility issues
-- Server admins can't customize loot
-
-**Prevention:**
-- Use `source.isBuiltin()` check to only modify vanilla tables
-- Document which tables are modified for compatibility
-- Example pattern:
+- Inject into `GameRenderer#close` to release resources:
   ```java
-  LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
-      if (!source.isBuiltin()) return;
-      // Only modify vanilla tables
-  });
+  @Inject(method = "close", at = @At("RETURN"))
+  private void onGameRendererClose(CallbackInfo ci) {
+      // Close allocator and vertex buffers
+  }
   ```
+- Test dimension changes (Nether portal, End portal)
+- Test repeated world load/unload cycles
 
-**Phase:** Spear removal phase - implement source filtering
+**Phase:** Sky rendering phase - implement cleanup from start
+
+**Source:** [Fabric Documentation - World Rendering](https://docs.fabricmc.net/develop/rendering/world)
 
 ---
 
-### SPEAR-04: Existing Items in World
+### SKY-03: Extraction vs Drawing Phase Confusion
 
-**Risk:** Items already in world (chests, player inventories, item frames) persist after recipe/loot removal. Players can still use/trade them.
+**Risk:** Fabric's modern rendering separates extraction (collecting data) from drawing (GPU execution). Calling draw operations during extraction phase causes crashes or visual corruption.
 
 **Warning signs:**
-- Players in existing worlds still have item
-- Item duplication via death/inventory manipulation
-- Item persistence across mod update
+- Rendering flickers or shows garbage
+- Crash with buffer state errors
+- Works initially then fails after a few frames
 
 **Prevention:**
-- Decide policy: allow existing vs. delete existing
-- If allowing: document that existing items are grandfathered
-- If deleting: use `ServerTickEvents` to scan and remove (invasive)
-- For soft removal: disable item functionality instead of existence
+- Extraction phase: Populate BufferBuilder with vertices only
+- Drawing phase: Build buffer, upload to GPU, execute draw calls
+- Don't mix the phases - store state between them
+- Use `buffer.buildOrThrow()` only in draw phase
 
-**Phase:** Spear removal phase - document policy decision
+**Phase:** Sky rendering phase - follow two-phase pattern
+
+**Source:** [Fabric Documentation - World Rendering](https://docs.fabricmc.net/develop/rendering/world)
 
 ---
 
-## Projectile Physics Pitfalls
+### SKY-04: LevelRenderer Changes in 1.21.x
 
-### PROJ-01: Physics Calculation Order Changed in 1.21.2+
-
-**Risk:** Minecraft 1.21.2 changed throwable projectile physics order from "Position, Drag, Acceleration" to "Acceleration, Drag, Position". Code written for old order produces different trajectories.
+**Risk:** Minecraft 1.21.x refactored `LevelRenderer` significantly. Sodium and other mods alter method signatures. Mixins targeting old signatures fail.
 
 **Warning signs:**
-- Projectiles don't land where expected
-- Different behavior on version update
-- Calculations that worked in testing fail in production
+- Mixin fails to apply with method not found
+- Conflict with Sodium or Iris installed
+- Works in dev, fails with shader mods
 
 **Prevention:**
 - Target 1.21.11 specifically (current project version)
-- Don't copy physics code from older tutorials
-- Test at long range (32+ blocks) where small errors compound
+- In 1.21.4+, sky rendering moved to dedicated `SkyRendering` class
+- Document target method signatures explicitly in mixin comments
+- Test with Sodium installed (common mod users have)
+- Use `@WrapOperation` instead of `@Redirect` for compatibility
 
-**Phase:** Projectile physics phase - long-range trajectory tests
+**Phase:** Sky rendering phase - verify target class/method exists
+
+**Source:** [GitHub Issue - Malilib LevelRenderer Conflict](https://github.com/sakura-ryoko/malilib/issues/62)
 
 ---
 
-### PROJ-02: Velocity vs Delta Movement Confusion
+### SKY-05: DimensionEffects Registration Timing
 
-**Risk:** Minecraft uses `deltaMovement` (velocity per tick) not "velocity" in physics sense. Multiplying by wrong factors produces extreme speeds.
+**Risk:** Custom dimension effects must be registered before dimension loads. Late registration causes fallback to default sky rendering.
 
 **Warning signs:**
-- Projectiles move too fast or too slow
-- Damage becomes extreme (velocity affects arrow damage)
-- Projectiles clip through blocks at high speed
+- Custom sky doesn't appear in custom dimensions
+- Works after `/reload` but not initially
+- Different behavior on server restart vs client reconnect
 
 **Prevention:**
-- 20% velocity boost = multiply deltaMovement by 1.2
-- deltaMovement is already per-tick, don't multiply by tick rate
-- Arrow damage scales with speed - cap damage if needed
+- Register dimension effects in `ClientModInitializer.onInitializeClient()`
+- Use `DimensionRenderingRegistry.registerDimensionEffects()` for custom dimension JSON
+- For overworld modifications, mixin directly rather than registering effects
 
-**Phase:** Projectile physics phase - verify damage at new velocity
+**Phase:** Sky rendering phase - registration in client initializer
+
+**Source:** [Fabric API - DimensionRenderingRegistry](https://maven.fabricmc.net/docs/fabric-api-0.100.1+1.21/net/fabricmc/fabric/api/client/rendering/v1/DimensionRenderingRegistry.html)
 
 ---
 
-### PROJ-03: Client-Server Motion Desync
+### SKY-06: Client-Only Code in Common Mixin
 
-**Risk:** Projectile motion predicted on client, authoritative on server. Modifying only one side causes visual desync.
+**Risk:** Putting client-only classes in common mixins causes server crash with `Cannot load class net.minecraft.client.X in environment type SERVER`.
 
 **Warning signs:**
-- Projectile visually goes one place, hits another
-- Rubber-banding projectiles
-- Different behavior in singleplayer vs multiplayer
+- Server crashes on startup
+- `NoClassDefFoundError` for client classes
+- Works in dev (combined client+server) but fails on dedicated server
 
 **Prevention:**
-- Modify both client and server projectile logic
-- Or only modify server and let client prediction catch up
-- Test in actual multiplayer, not just integrated server
+- Use separate mixin config files: `thc.mixins.json` (server) and `thc.client.mixins.json` (client)
+- Project already has this structure - add client rendering mixins to `thc.client.mixins.json` only
+- Never import `net.minecraft.client.*` in server mixins
+- Use `@Environment(EnvType.CLIENT)` annotation for safety
 
-**Phase:** Projectile physics phase - multiplayer test
+**Phase:** All client phases - verify mixin config placement
 
 ---
 
-### PROJ-04: Quadratic Gravity Implementation
+## Spawn Modification Pitfalls
 
-**Risk:** "Quadratic gravity after 8 blocks" requires tracking projectile travel distance. Each projectile needs state to track distance traveled.
+### SPAWN-01: Incomplete Spawn Blocking Scope
+
+**Risk:** Current `NaturalSpawnerMixin` blocks `isValidSpawnPostitionForType`. Other spawn methods (`spawnCategoryForPosition`, `spawnCategoryForChunk`) may bypass this.
 
 **Warning signs:**
-- Gravity applies inconsistently
-- First projectile works, subsequent don't
-- Memory leak from uncleared state
+- Some mob types still spawn in blocked areas
+- Works for zombies but not for other categories
+- Spawn eggs and spawners still work (this may be intentional)
 
 **Prevention:**
-- Use persistent data on projectile entity (NBT or entity field)
-- Calculate distance from spawn position, not per-tick accumulation
-- Clean up state when projectile removed
-- Consider: is "8 blocks traveled" or "8 blocks from shooter" intended?
+- Existing `isValidSpawnPostitionForType` injection is correct for natural spawns
+- If adding new spawn conditions, verify they use same code path
+- Spawner and spawn egg bypasses are likely intentional (they don't use NaturalSpawner)
+- Document which spawn types are blocked vs allowed
 
-**Phase:** Projectile physics phase - clarify distance definition first
+**Phase:** Spawn modification phase - enumerate spawn types explicitly
+
+**Source:** [GitHub - fabric-carpet NaturalSpawnerMixin](https://github.com/gnembon/fabric-carpet/blob/master/src/main/java/carpet/mixins/NaturalSpawnerMixin.java)
 
 ---
 
-### PROJ-05: Drag and Gravity Interaction
+### SPAWN-02: Performance of Spawn Checks
 
-**Risk:** Projectiles have both gravity (downward acceleration) and drag (velocity multiplier ~0.99/tick). Changing gravity without accounting for drag produces unexpected arcs.
+**Risk:** Spawn position validity is checked many times per tick. Expensive checks (database lookups, complex calculations) cause lag.
 
 **Warning signs:**
-- Projectiles curve strangely
-- Terminal velocity reached too quickly
-- Projectiles float instead of fall
+- TPS drops in loaded chunks
+- Server lag when many players online
+- Profiler shows spawn check methods taking excessive time
 
 **Prevention:**
-- Understand vanilla physics: gravity = 0.05 blocks/tick^2, drag = 0.99/tick
-- Quadratic gravity increases the 0.05 factor, doesn't change drag
-- Test at various angles and distances
+- Current `ClaimManager.INSTANCE.isClaimed()` should use cached chunk data
+- Avoid database queries in spawn checks - cache claim status per chunk
+- Consider chunk position lookup instead of block position (cheaper)
+- Benchmark with 50+ chunks loaded
 
-**Phase:** Projectile physics phase - trajectory validation
+**Phase:** Spawn modification phase - profile with many chunks
 
 ---
 
-### PROJ-06: Different Projectile Classes
+### SPAWN-03: Mixin Signature Mismatch
 
-**Risk:** `AbstractArrow` (arrows, tridents) and `ThrowableProjectile` (snowballs, eggs) have different physics and collision detection.
+**Risk:** `isValidSpawnPostitionForType` has specific parameter order. Mixin with wrong signature silently fails or causes crashes on MC version change.
 
 **Warning signs:**
-- Changes work for arrows but not snowballs (or vice versa)
-- Collision detection differs
-- Some projectiles use raycast, others use hitbox inflation
+- `Mixin signature mismatch` warnings in logs
+- Spawn blocking doesn't work after MC update
+- Method found but injection doesn't fire
 
 **Prevention:**
-- Identify which projectiles need modification (player projectiles = both types?)
-- ThrowableProjectile inflates entity hitboxes by 0.3 blocks each direction
-- AbstractArrow uses raycast for entity collision
-- May need separate mixins for each class hierarchy
+- Current signature matches 1.21.11:
+  ```java
+  (ServerLevel, MobCategory, StructureManager, ChunkGenerator,
+   MobSpawnSettings.SpawnerData, BlockPos.MutableBlockPos, double,
+   CallbackInfoReturnable<Boolean>)
+  ```
+- Document exact signature in mixin comments
+- Verify signature after any MC version bump
 
-**Phase:** Projectile physics phase - enumerate projectile types first
+**Phase:** Spawn modification phase - verify after updates
+
+**Source:** [Modrinth - Fabric per player spawns changelog](https://modrinth.com/mod/fabric-per-player-spawns/changelog)
 
 ---
 
-## Aggro System Pitfalls
+### SPAWN-04: Category-Specific Spawn Logic
 
-### AGGRO-01: Goal-Based vs Brain-Based AI
-
-**Risk:** Different mobs use different AI systems. Zombies/skeletons use Goal-based AI, Piglins/Wardens use Brain-based AI. Changing target in one system doesn't affect the other.
+**Risk:** Different `MobCategory` types (MONSTER, CREATURE, AMBIENT, etc.) have different spawn rules. Changes to one category may not apply to others.
 
 **Warning signs:**
-- Works on zombies but not piglins
-- Works on some mobs in same category but not others
-- Aggro appears to work but mob doesn't actually path toward target
+- Zombies blocked but fish spawn
+- Passive animals still spawn in base
+- Different behavior day vs night
 
 **Prevention:**
-- Goal-based: modify `mob.setTarget()`
-- Brain-based: modify `MemoryModuleType.ATTACK_TARGET`
-- Test on both system types
-- Some mobs (Goats) have custom behavior mixins
+- Current implementation checks all categories (good)
+- If filtering by category, document which categories are affected
+- Note: WATER_CREATURE and WATER_AMBIENT spawn differently than land mobs
+- Test each category explicitly
 
-**Phase:** Aggro system phase - test zombie (goal) and piglin (brain)
+**Phase:** Spawn modification phase - test per-category
 
 ---
 
-### AGGRO-02: Target Validation After Set
+## Mob Burning Pitfalls
 
-**Risk:** After `setTarget()`, mob's targeting goals validate the target. Invalid targets (wrong entity type, too far, can't see) get cleared immediately.
+### BURN-01: isSunBurnTick Check Order
+
+**Risk:** Undead burning uses `isSunBurnTick()` which checks: daytime, sky exposure, no helmet, not in water. Modifying wrong condition has unexpected effects.
 
 **Warning signs:**
-- Target set but mob doesn't attack
-- Mob briefly looks at target then returns to player
-- Works at close range, fails at long range
+- Undead don't burn even when intended
+- Helmet no longer protects
+- Water no longer protects
+- Burning happens in caves
 
 **Prevention:**
-- Ensure target is valid: right entity type, in range, has line of sight
-- Check `NearestAttackableTargetGoal` conditions for the mob type
-- May need to temporarily modify goal's target predicate
+- To prevent ALL sun burning: override `isSunBurnTick()` return value
+- To prevent in specific areas: check location in `aiStep()` before fire is set
+- Don't modify vanilla checks for helmet/water protection
+- Target `Mob` class for `isSunBurnTick()` (zombies and skeletons inherit from Mob)
 
-**Phase:** Aggro system phase - verify target persistence
+**Phase:** Burning prevention phase - understand check sequence first
 
 ---
 
-### AGGRO-03: lastHurtBy vs Target
+### BURN-02: Helmet Durability Side Effect
 
-**Risk:** Mobs track both `target` (what they're attacking) and `lastHurtBy` (what hurt them). HurtByTargetGoal uses lastHurtBy to set target. Both need to be set for consistent behavior.
+**Risk:** When undead wear helmets, the helmet takes durability damage (50% chance per tick) instead of the mob. Preventing burning may need to also prevent this durability loss.
 
 **Warning signs:**
-- Mob attacks wrong entity
-- Mob switches between targets erratically
-- Revenge mechanics don't trigger on aggro target
+- Helmets on mobs in twilight zone break over time
+- Mob stops being protected after helmet breaks
+- Different behavior with/without armor
 
 **Prevention:**
-- Set both: `mob.setTarget(newTarget)` and `mob.setLastHurtByMob(newTarget)`
-- Or use damage event that naturally sets lastHurtBy
-- Test that mob remembers target after being hit
+- If preventing burning entirely, helmet durability loss is moot
+- If using helmet to prevent burning, monitor helmet durability
+- Vanilla: Helmets have 50% chance to lose 1 durability per burn tick
 
-**Phase:** Aggro system phase - verify revenge consistency
+**Phase:** Burning prevention phase - decide helmet interaction
+
+**Source:** [Minecraft Wiki - Zombie](https://minecraft.fandom.com/wiki/Zombie)
 
 ---
 
-### AGGRO-04: Glowing Effect Visibility
+### BURN-03: Visual Fire Effect Desync
 
-**Risk:** Glowing effect (Speed II + Glowing 6s) requires proper client sync. If effect applied server-only, visual glowing may not appear.
+**Risk:** Burning has visual fire effect on client. Preventing server damage without preventing client effect causes visual desync.
 
 **Warning signs:**
-- Effect applied but mob doesn't glow
-- Glowing visible to some players but not others
-- Effect duration seems wrong
+- Mob appears on fire but takes no damage
+- Fire effect flickers on/off
+- Different visual on different clients
 
 **Prevention:**
-- `addEffect()` handles sync automatically on LivingEntity
-- Test in multiplayer that all players see glow
-- Glowing effect uses separate outline rendering - may have shader compat issues
+- Use `setRemainingFireTicks(0)` or `-1` to fully prevent fire
+- Or prevent fire from being set in the first place (cleaner)
+- Don't just absorb the damage - prevent the fire state
+- Client syncs fire state automatically if using entity data
 
-**Phase:** Aggro system phase - multiplayer visual test
+**Phase:** Burning prevention phase - prevent fire state, not just damage
 
 ---
 
-### AGGRO-05: Owner/Shooter Resolution
+### BURN-04: Multiple Fire Sources
 
-**Risk:** Projectile's "owner" (shooter) must be resolved correctly to redirect aggro. Owner can be null, dead, or no longer in world.
+**Risk:** Mobs can catch fire from multiple sources: sun, lava, fire blocks, fire aspect enchant. Preventing sun burning shouldn't prevent other fire.
 
 **Warning signs:**
-- NullPointerException on hit
-- Wrong entity gets aggro
-- Works for arrows but not snowballs
+- Mobs can't be set on fire by players
+- Fire aspect doesn't work
+- Lava doesn't burn mobs
 
 **Prevention:**
-- Always null-check `projectile.getOwner()`
-- Verify owner is still alive and in same dimension
-- ThrowableProjectile and AbstractArrow both have `getOwner()` but from different parent
+- Hook specifically into `aiStep()` sun burning logic, not general `setRemainingFireTicks()`
+- Sun burning is applied in `Mob.aiStep()` after `isSunBurnTick()` check
+- Other fire sources use different code paths
 
-**Phase:** Aggro system phase - null safety checks
+**Phase:** Burning prevention phase - target sun-specific code path
 
 ---
 
-## Effect Application Pitfalls
+### BURN-05: Phantom and Other Non-Mob Undead
 
-### EFFECT-01: onHit vs onEntityHit
-
-**Risk:** Projectile collision has multiple hooks: `onHit(HitResult)`, `onEntityHit(EntityHitResult)`, `onBlockHit(BlockHitResult)`. Using wrong one misses cases.
+**Risk:** Phantoms burn in sunlight but aren't `Mob` subclass in the same way. Other undead variants (strays, husks) may have custom burning logic.
 
 **Warning signs:**
-- Effect applies when hitting ground but not entities
-- Effect applies to entities but crashes on block hit
-- Double application (hit block behind entity)
+- Works on zombies/skeletons but not phantoms
+- Husks still burn (they shouldn't in vanilla either)
+- Drowned behave differently underwater
 
 **Prevention:**
-- `onEntityHit` for entity-specific effects
-- Check `hitResult` type before casting
-- Verify not hitting block behind entity (arrow pass-through)
+- Zombie, Skeleton, Phantom all use `isSunBurnTick()` but at different points
+- Husks never burn (override `isSunBurnTick()` to return false)
+- Drowned burn normally unless in water
+- Test each undead mob type explicitly
 
-**Phase:** Effect application phase - test both entity and block hits
+**Phase:** Burning prevention phase - enumerate undead types
 
 ---
 
-### EFFECT-02: Self-Application
+## Bee AI Pitfalls
 
-**Risk:** When applying effects on projectile hit, careless code can apply effect to shooter instead of target.
+### BEE-01: Brain vs Goal AI System
+
+**Risk:** Bees use both Brain-based and Goal-based AI depending on version and behavior. Modifying wrong system doesn't affect behavior.
 
 **Warning signs:**
-- Shooter gets Speed II instead of target
-- Effects apply to both shooter and target
-- Effect applies on throw, not hit
+- Goal modification doesn't change behavior
+- Works in one MC version but not another
+- Bee ignores custom goals
 
 **Prevention:**
-- `EntityHitResult.getEntity()` is the HIT entity (target)
-- `projectile.getOwner()` is the shooter
-- Double-check parameter order in `addEffect()` calls
+- In modern versions, bees use Brain-based AI for complex behavior
+- Check `Bee.registerGoals()` and `Bee.getBrain()` for which system controls what
+- Home location memory uses Brain system (`MemoryModuleType`)
+- Pollination uses Goal system
 
-**Phase:** Effect application phase - verify target identity
+**Phase:** Bee AI phase - determine which system to target
+
+**Source:** [Modrinth - Brainier Bees](https://modrinth.com/mod/brainier-bees)
 
 ---
 
-### EFFECT-03: Effect Duration Mismatch
+### BEE-02: Bee Wander Goal Flying Into Void
 
-**Risk:** MobEffectInstance duration is in ticks, not seconds. 6 seconds = 120 ticks, not 6.
+**Risk:** Bees' wander goal can path them away from solid blocks in skyblock scenarios, causing them to fly into the void or get stuck.
 
 **Warning signs:**
-- Effect lasts too short or too long
-- Effect seems instant (1 tick duration)
-- Duration doesn't match design spec
+- Bees fly away from hive and don't return
+- Bees get stuck at build limit
+- Mob cap fills with stuck bees
 
 **Prevention:**
-- Always calculate: `seconds * 20 = ticks`
-- 6 seconds = 120 ticks
-- Speed II + Glowing 6s: `new MobEffectInstance(MobEffects.SPEED, 120, 1)` (amplifier 1 = level II)
+- This is a vanilla bug (MC-206401)
+- If modifying bee AI, consider limiting wander range from solid blocks
+- Or use existing fix mod pattern (Brainier Bees, Bumblegum)
+- Test in skyblock-style void world
 
-**Phase:** Effect application phase - verify duration
+**Phase:** Bee AI phase - consider void edge cases
+
+**Source:** [Modrinth - Brainier Bees](https://modrinth.com/mod/brainier-bees)
 
 ---
 
-### EFFECT-04: Amplifier Off-By-One
+### BEE-03: Bee Home Memory Persistence
 
-**Risk:** MobEffect amplifier 0 = Level I, amplifier 1 = Level II. Speed II requires amplifier 1, not 2.
+**Risk:** Bees remember their home hive. Modifying AI without accounting for home memory causes bees to forget their hive or fail to return.
 
 **Warning signs:**
-- Speed III instead of Speed II
-- Effect too weak (Level I instead of II)
-- Confusion in code review
+- Bees pollinate but don't return to hive
+- Bees return to wrong hive
+- Bees forget hive on chunk reload
 
 **Prevention:**
-- Comment amplifier meaning: `// amplifier 1 = Speed II`
-- Speed II: `new MobEffectInstance(MobEffects.SPEED, ticks, 1)`
-- Test effect icon shows correct level in inventory
+- Home position stored in Brain memory: `MemoryModuleType.HOME`
+- Don't clear brain memories when modifying other behavior
+- If moving hives, update bee memories
+- Test chunk unload/reload cycle
 
-**Phase:** Effect application phase - verify effect level
+**Phase:** Bee AI phase - preserve home memory
 
 ---
 
-## General Integration Pitfalls
+### BEE-04: Baby Bee Suffocation
 
-### INT-01: Mixin Injection Point Version Specificity
-
-**Risk:** Mixin injection points like `@At(value="INVOKE", target="...")` reference specific method signatures that change between Minecraft versions.
+**Risk:** Smaller (baby) bees can suffocate in blocks due to pathfinding placing them inside blocks.
 
 **Warning signs:**
-- Mixin fails to apply after Minecraft update
-- "defaultRequire" violations in logs
-- Runtime crash vs compile success
+- Baby bees die randomly
+- Death messages show suffocation
+- Happens near flowering plants
 
 **Prevention:**
-- Project targets 1.21.11 specifically
-- Document exact method signatures in comments
-- Run full test suite after any Minecraft version bump
-- Note: Minecraft 26.1 will be unobfuscated - mappings strategy changes
+- Consider implementing suffocation damage prevention for bees
+- Or fix pathfinding to account for smaller hitbox
+- Realistic Bees mod has `preventBeeSuffocationDamage` config
 
-**Phase:** All phases - verify against 1.21.11 specifically
+**Phase:** Bee AI phase - consider baby bee edge case
+
+**Source:** [CurseForge - Realistic Bees](https://www.curseforge.com/minecraft/mc-mods/realistic-bees)
 
 ---
 
-### INT-02: Accessor Mixin Necessity
+### BEE-05: Goal Priority Conflicts
 
-**Risk:** Some fields/methods are private and immutable. Direct field access fails; accessor mixins required.
+**Risk:** GoalSelector runs goals by priority. Adding goals with wrong priority causes existing behavior to break.
 
 **Warning signs:**
-- Compile error accessing private field
-- "cannot assign to final field" errors
-- Changes don't persist
+- Bees stop pollinating
+- Bees don't attack when stung
+- Custom goal never runs
 
 **Prevention:**
-- Project already uses `access.ItemAccessor` pattern
-- Check field visibility before writing mixin
-- Use `@Accessor` for getters, `@Invoker` for methods
-- Kotlin's backtick syntax for reserved words: `` `is`(BlockTags.COAL_ORES) ``
+- Check existing goal priorities before adding new ones
+- Same priority = first registered wins (if competing for same flags)
+- Lower number = higher priority
+- Don't add priority 0 goals unless they should override everything
+- Document goal priorities in code comments
 
-**Phase:** All phases - identify private fields early
+**Phase:** Bee AI phase - survey existing priorities
+
+**Source:** [Fabric Yarn API - GoalSelector](https://maven.fabricmc.net/docs/yarn-21w05b+build.11/net/minecraft/entity/ai/goal/GoalSelector.html)
 
 ---
 
-### INT-03: Event Registration Order
+## Compatibility Concerns
 
-**Risk:** Fabric events fire in registration order. Late registration may miss events or conflict with other handlers.
+### COMPAT-01: Mixin Nesting Limitations
 
-**Prevention:**
-- Register in mod initializer, not lazily
-- Document event dependencies
-- Test with other mods installed
-
-**Phase:** All phases - centralized registration in initializer
-
----
-
-### INT-04: Test Infrastructure Gaps
-
-**Risk:** Game tests can't cover all scenarios. Visual effects, multiplayer sync, and natural spawns need manual testing.
+**Risk:** `@Redirect` and `@ModifyConstant` cannot be nested (multiple mods targeting same point). This is the #1 compatibility issue in Fabric mods.
 
 **Warning signs:**
-- Tests pass but feature broken in gameplay
-- Works in dev, fails in production
-- Multiplayer-only bugs
+- Crash when another mod is installed
+- `Mixin conflict` errors in console
+- Feature works alone, breaks with modpack
 
 **Prevention:**
-- Game tests for logic (damage calculations, effect application)
-- Manual tests for: visuals, multiplayer sync, natural world generation
-- Document manual test procedures
+- Use MixinExtras alternatives that CAN chain:
+  - Replace `@Redirect` with `@WrapOperation`
+  - Replace `@ModifyConstant` with `@ModifyExpressionValue`
+  - Avoid `@Overwrite` entirely; use `@WrapMethod`
+- Project already follows this pattern (good) - continue it
 
-**Phase:** All phases - maintain test coverage plan
+**Phase:** All phases - always use chaining-compatible annotations
+
+**Source:** [Fabric Wiki - Modding Tips](https://wiki.fabricmc.net/tutorial:modding_tips)
+
+---
+
+### COMPAT-02: Sodium/Iris Rendering Conflicts
+
+**Risk:** Sodium heavily modifies rendering pipeline. Iris adds shader support. Both can conflict with custom rendering mixins.
+
+**Warning signs:**
+- Visual glitches with Sodium installed
+- Shader pack disables custom sky
+- Crash in world renderer with shader mods
+
+**Prevention:**
+- Test with Sodium and Iris installed
+- Consider soft dependencies: detect their presence and adjust behavior
+- Iris can disable specific features (`features.render.world.sky.*`)
+- Document known incompatibilities
+
+**Phase:** Sky rendering phase - test with Sodium/Iris
+
+---
+
+### COMPAT-03: Other Mob AI Mods
+
+**Risk:** Mods like "AI Improvements", "Better AI", etc. modify same mob goals. Conflicts can cause mobs to stand still or behave erratically.
+
+**Warning signs:**
+- Mobs stop moving when other AI mod installed
+- Goals fire multiple times
+- Mob behavior inconsistent
+
+**Prevention:**
+- Use `@Unique` prefix on custom fields: `thc$fieldName`
+- Avoid modifying vanilla goal priorities (add new goals instead)
+- Document which vanilla methods are modified
+- Test with popular AI mods
+
+**Phase:** Bee AI and burning phases - unique field prefixes
+
+**Source:** [Fabric Wiki - Modding Tips](https://wiki.fabricmc.net/tutorial:modding_tips)
+
+---
+
+### COMPAT-04: Spawn Control Mods
+
+**Risk:** Mods like "Custom Spawns", "Spawn Balance Utility" also modify NaturalSpawner. Multiple spawn modifications can conflict.
+
+**Warning signs:**
+- Spawn blocking doesn't work with modpack
+- Double-blocking causes crashes
+- Mod-added mobs still spawn in blocked areas
+
+**Prevention:**
+- Use early injection (`@At("HEAD")`) and cancel if blocking
+- Check if other mods use same injection point
+- Consider config option to disable spawn blocking for mod compatibility
+
+**Phase:** Spawn modification phase - early cancellation
+
+---
+
+## Debug Difficulty
+
+### DEBUG-01: Client Rendering Hard to Test
+
+**Risk:** Client rendering issues only manifest visually. Game tests can't verify sky appearance or rendering correctness.
+
+**Warning signs:**
+- Tests pass but feature looks wrong
+- Works in one scenario, wrong in another
+- Subtle color/lighting differences
+
+**Prevention:**
+- Manual visual testing required for all rendering changes
+- Document expected visual appearance with screenshots
+- Test in different times of day, weather conditions, dimensions
+- Test with different video settings (Fabulous, Fast, Fancy)
+
+**Phase:** Sky rendering phase - visual verification checklist
+
+**Source:** [Fabric Documentation - Debugging](https://docs.fabricmc.net/develop/debugging)
+
+---
+
+### DEBUG-02: Multiplayer-Only Sync Issues
+
+**Risk:** Client-server desync only appears in true multiplayer, not integrated server (singleplayer).
+
+**Warning signs:**
+- Works in singleplayer, broken in multiplayer
+- Different players see different things
+- Rubber-banding effects
+
+**Prevention:**
+- Test on dedicated server, not just singleplayer
+- Use two clients connected to same server
+- Watch both client perspectives simultaneously
+- Check that entity data syncs properly
+
+**Phase:** All client phases - dedicated server testing
+
+---
+
+### DEBUG-03: Hotswapping Limitations for Mixins
+
+**Risk:** Mixin changes require full restart, unlike regular code which can hotswap in debug mode.
+
+**Warning signs:**
+- Code changes don't take effect
+- Must restart for every mixin tweak
+- Long iteration cycles
+
+**Prevention:**
+- Configure Run Configuration for mixin hotswapping (complex setup)
+- Or accept restart requirement for mixin development
+- Test non-mixin code separately to speed iteration
+- Use breakpoints to verify mixin is applying
+
+**Phase:** All phases - expect restart for mixin changes
+
+**Source:** [Fabric Documentation - Debugging](https://docs.fabricmc.net/develop/debugging)
+
+---
+
+### DEBUG-04: Bee Behavior Hard to Observe
+
+**Risk:** Bee AI operates over minutes (pollination cycle, return to hive). Bugs manifest slowly and intermittently.
+
+**Warning signs:**
+- Bees "seem fine" in short tests
+- Issue reported by players after hours of gameplay
+- Can't reproduce reliably
+
+**Prevention:**
+- Use time acceleration (`/time add 1000`) to speed up cycles
+- Add debug logging to bee goals (remove before release)
+- Test multiple bee population simultaneously
+- Set up automated bee farm to observe long-term behavior
+
+**Phase:** Bee AI phase - accelerated time testing
+
+---
+
+### DEBUG-05: Spawn Rate Hard to Verify
+
+**Risk:** Spawn blocking affects probability over time. Hard to prove spawns are correctly blocked vs. "just didn't spawn yet".
+
+**Warning signs:**
+- "I think it's working" - no definitive proof
+- Rare mob still spawns (was it the block or just RNG?)
+- Different results on different test runs
+
+**Prevention:**
+- Use spectator mode to observe spawn attempts
+- Set up spawn proof chamber (only blocked spawns possible)
+- Log spawn check results with chunk coordinates
+- Statistical testing: many spawns over time, compare rates
+
+**Phase:** Spawn modification phase - statistical verification
 
 ---
 
 ## Critical Path
 
-Pitfalls that are most likely to cause rework, ordered by risk:
+Pitfalls most likely to cause rework, ordered by risk:
 
-1. **PROJ-04: Quadratic Gravity Implementation** - Requires state tracking design decision before coding
-2. **SPEAR-01: Incomplete Removal Sources** - Must enumerate ALL sources first
-3. **AGGRO-01: Goal-Based vs Brain-Based AI** - Different mobs need different approaches
-4. **PROJ-06: Different Projectile Classes** - May need multiple implementations
-5. **EFFECT-02: Self-Application** - Easy to get wrong, hard to notice in testing
+1. **SKY-06: Client-Only Code in Common Mixin** - Server crash on startup (most catastrophic)
+2. **COMPAT-01: Mixin Nesting Limitations** - Breaks with other mods (user-facing)
+3. **SKY-02: Resource Cleanup** - Memory leak on dimension change
+4. **BEE-01: Brain vs Goal AI** - Wrong system = no effect
+5. **BURN-04: Multiple Fire Sources** - Accidentally breaks fire aspect
 
 **Recommended implementation order:**
-1. Drowning (isolated, well-defined injection points)
-2. Spear removal (build on existing removal patterns)
-3. Effect application (simpler projectile hook)
-4. Aggro redirection (depends on effect working)
-5. Projectile physics (most complex, needs design clarification)
+1. Sky rendering (most complex, most risk, establish client mixin patterns)
+2. Spawn modifications (build on existing working pattern)
+3. Burning prevention (clear injection point, isolated)
+4. Bee AI (depends on understanding AI system selection)
 
 ---
 
 ## Sources
 
 ### Primary (HIGH confidence)
-- [Fabric Wiki - Mixin Injects](https://wiki.fabricmc.net/tutorial:mixin_injects) - Injection point documentation
-- [Fabric API LootTableEvents](https://maven.fabricmc.net/docs/fabric-api-0.100.1+1.21/net/fabricmc/fabric/api/loot/v2/LootTableEvents.html) - Loot table modification API
-- [Minecraft Wiki - Projectile Motion](https://minecraft.wiki/w/Calculators/Projectile_motion) - Physics values
-- [Fabric Documentation - Events](https://docs.fabricmc.net/develop/events) - Event registration patterns
+- [Fabric Documentation - World Rendering](https://docs.fabricmc.net/develop/rendering/world) - Render pipeline requirements
+- [Fabric Wiki - Modding Tips](https://wiki.fabricmc.net/tutorial:modding_tips) - Mixin compatibility patterns
+- [Fabric Documentation - Debugging](https://docs.fabricmc.net/develop/debugging) - Debug techniques
+- [Fabric API - DimensionRenderingRegistry](https://maven.fabricmc.net/docs/fabric-api-0.100.1+1.21/net/fabricmc/fabric/api/client/rendering/v1/DimensionRenderingRegistry.html) - Sky registration API
 
 ### Secondary (MEDIUM confidence)
-- [Minecraft Wiki - Mob AI](https://minecraft.wiki/w/Mob_AI) - Goal vs brain AI systems
-- [Minecraft Wiki - Drowned](https://minecraft.wiki/w/Drowned) - Spawn equipment mechanics
-- [Forge Javadocs - LivingEntity](https://nekoyue.github.io/ForgeJavaDocs-NG/javadoc/1.21.x-neoforge/net/minecraft/world/entity/LivingEntity.html) - Entity methods
+- [Minecraft Wiki - Zombie](https://minecraft.fandom.com/wiki/Zombie) - Burning mechanics
+- [Minecraft Wiki - Mob AI](https://minecraft.wiki/w/Mob_AI) - Goal vs Brain systems
+- [Modrinth - Brainier Bees](https://modrinth.com/mod/brainier-bees) - Bee AI fixes
+- [GitHub - fabric-carpet NaturalSpawnerMixin](https://github.com/gnembon/fabric-carpet/blob/master/src/main/java/carpet/mixins/NaturalSpawnerMixin.java) - Spawn mixin patterns
+- [Modrinth - Mixin Conflict Helper](https://modrinth.com/mod/mixin-conflict-helper) - Diagnosing conflicts
 
 ### Tertiary (LOW confidence - needs validation)
-- Minecraft Forum discussions on projectile physics
-- MCreator tutorials on effect application
-- Community mod compatibility observations
+- GitHub issue discussions on Sodium/LevelRenderer changes
+- CurseForge mod descriptions for bee fixes
+- Community reports on spawn blocking implementations
 
 ---
 
@@ -575,12 +663,18 @@ Pitfalls that are most likely to cause rework, ordered by risk:
 **Phase mapping:**
 | Pitfall Group | Phase |
 |---------------|-------|
-| DROWN-* | Drowning damage modification |
-| SPEAR-* | Spear removal |
-| PROJ-* | Projectile physics overhaul |
-| AGGRO-* | Aggro redirection system |
-| EFFECT-* | Effect application |
-| INT-* | All phases |
+| SKY-* | Client sky rendering |
+| SPAWN-* | Spawn modification |
+| BURN-* | Undead burning prevention |
+| BEE-* | Bee AI modification |
+| COMPAT-* | All phases |
+| DEBUG-* | All phases |
 
-**Research date:** 2026-01-18
-**Valid until:** 2026-02-18 (30 days - stable domain)
+**Research date:** 2026-01-20
+**Valid until:** 2026-02-20 (30 days - client mixins are stable domain but need version verification)
+
+**New patterns for this codebase:**
+- First client-side mixins (establish patterns carefully)
+- First rendering modifications (new complexity domain)
+- Building on existing AI pattern (MonsterThreatGoalMixin)
+- Building on existing spawn pattern (NaturalSpawnerMixin)

@@ -1,431 +1,268 @@
-# Stack Research: THC v1.1 Features
+# Stack Research: v2.0 Twilight System
 
-**Researched:** 2026-01-18
-**Minecraft Version:** 1.21.11 (Mounts of Mayhem)
+**Researched:** 2026-01-20
+**Minecraft Version:** 1.21.11
+**Mappings:** Mojang Official (not Yarn)
 **Fabric API:** 0.141.0+1.21.11
-**Domain:** Combat modifications, damage systems, projectile mechanics
 
-## Drowning Damage Modification
+## Summary
 
-### Target: LivingEntity.baseTick()
+The twilight visual system requires decoupling client-side sky rendering from server time. Minecraft separates visual time (sky angle, brightness) from gameplay time (mob schedules, spawning checks). The recommended approach: mixin client-side `Level` methods for visuals, mixin server-side `Mob`/`Monster` methods for mechanics.
 
-The drowning damage system works as follows:
-- Air supply decreases each tick when underwater (from max 300 to 0, then -20)
-- Damage triggers when air supply reaches -20 (every 20 ticks = 1 second)
-- After damage, air supply resets to 0 and cycle repeats
-
-**Mixin approach:**
-
-```java
-@Mixin(LivingEntity.class)
-public abstract class LivingEntityDrowningMixin {
-
-    // Option 1: Modify air consumption rate
-    @Inject(
-        method = "baseTick",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;getAirSupply()I")
-    )
-    private void thc$modifyDrowningRate(CallbackInfo ci) {
-        // Inject before air supply check to modify rate
-    }
-
-    // Option 2: Override getNextAirUnderwater to control depletion
-    @Inject(method = "getNextAirUnderwater", at = @At("RETURN"), cancellable = true)
-    private void thc$slowerAirDepletion(int air, CallbackInfoReturnable<Integer> cir) {
-        // Example: Only deplete every other tick (halves drowning damage rate)
-        if (((LivingEntity)(Object)this).tickCount % 2 == 0) {
-            cir.setReturnValue(air); // Don't deplete this tick
-        }
-    }
-}
-```
-
-**Method signatures (Yarn mappings):**
-- `protected int getNextAirUnderwater(int air)` - Called each tick underwater
-- `protected int getNextAirOnLand(int air)` - Called each tick on land (regeneration)
-- `public void baseTick()` - Main tick loop where air management happens
-
-**Recommended approach:** Override `getNextAirUnderwater` with `@Inject` at `RETURN` to conditionally skip air depletion ticks. This halves the effective drowning damage rate without modifying damage amounts.
-
-**Confidence:** MEDIUM - Method signatures verified via Yarn 1.21 docs, but exact injection points need in-game testing.
+**Primary recommendation:** Use `@Inject` with `cancellable=true` at `RETURN` to modify time-related return values. Avoid `@Redirect` for compatibility with shaders (Iris/Optifine).
 
 ---
 
-## Spear Removal
+## Client Rendering Hooks
 
-### Item IDs
+Methods that control visual time-of-day. These are CLIENT-SIDE ONLY - modifying them does not affect server mechanics.
 
-**Confirmed spear item IDs (minecraft namespace):**
-- `minecraft:wooden_spear`
-- `minecraft:stone_spear`
-- `minecraft:copper_spear`
-- `minecraft:iron_spear`
-- `minecraft:golden_spear`
-- `minecraft:diamond_spear`
-- `minecraft:netherite_spear`
+### Primary Targets (Level class hierarchy)
 
-**Item tag:** `#minecraft:spears` (contains all spear variants)
+| Method | Class | Signature | Purpose |
+|--------|-------|-----------|---------|
+| `getSunAngle` | `Level` | `float getSunAngle(float partialTick)` | Controls sun/moon position in sky |
+| `getTimeOfDay` | `Level` (via `LevelTimeAccess`) | `float getTimeOfDay(float partialTick)` | Normalized time (0-1) for rendering |
+| `getSkyDarken` | `Level` | `int getSkyDarken()` | Sky darkness level (0-15) |
+| `updateSkyBrightness` | `Level` | `void updateSkyBrightness()` | Recalculates ambient light |
 
-**Confidence:** HIGH - Confirmed via Minecraft Wiki, follows standard naming convention.
+### Client-Specific Methods (ClientLevel)
 
-### Crafting Removal
+| Method | Signature | Purpose |
+|--------|-----------|---------|
+| `getSkyColor` | `Vec3 getSkyColor(Vec3 cameraPos, float partialTick)` | Sky color calculation |
+| `getCloudColor` | `Vec3 getCloudColor(float partialTick)` | Cloud tint |
+| `getStarBrightness` | `float getStarBrightness(float partialTick)` | Star visibility |
+| `setDayTime` | `void setDayTime(long time)` | Client-side time setter (called from server packets) |
+| `setGameTime` | `void setGameTime(long time)` | Game tick time |
 
-**Existing pattern in project:** `RecipeManagerMixin.java` demonstrates recipe removal.
+### Twilight Lock Strategy
+
+To lock visuals to dusk (twilight), override in `ClientLevel`:
 
 ```java
-@Mixin(RecipeManager.class)
-public class RecipeManagerMixin {
-    @Inject(
-        method = "prepare(Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)Lnet/minecraft/world/item/crafting/RecipeMap;",
-        at = @At("RETURN"),
-        cancellable = true
-    )
-    private void thc$removeSpearRecipes(ResourceManager resourceManager, ProfilerFiller profiler, CallbackInfoReturnable<RecipeMap> cir) {
-        RecipeMap recipes = cir.getReturnValue();
-        Set<ResourceKey<Recipe<?>>> spearKeys = Set.of(
-            ResourceKey.create(Registries.RECIPE, Identifier.withDefaultNamespace("wooden_spear")),
-            ResourceKey.create(Registries.RECIPE, Identifier.withDefaultNamespace("stone_spear")),
-            ResourceKey.create(Registries.RECIPE, Identifier.withDefaultNamespace("copper_spear")),
-            ResourceKey.create(Registries.RECIPE, Identifier.withDefaultNamespace("iron_spear")),
-            ResourceKey.create(Registries.RECIPE, Identifier.withDefaultNamespace("golden_spear")),
-            ResourceKey.create(Registries.RECIPE, Identifier.withDefaultNamespace("diamond_spear"))
-            // Note: netherite_spear uses smithing table upgrade, different recipe type
-        );
+@Mixin(ClientLevel.class)
+public abstract class ClientLevelTwilightMixin extends Level {
 
-        Collection<RecipeHolder<?>> values = recipes.values();
-        List<RecipeHolder<?>> filtered = new ArrayList<>(values.size());
-        for (RecipeHolder<?> holder : values) {
-            if (!spearKeys.contains(holder.id())) {
-                filtered.add(holder);
-            }
-        }
-        if (filtered.size() != values.size()) {
-            cir.setReturnValue(RecipeMap.create(filtered));
-        }
+    // Dusk is approximately tick 12000-13000 (sun setting)
+    private static final long TWILIGHT_TIME = 12500L;
+
+    @Inject(method = "getSunAngle", at = @At("RETURN"), cancellable = true)
+    private void thc$lockSunAngle(float partialTick, CallbackInfoReturnable<Float> cir) {
+        // Calculate angle as if time is always TWILIGHT_TIME
+        float timeOfDay = (TWILIGHT_TIME % 24000L) / 24000.0F;
+        float angle = timeOfDay + 0.25F; // Offset for noon alignment
+        if (angle > 1.0F) angle -= 1.0F;
+        cir.setReturnValue(angle * (float)(Math.PI * 2));
     }
 }
 ```
 
-**Note:** Netherite spear uses smithing table upgrade recipe, not crafting table. May need additional handling for `SmithingTransformRecipe`.
+**Confidence:** MEDIUM - Pattern verified from [Evernight mod description](https://www.curseforge.com/minecraft/mc-mods/evernight), method signatures from [NeoForge 1.21 JavaDocs](https://nekoyue.github.io/ForgeJavaDocs-NG/javadoc/1.21.x-neoforge/).
 
-**Confidence:** HIGH - Pattern already working in codebase for shield removal.
+### Alternative: DimensionRenderingRegistry (Fabric API)
 
-### Mob Equipment Removal
+Fabric API provides `DimensionRenderingRegistry` for custom sky rendering:
 
-Mobs that spawn with spears (as of 1.21.11):
-- Zombies, Husks, Zombie Horsemen, Camel Husk Jockeys: iron spears
-- Piglins, Zombified Piglins: golden spears
+```java
+// In client entrypoint
+DimensionRenderingRegistry.registerSkyRenderer(
+    Level.OVERWORLD,  // RegistryKey<World>
+    (worldRenderContext) -> {
+        // Custom sky rendering code
+        // Return true to prevent vanilla sky, false to continue
+    }
+);
+```
 
-**Equipment spawning is hardcoded** in `Mob.finalizeSpawn()` and `populateDefaultEquipmentSlots()`, NOT determined by loot tables.
+**Methods:**
+- `registerSkyRenderer(RegistryKey<World> key, SkyRenderer renderer)` - Override entire sky
+- `getSkyRenderer(RegistryKey<World> key)` - Retrieve registered renderer
 
-**Mixin approach:**
+**Warning:** As of Fabric API 1.21.9+, world rendering events have been removed. Use direct mixins instead for maximum compatibility.
+
+**Confidence:** HIGH - From [Fabric API JavaDocs](https://maven.fabricmc.net/docs/fabric-api-0.100.1+1.21/net/fabricmc/fabric/api/client/rendering/v1/DimensionRenderingRegistry.html)
+
+---
+
+## Server Mechanic Hooks
+
+Methods that control gameplay mechanics. These are SERVER-SIDE - they affect actual game logic regardless of visuals.
+
+### Undead Sun Burning
+
+| Method | Class | Signature | Purpose |
+|--------|-------|-----------|---------|
+| `isSunBurnTick` | `Mob` | `protected boolean isSunBurnTick()` | Checks if mob should burn this tick |
+
+**Implementation to disable sun burning:**
 
 ```java
 @Mixin(Mob.class)
-public abstract class MobEquipmentMixin {
+public abstract class MobSunBurnMixin {
 
-    @Inject(
-        method = "finalizeSpawn",
-        at = @At("TAIL")
-    )
-    private void thc$removeSpearEquipment(
-        ServerLevelAccessor level,
-        DifficultyInstance difficulty,
-        EntitySpawnReason spawnReason,
-        @Nullable SpawnGroupData groupData,
-        CallbackInfoReturnable<SpawnGroupData> cir
-    ) {
+    @Inject(method = "isSunBurnTick", at = @At("HEAD"), cancellable = true)
+    private void thc$disableSunBurn(CallbackInfoReturnable<Boolean> cir) {
+        // Check if this is an undead mob type we want to protect
         Mob self = (Mob)(Object)this;
-        ItemStack mainHand = self.getMainHandItem();
-        if (mainHand.is(ItemTags.SPEARS)) { // Use #spears tag
-            self.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
+        if (self.getType().is(EntityTypeTags.UNDEAD)) {
+            cir.setReturnValue(false);
         }
     }
 }
 ```
 
-**Alternative:** Target specific mob classes (ZombieEntity, PiglinEntity) with more surgical mixins if `ItemTags.SPEARS` doesn't exist.
+**Note:** `isSunBurnTick()` checks:
+1. Is it daytime (sky light)
+2. Is mob exposed to sky
+3. Is mob wearing a helmet
+4. Random chance per tick
 
-**Confidence:** MEDIUM - `finalizeSpawn` method signature verified, but `ItemTags.SPEARS` existence needs verification. May need to check item directly against spear item list.
+**Confidence:** HIGH - Method signature confirmed in [Forge 1.18.2 JavaDocs](https://nekoyue.github.io/ForgeJavaDocs-NG/javadoc/1.18.2/net/minecraft/world/entity/Mob.html), behavior documented on [Minecraft Wiki](https://minecraft.wiki/w/Light)
 
-### Loot Table Removal
+### Hostile Spawn Light Checks
 
-**Spear loot table locations (1.21.11):**
+The existing `NaturalSpawnerMixin` in THC targets `isValidSpawnPostitionForType`. For sky-light-ignoring spawns:
 
-| Location | Spear Type | Loot Table Path |
-|----------|------------|-----------------|
-| Ocean Ruins | Stone Spear | `minecraft:chests/underwater_ruin_small`, `minecraft:chests/underwater_ruin_big` |
-| Buried Treasure | Iron Spear | `minecraft:chests/buried_treasure` |
-| Weaponsmith | Copper/Iron Spear | `minecraft:chests/village/village_weaponsmith` |
-| End City | Diamond Spear | `minecraft:chests/end_city_treasure` |
+| Method | Class | Signature | Purpose |
+|--------|-------|-----------|---------|
+| `isValidSpawnPostitionForType` | `NaturalSpawner` | `static boolean isValidSpawnPostitionForType(ServerLevel, MobCategory, StructureManager, ChunkGenerator, MobSpawnSettings.SpawnerData, BlockPos.MutableBlockPos, double)` | Main spawn position validation |
+| `checkSpawnRules` | `SpawnPlacements` | Type-specific predicates | Per-mob-type spawn checks |
 
-**Fabric API approach (LootTableEvents):**
+**Spawn light mechanics (post-1.18):**
+- Hostile mobs require block light = 0 AND sky light <= 7
+- To allow spawning regardless of sky light, intercept where sky light is checked
+
+**Strategy:** Rather than modifying `NaturalSpawner`, override per-mob-type spawn predicates or modify the light level check result.
 
 ```java
-public class THCLootTableModifier implements ModInitializer {
-    private static final Set<Identifier> SPEAR_IDS = Set.of(
-        Identifier.of("minecraft", "wooden_spear"),
-        Identifier.of("minecraft", "stone_spear"),
-        Identifier.of("minecraft", "copper_spear"),
-        Identifier.of("minecraft", "iron_spear"),
-        Identifier.of("minecraft", "golden_spear"),
-        Identifier.of("minecraft", "diamond_spear"),
-        Identifier.of("minecraft", "netherite_spear")
-    );
-
-    @Override
-    public void onInitialize() {
-        LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
-            // Only modify vanilla tables, not datapack overrides
-            if (source.isBuiltin()) {
-                // Unfortunately, MODIFY event doesn't support removal directly
-                // Must use REPLACE for removal scenarios
-            }
-        });
-
-        // For removal, use datapack override approach instead
-        // Place empty pool JSON files in: data/minecraft/loot_table/chests/...
-    }
-}
+// In NaturalSpawner or spawn placement checks:
+// Sky light check: level.getBrightness(LightLayer.SKY, pos)
+// Block light check: level.getBrightness(LightLayer.BLOCK, pos)
 ```
 
-**Recommended approach:** Use data generation to create replacement loot table JSON files that exclude spears. This is simpler and more compatible than runtime modification.
+**Confidence:** MEDIUM - General mechanics from [Minecraft Wiki Light](https://minecraft.wiki/w/Light), specific method signatures need verification in decompiled source.
 
-**Data generation pattern:**
-```java
-public class THCLootTableProvider extends SimpleFabricLootTableProvider {
-    // Override vanilla loot tables with versions that exclude spears
-}
-```
+### Bee Time-of-Day Behavior
 
-**Confidence:** MEDIUM - LootTableEvents.MODIFY doesn't support removal cleanly. Datapack override approach is more reliable but requires knowing exact vanilla loot table structure.
+| Method | Class | Signature | Purpose |
+|--------|-------|-----------|---------|
+| `wantsToEnterHive` | `Bee` | `boolean wantsToEnterHive()` | Returns true at night/rain |
+| Inner goals | `Bee.BeeGoToKnownFlowerGoal`, `Bee.BeeEnterHiveGoal`, etc. | Various | Behavioral AI |
 
----
+**Bee behavior timing:**
+- Bees work during daytime only (leave hive when `isDay()`)
+- Return to hive at night or during rain
+- Inner goal classes control flower-seeking and hive-entering
 
-## Projectile Interception
-
-### No Fabric API Event Exists
-
-Fabric API does NOT provide a projectile hit event. Must use mixins.
-
-**Available Fabric events (insufficient):**
-- `ServerEntityCombatEvents.AFTER_KILLED_OTHER_ENTITY` - Too late, only after kill
-- `ServerLivingEntityEvents.ALLOW_DAMAGE` - Fires for all damage, not projectile-specific
-
-**Mixin target: Projectile.onHit()**
+**Strategy to make bees always work:**
 
 ```java
-@Mixin(Projectile.class)
-public abstract class ProjectileHitMixin {
+@Mixin(Bee.class)
+public abstract class BeeTwilightMixin {
 
-    @Inject(
-        method = "onHit",
-        at = @At("HEAD")
-    )
-    private void thc$onProjectileHit(HitResult hitResult, CallbackInfo ci) {
-        if (hitResult.getType() == HitResult.Type.ENTITY) {
-            EntityHitResult entityHit = (EntityHitResult) hitResult;
-            Entity target = entityHit.getEntity();
-            Projectile self = (Projectile)(Object)this;
-            Entity shooter = self.getOwner();
-
-            // Custom logic here
+    @Inject(method = "wantsToEnterHive", at = @At("HEAD"), cancellable = true)
+    private void thc$beesNeverSleep(CallbackInfoReturnable<Boolean> cir) {
+        // Bees never want to enter hive due to time (still enter when full of pollen)
+        Bee self = (Bee)(Object)this;
+        if (!self.hasNectar()) {
+            cir.setReturnValue(false);
         }
     }
 }
 ```
 
-**For entity-specific hit detection:**
-
-```java
-@Mixin(AbstractArrow.class)
-public abstract class ArrowHitMixin {
-
-    @Inject(
-        method = "onHitEntity",
-        at = @At("HEAD")
-    )
-    private void thc$onArrowHitEntity(EntityHitResult result, CallbackInfo ci) {
-        Entity target = result.getEntity();
-        AbstractArrow self = (AbstractArrow)(Object)this;
-        Entity shooter = self.getOwner();
-
-        // Apply effects, change aggro, etc.
-    }
-}
-```
-
-**Key methods:**
-- `Projectile.onHit(HitResult)` - General hit handler
-- `AbstractArrow.onHitEntity(EntityHitResult)` - Arrow-specific entity hit
-- `AbstractArrow.onHitBlock(BlockHitResult)` - Arrow-specific block hit
-- `ThrowableProjectile.onHit(HitResult)` - Snowballs, eggs, potions
-
-**Confidence:** HIGH - Method signatures verified via Fabric wiki tutorials and Forge javadocs.
+**Confidence:** MEDIUM - Method list from [Forge 1.18.2 Bee JavaDocs](https://nekoyue.github.io/ForgeJavaDocs-NG/javadoc/1.18.2/net/minecraft/world/entity/animal/Bee.html), behavior from [Minecraft Wiki Bee](https://minecraft.wiki/w/Bee)
 
 ---
 
-## Projectile Physics
+## Mixin Strategy
 
-### Velocity and Gravity Modification
+### Injection Point Recommendations
 
-**Key physics facts:**
-- Gravity: 0.05 blocks/tick^2 (arrows)
-- Drag: 0.99 multiplier per tick
-- Order (1.21.2+): Acceleration, Drag, Position
+| Goal | Injection Type | Why |
+|------|---------------|-----|
+| Override return value | `@Inject(at = @At("RETURN"), cancellable = true)` | Safe, allows reading original value |
+| Completely replace | `@Inject(at = @At("HEAD"), cancellable = true)` | Skip original computation |
+| Modify parameter | `@ModifyArg` or `@ModifyVariable` | Targeted modification |
+| Conditional logic | `@Inject` with early return | Check condition, optionally cancel |
 
-**Mixin approach for velocity:**
+### Avoid @Redirect and @Overwrite
 
-```java
-@Mixin(AbstractArrow.class)
-public abstract class ArrowPhysicsMixin {
+**Compatibility risk:** Shader mods (Iris, Optifine) and dimension mods also target rendering methods. `@Redirect` fails when multiple mods target the same call site. `@Overwrite` is incompatible by design.
 
-    // Modify initial velocity when shot
-    @Inject(
-        method = "shootFromRotation",
-        at = @At("TAIL")
-    )
-    private void thc$modifyInitialVelocity(
-        Entity shooter, float pitch, float yaw, float roll, float speed, float divergence,
-        CallbackInfo ci
-    ) {
-        AbstractArrow self = (AbstractArrow)(Object)this;
-        Vec3 velocity = self.getDeltaMovement();
-        // Example: increase velocity by 50%
-        self.setDeltaMovement(velocity.scale(1.5));
-    }
-}
-```
+**Instead use:**
+- `@Inject` with `cancellable = true` - Multiple mods can inject
+- `@ModifyReturnValue` (MixinExtras) - Allows chaining modifications
 
-**Mixin approach for gravity:**
+### Client vs Server Mixin Separation
 
-```java
-@Mixin(Projectile.class)
-public abstract class ProjectileGravityMixin {
+THC already uses `splitEnvironmentSourceSets()` in `build.gradle`:
 
-    // Option 1: Disable gravity entirely
-    @Inject(method = "tick", at = @At("HEAD"))
-    private void thc$disableGravity(CallbackInfo ci) {
-        ((Projectile)(Object)this).setNoGravity(true);
-    }
+| Source Set | Mixin Config | Target Classes |
+|------------|--------------|----------------|
+| `src/main/java` | `thc.mixins.json` | Server + common (Mob, NaturalSpawner, Bee) |
+| `src/client/java` | `thc.client.mixins.json` | Client only (ClientLevel, LevelRenderer) |
 
-    // Option 2: Modify gravity amount (more complex)
-    // Target the tick method where deltaMovement.y is modified
-}
-```
-
-**Method signatures:**
-- `public void shootFromRotation(Entity shooter, float pitch, float yaw, float roll, float speed, float divergence)`
-- `public void shoot(double x, double y, double z, float speed, float divergence)`
-- `public void tick()` - Physics update each tick
-- `public void setNoGravity(boolean noGravity)` - Inherited from Entity
-
-**For custom gravity values:** Must inject into `tick()` method after gravity is applied and adjust `deltaMovement.y` accordingly. This is complex because gravity application varies by projectile type.
-
-**Confidence:** MEDIUM - Basic patterns verified, but exact injection points for gravity modification need testing.
+**Rule:** Never put client class imports in `src/main`. Classloader will crash on dedicated server.
 
 ---
 
-## Aggro + Effects Application
+## What NOT to Hook
 
-### Applying Potion Effects
+Methods that would cause cascading issues or break other systems:
 
-**Standard pattern (used in existing LivingEntityMixin):**
+### DO NOT Modify
 
-```java
-MobEffectInstance speedEffect = new MobEffectInstance(
-    MobEffects.MOVEMENT_SPEED,  // Effect type
-    20 * 10,                     // Duration in ticks (10 seconds)
-    1,                           // Amplifier (0 = level I, 1 = level II)
-    false,                       // Ambient (beacon-style)
-    true,                        // Visible in inventory
-    true                         // Show icon
-);
-target.addEffect(speedEffect, sourceEntity); // Second param is source for death message
-```
+| Method | Class | Why |
+|--------|-------|-----|
+| `tickTime()` | `ServerLevel` | Breaks all time-dependent mechanics (villager schedules, crop growth, raid timing) |
+| `setDayTime()` on server | `ServerLevel` | Syncs to all clients, would freeze actual game time |
+| `getDayTime()` broadly | `Level` | Used by spawning, AI, crops - only override in rendering contexts |
+| `isDay()` / `isNight()` globally | `Level` | Used by too many systems (phantoms, villagers, cats) |
+| `render()` in `LevelRenderer` | `LevelRenderer` | Too broad, shader incompatibility |
+| `DimensionType` time properties | `DimensionType` | Affects data packs, would require custom dimension |
 
-**For Speed II and Glowing on projectile hit:**
+### Safe Isolation Pattern
 
-```java
-@Inject(method = "onHitEntity", at = @At("TAIL"))
-private void thc$applyAggroEffects(EntityHitResult result, CallbackInfo ci) {
-    Entity target = result.getEntity();
-    if (!(target instanceof LivingEntity living)) return;
+**Client visuals:** Override `getSunAngle`, `getTimeOfDay`, `getSkyDarken` ONLY on `ClientLevel`
+**Server mechanics:** Target specific methods per feature (isSunBurnTick, wantsToEnterHive, spawn predicates)
 
-    Projectile self = (Projectile)(Object)this;
-    Entity shooter = self.getOwner();
-
-    // Speed II (amplifier 1) for 10 seconds
-    living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 1), shooter);
-
-    // Glowing for 10 seconds
-    living.addEffect(new MobEffectInstance(MobEffects.GLOWING, 200, 0), shooter);
-}
-```
-
-**Confidence:** HIGH - Pattern already used successfully in project's LivingEntityMixin.
-
-### Redirecting Aggro
-
-**MobEntity targeting API:**
-
-```java
-// Get current target
-LivingEntity currentTarget = mob.getTarget();
-
-// Set new target
-mob.setTarget(newTarget);
-
-// Check if mob can target something
-boolean canTarget = mob.canTarget(potentialTarget);
-```
-
-**Mixin for aggro redirection on projectile hit:**
-
-```java
-@Inject(method = "onHitEntity", at = @At("TAIL"))
-private void thc$redirectAggro(EntityHitResult result, CallbackInfo ci) {
-    Entity target = result.getEntity();
-    if (!(target instanceof Mob mob)) return;
-
-    Projectile self = (Projectile)(Object)this;
-    Entity shooter = self.getOwner();
-
-    if (shooter instanceof LivingEntity livingShooter) {
-        // Make the mob target the shooter
-        mob.setTarget(livingShooter);
-    }
-}
-```
-
-**Important caveats:**
-1. `setTarget()` is immediate but mob AI may override it next tick
-2. For persistent aggro, may need to also add to mob's anger/revenge system
-3. Some mobs (neutral mobs) use different targeting mechanics
-
-**For persistent aggro on neutral mobs:** May need to set NBT anger data (`AngryAt` tag) or use mob-specific APIs.
-
-**Confidence:** HIGH - Method signatures verified via Fabric Yarn docs.
+This preserves:
+- Villager schedules (use actual server time)
+- Phantom spawning (insomnia timer uses real time)
+- Crop growth (real tick-based)
+- Raid timing (real time)
+- Bed sleep mechanics (real time)
 
 ---
 
-## What NOT To Do
+## Implementation Checklist
 
-### Don't Use LootTableEvents.MODIFY for Removal
+### Phase 1: Client Twilight Visuals
+- [ ] Create `ClientLevelTwilightMixin` in `src/client/java/thc/mixin/client/`
+- [ ] Override `getSunAngle()` to return dusk angle
+- [ ] Override `getTimeOfDay()` to return dusk time
+- [ ] Test with Iris shaders for compatibility
+- [ ] Add config option to disable
 
-The MODIFY event is designed for adding to loot tables, not removing. The API doesn't expose pool entries for removal. Use datapack overrides instead.
+### Phase 2: Undead Sun Immunity
+- [ ] Create `MobSunBurnMixin` in `src/main/java/thc/mixin/`
+- [ ] Override `isSunBurnTick()` for undead types
+- [ ] Verify zombies/skeletons don't burn
+- [ ] Test that fire from other sources still works
 
-### Don't Target Entity.damage() for Projectile Detection
+### Phase 3: Hostile Spawning (Sky Light Ignore)
+- [ ] Research spawn placement predicate system
+- [ ] Create targeted mixin for Monster spawn checks
+- [ ] Verify doesn't affect claimed chunk blocking
+- [ ] Test spawn rates in lit outdoor areas
 
-The `Entity.damage()` method is overridden inconsistently across entity types. Some don't call super. Use projectile-specific methods instead.
-
-### Don't Assume ItemTags.SPEARS Exists
-
-This tag may not be exposed in the Items API. Check at runtime or hardcode the item list.
-
-### Don't Modify deltaMovement Directly in TAIL of tick()
-
-By TAIL of tick(), the position has already been updated. Modify velocity at HEAD or use specific injection points.
+### Phase 4: Bee Always-Work
+- [ ] Create `BeeTwilightMixin`
+- [ ] Override `wantsToEnterHive()` time check
+- [ ] Verify bees still enter when carrying nectar
+- [ ] Test pollination cycles
 
 ---
 
@@ -433,41 +270,47 @@ By TAIL of tick(), the position has already been updated. Modify velocity at HEA
 
 | Area | Level | Reason |
 |------|-------|--------|
-| Drowning damage | MEDIUM | Method signatures verified, injection points need testing |
-| Spear item IDs | HIGH | Confirmed via official wiki and standard naming |
-| Recipe removal | HIGH | Working pattern exists in codebase |
-| Mob equipment removal | MEDIUM | finalizeSpawn exists but ItemTags.SPEARS uncertain |
-| Loot table removal | MEDIUM | Fabric API limited; datapack approach recommended |
-| Projectile hit | HIGH | Method signatures verified via multiple sources |
-| Projectile physics | MEDIUM | Basic API verified, gravity modification complex |
-| Effects application | HIGH | Working pattern in codebase |
-| Aggro redirection | HIGH | MobEntity API well-documented |
+| Client time methods | MEDIUM | Signatures from Forge/NeoForge JavaDocs (1.18-1.21), not directly verified for 1.21.11 |
+| `isSunBurnTick` | HIGH | Method confirmed in multiple JavaDocs versions |
+| Bee methods | MEDIUM | Method list from 1.18.2 docs, may have changed |
+| Spawn light checks | LOW | General mechanics known, specific method targets need verification |
+| Mixin strategy | HIGH | Standard Fabric patterns, widely documented |
+| What NOT to hook | HIGH | Based on understanding of time-dependent systems |
+
+### Verification Needed
+
+1. **Confirm method signatures in 1.21.11:** Decompile with Mojang mappings to verify exact signatures haven't changed
+2. **Test shader compatibility:** Verify Iris doesn't conflict with `getSunAngle` mixin
+3. **Spawn predicate system:** Research `SpawnPlacements` registry for proper hostile spawn modification
 
 ---
 
 ## Sources
 
 ### Primary (HIGH confidence)
-- [Yarn 1.21 LivingEntity API](https://maven.fabricmc.net/docs/yarn-1.21+build.9/net/minecraft/entity/LivingEntity.html)
-- [Fabric Wiki - Projectiles Tutorial](https://wiki.fabricmc.net/tutorial:projectiles)
-- [Fabric API LootTableEvents](https://maven.fabricmc.net/docs/fabric-api-0.129.0+1.21.7/net/fabricmc/fabric/api/loot/v3/LootTableEvents.html)
-- [Minecraft Wiki - Spear](https://minecraft.wiki/w/Spear)
-- [Minecraft Wiki - Java Edition 1.21.11](https://minecraft.wiki/w/Java_Edition_1.21.11)
+- [NeoForge 1.21.0 ServerLevel JavaDocs](https://nekoyue.github.io/ForgeJavaDocs-NG/javadoc/1.21.x-neoforge/net/minecraft/server/level/ServerLevel.html) - Time method signatures
+- [Forge 1.19.3 Level JavaDocs](https://nekoyue.github.io/ForgeJavaDocs-NG/javadoc/1.19.3/net/minecraft/world/level/Level.html) - Sky/time methods
+- [Fabric API DimensionRenderingRegistry](https://maven.fabricmc.net/docs/fabric-api-0.100.1+1.21/net/fabricmc/fabric/api/client/rendering/v1/DimensionRenderingRegistry.html) - Sky renderer API
+- [Fabric Wiki Mixin Examples](https://wiki.fabricmc.net/tutorial:mixin_examples) - Injection patterns
+- [Yarn 1.21.4 SkyRendering](https://maven.fabricmc.net/docs/yarn-1.21.4+build.1/net/minecraft/client/render/SkyRendering.html) - Sky rendering methods
 
 ### Secondary (MEDIUM confidence)
-- [Fabric Events Documentation](https://docs.fabricmc.net/develop/events)
-- [Forge JavaDocs - Projectile](https://nekoyue.github.io/ForgeJavaDocs-NG/javadoc/1.18.2/net/minecraft/world/entity/projectile/Projectile.html)
-- [Minecraft Wiki - Geared Mobs](https://minecraft.wiki/w/Geared_mobs)
-- [Minecraft Wiki - Damage](https://minecraft.wiki/w/Damage)
+- [Evernight Mod](https://www.curseforge.com/minecraft/mc-mods/evernight) - Pattern for client-side time override (no source available)
+- [Forge 1.18.2 Mob JavaDocs](https://nekoyue.github.io/ForgeJavaDocs-NG/javadoc/1.18.2/net/minecraft/world/entity/Mob.html) - `isSunBurnTick` signature
+- [Forge 1.18.2 Bee JavaDocs](https://nekoyue.github.io/ForgeJavaDocs-NG/javadoc/1.18.2/net/minecraft/world/entity/animal/Bee.html) - Bee goal methods
+- [Minecraft Wiki Light](https://minecraft.wiki/w/Light) - Spawn light mechanics
+- [Minecraft Wiki Bee](https://minecraft.wiki/w/Bee) - Bee behavior timing
 
 ### Tertiary (LOW confidence)
-- WebSearch results for mob equipment spawning patterns
-- Community modding tutorials (moddingtutorials.org)
+- General web search results for spawn predicate methods (needs decompiled source verification)
 
 ---
 
 ## Metadata
 
-**Research date:** 2026-01-18
-**Valid until:** 2026-02-18 (30 days - stable domain)
-**Project mappings:** Mojang (based on existing mixin imports)
+**Research date:** 2026-01-20
+**Valid until:** 2026-02-20 (30 days - stable domain)
+**Requires validation:**
+- Method signatures against actual 1.21.11 decompiled source
+- Spawn placement predicate system details
+- Shader mod compatibility testing

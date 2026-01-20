@@ -155,6 +155,7 @@ object THC : ModInitializer {
 
 	private fun lockWorldToNight(server: MinecraftServer, world: ServerLevel) {
 		world.gameRules.set(GameRules.ADVANCE_TIME, false, server)
-        world.dayTime = NIGHT_TIME
+		world.gameRules.set(GameRules.MOB_GRIEFING, false, server)
+		world.dayTime = NIGHT_TIME
 	}
 }

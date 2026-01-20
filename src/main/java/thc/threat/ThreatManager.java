@@ -1,6 +1,7 @@
 package thc.threat;
 
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.player.Player;
 import thc.THCAttachments;
 
 import java.util.Map;
@@ -84,5 +85,42 @@ public final class ThreatManager {
 		threats.entrySet().removeIf(entry -> entry.getValue() <= 0.0);
 
 		mob.setAttached(THCAttachments.THREAT_LAST_DECAY, now);
+	}
+
+	/**
+	 * Find the player with highest threat that meets minimum threshold.
+	 * Returns null if no player meets the threshold or is valid target.
+	 */
+	public static Player getHighestThreatTarget(Mob mob, double minThreat) {
+		Map<UUID, Double> threats = mob.getAttached(THCAttachments.MOB_THREAT);
+		if (threats == null || threats.isEmpty()) {
+			return null;
+		}
+
+		Player highestPlayer = null;
+		double highestThreat = minThreat;
+
+		for (Map.Entry<UUID, Double> entry : threats.entrySet()) {
+			if (entry.getValue() < minThreat) {
+				continue;
+			}
+
+			Player player = mob.level().getPlayerByUUID(entry.getKey());
+			if (player == null || !player.isAlive() || player.isSpectator()) {
+				continue;
+			}
+
+			// Check if mob can actually attack this player
+			if (!mob.canAttack(player)) {
+				continue;
+			}
+
+			if (entry.getValue() > highestThreat || highestPlayer == null) {
+				highestThreat = entry.getValue();
+				highestPlayer = player;
+			}
+		}
+
+		return highestPlayer;
 	}
 }

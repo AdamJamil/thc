@@ -27,7 +27,6 @@ import thc.world.WorldRestrictions
 
 object THC : ModInitializer {
 	private val logger = LoggerFactory.getLogger("thc")
-	private const val NIGHT_TIME = 18000L
 	private const val SMOKE_TEST_PROPERTY = "thc.smokeTest"
 	private const val SMOKE_TEST_TICKS = 100
 
@@ -58,7 +57,7 @@ object THC : ModInitializer {
 
 		ServerLifecycleEvents.SERVER_STARTED.register(ServerLifecycleEvents.ServerStarted { server ->
 			server.allLevels.forEach { world ->
-				lockWorldToNight(server, world)
+				world.gameRules.set(GameRules.MOB_GRIEFING, false, server)
 			}
 		})
 
@@ -153,9 +152,4 @@ object THC : ModInitializer {
 		}
 	}
 
-	private fun lockWorldToNight(server: MinecraftServer, world: ServerLevel) {
-		world.gameRules.set(GameRules.ADVANCE_TIME, false, server)
-		world.gameRules.set(GameRules.MOB_GRIEFING, false, server)
-		world.dayTime = NIGHT_TIME
-	}
 }

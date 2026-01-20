@@ -10,9 +10,9 @@ See: .planning/PROJECT.md (updated 2026-01-19)
 ## Current Position
 
 Phase: 14 of 16 (Ranged Weapon Gating)
-Plan: Not started
-Status: Ready to plan
-Last activity: 2026-01-19 — Phase 13 complete (Wind Charge Mobility verified)
+Plan: 2 of 2
+Status: In progress
+Last activity: 2026-01-20 — Completed 14-02-PLAN.md (Bow/Crossbow Loot Removal)
 
 Progress: ████░░░░░░ 2/5 phases (40%)
 
@@ -36,12 +36,12 @@ Progress: ████░░░░░░ 2/5 phases (40%)
 - Timeline: 1 day (Jan 19, 2026)
 
 **v1.3 Milestone (in progress):**
-- Plans completed: 4
-- Total execution time: ~12 min (2 min + 7 min + overhead)
+- Plans completed: 5
+- Total execution time: ~13 min
 
 **Cumulative:**
-- 26 plans completed across 3+ milestones
-- ~1.9 hours total execution time
+- 27 plans completed across 3+ milestones
+- ~2.0 hours total execution time
 - 5 days from project start to v1.2 ship
 
 ## Accumulated Context
@@ -83,7 +83,7 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-01-19
-Stopped at: Phase 13 verified complete (Wind Charge Mobility)
+Last session: 2026-01-20
+Stopped at: Completed 14-02-PLAN.md (Bow/Crossbow Loot Removal)
 Resume file: None
-Next: /gsd:plan-phase 14 or /gsd:execute-phase 14
+Next: Execute 14-01-PLAN.md or verify phase complete

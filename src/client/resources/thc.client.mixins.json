@@ -3,6 +3,7 @@
 	"package": "thc.mixin.client",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
+		"ClientLevelTimeMixin",
 		"ExampleClientMixin"
 	],
 	"injectors": {

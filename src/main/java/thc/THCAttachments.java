@@ -5,6 +5,10 @@ import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 import net.minecraft.resources.Identifier;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 public final class THCAttachments {
 	public static final AttachmentType<Double> MAX_HEALTH = AttachmentRegistry.create(
 		Identifier.fromNamespaceAndPath("thc", "max_health"),
@@ -44,6 +48,10 @@ public final class THCAttachments {
 	public static final AttachmentType<Boolean> WIND_CHARGE_BOOSTED = AttachmentRegistry.create(
 		Identifier.fromNamespaceAndPath("thc", "wind_charge_boosted"),
 		builder -> builder.initializer(() -> Boolean.FALSE)
+	);
+	public static final AttachmentType<Map<UUID, Double>> MOB_THREAT = AttachmentRegistry.create(
+		Identifier.fromNamespaceAndPath("thc", "mob_threat"),
+		builder -> builder.initializer(HashMap::new)
 	);
 
 	private THCAttachments() {

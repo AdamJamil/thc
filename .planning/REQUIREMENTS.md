@@ -38,11 +38,11 @@ Requirements for v1.3 release. Each maps to roadmap phases.
 
 ### World Changes
 
-- [ ] **WORLD-01**: Mob griefing disabled
-- [ ] **WORLD-02**: Smooth stone drops cobblestone without silk touch
-- [ ] **WORLD-03**: Always max regional difficulty & clamped regional difficulty in every chunk
-- [ ] **WORLD-04**: Moon phase always "true" for mob/difficulty checks
-- [ ] **WORLD-05**: Mobs cannot spawn in base chunks
+- [x] **WORLD-01**: Mob griefing disabled
+- [x] **WORLD-02**: Smooth stone drops cobblestone without silk touch
+- [x] **WORLD-03**: Always max regional difficulty & clamped regional difficulty in every chunk
+- [x] **WORLD-04**: Moon phase always "true" for mob/difficulty checks
+- [x] **WORLD-05**: Mobs cannot spawn in base chunks
 
 ## v2 Requirements
 
@@ -82,11 +82,11 @@ Which phases cover which requirements. Updated by create-roadmap.
 | THREAT-04 | Phase 15 | Complete |
 | THREAT-05 | Phase 15 | Complete |
 | THREAT-06 | Phase 15 | Complete |
-| WORLD-01 | Phase 16 | Pending |
-| WORLD-02 | Phase 16 | Pending |
-| WORLD-03 | Phase 16 | Pending |
-| WORLD-04 | Phase 16 | Pending |
-| WORLD-05 | Phase 16 | Pending |
+| WORLD-01 | Phase 16 | Complete |
+| WORLD-02 | Phase 16 | Complete |
+| WORLD-03 | Phase 16 | Complete |
+| WORLD-04 | Phase 16 | Complete |
+| WORLD-05 | Phase 16 | Complete |
 
 **Coverage:**
 - v1.3 requirements: 22 total

@@ -72,7 +72,7 @@ Combat and survival systems that reinforce risk/reward philosophy. Melee damage 
 - [x] **Phase 13: Wind Charge Mobility** — Enhanced wind charges as core mobility tool
 - [x] **Phase 14: Ranged Weapon Gating** — Bows/crossbows gated behind Trial Chambers
 - [x] **Phase 15: Threat System** — Tactical aggro management across mob groups
-- [ ] **Phase 16: World Difficulty** — Max difficulty everywhere, safer bases
+- [x] **Phase 16: World Difficulty** — Max difficulty everywhere, safer bases
 
 ## Phase Details
 
@@ -161,9 +161,9 @@ Plans:
 **Plans**: TBD
 
 Plans:
-- [ ] 16-01: Mob griefing and smooth stone
-- [ ] 16-02: Regional difficulty and moon phase
-- [ ] 16-03: Base chunk spawn blocking
+- [x] 16-01: Mob griefing and smooth stone
+- [x] 16-02: Regional difficulty and moon phase
+- [x] 16-03: Base chunk spawn blocking
 
 ## Progress
 
@@ -176,7 +176,7 @@ Phases execute in numeric order: 12 → 13 → 14 → 15 → 16
 | 13. Wind Charge Mobility | v1.3 | 2/2 | Complete | 2026-01-19 |
 | 14. Ranged Weapon Gating | v1.3 | 2/2 | Complete | 2026-01-19 |
 | 15. Threat System | v1.3 | 4/4 | Complete | 2026-01-19 |
-| 16. World Difficulty | v1.3 | 0/3 | Not started | - |
+| 16. World Difficulty | v1.3 | 3/3 | Complete | 2026-01-20 |
 
 ---
 *Created: 2026-01-19*

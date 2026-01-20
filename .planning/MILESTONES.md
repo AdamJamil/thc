@@ -1,5 +1,31 @@
 # Project Milestones: THC (True Hardcore)
 
+## v1.3 Extra Features Batch 3 (Shipped: 2026-01-20)
+
+**Delivered:** Combat rebalancing (melee weakened, ranged gated), wind charge mobility system, threat-based aggro management, and world difficulty tuning for harder exploration with safer bases.
+
+**Phases completed:** 12-16 (13 plans total)
+
+**Key accomplishments:**
+
+- Combat rebalancing: Arrow Speed IV effect, knockback removal, sweeping edge disabled, 75% melee damage reduction
+- Wind charge mobility: 12 charges per breeze rod, 50% higher boost, one-time fall damage negation
+- Ranged weapon gating: Bows/crossbows require breeze rods from Trial Chambers, removed from all loot
+- Threat system: Per-mob threat maps, 15-block propagation, 1/sec decay, arrow +10 bonus, AI targeting
+- World difficulty: Max regional difficulty everywhere, mob griefing disabled, base spawn blocking
+
+**Stats:**
+
+- ~3,582 lines of Kotlin/Java (cumulative)
+- 5 phases, 13 plans
+- 2 days from start to ship (Jan 19-20, 2026)
+
+**Git range:** feat(12-01) → feat(16-03)
+
+**What's next:** To be determined
+
+---
+
 ## v1.2 Extra Features Batch 2 (Shipped: 2026-01-19)
 
 **Delivered:** Ranged combat depth through tiered arrows with damage progression, improved buckler crowd control, and XP economy restricted to combat-only.

@@ -2,7 +2,7 @@
 
 ## What This Is
 
-A Minecraft mod that creates a "true hardcore" experience where players must always take meaningful risks to achieve anything. The mod replaces tedium-as-difficulty with risk-as-progression through multiple interconnected systems including combat overhaul (buckler replacing shields) and territorial base claiming mechanics.
+A Minecraft mod that creates a "true hardcore" experience where players must always take meaningful risks to achieve anything. The mod replaces tedium-as-difficulty with risk-as-progression through multiple interconnected systems including combat overhaul (buckler replacing shields), territorial base claiming mechanics, threat-based aggro management, and world difficulty tuning.
 
 ## Core Value
 
@@ -58,50 +58,42 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
   - Vanilla arrow renamed to "Flint Arrow" with custom texture
   - Iron Arrow (+1 damage), Diamond Arrow (+2), Netherite Arrow (+3)
   - Anvil crafting: 64 flint arrows + material = 64 tiered arrows
+- ✓ Combat rebalancing — v1.3
+  - Arrow hits cause Speed IV (up from Speed II), no knockback on monsters
+  - Sweeping edge enchantment disabled
+  - All melee damage reduced by 75%
+- ✓ Wind charge mobility — v1.3
+  - Breeze rods yield 12 wind charges (up from 4)
+  - Wind charges boost player 50% higher
+  - One-time fall damage negation after self-boost
+- ✓ Ranged weapon gating — v1.3
+  - Bows require 3 breeze rods + 3 string (no sticks)
+  - Crossbows require breeze rod + diamond (no sticks/iron)
+  - Bows and crossbows removed from all loot tables and mob drops
+- ✓ Threat system — v1.3
+  - Per-mob threat maps (player → threat value)
+  - Damage propagates threat to all mobs within 15 blocks
+  - Threat decays 1 per second per player
+  - Arrow hits add +10 bonus threat
+  - Mobs target highest-threat player (threshold 5, unless revenge)
+  - Target switching only on revenge or strictly higher threat
+- ✓ World difficulty — v1.3
+  - Mob griefing disabled (no creeper block damage, no enderman pickup)
+  - Smooth stone drops cobblestone without silk touch
+  - Regional difficulty always maximum (max inhabited time, full moon)
+  - No natural mob spawns in base chunks
 
 ### Active
 
-**Current Milestone: v1.3 Extra Features Batch 3**
-
-**Goal:** Combat rebalancing (melee weakened, ranged gated), wind charge mobility system, threat-based aggro management, and world difficulty tuning.
-
-**Combat Rebalancing:**
-- [ ] Arrow aggro causes Speed 4 (up from Speed 2) for 6 seconds
-- [ ] Remove knockback from arrow hits on enemy mobs
-- [ ] Sweeping edge no longer applies to weapon hits
-- [ ] All melee damage reduced by 75%
-
-**Wind Charge / Mobility:**
-- [ ] Breeze rods yield 12 wind charges (up from 4)
-- [ ] Wind charges knock player 50% higher
-- [ ] Wind charge self-use negates fall damage on next landing (wind charge boost only)
-
-**Ranged Weapon Gating:**
-- [ ] Bows require 3 breeze rods + 3 string (replaces all sticks in recipe)
-- [ ] Crossbows require breeze rod + diamond instead of sticks + iron
-- [ ] Bows and crossbows don't spawn in overworld chests
-- [ ] Bows and crossbows don't drop from mobs
-
-**Threat System:**
-- [ ] Per-mob threat map (player → threat value as double)
-- [ ] Dealing X damage adds X threat to all hostile/neutral mobs within 15 blocks
-- [ ] Threat decays by 1 per second per mob per player
-- [ ] Arrow hits add +10 bonus threat to struck mob
-- [ ] Mobs target highest-threat player when threat ≥ 5 (unless revenge priority)
-- [ ] Target switch only on: (1) revenge strike, or (2) another player gains strictly higher threat
-
-**World Changes:**
-- [ ] Mob griefing disabled
-- [ ] Smooth stone drops cobblestone without silk touch
-- [ ] Always max regional difficulty & clamped regional difficulty in every chunk
-- [ ] Moon phase always "true" for mob/difficulty checks
-- [ ] Mobs cannot spawn in base chunks
+No active requirements. All v1.3 features shipped.
 
 ### Out of Scope
 
 - Vanilla hardcore mode integration — THC defines its own hardcore ruleset independent of vanilla permadeath
 - Multiplayer territory conflict resolution — focus is single-player or cooperative server experience for now
 - Buckler visual effects beyond existing implementation — parry system complete as-is
+- Tipped tiered arrows — complexity deferred
+- Threat persistence across chunk unload — threat is ephemeral by design
 
 ## Context
 
@@ -119,10 +111,10 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 - Game tests preferred for verification, manual testing as fallback
 
 **Existing Architecture:**
-- Kotlin + Java mixed codebase
-- Mixins for vanilla behavior modification (LivingEntityMixin, ServerPlayerMixin, etc.)
-- Attachment API for player state (THCAttachments.java)
-- Client/server networking for state sync (BucklerStatePayload)
+- Kotlin + Java mixed codebase (~3,582 LOC)
+- Mixins for vanilla behavior modification
+- Attachment API for player and mob state
+- Client/server networking for state sync
 - Fabric GameTest framework integration
 - Data generation for recipes/models
 
@@ -142,22 +134,25 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 | Iterative system design | Allows parallel design/implementation, faster iteration | ✓ Good - v1.0 delivered in 3 days |
 | Attachments for player state | Fabric API standard for entity data persistence | ✓ Good - clean sync mechanism |
 | GameTest over manual testing | Automated verification prevents regressions | ✓ Good - catches bugs early |
+| Threat as session-scoped state | Mobs forget threat on unload, keeps threat tactical not strategic | ✓ Good - simpler implementation |
+| Boolean attachment for one-time effects | Wind charge fall negation tracks state without complex logic | ✓ Good - clean pattern |
+| HEAD inject for spawn blocking | NaturalSpawner.isValidSpawnPostitionForType interception | ✓ Good - efficient spawn control |
 
 ## Current State
 
-**Shipped:** v1.2 Extra Features Batch 2 (2026-01-19)
+**Shipped:** v1.3 Extra Features Batch 3 (2026-01-20)
 
-**In Progress:** v1.3 Extra Features Batch 3
+**In Progress:** None - all milestones complete
 
 **Codebase:**
-- ~3,000 LOC Kotlin/Java
+- ~3,582 LOC Kotlin/Java
 - Mixed mixin + event-driven architecture
-- Accessor mixin pattern for immutable field modification
-- XP blocking via HEAD cancellation and @Redirect patterns
+- 35 plans across 16 phases in 4 milestones
+- Attachment patterns for player state, mob threat, one-time effects
 
 **Known issues:** None currently tracked
 
 **Technical debt:** None identified
 
 ---
-*Last updated: 2026-01-19 after v1.3 milestone start*
+*Last updated: 2026-01-20 after v1.3 milestone completion*

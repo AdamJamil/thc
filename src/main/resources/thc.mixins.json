@@ -13,6 +13,7 @@
 		"LivingEntityDrowningMixin",
 		"LivingEntityMixin",
 		"MobDamageThreatMixin",
+		"MobSunBurnMixin",
 		"MonsterThreatGoalMixin",
 		"NaturalSpawnerMixin",
 		"PlayerAttackMixin",

@@ -76,6 +76,8 @@ Key patterns established:
 - Static utility class pattern for attachment CRUD operations (ThreatManager)
 - Timestamp attachment for rate-limiting operations (THREAT_LAST_DECAY pattern)
 - Lazy decay via method call (vs tick mixin) for efficient threat decay
+- LivingEntity mixin with Mob filter for inherited method targeting
+- AABB.inflate for area-based entity queries with MobCategory filtering
 
 ### Pending Todos
 

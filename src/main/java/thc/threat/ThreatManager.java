@@ -55,4 +55,34 @@ public final class ThreatManager {
 		Map<UUID, Double> threats = mob.getAttached(THCAttachments.MOB_THREAT);
 		return threats != null && !threats.isEmpty();
 	}
+
+	/**
+	 * Decay threat for all players by 1 per second.
+	 * Should be called frequently (e.g., in goal canUse/canContinueToUse).
+	 * Uses tick-based check to only decay once per second (20 ticks).
+	 */
+	public static void decayThreat(Mob mob) {
+		if (mob.level().isClientSide()) return;
+
+		long now = mob.level().getGameTime();
+		long lastDecay = mob.getAttachedOrCreate(THCAttachments.THREAT_LAST_DECAY);
+
+		// Only decay once per second (20 ticks)
+		if (now - lastDecay < 20) {
+			return;
+		}
+
+		Map<UUID, Double> threats = mob.getAttached(THCAttachments.MOB_THREAT);
+		if (threats == null || threats.isEmpty()) {
+			return;
+		}
+
+		// Decay all threat values by 1
+		threats.replaceAll((uuid, threat) -> threat - 1.0);
+
+		// Remove entries at or below zero
+		threats.entrySet().removeIf(entry -> entry.getValue() <= 0.0);
+
+		mob.setAttached(THCAttachments.THREAT_LAST_DECAY, now);
+	}
 }

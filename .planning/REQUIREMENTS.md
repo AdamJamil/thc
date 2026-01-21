@@ -36,9 +36,9 @@ Requirements for the Twilight Hardcore release. Each maps to roadmap phases.
 
 ### Beds
 
-- [ ] **BED-01**: Player can always use beds (no time-of-day restriction)
-- [ ] **BED-02**: Sleeping does not skip time or advance day/night cycle
-- [ ] **BED-03**: Beds still set spawn point when used
+- [x] **BED-01**: Player can always use beds (no time-of-day restriction)
+- [x] **BED-02**: Sleeping does not skip time or advance day/night cycle
+- [x] **BED-03**: Beds still set spawn point when used
 
 ## v2 Requirements
 
@@ -76,9 +76,9 @@ Which phases cover which requirements. Updated by create-roadmap.
 | BEE-03 | Phase 21 | Complete |
 | VILLAGER-01 | Phase 22 | Complete |
 | VILLAGER-02 | Phase 22 | Complete |
-| BED-01 | Phase 23 | Pending |
-| BED-02 | Phase 23 | Pending |
-| BED-03 | Phase 23 | Pending |
+| BED-01 | Phase 23 | Complete |
+| BED-02 | Phase 23 | Complete |
+| BED-03 | Phase 23 | Complete |
 
 **Coverage:**
 - v2.0 requirements: 18 total
@@ -87,4 +87,4 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 ---
 *Requirements defined: 2026-01-20*
-*Last updated: 2026-01-20 after phase 22 completion*
+*Last updated: 2026-01-20 after phase 23 completion*

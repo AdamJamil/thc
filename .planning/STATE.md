@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-01-20)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v2.0 Twilight Hardcore
+**Current focus:** v2.0 Twilight Hardcore - COMPLETE
 
 ## Current Position
 
-Phase: 22 of 23 (Villager Twilight)
+Phase: 23 of 23 (Bed Mechanics)
 Plan: 1 of 1 complete
-Status: Phase complete
-Last activity: 2026-01-20 — Completed 22-01-PLAN.md (villager twilight schedule)
+Status: MILESTONE COMPLETE - v2.0 Twilight Hardcore
+Last activity: 2026-01-21 — Completed 23-01-PLAN.md (bed mechanics)
 
-Progress: ████████████████████░ 96% (22/23 phases complete)
+Progress: █████████████████████ 100% (23/23 phases complete)
 
 ## Performance Metrics
 
@@ -40,14 +40,15 @@ Progress: ████████████████████░ 96% (2
 - Total execution time: ~46 min
 - Timeline: 2 days (Jan 19-20, 2026)
 
-**v2.0 Milestone (in progress):**
-- Plans completed: 6
-- Total execution time: ~19 min
+**v2.0 Milestone (COMPLETE):**
+- Plans completed: 7
+- Total execution time: ~22.5 min
+- Timeline: 2 days (Jan 20-21, 2026)
 
 **Cumulative:**
-- 39 plans completed across 5 milestones
-- ~2.5 hours total execution time
-- 6 days from project start to v1.3 ship
+- 42 plans completed across 5 milestones
+- ~2.75 hours total execution time
+- 7 days from project start to v2.0 ship
 
 ## Accumulated Context
 
@@ -98,6 +99,8 @@ Key patterns established:
 - Sky light spawn bypass: HEAD inject on Monster.isDarkEnoughToSpawn with block light preservation via DimensionType
 - Environment attribute redirect: @Redirect on EnvironmentAttributeReader.getValue for attribute-specific behavior override (BEES_STAY_IN_HIVE)
 - Brain schedule time redirect: @Redirect on Brain.updateActivityFromSchedule with constant time for forced activity
+- BedRule redirect: @Redirect on EnvironmentAttributeSystem.getValue for sleep restriction bypass
+- Sleep time skip prevention: @Redirect on GameRules.get for ADVANCE_TIME in sleep block
 
 ### Pending Todos
 
@@ -109,7 +112,7 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-01-20
-Stopped at: Phase 22 complete (22-01-PLAN.md)
+Last session: 2026-01-21
+Stopped at: v2.0 Milestone complete (23-01-PLAN.md)
 Resume file: None
-Next: Run /gsd:plan-phase 23
+Next: Define v2.1 milestone or new features

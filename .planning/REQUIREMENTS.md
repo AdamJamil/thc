@@ -31,8 +31,8 @@ Requirements for the Twilight Hardcore release. Each maps to roadmap phases.
 
 ### Villagers
 
-- [ ] **VILLAGER-01**: Villagers always attempt to stay inside/go to bed (night behavior active continuously)
-- [ ] **VILLAGER-02**: Villagers behave as if it's always night for schedule purposes
+- [x] **VILLAGER-01**: Villagers always attempt to stay inside/go to bed (night behavior active continuously)
+- [x] **VILLAGER-02**: Villagers behave as if it's always night for schedule purposes
 
 ### Beds
 
@@ -74,8 +74,8 @@ Which phases cover which requirements. Updated by create-roadmap.
 | BEE-01 | Phase 21 | Complete |
 | BEE-02 | Phase 21 | Complete |
 | BEE-03 | Phase 21 | Complete |
-| VILLAGER-01 | Phase 22 | Pending |
-| VILLAGER-02 | Phase 22 | Pending |
+| VILLAGER-01 | Phase 22 | Complete |
+| VILLAGER-02 | Phase 22 | Complete |
 | BED-01 | Phase 23 | Pending |
 | BED-02 | Phase 23 | Pending |
 | BED-03 | Phase 23 | Pending |
@@ -87,4 +87,4 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 ---
 *Requirements defined: 2026-01-20*
-*Last updated: 2026-01-20 after phase 21 completion*
+*Last updated: 2026-01-20 after phase 22 completion*

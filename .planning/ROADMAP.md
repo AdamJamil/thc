@@ -102,7 +102,7 @@ Combat and survival systems that reinforce risk/reward philosophy. Melee damage 
 - [x] **Phase 19: Undead Sun Immunity** — Zombies/skeletons/phantoms don't burn
 - [x] **Phase 20: Hostile Spawn Bypass** — Monsters spawn regardless of sky light
 - [x] **Phase 21: Bee Always-Work** — Bees work 24/7 regardless of time/weather
-- [ ] **Phase 22: Villager Twilight** — Villagers behave as if always night
+- [x] **Phase 22: Villager Twilight** — Villagers behave as if always night
 - [ ] **Phase 23: Bed Mechanics** — Beds always usable, don't skip time
 
 ## Phase Details (v2.0)
@@ -197,9 +197,9 @@ Combat and survival systems that reinforce risk/reward philosophy. Melee damage 
 | 19. Undead Sun Immunity | 1/1 | Complete | 2026-01-20 |
 | 20. Hostile Spawn Bypass | 1/1 | Complete | 2026-01-20 |
 | 21. Bee Always-Work | 1/1 | Complete | 2026-01-20 |
-| 22. Villager Twilight | 0/TBD | Not started | - |
+| 22. Villager Twilight | 1/1 | Complete | 2026-01-20 |
 | 23. Bed Mechanics | 0/TBD | Not started | - |
 
 ---
 *Created: 2026-01-19*
-*Last updated: 2026-01-20 after phase 21 completion*
+*Last updated: 2026-01-20 after phase 22 completion*

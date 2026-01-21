@@ -25,6 +25,7 @@
 		"ServerLevelDifficultyMixin",
 		"ServerPlayerMixin",
 		"SnowballItemMixin",
+		"VillagerMixin",
 		"WindChargePlayerBoostMixin",
 		"access.ItemAccessor",
 		"access.AbstractArrowAccessor"

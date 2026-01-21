@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-20)
 
 ## Current Position
 
-Phase: 21 of 23 (Bee Always Work)
+Phase: 22 of 23 (Villager Twilight)
 Plan: 1 of 1 complete
 Status: Phase complete
-Last activity: 2026-01-20 — Completed 21-01-PLAN.md (bee always work)
+Last activity: 2026-01-20 — Completed 22-01-PLAN.md (villager twilight schedule)
 
-Progress: ███████████████████░ 91% (21/23 phases complete)
+Progress: ████████████████████░ 96% (22/23 phases complete)
 
 ## Performance Metrics
 
@@ -41,8 +41,8 @@ Progress: ███████████████████░ 91% (21/2
 - Timeline: 2 days (Jan 19-20, 2026)
 
 **v2.0 Milestone (in progress):**
-- Plans completed: 5
-- Total execution time: ~14 min
+- Plans completed: 6
+- Total execution time: ~19 min
 
 **Cumulative:**
 - 39 plans completed across 5 milestones
@@ -97,6 +97,7 @@ Key patterns established:
 - Sun burn prevention: HEAD inject on Mob.isSunBurnTick with cancellable=true returning false
 - Sky light spawn bypass: HEAD inject on Monster.isDarkEnoughToSpawn with block light preservation via DimensionType
 - Environment attribute redirect: @Redirect on EnvironmentAttributeReader.getValue for attribute-specific behavior override (BEES_STAY_IN_HIVE)
+- Brain schedule time redirect: @Redirect on Brain.updateActivityFromSchedule with constant time for forced activity
 
 ### Pending Todos
 
@@ -109,6 +110,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-20
-Stopped at: Phase 21 complete (21-01-PLAN.md)
+Stopped at: Phase 22 complete (22-01-PLAN.md)
 Resume file: None
-Next: Run /gsd:plan-phase 22
+Next: Run /gsd:plan-phase 23

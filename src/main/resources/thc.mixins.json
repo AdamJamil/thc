@@ -6,6 +6,7 @@
 		"AbstractArrowMixin",
 		"AbstractVillagerMixin",
 		"AnvilMenuMixin",
+		"BeeMixin",
 		"BellBlockMixin",
 		"ExampleMixin",
 		"ExperienceOrbXpMixin",

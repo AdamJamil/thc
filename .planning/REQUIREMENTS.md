@@ -25,9 +25,9 @@ Requirements for the Twilight Hardcore release. Each maps to roadmap phases.
 
 ### Passive Mobs
 
-- [ ] **BEE-01**: Bees work continuously regardless of time of day
-- [ ] **BEE-02**: Bees work continuously regardless of weather (rain)
-- [ ] **BEE-03**: Bees still return to hive when nectar-full (that behavior preserved)
+- [x] **BEE-01**: Bees work continuously regardless of time of day
+- [x] **BEE-02**: Bees work continuously regardless of weather (rain)
+- [x] **BEE-03**: Bees still return to hive when nectar-full (that behavior preserved)
 
 ### Villagers
 
@@ -71,9 +71,9 @@ Which phases cover which requirements. Updated by create-roadmap.
 | MOB-04 | Phase 19 | Complete |
 | SPAWN-01 | Phase 20 | Complete |
 | SPAWN-02 | Phase 20 | Complete |
-| BEE-01 | Phase 21 | Pending |
-| BEE-02 | Phase 21 | Pending |
-| BEE-03 | Phase 21 | Pending |
+| BEE-01 | Phase 21 | Complete |
+| BEE-02 | Phase 21 | Complete |
+| BEE-03 | Phase 21 | Complete |
 | VILLAGER-01 | Phase 22 | Pending |
 | VILLAGER-02 | Phase 22 | Pending |
 | BED-01 | Phase 23 | Pending |
@@ -87,4 +87,4 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 ---
 *Requirements defined: 2026-01-20*
-*Last updated: 2026-01-20 after phase 20 completion*
+*Last updated: 2026-01-20 after phase 21 completion*

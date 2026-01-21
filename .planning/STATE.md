@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-20)
 
 ## Current Position
 
-Phase: 20 of 23 (Hostile Spawn Bypass)
+Phase: 21 of 23 (Bee Always Work)
 Plan: 1 of 1 complete
 Status: Phase complete
-Last activity: 2026-01-20 — Completed 20-01-PLAN.md (hostile spawn light bypass)
+Last activity: 2026-01-20 — Completed 21-01-PLAN.md (bee always work)
 
-Progress: ██████████████████░░ 87% (20/23 phases complete)
+Progress: ███████████████████░ 91% (21/23 phases complete)
 
 ## Performance Metrics
 
@@ -41,8 +41,8 @@ Progress: ██████████████████░░ 87% (20/2
 - Timeline: 2 days (Jan 19-20, 2026)
 
 **v2.0 Milestone (in progress):**
-- Plans completed: 4
-- Total execution time: ~8 min
+- Plans completed: 5
+- Total execution time: ~14 min
 
 **Cumulative:**
 - 39 plans completed across 5 milestones
@@ -96,6 +96,7 @@ Key patterns established:
 - Interface method targeting: Fabric Loom remapping warning expected when method from interface (LevelTimeAccess)
 - Sun burn prevention: HEAD inject on Mob.isSunBurnTick with cancellable=true returning false
 - Sky light spawn bypass: HEAD inject on Monster.isDarkEnoughToSpawn with block light preservation via DimensionType
+- Environment attribute redirect: @Redirect on EnvironmentAttributeReader.getValue for attribute-specific behavior override (BEES_STAY_IN_HIVE)
 
 ### Pending Todos
 
@@ -108,6 +109,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-20
-Stopped at: Phase 20 complete (20-01-PLAN.md)
+Stopped at: Phase 21 complete (21-01-PLAN.md)
 Resume file: None
-Next: Run /gsd:plan-phase 21
+Next: Run /gsd:plan-phase 22

@@ -123,7 +123,20 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ### Active
 
-*No active requirements — milestone complete*
+**Food Economy Overhaul:**
+- [ ] Smoker gating — requires iron to craft, removed from natural village spawns
+- [ ] Apple drop improvements — 5x drop rate, drops from all leaf types (not just oak)
+- [ ] Bonemeal improvements — fully grows any crop, bone yields 6 bonemeal (up from 3)
+- [ ] Food removals — suspicious stew, mushroom stew, beetroot soup, sugarcane→sugar recipe
+- [ ] Food stat rebalancing — complete hunger/saturation overhaul per design table
+- [ ] Hearty Stew — rabbit stew renamed with new stats (10 hunger, 6.36 saturation)
+- [ ] Honey Apple — new item (apple + honey bottle shapeless), 8 hunger, 2.73 saturation
+
+**Class & Stage System:**
+- [ ] Class selection system — /selectClass <tank|melee|ranged|support> command (base chunks only)
+- [ ] Class modifiers — permanent health and damage multipliers per class
+- [ ] Stage system — 5 stages with server-wide /advanceStage command
+- [ ] Boon level tracking — per-player class + boon level persistence (scaffolding for future)
 
 ### Out of Scope
 
@@ -186,11 +199,19 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 | HEAD cancellation for FoodData.tick() | Complete control over exhaustion and healing logic | Good |
 | Fixed interval + variable heal amount | Simpler than variable intervals for saturation tier healing | Good |
 
-## Current Milestone: Complete
+## Current Milestone: v2.2 Extra Features Batch 6
 
-**Shipped:** v2.1 Extra Features Batch 5 (2026-01-22)
+**Goal:** Overhaul food economy with meaningful cooking progression and introduce class/stage system foundation for multiplayer role differentiation.
 
-**Delivered:** Survival progression gating, healing skill expression, improved village protection granularity.
+**Target features:**
+- Food economy rebalancing (hunger/saturation overhaul, cooking gates)
+- Smoker progression gate (iron requirement, no natural spawns)
+- Apple availability improvements (5x rate, all leaves)
+- Food item removals (stews, suspicious foods)
+- New foods: Hearty Stew (rabbit stew rename), Honey Apple
+- Class system with permanent role selection (tank/melee/ranged/support)
+- Stage progression system (5 stages, admin-controlled advancement)
+- Boon level scaffolding for future expansion
 
 ## Current State
 
@@ -211,4 +232,4 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 **Technical debt:** None identified
 
 ---
-*Last updated: 2026-01-22 after v2.1 milestone complete*
+*Last updated: 2026-01-22 after v2.2 milestone started*

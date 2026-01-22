@@ -24,9 +24,19 @@ object THCItems {
         )
     }
 
+    @JvmField
+    val BLAST_TOTEM: Item = register("blast_totem") { key ->
+        Item(
+            Item.Properties()
+                .setId(key)
+                .stacksTo(1)
+        )
+    }
+
     fun init() {
         ItemGroupEvents.modifyEntriesEvent(toolsTabKey).register { entries ->
             entries.accept(LAND_PLOT)
+            entries.accept(BLAST_TOTEM)
         }
     }
 

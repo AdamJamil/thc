@@ -11,7 +11,7 @@ Food economy overhaul establishing cooking progression gates and meaningful food
 - Integer phases (30, 31, 32...): Planned milestone work
 
 - [x] **Phase 30: Smoker Gating** - Iron requirement for smoker crafting, removed from villages
-- [ ] **Phase 31: Apple & Bonemeal** - 5x apple drops from all leaves, improved bonemeal
+- [x] **Phase 31: Apple & Bonemeal** - 5x apple drops from all leaves, improved bonemeal
 - [ ] **Phase 32: Food Removals** - Remove suspicious stew, mushroom stew, beetroot soup, sugar recipe
 - [ ] **Phase 33: Food Stats** - Complete hunger/saturation rebalancing
 - [ ] **Phase 34: New Foods** - Hearty Stew rename, Honey Apple item
@@ -41,7 +41,8 @@ Food economy overhaul establishing cooking progression gates and meaningful food
   4. Bone crafts into 6 bonemeal (not 3)
 **Research**: Likely (leaf loot table structure, bonemeal mechanics)
 **Research topics**: Leaf block loot tables, bonemeal growth mechanics intercept point
-**Plans**: TBD
+**Plans**: 1 (31-01)
+**Completed**: 2026-01-22
 
 ### Phase 32: Food Removals
 **Goal**: Remove low-value food items to simplify food choices
@@ -116,7 +117,7 @@ Phases execute in numeric order: 30 → 31 → 32 → 33 → 34 → 35 → 36
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 30. Smoker Gating | 1/1 | Complete | 2026-01-22 |
-| 31. Apple & Bonemeal | 0/TBD | Not started | - |
+| 31. Apple & Bonemeal | 1/1 | Complete | 2026-01-22 |
 | 32. Food Removals | 0/TBD | Not started | - |
 | 33. Food Stats | 0/TBD | Not started | - |
 | 34. New Foods | 0/TBD | Not started | - |

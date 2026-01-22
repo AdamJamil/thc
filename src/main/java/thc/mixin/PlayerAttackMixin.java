@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.Slice;
 
 @Mixin(Player.class)
 public abstract class PlayerAttackMixin {
@@ -30,9 +31,14 @@ public abstract class PlayerAttackMixin {
 
 	/**
 	 * Increase critical hit multiplier from 1.5x to 2.0x.
+	 * Slice ensures we only modify the 1.5F between canCriticalAttack and isSweepAttack.
 	 */
 	@ModifyConstant(
 		method = "attack",
+		slice = @Slice(
+			from = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;canCriticalAttack(Lnet/minecraft/world/entity/Entity;)Z"),
+			to = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;isSweepAttack(ZZZ)Z")
+		),
 		constant = @Constant(floatValue = 1.5F)
 	)
 	private float thc$doubleCritDamage(float original) {

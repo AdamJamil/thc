@@ -28,7 +28,9 @@ public class RecipeManagerMixin {
 		"golden_spear",
 		"diamond_spear",
 		"netherite_spear_smithing",
-		"snow_block"
+		"snow_block",
+		"furnace",
+		"blast_furnace"
 	);
 
 	@Inject(

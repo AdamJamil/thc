@@ -11,6 +11,7 @@
 		"ExampleMixin",
 		"ExperienceOrbXpMixin",
 		"FoodDataMixin",
+		"ItemEatingMixin",
 		"LivingEntityDrowningMixin",
 		"LivingEntityMixin",
 		"MobDamageThreatMixin",
@@ -31,7 +32,8 @@
 		"VillagerMixin",
 		"WindChargePlayerBoostMixin",
 		"access.ItemAccessor",
-		"access.AbstractArrowAccessor"
+		"access.AbstractArrowAccessor",
+		"access.FoodDataAccessor"
 	],
 	"injectors": {
 		"defaultRequire": 1

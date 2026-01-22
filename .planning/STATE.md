@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 
 ## Current Position
 
-Phase: 30 of 36 (Smoker Gating)
+Phase: 31 of 36 (Apple and Bonemeal)
 Plan: 01 of 01 complete
 Status: Phase complete
-Last activity: 2026-01-22 — Completed 30-01-PLAN.md
+Last activity: 2026-01-22 — Completed 31-01-PLAN.md
 
-Progress: █░░░░░░░░░ 14% — v2.2 phase 30 complete (1/7 phases)
+Progress: ██░░░░░░░░ 29% — v2.2 phase 31 complete (2/7 phases)
 
 ## Performance Metrics
 
@@ -117,6 +117,8 @@ Key patterns established:
 - Accessor interface expansion for multiple private fields on same target class
 - getSaturationLevel() tier mapping for variable healing rates (descending threshold checks)
 - Fixed interval (5 ticks) + variable heal amount for smoother tiered healing
+- Loot table override for universal item drops (apples from all leaves)
+- CropBlock performBonemeal HEAD injection for instant crop maturation
 
 ### Pending Todos
 
@@ -129,6 +131,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-22
-Stopped at: Completed 30-01-PLAN.md (smoker gating)
+Stopped at: Completed 31-01-PLAN.md (apple and bonemeal)
 Resume file: None
-Next: /gsd:execute-plan 31-01
+Next: /gsd:execute-plan 32-01

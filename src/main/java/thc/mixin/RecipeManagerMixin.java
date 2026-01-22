@@ -32,7 +32,11 @@ public class RecipeManagerMixin {
 		"furnace",
 		"blast_furnace",
 		"smoker",
-		"bone_meal"
+		"bone_meal",
+		"suspicious_stew",
+		"mushroom_stew",
+		"beetroot_soup",
+		"sugar_from_sugar_cane"
 	);
 
 	@Inject(

@@ -100,7 +100,7 @@ Combat and survival systems that reinforce risk/reward philosophy. Melee damage 
 
 - [x] **Phase 24: Blast Totem** — Custom item replaces Totem of Undying
 - [x] **Phase 25: Furnace Gating** — Furnaces require blaze powder, blast furnace requires blast totem
-- [ ] **Phase 26: Structure Protection** — Village protection based on structure bounding boxes
+- [x] **Phase 26: Structure Protection** — Village protection based on structure bounding boxes
 - [ ] **Phase 27: Eating Mechanics** — Saturation cap behavior, longer eating duration
 - [ ] **Phase 28: Exhaustion & Healing** — Faster exhaustion, hunger-gated healing
 - [ ] **Phase 29: Saturation Tiers** — Healing rate scales with saturation level
@@ -193,7 +193,7 @@ Phases execute in numeric order: 24 → 25 → 26 → 27 → 28 → 29
 | 17-23 | v2.0 | 7/7 | Complete | 2026-01-22 |
 | 24. Blast Totem | v2.1 | 1/1 | Complete | 2026-01-22 |
 | 25. Furnace Gating | v2.1 | 2/2 | Complete | 2026-01-22 |
-| 26. Structure Protection | v2.1 | 0/TBD | Not started | - |
+| 26. Structure Protection | v2.1 | 1/1 | Complete | 2026-01-22 |
 | 27. Eating Mechanics | v2.1 | 0/TBD | Not started | - |
 | 28. Exhaustion & Healing | v2.1 | 0/TBD | Not started | - |
 | 29. Saturation Tiers | v2.1 | 0/TBD | Not started | - |

@@ -18,9 +18,9 @@ Requirements for v2.1 release. Each maps to roadmap phases.
 
 ### World Protection
 
-- [ ] **PROT-01**: Village block breaking restricted to structure bounding boxes only
-- [ ] **PROT-02**: Underground traversal below villages is unrestricted
-- [ ] **PROT-03**: Existing village chunk protection replaced with structure-based protection
+- [x] **PROT-01**: Village block breaking restricted to structure bounding boxes only
+- [x] **PROT-02**: Underground traversal below villages is unrestricted
+- [x] **PROT-03**: Existing village chunk protection replaced with structure-based protection
 
 ### Healing System
 
@@ -63,9 +63,9 @@ Which phases cover which requirements. Updated by create-roadmap.
 | PROG-04 | Phase 25 | Complete |
 | PROG-05 | Phase 25 | Complete |
 | PROG-06 | Phase 25 | Complete |
-| PROT-01 | Phase 26 | Pending |
-| PROT-02 | Phase 26 | Pending |
-| PROT-03 | Phase 26 | Pending |
+| PROT-01 | Phase 26 | Complete |
+| PROT-02 | Phase 26 | Complete |
+| PROT-03 | Phase 26 | Complete |
 | HEAL-01 | Phase 27 | Pending |
 | HEAL-02 | Phase 27 | Pending |
 | HEAL-03 | Phase 28 | Pending |

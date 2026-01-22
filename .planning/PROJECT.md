@@ -2,7 +2,7 @@
 
 ## What This Is
 
-A Minecraft mod that creates a "true hardcore" experience where players must always take meaningful risks to achieve anything. The mod replaces tedium-as-difficulty with risk-as-progression through multiple interconnected systems including combat overhaul (buckler replacing shields), territorial base claiming mechanics, threat-based aggro management, and world difficulty tuning.
+A Minecraft mod that creates a "true hardcore" experience where players must always take meaningful risks to achieve anything. The mod replaces tedium-as-difficulty with risk-as-progression through multiple interconnected systems including combat overhaul (buckler replacing shields), territorial base claiming mechanics, threat-based aggro management, world difficulty tuning, and a twilight system creating perpetual hostility where mobs spawn in daylight and the sky stays at dusk.
 
 ## Core Value
 
@@ -12,22 +12,20 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ### Validated
 
-- ✓ Buckler combat system — existing
+- Buckler combat system — existing
   - Five tiers (stone through netherite) with poise mechanics
   - Parry windows, damage reduction, durability system
   - HUD overlay showing poise bar above armor
   - Environmental damage exclusions
   - Lethal parry save mechanism
-- ✓ Shield replacement — existing
+- Shield replacement — existing
   - Shields removed from all loot tables
   - Bucklers registered and craftable
-- ✓ World mechanics — existing (modified in v2.0)
-  - ~~Time locked to night~~ → replaced by twilight system in v2.0
-- ✓ Testing infrastructure — existing
+- Testing infrastructure — existing
   - Smoke test system (100 tick validation)
   - Game tests for buckler mechanics
   - Debug output gated by tags
-- ✓ Base claiming system — v1.0
+- Base claiming system — v1.0
   - Bell rings drop land plot books (first ring per bell)
   - Land plots claim chunks with terrain flatness validation
   - Base areas allow unrestricted building
@@ -36,66 +34,79 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
   - Village chunks protected (no breaking except ores/allowlist)
   - Allowlist-only placement outside bases with adjacency rules
   - Bells indestructible (bedrock-like hardness)
-- ✓ Crafting tweaks — v1.0
+- Crafting tweaks — v1.0
   - Ladder recipe yields 16 (instead of 3)
   - Snowballs stack to 64 (instead of 16)
   - Snow block ↔ 9 snowballs conversion
-- ✓ Drowning modification — v1.1
+- Drowning modification — v1.1
   - Drowning damage ticks every 4 seconds (instead of 1)
-- ✓ Spear removal — v1.1
+- Spear removal — v1.1
   - Spears removed from crafting, loot tables, and mob drops
-- ✓ Projectile combat — v1.1
+- Projectile combat — v1.1
   - Hit effects: Speed II and Glowing (6s) on target
   - Aggro redirection to shooter
   - Enhanced physics: 20% faster launch, gravity increase after 8 blocks
-- ✓ Parry stun improvements — v1.2
+- Parry stun improvements — v1.2
   - Stun range increased to 3 blocks
   - ~1 block knockback on stunned enemies
-- ✓ XP economy restriction — v1.2
+- XP economy restriction — v1.2
   - XP orbs only from mob deaths and experience bottles
   - Blocked: ores, breeding, fishing, trading, smelting
-- ✓ Tiered arrows — v1.2
+- Tiered arrows — v1.2
   - Vanilla arrow renamed to "Flint Arrow" with custom texture
   - Iron Arrow (+1 damage), Diamond Arrow (+2), Netherite Arrow (+3)
   - Anvil crafting: 64 flint arrows + material = 64 tiered arrows
-- ✓ Combat rebalancing — v1.3
+- Combat rebalancing — v1.3
   - Arrow hits cause Speed IV (up from Speed II), no knockback on monsters
   - Sweeping edge enchantment disabled
   - All melee damage reduced by 75%
-- ✓ Wind charge mobility — v1.3
+- Wind charge mobility — v1.3
   - Breeze rods yield 12 wind charges (up from 4)
   - Wind charges boost player 50% higher
   - One-time fall damage negation after self-boost
-- ✓ Ranged weapon gating — v1.3
+- Ranged weapon gating — v1.3
   - Bows require 3 breeze rods + 3 string (no sticks)
   - Crossbows require breeze rod + diamond (no sticks/iron)
   - Bows and crossbows removed from all loot tables and mob drops
-- ✓ Threat system — v1.3
+- Threat system — v1.3
   - Per-mob threat maps (player → threat value)
   - Damage propagates threat to all mobs within 15 blocks
   - Threat decays 1 per second per player
   - Arrow hits add +10 bonus threat
   - Mobs target highest-threat player (threshold 5, unless revenge)
   - Target switching only on revenge or strictly higher threat
-- ✓ World difficulty — v1.3
+- World difficulty — v1.3
   - Mob griefing disabled (no creeper block damage, no enderman pickup)
   - Smooth stone drops cobblestone without silk touch
   - Regional difficulty always maximum (max inhabited time, full moon)
   - No natural mob spawns in base chunks
+- Twilight time system — v2.0
+  - Server time flows normally (doDaylightCycle active)
+  - Night-lock code removed
+- Twilight visuals — v2.0
+  - Client sees perpetual dusk sky (locked at ~13000 ticks)
+  - Overworld only (Nether/End unaffected)
+- Undead sun immunity — v2.0
+  - Zombies, skeletons, phantoms do not burn in sunlight
+  - Fire aspect, lava, and other fire sources still damage undead
+- Hostile spawn bypass — v2.0
+  - Hostile mobs spawn regardless of sky light level
+  - Block light still affects spawn density (torch protection preserved)
+- Bee always-work — v2.0
+  - Bees work continuously regardless of time of day
+  - Bees work continuously regardless of weather (rain)
+  - Bees still return to hive when nectar-full (behavior preserved)
+- Villager twilight — v2.0
+  - Villagers always attempt to stay inside/go to bed (night behavior active)
+  - Villagers behave as if always night for schedule purposes
+- Bed mechanics — v2.0
+  - Beds usable at any time (no time-of-day restriction)
+  - Sleeping does not skip time or advance day/night cycle
+  - Beds still set spawn point when used
 
 ### Active
 
-**Current Milestone: v2.0 Twilight Hardcore**
-
-**Goal:** Replace night-lock with a twilight system where time flows normally but the world remains perpetually hostile — mobs spawn in daylight, undead don't burn, and clients see eternal dusk.
-
-**Target features:**
-- [ ] Remove night lock — server time flows normally again
-- [ ] Twilight visuals (client-only) — sky/ambient lighting fixed to dusk (~13000 ticks) regardless of actual time
-- [ ] Hostile spawn bypass — ignore sky light check for monster natural spawning
-- [ ] Undead sun immunity — zombies, skeletons, phantoms don't burn in daylight
-- [ ] Bees always work — ignore time/weather checks in bee AI so they produce honey 24/7
-- [ ] Preserve full moon difficulty — keep existing max regional difficulty implementation
+No active requirements - next milestone to be planned.
 
 ### Out of Scope
 
@@ -104,6 +115,10 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 - Buckler visual effects beyond existing implementation — parry system complete as-is
 - Tipped tiered arrows — complexity deferred
 - Threat persistence across chunk unload — threat is ephemeral by design
+- Weather visual override — rain during dusk is atmospheric, acceptable
+- Nether/End twilight — these dimensions have their own aesthetics
+- Shader-specific fixes — basic compatibility expected, deep Iris integration deferred
+- Phantom spawning changes — phantoms should still spawn based on insomnia mechanic
 
 ## Context
 
@@ -116,12 +131,12 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 **Design Philosophy:**
 - Risk/reward over tedium/grind
-- Multiple interconnected systems (combat, territory, future additions)
+- Multiple interconnected systems (combat, territory, twilight)
 - Implementation and design execute in parallel - new systems added iteratively as designed
 - Game tests preferred for verification, manual testing as fallback
 
 **Existing Architecture:**
-- Kotlin + Java mixed codebase (~3,582 LOC)
+- Kotlin + Java mixed codebase (~4,045 LOC)
 - Mixins for vanilla behavior modification
 - Attachment API for player and mob state
 - Client/server networking for state sync
@@ -139,30 +154,34 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Buckler replaces shields entirely | Supports risk/reward philosophy - active defense (parry) vs passive (shield block) | ✓ Good - completed and tested |
-| Night-only world | Forces exposure to hostile mobs, eliminates safe periods | ⚠️ Revisit — replacing with twilight system in v2.0 |
-| Iterative system design | Allows parallel design/implementation, faster iteration | ✓ Good - v1.0 delivered in 3 days |
-| Attachments for player state | Fabric API standard for entity data persistence | ✓ Good - clean sync mechanism |
-| GameTest over manual testing | Automated verification prevents regressions | ✓ Good - catches bugs early |
-| Threat as session-scoped state | Mobs forget threat on unload, keeps threat tactical not strategic | ✓ Good - simpler implementation |
-| Boolean attachment for one-time effects | Wind charge fall negation tracks state without complex logic | ✓ Good - clean pattern |
-| HEAD inject for spawn blocking | NaturalSpawner.isValidSpawnPostitionForType interception | ✓ Good - efficient spawn control |
+| Buckler replaces shields entirely | Supports risk/reward philosophy - active defense (parry) vs passive (shield block) | Good |
+| Twilight system over permanent night | Allows normal time flow while maintaining hostility, better gameplay variety | Good |
+| Iterative system design | Allows parallel design/implementation, faster iteration | Good |
+| Attachments for player state | Fabric API standard for entity data persistence | Good |
+| GameTest over manual testing | Automated verification prevents regressions | Good |
+| Threat as session-scoped state | Mobs forget threat on unload, keeps threat tactical not strategic | Good |
+| Boolean attachment for one-time effects | Wind charge fall negation tracks state without complex logic | Good |
+| HEAD inject for spawn blocking | NaturalSpawner.isValidSpawnPostitionForType interception | Good |
+| BedRule redirect for sleep | Cleanest approach for 24/7 bed usage | Good |
+| Brain schedule redirect for villagers | Force night activity without modifying multiple AI systems | Good |
 
 ## Current State
 
-**Shipped:** v1.3 Extra Features Batch 3 (2026-01-20)
+**Shipped:** v2.0 Twilight Hardcore (2026-01-22)
 
-**In Progress:** v2.0 Twilight Hardcore — defining requirements
+**In Progress:** None - planning next milestone
 
 **Codebase:**
-- ~3,582 LOC Kotlin/Java
+- ~4,045 LOC Kotlin/Java
 - Mixed mixin + event-driven architecture
-- 35 plans across 16 phases in 4 milestones
+- 42 plans across 23 phases in 5 milestones
 - Attachment patterns for player state, mob threat, one-time effects
+- Client visual overrides for twilight sky
+- Comprehensive spawn/behavior modifications
 
 **Known issues:** None currently tracked
 
 **Technical debt:** None identified
 
 ---
-*Last updated: 2026-01-20 after v2.0 milestone start*
+*Last updated: 2026-01-22 after v2.0 milestone*

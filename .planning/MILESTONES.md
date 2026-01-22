@@ -1,5 +1,33 @@
 # Project Milestones: THC (True Hardcore)
 
+## v2.0 Twilight Hardcore (Shipped: 2026-01-22)
+
+**Delivered:** Replaced permanent night with perpetual twilight system - time flows normally but world remains hostile with daylight mob spawns, sun-immune undead, and eternal dusk visuals.
+
+**Phases completed:** 17-23 (7 plans total)
+
+**Key accomplishments:**
+
+- Removed night lock, server time now flows naturally
+- Client-side perpetual dusk sky (13000 ticks visual, Overworld only)
+- Undead sun immunity (zombies, skeletons, phantoms don't burn)
+- Daylight hostile spawns with preserved block light protection
+- 24/7 bee productivity regardless of time or weather
+- Villager night schedule behavior (always shelter/sleep seeking)
+- Anytime bed usage without time skip (spawn points still work)
+
+**Stats:**
+
+- ~4,045 lines of Kotlin/Java (cumulative)
+- 7 phases, 7 plans
+- 1 day from start to ship (Jan 20, 2026)
+
+**Git range:** feat(17-01) → docs(23)
+
+**What's next:** To be determined
+
+---
+
 ## v1.3 Extra Features Batch 3 (Shipped: 2026-01-20)
 
 **Delivered:** Combat rebalancing (melee weakened, ranged gated), wind charge mobility system, threat-based aggro management, and world difficulty tuning for harder exploration with safer bases.

@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 ## Current Position
 
 Phase: 26 of 29 (Structure Protection)
-Plan: Not started
-Status: Ready to plan
-Last activity: 2026-01-22 — Phase 25 complete (Furnace Gating)
+Plan: 01 of 01 complete
+Status: Phase complete
+Last activity: 2026-01-22 — Completed 26-01-PLAN.md (Structure Protection)
 
-Progress: ██░░░░░░░░ 33% (v2.1) - 2/6 phases complete
+Progress: █████░░░░░ 50% (v2.1) - 3/6 phases complete
 
 ## Performance Metrics
 
@@ -104,6 +104,7 @@ Key patterns established:
 - Sleep time skip prevention: @Redirect on GameRules.get for ADVANCE_TIME in sleep block
 - Loot table item replacement: detect before remove, add replacement after (MODIFY_DROPS pattern)
 - @Redirect setBlock for structure block filtering: intercept ServerLevelAccessor.setBlock in placeInWorld
+- Position-based structure protection: getStructureWithPieceAt(pos) for precise bounding box checks
 
 ### Pending Todos
 
@@ -116,6 +117,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-22
-Stopped at: Phase 25 complete
+Stopped at: Completed 26-01-PLAN.md
 Resume file: None
-Next: `/gsd:plan-phase 26`
+Next: `/gsd:plan-phase 27` or execute remaining v2.1 phases

@@ -1,10 +1,10 @@
 package thc.world
 
 import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents
+import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.tags.BlockTags
-import net.minecraft.world.level.ChunkPos
-import thc.claim.ChunkValidator
+import net.minecraft.tags.StructureTags
 
 /**
  * Handles block break protection in village chunks.
@@ -33,16 +33,15 @@ object VillageProtection {
             }
 
             val serverLevel = level as ServerLevel
-            val chunkPos = ChunkPos(pos)
 
-            logger.info("VillageProtection checking block break at $pos (chunk ${chunkPos.x}, ${chunkPos.z})")
+            logger.info("VillageProtection checking block break at $pos")
 
-            // Only apply protection in village chunks
-            val isVillage = ChunkValidator.isVillageChunk(serverLevel, chunkPos)
-            logger.info("  isVillageChunk result: $isVillage")
+            // Only apply protection inside village structures
+            val isVillage = isInsideVillageStructure(serverLevel, pos)
+            logger.info("  isInsideVillageStructure result: $isVillage")
 
             if (!isVillage) {
-                logger.info("  -> ALLOWING (not a village)")
+                logger.info("  -> ALLOWING (not inside village structure)")
                 return@register true
             }
 
@@ -58,10 +57,27 @@ object VillageProtection {
                 return@register true
             }
 
-            // BREAK-05: Block breaking in village chunks
-            logger.info("  -> BLOCKING break in village!")
+            // BREAK-05: Block breaking inside village structures
+            logger.info("  -> BLOCKING break inside village structure!")
             false
         }
+    }
+
+    /**
+     * Checks if a position is inside a village structure piece bounding box.
+     *
+     * Uses StructureManager.getStructureWithPieceAt() which internally checks
+     * if the position falls within any structure piece's BoundingBox for
+     * villages in the chunk.
+     *
+     * @param level The server level to check
+     * @param pos The block position to check
+     * @return true if the position is inside any village structure piece
+     */
+    private fun isInsideVillageStructure(level: ServerLevel, pos: BlockPos): Boolean {
+        val structureManager = level.structureManager()
+        val structureAt = structureManager.getStructureWithPieceAt(pos, StructureTags.VILLAGE)
+        return structureAt.isValid
     }
 
     /**

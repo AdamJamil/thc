@@ -7,12 +7,16 @@ import net.minecraft.tags.BlockTags
 import net.minecraft.tags.StructureTags
 
 /**
- * Handles block break protection in village chunks.
+ * Handles block break protection inside village structures.
  *
  * Implements:
- * - BREAK-05: Player cannot break blocks in village chunks
- * - BREAK-06: Player CAN break ores in village chunks (exception)
- * - BREAK-07: Player CAN break allowlist blocks in village chunks (exception)
+ * - BREAK-05: Player cannot break blocks inside village structure bounding boxes
+ * - BREAK-06: Player CAN break ores inside village structures (exception)
+ * - BREAK-07: Player CAN break allowlist blocks inside village structures (exception)
+ *
+ * Uses position-based structure detection via getStructureWithPieceAt() which
+ * checks if a block position falls within any village structure piece's bounding box.
+ * This allows underground traversal below villages while protecting actual structures.
  *
  * This handler should be registered BEFORE MiningFatigue so that blocked breaks
  * don't trigger fatigue application.
@@ -45,13 +49,13 @@ object VillageProtection {
                 return@register true
             }
 
-            // BREAK-06: Allow breaking ores in village chunks
+            // BREAK-06: Allow breaking ores in village structures
             if (isOre(state)) {
                 logger.info("  -> ALLOWING (is ore)")
                 return@register true
             }
 
-            // BREAK-07: Allow breaking allowlist blocks in village chunks
+            // BREAK-07: Allow breaking allowlist blocks in village structures
             if (WorldRestrictions.ALLOWED_BLOCKS.contains(state.block)) {
                 logger.info("  -> ALLOWING (is allowlist block)")
                 return@register true

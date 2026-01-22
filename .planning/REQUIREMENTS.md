@@ -24,8 +24,8 @@ Requirements for v2.1 release. Each maps to roadmap phases.
 
 ### Healing System
 
-- [ ] **HEAL-01**: Eating sets saturation to max(food_saturation, current_saturation)
-- [ ] **HEAL-02**: Eating duration is 64 ticks (instead of vanilla 32)
+- [x] **HEAL-01**: Eating sets saturation to max(food_saturation, current_saturation)
+- [x] **HEAL-02**: Eating duration is 64 ticks (instead of vanilla 32)
 - [ ] **HEAL-03**: Exhaustion rate: 4.0 exhaustion removes 1.21 saturation
 - [ ] **HEAL-04**: Healing requires hunger ≥ 18 (9 bars)
 - [ ] **HEAL-05**: Base healing rate: 3/16 hearts per second when hunger ≥ 18
@@ -66,8 +66,8 @@ Which phases cover which requirements. Updated by create-roadmap.
 | PROT-01 | Phase 26 | Complete |
 | PROT-02 | Phase 26 | Complete |
 | PROT-03 | Phase 26 | Complete |
-| HEAL-01 | Phase 27 | Pending |
-| HEAL-02 | Phase 27 | Pending |
+| HEAL-01 | Phase 27 | Complete |
+| HEAL-02 | Phase 27 | Complete |
 | HEAL-03 | Phase 28 | Pending |
 | HEAL-04 | Phase 28 | Pending |
 | HEAL-05 | Phase 28 | Pending |

@@ -25,12 +25,13 @@ public class StructureTemplateMixin {
 
 	/**
 	 * Blocks to filter from structure generation.
-	 * Furnaces require blaze powder to craft in THC.
+	 * Furnaces require blaze powder, smokers require iron to craft in THC.
 	 */
 	@Unique
 	private static final Set<Block> FILTERED_STRUCTURE_BLOCKS = Set.of(
 		Blocks.FURNACE,
-		Blocks.BLAST_FURNACE
+		Blocks.BLAST_FURNACE,
+		Blocks.SMOKER
 	);
 
 	/**

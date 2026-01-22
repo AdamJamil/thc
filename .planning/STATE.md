@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 ## Current Position
 
 Phase: 27 of 29 (Eating Mechanics)
-Plan: Not started
-Status: Ready to plan
-Last activity: 2026-01-22 — Phase 26 complete (Structure Protection)
+Plan: 1 of 1 complete
+Status: Phase complete
+Last activity: 2026-01-22 — Completed 27-01-PLAN.md (Eating Mechanics)
 
-Progress: █████░░░░░ 50% (v2.1) - 3/6 phases complete
+Progress: ██████░░░░ 67% (v2.1) - 4/6 phases complete
 
 ## Performance Metrics
 
@@ -105,6 +105,7 @@ Key patterns established:
 - Loot table item replacement: detect before remove, add replacement after (MODIFY_DROPS pattern)
 - @Redirect setBlock for structure block filtering: intercept ServerLevelAccessor.setBlock in placeInWorld
 - Position-based structure protection: getStructureWithPieceAt(pos) for precise bounding box checks
+- ThreadLocal for paired injection state: store in HEAD, use in RETURN (eating saturation cap)
 
 ### Pending Todos
 
@@ -117,6 +118,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-22
-Stopped at: Phase 26 complete
+Stopped at: Phase 27 complete
 Resume file: None
-Next: `/gsd:plan-phase 27`
+Next: `/gsd:plan-phase 28`

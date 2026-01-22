@@ -27,6 +27,7 @@
 		"ServerLevelSleepMixin",
 		"ServerPlayerMixin",
 		"SnowballItemMixin",
+		"StructureTemplateMixin",
 		"VillagerMixin",
 		"WindChargePlayerBoostMixin",
 		"access.ItemAccessor",

@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 
 ## Current Position
 
-Phase: 28 of 29 (Exhaustion & Healing)
+Phase: 29 of 29 (Saturation Tiers)
 Plan: 1 of 1 complete
 Status: Phase complete
-Last activity: 2026-01-22 — Completed 28-01-PLAN.md (Exhaustion & Healing)
+Last activity: 2026-01-22 — Completed 29-01-PLAN.md (Saturation Tiers)
 
-Progress: ████████░░ 83% (v2.1) - 5/6 phases complete
+Progress: ██████████ 100% (v2.1) - 6/6 phases complete
 
 ## Performance Metrics
 
@@ -108,6 +108,7 @@ Key patterns established:
 - ThreadLocal for paired injection state: store in HEAD, use in RETURN (eating saturation cap)
 - HEAD cancellation with ci.cancel() for complete method replacement (FoodData.tick)
 - Accessor interface expansion for multiple private fields on same target class
+- getSaturationLevel() tier mapping for variable healing rates (descending threshold checks)
 
 ### Pending Todos
 
@@ -120,6 +121,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-22
-Stopped at: Phase 28 complete
+Stopped at: Phase 29 complete (v2.1 milestone complete)
 Resume file: None
-Next: `/gsd:plan-phase 29`
+Next: v2.1 milestone review or next milestone planning

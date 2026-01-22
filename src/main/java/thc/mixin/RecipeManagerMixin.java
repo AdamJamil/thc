@@ -31,7 +31,8 @@ public class RecipeManagerMixin {
 		"snow_block",
 		"furnace",
 		"blast_furnace",
-		"smoker"
+		"smoker",
+		"bone_meal"
 	);
 
 	@Inject(

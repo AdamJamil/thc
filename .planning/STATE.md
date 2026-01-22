@@ -109,6 +109,7 @@ Key patterns established:
 - HEAD cancellation with ci.cancel() for complete method replacement (FoodData.tick)
 - Accessor interface expansion for multiple private fields on same target class
 - getSaturationLevel() tier mapping for variable healing rates (descending threshold checks)
+- Fixed interval (5 ticks) + variable heal amount for smoother tiered healing
 
 ### Pending Todos
 

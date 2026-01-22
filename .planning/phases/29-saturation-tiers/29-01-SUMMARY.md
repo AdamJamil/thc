@@ -50,11 +50,14 @@ completed: 2026-01-22
 
 ## Accomplishments
 
-- T5: saturation >= 6.36 heals at 20 ticks/HP (+1 heart/s)
-- T4: saturation >= 2.73 heals at 40 ticks/HP (+0.5 heart/s)
-- T3: saturation >= 1.36 heals at 53 ticks/HP (+3/16 heart/s, base rate)
-- T2: saturation >= 0.45 heals at 80 ticks/HP (+1/8 heart/s)
-- T1: saturation < 0.45 heals at 160 ticks/HP (+1/16 heart/s)
+Healing occurs every 5 ticks (4x per second) with tier-based heal amounts:
+- T5: saturation >= 6.36 → 0.5 HP/tick = +1 heart/s
+- T4: saturation >= 2.73 → 0.25 HP/tick = +0.5 heart/s
+- T3: saturation >= 1.36 → 0.09375 HP/tick = +3/16 heart/s
+- T2: saturation >= 0.45 → 0.0625 HP/tick = +1/8 heart/s
+- T1: saturation < 0.45 → 0.03125 HP/tick = +1/16 heart/s
+
+Formula: hearts/s × 2 HP/heart ÷ 4 ticks/s = HP/tick
 - Hunger >= 18 requirement preserved from phase 28
 - Updated javadoc to document tier system
 
@@ -71,12 +74,13 @@ Each task was committed atomically:
 
 ## Decisions Made
 
+- **Fixed interval, variable amount:** Heals every 5 ticks with variable HP amount per tier, rather than variable intervals with fixed HP. Simpler math and smoother healing in-game.
 - **Descending threshold checks:** Check highest tier first (6.36+) for clean if-else chain without complex range conditions.
-- **Base rate as T3:** The vanilla-equivalent base rate (53 ticks) is now a middle tier, not the floor. Lower saturation means SLOWER healing, creating a penalty for poor food management.
+- **Base rate as T3:** The base rate is a middle tier, not the floor. Lower saturation means SLOWER healing, creating a penalty for poor food management.
 
 ## Deviations from Plan
 
-None - plan executed exactly as written.
+Implementation approach changed from variable tick intervals to fixed 5-tick interval with variable heal amounts. Same effective rates, cleaner implementation.
 
 ## Issues Encountered
 
@@ -93,7 +97,7 @@ To verify the mechanics in-game:
 2. Give player damage: `/damage @s 10 minecraft:generic`
 3. Eat golden carrot (high saturation) - should heal fast at T5 rate
 4. Watch saturation drain and observe healing rate slow through T4, T3, T2, T1
-5. At low saturation (<0.45), healing should be noticeably slow (160 tick interval)
+5. At low saturation (<0.45), healing should be noticeably slow (only 0.03125 HP per 5 ticks)
 
 Test commands:
 ```

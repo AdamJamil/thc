@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 ## Current Position
 
 Phase: 25 of 29 (Furnace Gating)
-Plan: Not started
-Status: Ready to plan
-Last activity: 2026-01-22 — Phase 24 complete (Blast Totem)
+Plan: 2 of 2 complete
+Status: Phase complete
+Last activity: 2026-01-22 — Completed 25-02-PLAN.md (Village Structure Filtering)
 
-Progress: █░░░░░░░░░ 17% (v2.1) - 1/6 phases complete
+Progress: ██░░░░░░░░ 33% (v2.1) - 2/6 phases complete
 
 ## Performance Metrics
 
@@ -103,6 +103,7 @@ Key patterns established:
 - BedRule redirect: @Redirect on EnvironmentAttributeSystem.getValue for sleep restriction bypass
 - Sleep time skip prevention: @Redirect on GameRules.get for ADVANCE_TIME in sleep block
 - Loot table item replacement: detect before remove, add replacement after (MODIFY_DROPS pattern)
+- @Redirect setBlock for structure block filtering: intercept ServerLevelAccessor.setBlock in placeInWorld
 
 ### Pending Todos
 
@@ -115,6 +116,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-22
-Stopped at: Phase 24 complete
+Stopped at: Phase 25 complete (Furnace Gating)
 Resume file: None
-Next: `/gsd:plan-phase 25`
+Next: Phase 26 (Village Structure Protection)

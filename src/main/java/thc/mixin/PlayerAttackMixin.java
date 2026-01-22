@@ -22,8 +22,8 @@ public abstract class PlayerAttackMixin {
 		ordinal = 0
 	)
 	private float thc$reduceMeleeDamage(float originalDamage) {
-		// Reduce damage by 75% (multiply by 0.25)
-		return originalDamage * 0.25f;
+		// Reduce damage by 25% (multiply by 0.75)
+		return originalDamage * 0.75f;
 	}
 
 	/**

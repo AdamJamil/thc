@@ -6,6 +6,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Constant;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
@@ -24,6 +26,17 @@ public abstract class PlayerAttackMixin {
 	private float thc$reduceMeleeDamage(float originalDamage) {
 		// Reduce damage by 25% (multiply by 0.75)
 		return originalDamage * 0.75f;
+	}
+
+	/**
+	 * Increase critical hit multiplier from 1.5x to 2.0x.
+	 */
+	@ModifyConstant(
+		method = "attack",
+		constant = @Constant(floatValue = 1.5F)
+	)
+	private float thc$doubleCritDamage(float original) {
+		return 2.0F;
 	}
 
 	/**

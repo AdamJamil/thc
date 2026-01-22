@@ -102,7 +102,7 @@ Combat and survival systems that reinforce risk/reward philosophy. Melee damage 
 - [x] **Phase 25: Furnace Gating** — Furnaces require blaze powder, blast furnace requires blast totem
 - [x] **Phase 26: Structure Protection** — Village protection based on structure bounding boxes
 - [x] **Phase 27: Eating Mechanics** — Saturation cap behavior, longer eating duration
-- [ ] **Phase 28: Exhaustion & Healing** — Faster exhaustion, hunger-gated healing
+- [x] **Phase 28: Exhaustion & Healing** — Faster exhaustion, hunger-gated healing
 - [ ] **Phase 29: Saturation Tiers** — Healing rate scales with saturation level
 
 ## Phase Details (v2.1)
@@ -195,7 +195,7 @@ Phases execute in numeric order: 24 → 25 → 26 → 27 → 28 → 29
 | 25. Furnace Gating | v2.1 | 2/2 | Complete | 2026-01-22 |
 | 26. Structure Protection | v2.1 | 1/1 | Complete | 2026-01-22 |
 | 27. Eating Mechanics | v2.1 | 1/1 | Complete | 2026-01-22 |
-| 28. Exhaustion & Healing | v2.1 | 0/TBD | Not started | - |
+| 28. Exhaustion & Healing | v2.1 | 1/1 | Complete | 2026-01-22 |
 | 29. Saturation Tiers | v2.1 | 0/TBD | Not started | - |
 
 **Cumulative:** 42 plans across 23 phases in 5 milestones (v2.1 in progress)

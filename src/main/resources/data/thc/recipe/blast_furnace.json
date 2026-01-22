@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:furnace",
+    "thc:blast_totem"
+  ],
+  "result": {
+    "id": "minecraft:blast_furnace"
+  }
+}

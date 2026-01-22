@@ -106,7 +106,20 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ### Active
 
-No active requirements - next milestone to be planned.
+**v2.1 Extra Features Batch 5**
+
+- [ ] Blast Totem — replaces Totem of Undying in all loot tables/chests (custom texture at blast_totem.png)
+- [ ] Furnace gating — remove natural furnace/blast furnace spawns
+  - Furnace recipe: blaze powder center + 8 cobblestone
+  - Blast furnace recipe: furnace + blast totem (shapeless)
+- [ ] Village structure protection (revised) — block breaking restricted to structure bounding boxes only, not entire village chunks (allows underground traversal)
+- [ ] Saturation-tiered healing system — complete healing overhaul
+  - Eating: saturation = max(food_sat, current_sat), 64 tick eating duration
+  - Exhaustion: 4.0 exhaustion removes 1.21 saturation (faster drain)
+  - Healing requires hunger ≥ 18 (9 bars)
+  - Base healing: 3/16 hearts/s when hunger ≥ 18
+  - Saturation tiers add healing: T5 (6.36+) +1, T4 (2.73+) +0.5, T3 (1.36+) +3/16, T2 (0.45+) +1/8, T1 (0-0.45) +1/16
+  - Vanilla natural regeneration disabled
 
 ### Out of Scope
 
@@ -165,11 +178,22 @@ No active requirements - next milestone to be planned.
 | BedRule redirect for sleep | Cleanest approach for 24/7 bed usage | Good |
 | Brain schedule redirect for villagers | Force night activity without modifying multiple AI systems | Good |
 
+## Current Milestone: v2.1 Extra Features Batch 5
+
+**Goal:** Survival progression gating through furnace requirements, healing skill expression through saturation management, and improved village protection granularity.
+
+**Target features:**
+- Blast Totem replacing Totem of Undying
+- Furnace crafting gated behind Nether (blaze powder)
+- Blast furnace gated behind blast totem
+- Village protection based on structure bounding boxes (not chunk-wide)
+- Saturation-tiered healing with skill-based food management
+
 ## Current State
 
 **Shipped:** v2.0 Twilight Hardcore (2026-01-22)
 
-**In Progress:** None - planning next milestone
+**In Progress:** v2.1 Extra Features Batch 5
 
 **Codebase:**
 - ~4,045 LOC Kotlin/Java
@@ -184,4 +208,4 @@ No active requirements - next milestone to be planned.
 **Technical debt:** None identified
 
 ---
-*Last updated: 2026-01-22 after v2.0 milestone*
+*Last updated: 2026-01-22 after v2.1 milestone started*

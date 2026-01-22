@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 
 ## Current Position
 
-Phase: Not started (run /gsd:create-roadmap)
-Plan: —
-Status: Defining requirements
-Last activity: 2026-01-22 — Milestone v2.2 started
+Phase: 30 of 36 (Smoker Gating)
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-01-22 — Roadmap created (7 phases)
 
-Progress: ░░░░░░░░░░ 0% — v2.2 requirements defined
+Progress: ░░░░░░░░░░ 0% — v2.2 ready to execute
 
 ## Performance Metrics
 
@@ -129,6 +129,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-22
-Stopped at: v2.2 milestone initialized
+Stopped at: Roadmap created
 Resume file: None
-Next: /gsd:define-requirements or /gsd:create-roadmap
+Next: /gsd:plan-phase 30

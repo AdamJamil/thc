@@ -9,10 +9,10 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 
 ## Current Position
 
-Phase: 25 of 29 (Furnace Gating)
-Plan: 2 of 2 complete
-Status: Phase complete
-Last activity: 2026-01-22 — Completed 25-02-PLAN.md (Village Structure Filtering)
+Phase: 26 of 29 (Structure Protection)
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-01-22 — Phase 25 complete (Furnace Gating)
 
 Progress: ██░░░░░░░░ 33% (v2.1) - 2/6 phases complete
 
@@ -116,6 +116,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-22
-Stopped at: Phase 25 complete (Furnace Gating)
+Stopped at: Phase 25 complete
 Resume file: None
-Next: Phase 26 (Village Structure Protection)
+Next: `/gsd:plan-phase 26`

@@ -11,10 +11,10 @@ Requirements for v2.1 release. Each maps to roadmap phases.
 
 - [x] **PROG-01**: Blast Totem item exists with custom texture (blast_totem.png)
 - [x] **PROG-02**: Blast Totem replaces Totem of Undying in all loot tables and chests
-- [ ] **PROG-03**: Furnace recipe requires blaze powder (center) + 8 cobblestone
-- [ ] **PROG-04**: Natural furnace spawns removed from world generation
-- [ ] **PROG-05**: Blast furnace recipe is furnace + blast totem (shapeless)
-- [ ] **PROG-06**: Natural blast furnace spawns removed from world generation
+- [x] **PROG-03**: Furnace recipe requires blaze powder (center) + 8 cobblestone
+- [x] **PROG-04**: Natural furnace spawns removed from world generation
+- [x] **PROG-05**: Blast furnace recipe is furnace + blast totem (shapeless)
+- [x] **PROG-06**: Natural blast furnace spawns removed from world generation
 
 ### World Protection
 
@@ -59,10 +59,10 @@ Which phases cover which requirements. Updated by create-roadmap.
 |-------------|-------|--------|
 | PROG-01 | Phase 24 | Complete |
 | PROG-02 | Phase 24 | Complete |
-| PROG-03 | Phase 25 | Pending |
-| PROG-04 | Phase 25 | Pending |
-| PROG-05 | Phase 25 | Pending |
-| PROG-06 | Phase 25 | Pending |
+| PROG-03 | Phase 25 | Complete |
+| PROG-04 | Phase 25 | Complete |
+| PROG-05 | Phase 25 | Complete |
+| PROG-06 | Phase 25 | Complete |
 | PROT-01 | Phase 26 | Pending |
 | PROT-02 | Phase 26 | Pending |
 | PROT-03 | Phase 26 | Pending |

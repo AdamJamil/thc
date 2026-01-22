@@ -12,7 +12,7 @@ Food economy overhaul establishing cooking progression gates and meaningful food
 
 - [x] **Phase 30: Smoker Gating** - Iron requirement for smoker crafting, removed from villages
 - [x] **Phase 31: Apple & Bonemeal** - 5x apple drops from all leaves, improved bonemeal
-- [ ] **Phase 32: Food Removals** - Remove suspicious stew, mushroom stew, beetroot soup, sugar recipe
+- [x] **Phase 32: Food Removals** - Remove suspicious stew, mushroom stew, beetroot soup, sugar recipe
 - [ ] **Phase 33: Food Stats** - Complete hunger/saturation rebalancing
 - [ ] **Phase 34: New Foods** - Hearty Stew rename, Honey Apple item
 - [ ] **Phase 35: Class System** - /selectClass command with permanent role modifiers
@@ -52,8 +52,9 @@ Food economy overhaul establishing cooking progression gates and meaningful food
   2. Mushroom stew recipe removed
   3. Beetroot soup recipe removed
   4. Sugarcane → sugar recipe removed
-**Research**: Unlikely (follows recipe removal pattern)
-**Plans**: TBD
+**Research**: None required
+**Plans**: 1 (32-01)
+**Completed**: 2026-01-22
 
 ### Phase 33: Food Stats
 **Goal**: Complete hunger/saturation rebalancing per design table
@@ -118,7 +119,7 @@ Phases execute in numeric order: 30 → 31 → 32 → 33 → 34 → 35 → 36
 |-------|----------------|--------|-----------|
 | 30. Smoker Gating | 1/1 | Complete | 2026-01-22 |
 | 31. Apple & Bonemeal | 1/1 | Complete | 2026-01-22 |
-| 32. Food Removals | 0/TBD | Not started | - |
+| 32. Food Removals | 1/1 | Complete | 2026-01-22 |
 | 33. Food Stats | 0/TBD | Not started | - |
 | 34. New Foods | 0/TBD | Not started | - |
 | 35. Class System | 0/TBD | Not started | - |

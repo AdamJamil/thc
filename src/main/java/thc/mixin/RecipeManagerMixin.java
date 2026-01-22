@@ -30,7 +30,8 @@ public class RecipeManagerMixin {
 		"netherite_spear_smithing",
 		"snow_block",
 		"furnace",
-		"blast_furnace"
+		"blast_furnace",
+		"smoker"
 	);
 
 	@Inject(

@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 
 ## Current Position
 
-Phase: 27 of 29 (Eating Mechanics)
+Phase: 28 of 29 (Exhaustion & Healing)
 Plan: 1 of 1 complete
 Status: Phase complete
-Last activity: 2026-01-22 — Completed 27-01-PLAN.md (Eating Mechanics)
+Last activity: 2026-01-22 — Completed 28-01-PLAN.md (Exhaustion & Healing)
 
-Progress: ██████░░░░ 67% (v2.1) - 4/6 phases complete
+Progress: ████████░░ 83% (v2.1) - 5/6 phases complete
 
 ## Performance Metrics
 
@@ -106,6 +106,8 @@ Key patterns established:
 - @Redirect setBlock for structure block filtering: intercept ServerLevelAccessor.setBlock in placeInWorld
 - Position-based structure protection: getStructureWithPieceAt(pos) for precise bounding box checks
 - ThreadLocal for paired injection state: store in HEAD, use in RETURN (eating saturation cap)
+- HEAD cancellation with ci.cancel() for complete method replacement (FoodData.tick)
+- Accessor interface expansion for multiple private fields on same target class
 
 ### Pending Todos
 
@@ -118,6 +120,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-22
-Stopped at: Phase 27 complete
+Stopped at: Phase 28 complete
 Resume file: None
-Next: `/gsd:plan-phase 28`
+Next: `/gsd:plan-phase 29`

@@ -57,32 +57,32 @@ Which phases cover which requirements. Updated by create-roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| PROG-01 | TBD | Pending |
-| PROG-02 | TBD | Pending |
-| PROG-03 | TBD | Pending |
-| PROG-04 | TBD | Pending |
-| PROG-05 | TBD | Pending |
-| PROG-06 | TBD | Pending |
-| PROT-01 | TBD | Pending |
-| PROT-02 | TBD | Pending |
-| PROT-03 | TBD | Pending |
-| HEAL-01 | TBD | Pending |
-| HEAL-02 | TBD | Pending |
-| HEAL-03 | TBD | Pending |
-| HEAL-04 | TBD | Pending |
-| HEAL-05 | TBD | Pending |
-| HEAL-06 | TBD | Pending |
-| HEAL-07 | TBD | Pending |
-| HEAL-08 | TBD | Pending |
-| HEAL-09 | TBD | Pending |
-| HEAL-10 | TBD | Pending |
-| HEAL-11 | TBD | Pending |
+| PROG-01 | Phase 24 | Pending |
+| PROG-02 | Phase 24 | Pending |
+| PROG-03 | Phase 25 | Pending |
+| PROG-04 | Phase 25 | Pending |
+| PROG-05 | Phase 25 | Pending |
+| PROG-06 | Phase 25 | Pending |
+| PROT-01 | Phase 26 | Pending |
+| PROT-02 | Phase 26 | Pending |
+| PROT-03 | Phase 26 | Pending |
+| HEAL-01 | Phase 27 | Pending |
+| HEAL-02 | Phase 27 | Pending |
+| HEAL-03 | Phase 28 | Pending |
+| HEAL-04 | Phase 28 | Pending |
+| HEAL-05 | Phase 28 | Pending |
+| HEAL-06 | Phase 29 | Pending |
+| HEAL-07 | Phase 29 | Pending |
+| HEAL-08 | Phase 29 | Pending |
+| HEAL-09 | Phase 29 | Pending |
+| HEAL-10 | Phase 29 | Pending |
+| HEAL-11 | Phase 28 | Pending |
 
 **Coverage:**
 - v2.1 requirements: 20 total
-- Mapped to phases: 0 (pending create-roadmap)
-- Unmapped: 20 ⚠️
+- Mapped to phases: 20 ✓
+- Unmapped: 0 ✓
 
 ---
 *Requirements defined: 2026-01-22*
-*Last updated: 2026-01-22 after initial definition*
+*Last updated: 2026-01-22 after roadmap creation*

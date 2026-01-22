@@ -9,10 +9,10 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 
 ## Current Position
 
-Phase: 24 of 29 (Blast Totem)
-Plan: 1 of 1 complete
-Status: Phase complete
-Last activity: 2026-01-22 — Completed 24-01-PLAN.md (Blast Totem item registration)
+Phase: 25 of 29 (Furnace Gating)
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-01-22 — Phase 24 complete (Blast Totem)
 
 Progress: █░░░░░░░░░ 17% (v2.1) - 1/6 phases complete
 
@@ -115,6 +115,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-22
-Stopped at: Completed 24-01-PLAN.md
+Stopped at: Phase 24 complete
 Resume file: None
-Next: Phase 25 (Blast Furnace)
+Next: `/gsd:plan-phase 25`

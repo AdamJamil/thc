@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-01-22)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v2.1 Extra Features Batch 5
+**Current focus:** Planning next milestone
 
 ## Current Position
 
-Phase: 29 of 29 (Saturation Tiers)
-Plan: 1 of 1 complete
-Status: Phase complete
-Last activity: 2026-01-22 — Completed 29-01-PLAN.md (Saturation Tiers)
+Phase: Milestone complete
+Plan: N/A
+Status: Ready for next milestone
+Last activity: 2026-01-22 — v2.1 milestone archived
 
-Progress: ██████████ 100% (v2.1) - 6/6 phases complete
+Progress: ██████████ 100% — 6 milestones shipped
 
 ## Performance Metrics
 
@@ -45,10 +45,16 @@ Progress: ██████████ 100% (v2.1) - 6/6 phases complete
 - Total execution time: ~22.5 min
 - Timeline: 1 day (Jan 20, 2026)
 
+**v2.1 Milestone:**
+- Plans completed: 7
+- Requirements: 20/20
+- Total execution time: ~1 day
+- Timeline: 1 day (Jan 22, 2026)
+
 **Cumulative:**
-- 42 plans completed across 5 milestones
-- ~2.9 hours total execution time
-- 8 days from project start to v2.0 ship
+- 49 plans completed across 6 milestones
+- ~3.5 hours total execution time
+- 8 days from project start to v2.1 ship
 
 ## Accumulated Context
 
@@ -60,6 +66,7 @@ See milestone archives for full decision logs:
 - .planning/milestones/v1.2-ROADMAP.md
 - .planning/milestones/v1.3-ROADMAP.md
 - .planning/milestones/v2.0-ROADMAP.md
+- .planning/milestones/v2.1-ROADMAP.md
 
 Key patterns established:
 - SavedDataType with Codec for persistent state
@@ -122,6 +129,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-22
-Stopped at: Phase 29 complete (v2.1 milestone complete)
+Stopped at: v2.1 milestone complete and archived
 Resume file: None
-Next: v2.1 milestone review or next milestone planning
+Next: /gsd:discuss-milestone to plan next milestone

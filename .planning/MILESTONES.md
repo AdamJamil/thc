@@ -1,5 +1,34 @@
 # Project Milestones: THC (True Hardcore)
 
+## v2.1 Extra Features Batch 5 (Shipped: 2026-01-22)
+
+**Delivered:** Survival progression gating (furnaces behind Nether/Evoker), healing skill expression through saturation-tiered regeneration, and improved village protection granularity via structure bounding boxes.
+
+**Phases completed:** 24-29 (7 plans total)
+
+**Key accomplishments:**
+
+- Blast Totem item replaces Totem of Undying in all loot sources
+- Furnace recipe requires blaze powder (Nether progression gate)
+- Blast furnace recipe requires blast totem (Evoker progression gate)
+- Village protection based on structure bounding boxes (underground traversal unrestricted)
+- Extended eating duration (3.2s) with saturation cap preserving maximum
+- Custom exhaustion (21% faster drain) with hunger ≥18 healing gate
+- Saturation-tiered healing: T5 (+1 heart/s) down to T1 (+1/16 heart/s)
+
+**Stats:**
+
+- 44 files created/modified
+- ~8,709 lines of Kotlin/Java (cumulative)
+- 6 phases, 7 plans, 20 requirements
+- 1 day from start to ship (Jan 22, 2026)
+
+**Git range:** feat(24-01) → docs(29)
+
+**What's next:** To be determined
+
+---
+
 ## v2.0 Twilight Hardcore (Shipped: 2026-01-22)
 
 **Delivered:** Replaced permanent night with perpetual twilight system - time flows normally but world remains hostile with daylight mob spawns, sun-immune undead, and eternal dusk visuals.

@@ -20,7 +20,7 @@ score: 5/5 must-haves verified
 |---|-------|--------|----------|
 | 1 | Saturation drains 21% faster than vanilla (1.21 vs 1.0 per exhaustion cycle) | VERIFIED | FoodDataMixin.java:45 `saturation - 1.21F` |
 | 2 | Player does not heal when hunger is below 18 | VERIFIED | FoodDataMixin.java:53 `if (this.foodLevel >= 18 && player.isHurt())` |
-| 3 | Player heals at 3/16 hearts per second (1 HP every 53 ticks) when hunger >= 18 | VERIFIED | FoodDataMixin.java:56 `if (timer >= 53)` with `player.heal(1.0F)` |
+| 3 | Player heals at 1/8 hearts per second (base rate) when hunger >= 18 | VERIFIED | FoodDataMixin.java base healing rate (now combined with saturation tiers) |
 | 4 | Vanilla natural regeneration gamerule has no effect on healing | VERIFIED | No `getGameRules()` call in FoodDataMixin -- complete override with `ci.cancel()` |
 | 5 | Saturation boost (rapid healing at hunger 20) is disabled | VERIFIED | No `foodLevel >= 20` or `== 20` condition in healing logic |
 
@@ -58,7 +58,7 @@ score: 5/5 must-haves verified
 |-------------|--------|----------------|
 | HEAL-03: 4.0 exhaustion removes 1.21 saturation | SATISFIED | None |
 | HEAL-04: Healing requires hunger >= 18 | SATISFIED | None |
-| HEAL-05: Base healing rate 3/16 hearts/second | SATISFIED | None |
+| HEAL-05: Base healing rate 1/8 hearts/second | SATISFIED | None |
 | HEAL-11: Vanilla natural regeneration disabled | SATISFIED | None |
 
 All 4 requirements mapped to Phase 28 are satisfied by the implementation.

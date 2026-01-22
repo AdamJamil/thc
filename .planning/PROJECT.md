@@ -103,23 +103,27 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
   - Beds usable at any time (no time-of-day restriction)
   - Sleeping does not skip time or advance day/night cycle
   - Beds still set spawn point when used
+- Blast Totem — v2.1
+  - Custom item replaces Totem of Undying in all loot sources
+  - Custom texture (blast_totem.png)
+- Furnace gating — v2.1
+  - Furnace recipe requires blaze powder (Nether progression gate)
+  - Blast furnace recipe requires blast totem (Evoker progression gate)
+  - Natural furnace/blast furnace spawns removed from villages
+- Village structure protection — v2.1
+  - Block breaking restricted to structure bounding boxes only
+  - Underground traversal below villages unrestricted
+  - Ore and allowlist exceptions preserved
+- Saturation-tiered healing system — v2.1
+  - Eating: saturation = max(food_sat, current_sat), 64 tick eating duration
+  - Exhaustion: 4.0 exhaustion removes 1.21 saturation (21% faster drain)
+  - Healing requires hunger ≥ 18 (9 bars)
+  - Saturation tiers: T5 (6.36+) +1 heart/s, T4 (2.73+) +0.5 heart/s, T3 (1.36+) +3/16, T2 (0.45+) +1/8, T1 (<0.45) +1/16
+  - Vanilla natural regeneration disabled
 
 ### Active
 
-**v2.1 Extra Features Batch 5**
-
-- [ ] Blast Totem — replaces Totem of Undying in all loot tables/chests (custom texture at blast_totem.png)
-- [ ] Furnace gating — remove natural furnace/blast furnace spawns
-  - Furnace recipe: blaze powder center + 8 cobblestone
-  - Blast furnace recipe: furnace + blast totem (shapeless)
-- [ ] Village structure protection (revised) — block breaking restricted to structure bounding boxes only, not entire village chunks (allows underground traversal)
-- [ ] Saturation-tiered healing system — complete healing overhaul
-  - Eating: saturation = max(food_sat, current_sat), 64 tick eating duration
-  - Exhaustion: 4.0 exhaustion removes 1.21 saturation (faster drain)
-  - Healing requires hunger ≥ 18 (9 bars)
-  - Base healing: 3/16 hearts/s when hunger ≥ 18
-  - Saturation tiers add healing: T5 (6.36+) +1, T4 (2.73+) +0.5, T3 (1.36+) +3/16, T2 (0.45+) +1/8, T1 (0-0.45) +1/16
-  - Vanilla natural regeneration disabled
+*No active requirements — milestone complete*
 
 ### Out of Scope
 
@@ -177,35 +181,34 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 | HEAD inject for spawn blocking | NaturalSpawner.isValidSpawnPostitionForType interception | Good |
 | BedRule redirect for sleep | Cleanest approach for 24/7 bed usage | Good |
 | Brain schedule redirect for villagers | Force night activity without modifying multiple AI systems | Good |
+| Position-based village protection | Structure bounding boxes vs chunk detection for granular protection | Good |
+| ThreadLocal for cross-injection state | Store saturation in HEAD, compare in RETURN for cap behavior | Good |
+| HEAD cancellation for FoodData.tick() | Complete control over exhaustion and healing logic | Good |
+| Fixed interval + variable heal amount | Simpler than variable intervals for saturation tier healing | Good |
 
-## Current Milestone: v2.1 Extra Features Batch 5
+## Current Milestone: Complete
 
-**Goal:** Survival progression gating through furnace requirements, healing skill expression through saturation management, and improved village protection granularity.
+**Shipped:** v2.1 Extra Features Batch 5 (2026-01-22)
 
-**Target features:**
-- Blast Totem replacing Totem of Undying
-- Furnace crafting gated behind Nether (blaze powder)
-- Blast furnace gated behind blast totem
-- Village protection based on structure bounding boxes (not chunk-wide)
-- Saturation-tiered healing with skill-based food management
+**Delivered:** Survival progression gating, healing skill expression, improved village protection granularity.
 
 ## Current State
 
-**Shipped:** v2.0 Twilight Hardcore (2026-01-22)
-
-**In Progress:** v2.1 Extra Features Batch 5
+**Latest Ship:** v2.1 Extra Features Batch 5 (2026-01-22)
 
 **Codebase:**
-- ~4,045 LOC Kotlin/Java
+- ~8,709 LOC Kotlin/Java
 - Mixed mixin + event-driven architecture
-- 42 plans across 23 phases in 5 milestones
+- 49 plans across 29 phases in 6 milestones
 - Attachment patterns for player state, mob threat, one-time effects
 - Client visual overrides for twilight sky
 - Comprehensive spawn/behavior modifications
+- Position-based structure protection
+- Saturation-tiered healing system
 
 **Known issues:** None currently tracked
 
 **Technical debt:** None identified
 
 ---
-*Last updated: 2026-01-22 after v2.1 milestone started*
+*Last updated: 2026-01-22 after v2.1 milestone complete*

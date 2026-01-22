@@ -10,7 +10,7 @@ Food economy overhaul establishing cooking progression gates and meaningful food
 - Continues from v2.1 (ended at Phase 29)
 - Integer phases (30, 31, 32...): Planned milestone work
 
-- [ ] **Phase 30: Smoker Gating** - Iron requirement for smoker crafting, removed from villages
+- [x] **Phase 30: Smoker Gating** - Iron requirement for smoker crafting, removed from villages
 - [ ] **Phase 31: Apple & Bonemeal** - 5x apple drops from all leaves, improved bonemeal
 - [ ] **Phase 32: Food Removals** - Remove suspicious stew, mushroom stew, beetroot soup, sugar recipe
 - [ ] **Phase 33: Food Stats** - Complete hunger/saturation rebalancing
@@ -28,7 +28,8 @@ Food economy overhaul establishing cooking progression gates and meaningful food
   2. Smokers do not spawn naturally in villages
   3. Existing smoker functionality unchanged
 **Research**: Unlikely (follows furnace gating pattern from v2.1)
-**Plans**: TBD
+**Plans**: 1 (30-01)
+**Completed**: 2026-01-22
 
 ### Phase 31: Apple & Bonemeal
 **Goal**: Improve early-game food availability and farming
@@ -114,7 +115,7 @@ Phases execute in numeric order: 30 → 31 → 32 → 33 → 34 → 35 → 36
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 30. Smoker Gating | 0/TBD | Not started | - |
+| 30. Smoker Gating | 1/1 | Complete | 2026-01-22 |
 | 31. Apple & Bonemeal | 0/TBD | Not started | - |
 | 32. Food Removals | 0/TBD | Not started | - |
 | 33. Food Stats | 0/TBD | Not started | - |

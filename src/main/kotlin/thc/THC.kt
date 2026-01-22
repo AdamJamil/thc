@@ -71,10 +71,15 @@ object THC : ModInitializer {
 			Items.DIAMOND_SPEAR,
 			Items.NETHERITE_SPEAR,
 			Items.BOW,
-			Items.CROSSBOW
+			Items.CROSSBOW,
+			Items.TOTEM_OF_UNDYING
 		)
 		LootTableEvents.MODIFY_DROPS.register(LootTableEvents.ModifyDrops { _, _, drops ->
+			val hadTotem = drops.any { it.`is`(Items.TOTEM_OF_UNDYING) }
 			drops.removeIf { stack -> removedItems.any { stack.`is`(it) } }
+			if (hadTotem) {
+				drops.add(THCItems.BLAST_TOTEM.defaultInstance)
+			}
 		})
 
 		if (java.lang.Boolean.getBoolean(SMOKE_TEST_PROPERTY)) {

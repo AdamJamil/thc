@@ -1,11 +1,7 @@
 package thc.mixin;
 
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.ai.attributes.Attribute;
-import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.core.Holder;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
@@ -61,22 +57,17 @@ public abstract class PlayerAttackMixin {
 	}
 
 	/**
-	 * Disable sweeping edge by returning 0 for SWEEPING_DAMAGE_RATIO attribute.
-	 * In 1.21.11+, sweeping damage is controlled by an attribute, not EnchantmentHelper.
+	 * Disable sweep attacks by making isSweepAttack always return false.
+	 * This completely prevents sweeping edge from triggering.
 	 */
 	@Redirect(
-		method = "doSweepAttack",
+		method = "attack",
 		at = @At(
 			value = "INVOKE",
-			target = "Lnet/minecraft/world/entity/player/Player;getAttributeValue(Lnet/minecraft/core/Holder;)D"
+			target = "Lnet/minecraft/world/entity/player/Player;isSweepAttack(ZZZ)Z"
 		)
 	)
-	private double thc$disableSweepingEdge(Player player, Holder<Attribute> attribute) {
-		// Return 0 for sweeping damage ratio to completely disable sweep attacks
-		if (attribute.value() == Attributes.SWEEPING_DAMAGE_RATIO) {
-			return 0.0;
-		}
-		// For other attributes, call the original method
-		return player.getAttributeValue(attribute);
+	private boolean thc$disableSweepAttack(Player instance, boolean bl, boolean bl2, boolean bl3) {
+		return false;
 	}
 }

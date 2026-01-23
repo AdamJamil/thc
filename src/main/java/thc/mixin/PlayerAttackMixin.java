@@ -1,9 +1,10 @@
 package thc.mixin;
 
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.Holder;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
@@ -25,8 +26,8 @@ public abstract class PlayerAttackMixin {
 		ordinal = 0
 	)
 	private float thc$reduceMeleeDamage(float originalDamage) {
-		// Reduce damage by 25% (multiply by 0.75)
-		return originalDamage * 0.75f;
+		// Reduce damage to 18.75% of original (0.75 * 0.25)
+		return originalDamage * 0.1875f;
 	}
 
 	/**
@@ -46,17 +47,22 @@ public abstract class PlayerAttackMixin {
 	}
 
 	/**
-	 * Disable sweeping edge enchantment by returning 0 for sweep damage ratio.
+	 * Disable sweeping edge by returning 0 for SWEEPING_DAMAGE_RATIO attribute.
+	 * In 1.21.11+, sweeping damage is controlled by an attribute, not EnchantmentHelper.
 	 */
 	@Redirect(
-		method = "attack",
+		method = "doSweepAttack",
 		at = @At(
 			value = "INVOKE",
-			target = "Lnet/minecraft/world/item/enchantment/EnchantmentHelper;getSweepingDamageRatio(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/item/ItemStack;F)F"
+			target = "Lnet/minecraft/world/entity/player/Player;getAttributeValue(Lnet/minecraft/core/Holder;)D"
 		)
 	)
-	private float thc$disableSweepingEdge(ServerLevel level, ItemStack weapon, float baseDamage) {
-		// Return 0 to completely disable sweeping edge bonus damage
-		return 0.0f;
+	private double thc$disableSweepingEdge(Player player, Holder<Attribute> attribute) {
+		// Return 0 for sweeping damage ratio to completely disable sweep attacks
+		if (attribute.value() == Attributes.SWEEPING_DAMAGE_RATIO) {
+			return 0.0;
+		}
+		// For other attributes, call the original method
+		return player.getAttributeValue(attribute);
 	}
 }

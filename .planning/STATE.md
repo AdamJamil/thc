@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 ## Current Position
 
 Phase: 36 of 36 (Stage System)
-Plan: 01 of 02 complete
-Status: In progress
-Last activity: 2026-01-23 — Completed 36-01-PLAN.md (stage data foundation)
+Plan: 02 of 02 complete
+Status: Phase complete
+Last activity: 2026-01-23 — Completed 36-02-PLAN.md (advance stage command)
 
-Progress: █████████░ 90% — v2.2 phase 36 started (6.5/7 phases)
+Progress: ██████████ 100% — v2.2 complete (7/7 phases)
 
 ## Performance Metrics
 
@@ -51,15 +51,15 @@ Progress: █████████░ 90% — v2.2 phase 36 started (6.5/7 ph
 - Total execution time: ~1 day
 - Timeline: 1 day (Jan 22, 2026)
 
-**v2.2 Milestone (in progress):**
-- Plans completed: 3
-- Total execution time: ~17 min
-- Timeline: Started Jan 23, 2026
+**v2.2 Milestone:**
+- Plans completed: 5
+- Total execution time: ~25 min
+- Timeline: 1 day (Jan 23, 2026)
 
 **Cumulative:**
-- 52 plans completed across 6 milestones + v2.2
-- ~3.76 hours total execution time
-- 8 days from project start to v2.1 ship
+- 54 plans completed across 7 milestones
+- ~4.0 hours total execution time
+- 8 days from project start to v2.2 ship
 
 ## Accumulated Context
 
@@ -138,6 +138,9 @@ Key patterns established:
 - Static utility for dual state management: StageManager handles server-wide stage + per-player boon level
 - Actionbar broadcast pattern: displayClientMessage(message, true) for server-wide announcements
 - Null-safe integer attachment getter: return default 0 when attachment is null
+- Operator command pattern: .requires(source -> source.permissions().hasPermission(Permissions.COMMANDS_GAMEMASTER)) for MC 1.21.11
+- Late-joiner initialization: JOIN event with hasClass() check to distinguish new vs returning players
+- Minecraft 1.21.11 permission system: Permissions constants (COMMANDS_GAMEMASTER, COMMANDS_ADMIN, etc.) replace hasPermissionLevel()
 
 ### Pending Todos
 
@@ -160,6 +163,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-23
-Stopped at: Completed 36-01-PLAN.md (stage system data foundation)
+Stopped at: Completed 36-02-PLAN.md (advance stage command) - v2.2 milestone complete
 Resume file: None
-Next: Phase 36-02 (Advance Stage Command).
+Next: v2.2 testing and ship, or begin next milestone planning.

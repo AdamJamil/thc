@@ -95,15 +95,17 @@ Food economy overhaul establishing cooking progression gates and meaningful food
   6. Support: no health change, x1 melee damage, x3 ranged damage
   7. Class selection is permanent (cannot change once selected)
   8. Class persists across sessions
-**Research**: Likely (max health attribute modification, command registration)
-**Research topics**: AttributeModifier for max health, Fabric command registration, persistent player attachments
-**Plans**: TBD
+**Research**: Completed (35-RESEARCH.md)
+**Plans**: 2 plans
+Plans:
+- [ ] 35-01-PLAN.md — Class foundation: attachment, enum, manager, /selectClass command
+- [ ] 35-02-PLAN.md — Damage modification: melee and ranged multipliers in mixins
 
 ### Phase 36: Stage System
 **Goal**: Server-wide stage progression with per-player boon tracking
 **Depends on**: Phase 35
 **Success Criteria** (what must be TRUE):
-  1. /advanceStage command advances server to next stage (1→2→3→4→5)
+  1. /advanceStage command advances server to next stage (1->2->3->4->5)
   2. Stage is server-wide (all players on same stage)
   3. Each player's boon level increments when stage advances
   4. Boon level tracked per-player with their class
@@ -115,7 +117,7 @@ Food economy overhaul establishing cooking progression gates and meaningful food
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 30 → 31 → 32 → 33 → 34 → 35 → 36
+Phases execute in numeric order: 30 -> 31 -> 32 -> 33 -> 34 -> 35 -> 36
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -124,5 +126,5 @@ Phases execute in numeric order: 30 → 31 → 32 → 33 → 34 → 35 → 36
 | 32. Food Removals | 1/1 | Complete | 2026-01-22 |
 | 33. Food Stats | 1/1 | Complete | 2026-01-23 |
 | 34. New Foods | 1/1 | Complete | 2026-01-23 |
-| 35. Class System | 0/TBD | Not started | - |
+| 35. Class System | 0/2 | Planned | - |
 | 36. Stage System | 0/TBD | Not started | - |

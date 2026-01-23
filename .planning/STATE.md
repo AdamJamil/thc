@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 
 ## Current Position
 
-Phase: 35 of 36 (Class System)
-Plan: 02 of 02 complete
-Status: Phase complete
-Last activity: 2026-01-23 — Completed 35-02-PLAN.md (class damage multipliers)
+Phase: 36 of 36 (Stage System)
+Plan: 01 of 02 complete
+Status: In progress
+Last activity: 2026-01-23 — Completed 36-01-PLAN.md (stage data foundation)
 
-Progress: ████████░░ 86% — v2.2 phase 35 complete (6/7 phases)
+Progress: █████████░ 90% — v2.2 phase 36 started (6.5/7 phases)
 
 ## Performance Metrics
 
@@ -52,13 +52,13 @@ Progress: ████████░░ 86% — v2.2 phase 35 complete (6/7 pha
 - Timeline: 1 day (Jan 22, 2026)
 
 **v2.2 Milestone (in progress):**
-- Plans completed: 2
-- Total execution time: ~13 min
+- Plans completed: 3
+- Total execution time: ~17 min
 - Timeline: Started Jan 23, 2026
 
 **Cumulative:**
-- 51 plans completed across 6 milestones + v2.2
-- ~3.72 hours total execution time
+- 52 plans completed across 6 milestones + v2.2
+- ~3.76 hours total execution time
 - 8 days from project start to v2.1 ship
 
 ## Accumulated Context
@@ -134,6 +134,10 @@ Key patterns established:
 - @Redirect on getAttributeValue for attribute-specific modification (SWEEPING_DAMAGE_RATIO in MC 1.21.11)
 - Post-reduction multiplier application: class multipliers applied after base damage reduction
 - Server-only class lookup: instanceof ServerPlayer check for attachment access
+- Integer attachment with copyOnDeath: BOON_LEVEL persistent state surviving respawn
+- Static utility for dual state management: StageManager handles server-wide stage + per-player boon level
+- Actionbar broadcast pattern: displayClientMessage(message, true) for server-wide announcements
+- Null-safe integer attachment getter: return default 0 when attachment is null
 
 ### Pending Todos
 
@@ -156,6 +160,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-23
-Stopped at: Completed 35-02-PLAN.md (class damage multipliers - melee and ranged scaling)
+Stopped at: Completed 36-01-PLAN.md (stage system data foundation)
 Resume file: None
-Next: Phase 35 complete. Phase 36 or mixin breakage resolution.
+Next: Phase 36-02 (Advance Stage Command).

@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents
 import net.minecraft.core.component.DataComponents
 import net.minecraft.world.food.FoodProperties
 import net.minecraft.world.item.Items
+import thc.item.THCItems
 
 /**
  * Rebalances vanilla food items' nutrition and saturation values.
@@ -229,6 +230,24 @@ object FoodStatsModifier {
                 builder.set(DataComponents.FOOD, FoodProperties.Builder()
                     .nutrition(6)
                     .saturationModifier(0.8333f)
+                    .build())
+            }
+
+            // ===== HEARTY STEW (rabbit stew renamed) - premium food =====
+            // 10 hunger, 6.36 sat -> modifier = 6.36 / 20 = 0.318
+            context.modify(Items.RABBIT_STEW) { builder ->
+                builder.set(DataComponents.FOOD, FoodProperties.Builder()
+                    .nutrition(10)
+                    .saturationModifier(0.318f)
+                    .build())
+            }
+
+            // ===== HONEY APPLE - mid-tier healing food =====
+            // 8 hunger, 2.73 sat -> modifier = 2.73 / 16 = 0.170625
+            context.modify(THCItems.HONEY_APPLE) { builder ->
+                builder.set(DataComponents.FOOD, FoodProperties.Builder()
+                    .nutrition(8)
+                    .saturationModifier(0.170625f)
                     .build())
             }
         }

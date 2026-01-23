@@ -1,5 +1,34 @@
 # Project Milestones: THC (True Hardcore)
 
+## v2.2 Extra Features Batch 6 (Shipped: 2026-01-23)
+
+**Delivered:** Food economy overhaul with cooking progression gates and meaningful food choices, plus class/stage system foundation for multiplayer role differentiation.
+
+**Phases completed:** 30-36 (9 plans total)
+
+**Key accomplishments:**
+
+- Smoker gated behind iron acquisition (recipe + village structure removal)
+- Universal apple drops from all 9 leaf types at 5x rate
+- Instant crop maturation + doubled bonemeal yield (6 per bone)
+- Complete food stat rebalancing (29 items across 4 tiers)
+- New foods: Hearty Stew (renamed rabbit stew), Honey Apple item
+- Class system with permanent role selection (tank/melee/ranged/support)
+- Stage system with server-wide progression and per-player boon tracking
+
+**Stats:**
+
+- 59 files created/modified
+- ~5,145 lines of Kotlin/Java (cumulative)
+- 7 phases, 9 plans, 11 requirements
+- 2 days from start to ship (Jan 22-23, 2026)
+
+**Git range:** `feat(30-01)` → `feat(36-02)`
+
+**What's next:** To be determined
+
+---
+
 ## v2.1 Extra Features Batch 5 (Shipped: 2026-01-22)
 
 **Delivered:** Survival progression gating (furnaces behind Nether/Evoker), healing skill expression through saturation-tiered regeneration, and improved village protection granularity via structure bounding boxes.

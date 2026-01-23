@@ -2,19 +2,19 @@
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-01-22)
+See: .planning/PROJECT.md (updated 2026-01-23)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v2.2 Extra Features Batch 6
+**Current focus:** Planning next milestone
 
 ## Current Position
 
-Phase: 36 of 36 (Stage System)
-Plan: 02 of 02 complete
-Status: Phase complete
-Last activity: 2026-01-23 — Completed 36-02-PLAN.md (advance stage command)
+Phase: 36 complete (v2.2 shipped)
+Plan: N/A — milestone complete
+Status: Ready for next milestone
+Last activity: 2026-01-23 — v2.2 milestone complete
 
-Progress: ██████████ 100% — v2.2 complete (7/7 phases)
+Progress: ██████████ 100% — v2.2 shipped (7 milestones total)
 
 ## Performance Metrics
 
@@ -52,14 +52,14 @@ Progress: ██████████ 100% — v2.2 complete (7/7 phases)
 - Timeline: 1 day (Jan 22, 2026)
 
 **v2.2 Milestone:**
-- Plans completed: 5
-- Total execution time: ~25 min
-- Timeline: 1 day (Jan 23, 2026)
+- Plans completed: 9
+- Total execution time: ~35 min
+- Timeline: 2 days (Jan 22-23, 2026)
 
 **Cumulative:**
-- 54 plans completed across 7 milestones
-- ~4.0 hours total execution time
-- 8 days from project start to v2.2 ship
+- 58 plans completed across 7 milestones
+- ~4.5 hours total execution time
+- 9 days from project start to v2.2 ship
 
 ## Accumulated Context
 
@@ -72,6 +72,7 @@ See milestone archives for full decision logs:
 - .planning/milestones/v1.3-ROADMAP.md
 - .planning/milestones/v2.0-ROADMAP.md
 - .planning/milestones/v2.1-ROADMAP.md
+- .planning/milestones/v2.2-ROADMAP.md
 
 Key patterns established:
 - SavedDataType with Codec for persistent state
@@ -163,6 +164,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-23
-Stopped at: Completed 36-02-PLAN.md (advance stage command) - v2.2 milestone complete
+Stopped at: v2.2 milestone archived and shipped
 Resume file: None
-Next: v2.2 testing and ship, or begin next milestone planning.
+Next: /gsd:new-milestone to plan next version

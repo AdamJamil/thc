@@ -120,23 +120,31 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
   - Healing requires hunger ≥ 18 (9 bars)
   - Saturation tiers: T5 (6.36+) +1 heart/s, T4 (2.73+) +0.5 heart/s, T3 (1.36+) +3/16, T2 (0.45+) +1/8, T1 (<0.45) +1/16
   - Vanilla natural regeneration disabled
+- Food economy overhaul — v2.2
+  - Smoker gated behind iron (recipe + village removal)
+  - Apples drop from all 9 leaf types at 5x rate
+  - Instant crop maturation on bonemeal use
+  - Bone yields 6 bonemeal (doubled from vanilla)
+  - Food removals: suspicious stew, mushroom stew, beetroot soup, sugarcane→sugar
+  - Complete hunger/saturation rebalancing (29 items across 4 tiers)
+  - Hearty Stew: renamed rabbit stew (10 hunger, 6.36 saturation)
+  - Honey Apple: new item (8 hunger, 2.73 saturation)
+- Class system — v2.2
+  - /selectClass <tank|melee|ranged|support> command (base chunks only)
+  - Tank: +1 heart, x2.5 melee, x1 ranged
+  - Melee: +0.5 hearts, x4 melee, x1 ranged
+  - Ranged: no health change, x1 melee, x5 ranged
+  - Support: no health change, x1 melee, x3 ranged
+  - Permanent selection, persists across death
+- Stage system — v2.2
+  - /advanceStage operator command (5 stages max)
+  - Server-wide stage, per-player boon level
+  - Late-joiner sync (new players get current stage as boon level)
+  - Boon level scaffolding for future expansion
 
 ### Active
 
-**Food Economy Overhaul:**
-- [ ] Smoker gating — requires iron to craft, removed from natural village spawns
-- [ ] Apple drop improvements — 5x drop rate, drops from all leaf types (not just oak)
-- [ ] Bonemeal improvements — fully grows any crop, bone yields 6 bonemeal (up from 3)
-- [ ] Food removals — suspicious stew, mushroom stew, beetroot soup, sugarcane→sugar recipe
-- [ ] Food stat rebalancing — complete hunger/saturation overhaul per design table
-- [ ] Hearty Stew — rabbit stew renamed with new stats (10 hunger, 6.36 saturation)
-- [ ] Honey Apple — new item (apple + honey bottle shapeless), 8 hunger, 2.73 saturation
-
-**Class & Stage System:**
-- [ ] Class selection system — /selectClass <tank|melee|ranged|support> command (base chunks only)
-- [ ] Class modifiers — permanent health and damage multipliers per class
-- [ ] Stage system — 5 stages with server-wide /advanceStage command
-- [ ] Boon level tracking — per-player class + boon level persistence (scaffolding for future)
+(None currently — v2.2 shipped, next milestone not yet planned)
 
 ### Out of Scope
 
@@ -199,37 +207,29 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 | HEAD cancellation for FoodData.tick() | Complete control over exhaustion and healing logic | Good |
 | Fixed interval + variable heal amount | Simpler than variable intervals for saturation tier healing | Good |
 
-## Current Milestone: v2.2 Extra Features Batch 6
-
-**Goal:** Overhaul food economy with meaningful cooking progression and introduce class/stage system foundation for multiplayer role differentiation.
-
-**Target features:**
-- Food economy rebalancing (hunger/saturation overhaul, cooking gates)
-- Smoker progression gate (iron requirement, no natural spawns)
-- Apple availability improvements (5x rate, all leaves)
-- Food item removals (stews, suspicious foods)
-- New foods: Hearty Stew (rabbit stew rename), Honey Apple
-- Class system with permanent role selection (tank/melee/ranged/support)
-- Stage progression system (5 stages, admin-controlled advancement)
-- Boon level scaffolding for future expansion
+## Current Milestone: None (planning next)
 
 ## Current State
 
-**Latest Ship:** v2.1 Extra Features Batch 5 (2026-01-22)
+**Latest Ship:** v2.2 Extra Features Batch 6 (2026-01-23)
 
 **Codebase:**
-- ~8,709 LOC Kotlin/Java
+- ~5,145 LOC Kotlin/Java
 - Mixed mixin + event-driven architecture
-- 49 plans across 29 phases in 6 milestones
-- Attachment patterns for player state, mob threat, one-time effects
+- 58 plans across 36 phases in 7 milestones
+- Attachment patterns for player state, mob threat, one-time effects, class, boon level
 - Client visual overrides for twilight sky
 - Comprehensive spawn/behavior modifications
 - Position-based structure protection
 - Saturation-tiered healing system
+- Food economy with cooking progression gates
+- Class system with permanent role differentiation
+- Stage system with boon level scaffolding
 
-**Known issues:** None currently tracked
+**Known issues:**
+- PlayerSleepMixin broken from MC 1.21.11 upgrade (blocks smoke test, not functionality)
 
 **Technical debt:** None identified
 
 ---
-*Last updated: 2026-01-22 after v2.2 milestone started*
+*Last updated: 2026-01-23 after v2.2 milestone complete*

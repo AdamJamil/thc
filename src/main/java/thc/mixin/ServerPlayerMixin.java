@@ -6,6 +6,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import thc.THCAttachments;
+import thc.playerclass.PlayerClass;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -51,16 +52,18 @@ public abstract class ServerPlayerMixin implements ServerPlayerHealthAccess {
 
 	@Unique
 	private double thc$getStoredMaxHealth() {
+		// Calculate max health from class, not from cached attachment
+		double value = THC_DEFAULT_MAX_HEALTH;
+
 		AttachmentTarget target = (AttachmentTarget) this;
-		Double stored = target.getAttachedOrCreate(THCAttachments.MAX_HEALTH);
-		double value = stored == null ? THC_DEFAULT_MAX_HEALTH : stored;
-		if (!Double.isFinite(value)) {
-			value = THC_DEFAULT_MAX_HEALTH;
+		String className = target.getAttached(THCAttachments.PLAYER_CLASS);
+		if (className != null) {
+			PlayerClass playerClass = PlayerClass.fromString(className);
+			if (playerClass != null) {
+				value = THC_DEFAULT_MAX_HEALTH + playerClass.getHealthBonus();
+			}
 		}
-		value = Math.max(1.0D, value);
-		if (stored == null || stored.doubleValue() != value) {
-			target.setAttached(THCAttachments.MAX_HEALTH, value);
-		}
+
 		return value;
 	}
 
@@ -71,11 +74,7 @@ public abstract class ServerPlayerMixin implements ServerPlayerHealthAccess {
 
 	@Override
 	public void thc$setMaxHealth(double maxHealth) {
-		double value = Math.max(1.0D, maxHealth);
-		if (!Double.isFinite(value)) {
-			value = THC_DEFAULT_MAX_HEALTH;
-		}
-		((AttachmentTarget) this).setAttached(THCAttachments.MAX_HEALTH, value);
+		// Health is now derived from PLAYER_CLASS, so just trigger an update
 		this.thcAppliedMaxHealth = this.thc$applyMaxHealth();
 	}
 }

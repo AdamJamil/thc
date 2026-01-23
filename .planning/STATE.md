@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 
 ## Current Position
 
-Phase: 34 of 36 (New Foods)
-Plan: 01 of 01 complete
-Status: Phase complete
-Last activity: 2026-01-23 — Completed quick task 001: honey apple recipe 8x batch
+Phase: 35 of 36 (Class System)
+Plan: 01 of 02 complete
+Status: In progress
+Last activity: 2026-01-23 — Completed 35-01-PLAN.md (class system foundation)
 
-Progress: █████░░░░░ 71% — v2.2 phase 34 complete (5/7 phases)
+Progress: █████░░░░░ 73% — v2.2 phase 35 in progress (5/7 phases)
 
 ## Performance Metrics
 
@@ -51,9 +51,14 @@ Progress: █████░░░░░ 71% — v2.2 phase 34 complete (5/7 pha
 - Total execution time: ~1 day
 - Timeline: 1 day (Jan 22, 2026)
 
+**v2.2 Milestone (in progress):**
+- Plans completed: 1
+- Total execution time: ~10 min
+- Timeline: Started Jan 23, 2026
+
 **Cumulative:**
-- 49 plans completed across 6 milestones
-- ~3.5 hours total execution time
+- 50 plans completed across 6 milestones + v2.2
+- ~3.7 hours total execution time
 - 8 days from project start to v2.1 ship
 
 ## Accumulated Context
@@ -123,6 +128,10 @@ Key patterns established:
 - FoodProperties.Builder saturationModifier formula: targetSat / (nutrition * 2)
 - Context.modify for custom THC items in FoodStatsModifier (not just vanilla Items)
 - Translation override for vanilla item rename (item.minecraft.rabbit_stew)
+- Persistent string attachment for player class selection (PLAYER_CLASS)
+- Class selection permanence via hasClass() check in setClass()
+- Base chunk restriction for class selection command
+- @Redirect on getAttributeValue for attribute-specific modification (SWEEPING_DAMAGE_RATIO in MC 1.21.11)
 
 ### Pending Todos
 
@@ -130,7 +139,11 @@ None.
 
 ### Blockers/Concerns
 
-None.
+**Minecraft 1.21.11 Mixin Compatibility**
+- Multiple mixins broken after MC version upgrade (PlayerAttackMixin fixed, PlayerSleepMixin unresolved)
+- Build succeeds but runtime smoke test cannot complete
+- Recommend: Comprehensive mixin audit before adding new mixins in 35-02
+- Status: Non-blocking for compilation and development, blocks in-game testing
 
 ### Quick Tasks Completed
 
@@ -141,6 +154,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-23
-Stopped at: Completed 34-01-PLAN.md (new foods - Hearty Stew and Honey Apple)
+Stopped at: Completed 35-01-PLAN.md (class system foundation - PlayerClass enum, ClassManager, /selectClass command)
 Resume file: None
-Next: Phase 35 or 36
+Next: Phase 35-02 (damage multipliers) or resolve mixin breakages first

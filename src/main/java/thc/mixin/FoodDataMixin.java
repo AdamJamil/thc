@@ -87,7 +87,7 @@ public abstract class FoodDataMixin {
 				float healAmount = baseHeal + tierBonus;
 
 				player.heal(healAmount);
-				this.addExhaustion(6.0F);  // Keep vanilla exhaustion cost
+				this.addExhaustion(healAmount * 6.0F);  // Vanilla: 6.0 exhaustion per 1 HP healed
 				accessor.setTickTimer(0);
 			}
 		}

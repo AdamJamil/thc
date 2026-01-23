@@ -54,4 +54,16 @@ public final class ClassManager {
 		double newHealth = baseHealth + playerClass.getHealthBonus();
 		((ServerPlayerHealthAccess) player).thc$setMaxHealth(newHealth);
 	}
+
+	/**
+	 * Restore health modifier for returning players on login.
+	 * Call this in JOIN event for players who already have a class.
+	 * @param player The player to restore health for
+	 */
+	public static void restoreHealthModifier(ServerPlayer player) {
+		PlayerClass playerClass = getClass(player);
+		if (playerClass != null) {
+			applyHealthModifier(player, playerClass);
+		}
+	}
 }

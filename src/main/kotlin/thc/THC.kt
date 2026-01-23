@@ -67,10 +67,13 @@ object THC : ModInitializer {
 			val player = handler.player
 
 			// New players (no class yet) get boon level matching current stage
-			// Returning players (have class) keep their accumulated boon level
+			// Returning players (have class) keep their accumulated boon level and restore health
 			if (!ClassManager.hasClass(player)) {
 				val currentStage = StageManager.getCurrentStage(server)
 				StageManager.setBoonLevel(player, currentStage)
+			} else {
+				// Returning player - restore health modifier from their class
+				ClassManager.restoreHealthModifier(player)
 			}
 		})
 

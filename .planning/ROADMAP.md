@@ -111,9 +111,11 @@ Plans:
   3. Each player's boon level increments when stage advances
   4. Boon level tracked per-player with their class
   5. Class + boon level persist across server restarts
-**Research**: Likely (server-wide persistent state)
-**Research topics**: SavedData for server-wide state, attachment persistence patterns
-**Plans**: TBD
+**Research**: Completed (36-RESEARCH.md)
+**Plans**: 2 plans
+Plans:
+- [ ] 36-01-PLAN.md — Stage foundation: StageData SavedData, BOON_LEVEL attachment, StageManager
+- [ ] 36-02-PLAN.md — Command and events: /advanceStage command, late-joiner boon initialization
 
 ## Progress
 
@@ -128,4 +130,4 @@ Phases execute in numeric order: 30 -> 31 -> 32 -> 33 -> 34 -> 35 -> 36
 | 33. Food Stats | 1/1 | Complete | 2026-01-23 |
 | 34. New Foods | 1/1 | Complete | 2026-01-23 |
 | 35. Class System | 2/2 | Complete | 2026-01-23 |
-| 36. Stage System | 0/TBD | Not started | - |
+| 36. Stage System | 0/2 | Not started | - |

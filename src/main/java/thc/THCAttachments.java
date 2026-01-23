@@ -65,6 +65,14 @@ public final class THCAttachments {
 			builder.copyOnDeath();
 		}
 	);
+	public static final AttachmentType<Integer> BOON_LEVEL = AttachmentRegistry.create(
+		Identifier.fromNamespaceAndPath("thc", "boon_level"),
+		builder -> {
+			builder.initializer(() -> 0);
+			builder.persistent(Codec.INT);
+			builder.copyOnDeath();
+		}
+	);
 
 	private THCAttachments() {
 	}

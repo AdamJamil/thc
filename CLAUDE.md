@@ -10,7 +10,7 @@ These values have been explicitly tuned by the user. Never modify without explic
 
 | File | Value | Setting |
 |------|-------|---------|
-| `PlayerAttackMixin.java` | `0.75f` | Melee damage multiplier (25% reduction) |
+| `PlayerAttackMixin.java` | `0.1875f` | Melee damage multiplier (81.25% reduction) |
 | `PlayerAttackMixin.java` | `2.0F` | Crit damage multiplier (double damage) |
 | `PlayerAttackMixin.java` | `0.0f` | Sweeping edge disabled |
 

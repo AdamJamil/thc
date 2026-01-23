@@ -25,12 +25,32 @@ Run `git status` first. If there are uncommitted changes:
 3. Ask if they want to: commit them, stash them, or discard them
 4. **Never** automatically stash or revert uncommitted changes
 
-### After Completing Any Work
-Always offer to commit completed work, even for "quick patches" outside GSD. Say:
-> "Would you like me to commit these changes?"
+### After Completing Any Work — COMMIT IMMEDIATELY
 
-If the user declines or the conversation is ending without a commit, warn:
-> "Warning: These changes are uncommitted and could be lost."
+**THIS IS THE MOST IMPORTANT RULE IN THIS FILE.**
+
+After ANY code change that builds successfully, you MUST:
+
+1. **STOP EVERYTHING** — Do not answer questions, do not investigate other issues, do not continue the conversation
+2. **COMMIT THE CHANGES** — Run git add and git commit immediately
+3. **THEN continue** — Only after committing may you proceed to anything else
+
+This is NOT optional. This is NOT "offer to commit." This is: **COMMIT NOW.**
+
+Uncommitted code is **LOST CODE**. Context windows end. Sessions crash. Work vanishes. Every minute code sits uncommitted is a minute it can be lost forever.
+
+**The pattern is:**
+```
+1. Make code change
+2. Verify it compiles
+3. IMMEDIATELY commit (do not pass go, do not collect $200)
+4. Only then continue conversation
+```
+
+**If you find yourself about to say anything other than "Let me commit these changes" after a successful build, STOP. You are about to violate this rule.**
+
+If the user explicitly declines a commit, warn LOUDLY:
+> "⚠️ WARNING: These changes are NOT committed. If this session ends, the work WILL BE LOST. Are you sure?"
 
 ### Never Silently Lose Work
 - Never run `git stash`, `git checkout .`, `git reset`, or `git clean` without explicit user approval

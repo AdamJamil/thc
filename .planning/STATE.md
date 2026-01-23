@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 ## Current Position
 
 Phase: 35 of 36 (Class System)
-Plan: 01 of 02 complete
-Status: In progress
-Last activity: 2026-01-23 — Completed 35-01-PLAN.md (class system foundation)
+Plan: 02 of 02 complete
+Status: Phase complete
+Last activity: 2026-01-23 — Completed 35-02-PLAN.md (class damage multipliers)
 
-Progress: █████░░░░░ 73% — v2.2 phase 35 in progress (5/7 phases)
+Progress: █████░░░░░ 74% — v2.2 phase 35 complete (5/7 phases)
 
 ## Performance Metrics
 
@@ -52,13 +52,13 @@ Progress: █████░░░░░ 73% — v2.2 phase 35 in progress (5/7 
 - Timeline: 1 day (Jan 22, 2026)
 
 **v2.2 Milestone (in progress):**
-- Plans completed: 1
-- Total execution time: ~10 min
+- Plans completed: 2
+- Total execution time: ~13 min
 - Timeline: Started Jan 23, 2026
 
 **Cumulative:**
-- 50 plans completed across 6 milestones + v2.2
-- ~3.7 hours total execution time
+- 51 plans completed across 6 milestones + v2.2
+- ~3.72 hours total execution time
 - 8 days from project start to v2.1 ship
 
 ## Accumulated Context
@@ -132,6 +132,8 @@ Key patterns established:
 - Class selection permanence via hasClass() check in setClass()
 - Base chunk restriction for class selection command
 - @Redirect on getAttributeValue for attribute-specific modification (SWEEPING_DAMAGE_RATIO in MC 1.21.11)
+- Post-reduction multiplier application: class multipliers applied after base damage reduction
+- Server-only class lookup: instanceof ServerPlayer check for attachment access
 
 ### Pending Todos
 
@@ -140,9 +142,9 @@ None.
 ### Blockers/Concerns
 
 **Minecraft 1.21.11 Mixin Compatibility**
-- Multiple mixins broken after MC version upgrade (PlayerAttackMixin fixed, PlayerSleepMixin unresolved)
+- PlayerSleepMixin broken after MC version upgrade (PlayerAttackMixin fixed in 35-01)
 - Build succeeds but runtime smoke test cannot complete
-- Recommend: Comprehensive mixin audit before adding new mixins in 35-02
+- Class system fully implemented (35-01, 35-02) but in-game testing blocked
 - Status: Non-blocking for compilation and development, blocks in-game testing
 
 ### Quick Tasks Completed
@@ -154,6 +156,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-23
-Stopped at: Completed 35-01-PLAN.md (class system foundation - PlayerClass enum, ClassManager, /selectClass command)
+Stopped at: Completed 35-02-PLAN.md (class damage multipliers - melee and ranged scaling)
 Resume file: None
-Next: Phase 35-02 (damage multipliers) or resolve mixin breakages first
+Next: Phase 35 complete. Phase 36 or mixin breakage resolution.

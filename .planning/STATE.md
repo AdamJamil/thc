@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-22)
 
 ## Current Position
 
-Phase: 32 of 36 (Food Removals)
+Phase: 33 of 36 (Food Stats)
 Plan: 01 of 01 complete
 Status: Phase complete
-Last activity: 2026-01-22 — Completed 32-01-PLAN.md
+Last activity: 2026-01-23 — Completed 33-01-PLAN.md
 
-Progress: ███░░░░░░░ 43% — v2.2 phase 32 complete (3/7 phases)
+Progress: ████░░░░░░ 57% — v2.2 phase 33 complete (4/7 phases)
 
 ## Performance Metrics
 
@@ -119,6 +119,8 @@ Key patterns established:
 - Fixed interval (5 ticks) + variable heal amount for smoother tiered healing
 - Loot table override for universal item drops (apples from all leaves)
 - CropBlock performBonemeal HEAD injection for instant crop maturation
+- DefaultItemComponentEvents.MODIFY for vanilla item component modification at startup
+- FoodProperties.Builder saturationModifier formula: targetSat / (nutrition * 2)
 
 ### Pending Todos
 
@@ -130,7 +132,7 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-01-22
-Stopped at: Completed 32-01-PLAN.md (food removals)
+Last session: 2026-01-23
+Stopped at: Completed 33-01-PLAN.md (food stats rebalancing)
 Resume file: None
-Next: /gsd:execute-plan 33-01
+Next: /gsd:execute-plan 34-01

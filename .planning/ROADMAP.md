@@ -13,7 +13,7 @@ Food economy overhaul establishing cooking progression gates and meaningful food
 - [x] **Phase 30: Smoker Gating** - Iron requirement for smoker crafting, removed from villages
 - [x] **Phase 31: Apple & Bonemeal** - 5x apple drops from all leaves, improved bonemeal
 - [x] **Phase 32: Food Removals** - Remove suspicious stew, mushroom stew, beetroot soup, sugar recipe
-- [ ] **Phase 33: Food Stats** - Complete hunger/saturation rebalancing
+- [x] **Phase 33: Food Stats** - Complete hunger/saturation rebalancing
 - [ ] **Phase 34: New Foods** - Hearty Stew rename, Honey Apple item
 - [ ] **Phase 35: Class System** - /selectClass command with permanent role modifiers
 - [ ] **Phase 36: Stage System** - /advanceStage command with boon level scaffolding
@@ -67,7 +67,8 @@ Food economy overhaul establishing cooking progression gates and meaningful food
   5. All food values match design specification
 **Research**: Likely (food component modification in 1.21)
 **Research topics**: FoodProperties modification, DataComponent system for food stats
-**Plans**: TBD
+**Plans**: 1 (33-01)
+**Completed**: 2026-01-23
 
 ### Phase 34: New Foods
 **Goal**: Add Hearty Stew and Honey Apple
@@ -120,7 +121,7 @@ Phases execute in numeric order: 30 → 31 → 32 → 33 → 34 → 35 → 36
 | 30. Smoker Gating | 1/1 | Complete | 2026-01-22 |
 | 31. Apple & Bonemeal | 1/1 | Complete | 2026-01-22 |
 | 32. Food Removals | 1/1 | Complete | 2026-01-22 |
-| 33. Food Stats | 0/TBD | Not started | - |
+| 33. Food Stats | 1/1 | Complete | 2026-01-23 |
 | 34. New Foods | 0/TBD | Not started | - |
 | 35. Class System | 0/TBD | Not started | - |
 | 36. Stage System | 0/TBD | Not started | - |

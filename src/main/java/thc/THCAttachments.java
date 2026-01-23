@@ -57,6 +57,14 @@ public final class THCAttachments {
 		Identifier.fromNamespaceAndPath("thc", "threat_last_decay"),
 		builder -> builder.initializer(() -> 0L)
 	);
+	public static final AttachmentType<String> PLAYER_CLASS = AttachmentRegistry.create(
+		Identifier.fromNamespaceAndPath("thc", "player_class"),
+		builder -> {
+			builder.initializer(() -> null);
+			builder.persistent(Codec.STRING);
+			builder.copyOnDeath();
+		}
+	);
 
 	private THCAttachments() {
 	}

@@ -22,7 +22,10 @@ import thc.item.THCItems
 import thc.network.BucklerSync
 import thc.network.BucklerStatePayload
 import thc.food.FoodStatsModifier
+import thc.playerclass.ClassManager
 import thc.playerclass.SelectClassCommand
+import thc.stage.AdvanceStageCommand
+import thc.stage.StageManager
 import thc.world.MiningFatigue
 import thc.world.VillageProtection
 import thc.world.WorldRestrictions
@@ -49,6 +52,7 @@ object THC : ModInitializer {
 		MiningFatigue.register()
 		FoodStatsModifier.register()
 		SelectClassCommand.register()
+		AdvanceStageCommand.register()
 		PayloadTypeRegistry.playS2C().register(BucklerStatePayload.TYPE, BucklerStatePayload.STREAM_CODEC)
 
 		ServerTickEvents.END_SERVER_TICK.register(ServerTickEvents.EndTick { server ->
@@ -57,6 +61,17 @@ object THC : ModInitializer {
 
 		ServerPlayConnectionEvents.DISCONNECT.register(ServerPlayConnectionEvents.Disconnect { handler, _ ->
 			BucklerSync.clear(handler.player)
+		})
+
+		ServerPlayConnectionEvents.JOIN.register(ServerPlayConnectionEvents.Join { handler, sender, server ->
+			val player = handler.player
+
+			// New players (no class yet) get boon level matching current stage
+			// Returning players (have class) keep their accumulated boon level
+			if (!ClassManager.hasClass(player)) {
+				val currentStage = StageManager.getCurrentStage(server)
+				StageManager.setBoonLevel(player, currentStage)
+			}
 		})
 
 		ServerLifecycleEvents.SERVER_STARTED.register(ServerLifecycleEvents.ServerStarted { server ->

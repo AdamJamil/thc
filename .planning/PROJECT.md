@@ -144,7 +144,25 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ### Active
 
-(None currently — v2.2 shipped, next milestone not yet planned)
+- Monster speed increase (20% faster, except creepers/baby zombies)
+- Monster loot removal (no armor/weapon drops)
+- Zombie → Husk replacement in all spawn tables
+- Baby zombie speed normalization
+- Zombie iron drop removal
+- Skeleton → Stray replacement in all spawn tables
+- Ghast projectile modifications (speed +50%, fire rate -25%, fire spread +100%)
+- Enderman teleport-behind mechanic (50% after damage)
+- Enderman proximity aggro (3 block radius)
+- Vex health reduction (4 hearts) and iron sword removal
+- Phantom natural spawn removal
+- Illager patrol stage-gating (stage 2+)
+- Monster damage rebalancing (7 mobs)
+- Iron golem summon prevention
+- Regional spawn system (Overworld 3-way split)
+- Custom mob distributions per region (surface/upper cave/lower cave)
+- Pillager variants (MELEE/RANGED equipment loadouts)
+- Partitioned monster caps per region
+- NBT spawn origin tagging
 
 ### Out of Scope
 
@@ -156,7 +174,7 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 - Weather visual override — rain during dusk is atmospheric, acceptable
 - Nether/End twilight — these dimensions have their own aesthetics
 - Shader-specific fixes — basic compatibility expected, deep Iris integration deferred
-- Phantom spawning changes — phantoms should still spawn based on insomnia mechanic
+- Phantom spawning changes — phantoms now removed from natural spawns in v2.3
 
 ## Context
 
@@ -207,7 +225,22 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 | HEAD cancellation for FoodData.tick() | Complete control over exhaustion and healing logic | Good |
 | Fixed interval + variable heal amount | Simpler than variable intervals for saturation tier healing | Good |
 
-## Current Milestone: None (planning next)
+## Current Milestone: v2.3 Extra Features Batch 7
+
+**Goal:** Comprehensive monster overhaul with regional spawn distributions, mob behavior modifications, and damage rebalancing to create distinct threat profiles across Overworld regions.
+
+**Target features:**
+- All mobs 20% faster (except creepers/baby zombies)
+- Zombies → Husks, Skeletons → Strays in spawn tables
+- Ghast, Enderman, Vex behavior modifications
+- Phantom natural spawn removal, Illager patrol stage-gating
+- Damage rebalancing for 7 mobs
+- Iron golem summon prevention
+- Regional spawn system (Surface/Upper Cave/Lower Cave)
+- Custom mob distributions with probability-based mixing
+- Pillager MELEE/RANGED variants
+- Partitioned monster caps per region (30%/40%/50%)
+- NBT spawn origin tagging
 
 ## Current State
 
@@ -232,4 +265,4 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 **Technical debt:** None identified
 
 ---
-*Last updated: 2026-01-23 after v2.2 milestone complete*
+*Last updated: 2026-01-23 after v2.3 milestone started*

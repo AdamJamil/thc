@@ -49,7 +49,7 @@ public abstract class VillagerMixin {
 	 * MEET_PLAYER activity which overrides the schedule temporarily.
 	 */
 	@Redirect(
-		method = "customServerAiStep",
+		method = "registerBrainGoals",
 		at = @At(
 			value = "INVOKE",
 			target = "Lnet/minecraft/world/entity/ai/Brain;updateActivityFromSchedule(Lnet/minecraft/world/attribute/EnvironmentAttributeSystem;JLnet/minecraft/world/phys/Vec3;)V"

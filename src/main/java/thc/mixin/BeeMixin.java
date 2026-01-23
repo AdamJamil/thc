@@ -1,7 +1,7 @@
 package thc.mixin;
 
 import net.minecraft.world.attribute.EnvironmentAttribute;
-import net.minecraft.world.attribute.EnvironmentAttributeReader;
+import net.minecraft.world.attribute.EnvironmentAttributeSystem;
 import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.entity.animal.bee.Bee;
 import net.minecraft.world.phys.Vec3;
@@ -42,13 +42,13 @@ public abstract class BeeMixin {
 		method = "wantsToEnterHive",
 		at = @At(
 			value = "INVOKE",
-			target = "Lnet/minecraft/world/attribute/EnvironmentAttributeReader;getValue(Lnet/minecraft/world/attribute/EnvironmentAttribute;Lnet/minecraft/world/phys/Vec3;)Ljava/lang/Object;"
+			target = "Lnet/minecraft/world/attribute/EnvironmentAttributeSystem;getValue(Lnet/minecraft/world/attribute/EnvironmentAttribute;Lnet/minecraft/world/phys/Vec3;)Ljava/lang/Object;"
 		)
 	)
-	private Object thc$alwaysWork(EnvironmentAttributeReader reader, EnvironmentAttribute<?> attribute, Vec3 pos) {
+	private Object thc$alwaysWork(EnvironmentAttributeSystem system, EnvironmentAttribute<?> attribute, Vec3 pos) {
 		if (attribute == EnvironmentAttributes.BEES_STAY_IN_HIVE) {
 			return Boolean.FALSE;
 		}
-		return reader.getValue(attribute, pos);
+		return system.getValue(attribute, pos);
 	}
 }

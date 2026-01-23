@@ -5,7 +5,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.attribute.BedRule;
 import net.minecraft.world.attribute.EnvironmentAttributeSystem;
 import net.minecraft.world.attribute.EnvironmentAttributes;
-import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
@@ -56,13 +55,13 @@ public abstract class PlayerSleepMixin {
 		method = "startSleepInBed",
 		at = @At(
 			value = "INVOKE",
-			target = "Lnet/minecraft/world/attribute/EnvironmentAttributeSystem;getValue(Lnet/minecraft/world/attribute/EnvironmentAttribute;Lnet/minecraft/world/phys/Vec3;)Ljava/lang/Object;"
+			target = "Lnet/minecraft/world/attribute/EnvironmentAttributeSystem;getValue(Lnet/minecraft/world/attribute/EnvironmentAttribute;Lnet/minecraft/core/BlockPos;)Ljava/lang/Object;"
 		)
 	)
 	private Object thc$allowSleepAnytime(
 		EnvironmentAttributeSystem system,
 		net.minecraft.world.attribute.EnvironmentAttribute<?> attribute,
-		Vec3 pos
+		BlockPos pos
 	) {
 		// Only intercept BED_RULE attribute lookups
 		if (attribute == EnvironmentAttributes.BED_RULE) {

@@ -15,7 +15,7 @@ Food economy overhaul establishing cooking progression gates and meaningful food
 - [x] **Phase 32: Food Removals** - Remove suspicious stew, mushroom stew, beetroot soup, sugar recipe
 - [x] **Phase 33: Food Stats** - Complete hunger/saturation rebalancing
 - [x] **Phase 34: New Foods** - Hearty Stew rename, Honey Apple item
-- [ ] **Phase 35: Class System** - /selectClass command with permanent role modifiers
+- [x] **Phase 35: Class System** - /selectClass command with permanent role modifiers
 - [ ] **Phase 36: Stage System** - /advanceStage command with boon level scaffolding
 
 ## Phase Details
@@ -98,8 +98,9 @@ Food economy overhaul establishing cooking progression gates and meaningful food
 **Research**: Completed (35-RESEARCH.md)
 **Plans**: 2 plans
 Plans:
-- [ ] 35-01-PLAN.md — Class foundation: attachment, enum, manager, /selectClass command
-- [ ] 35-02-PLAN.md — Damage modification: melee and ranged multipliers in mixins
+- [x] 35-01-PLAN.md — Class foundation: attachment, enum, manager, /selectClass command
+- [x] 35-02-PLAN.md — Damage modification: melee and ranged multipliers in mixins
+**Completed**: 2026-01-23
 
 ### Phase 36: Stage System
 **Goal**: Server-wide stage progression with per-player boon tracking
@@ -126,5 +127,5 @@ Phases execute in numeric order: 30 -> 31 -> 32 -> 33 -> 34 -> 35 -> 36
 | 32. Food Removals | 1/1 | Complete | 2026-01-22 |
 | 33. Food Stats | 1/1 | Complete | 2026-01-23 |
 | 34. New Foods | 1/1 | Complete | 2026-01-23 |
-| 35. Class System | 0/2 | Planned | - |
+| 35. Class System | 2/2 | Complete | 2026-01-23 |
 | 36. Stage System | 0/TBD | Not started | - |

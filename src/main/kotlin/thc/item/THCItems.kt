@@ -15,6 +15,11 @@ object THCItems {
         Identifier.withDefaultNamespace("tools")
     )
 
+    private val foodTabKey: ResourceKey<CreativeModeTab> = ResourceKey.create(
+        Registries.CREATIVE_MODE_TAB,
+        Identifier.withDefaultNamespace("food_and_drinks")
+    )
+
     @JvmField
     val LAND_PLOT: Item = register("land_plot") { key ->
         LandPlotItem(
@@ -33,10 +38,22 @@ object THCItems {
         )
     }
 
+    @JvmField
+    val HONEY_APPLE: Item = register("honey_apple") { key ->
+        Item(
+            Item.Properties()
+                .setId(key)
+                .stacksTo(64)
+        )
+    }
+
     fun init() {
         ItemGroupEvents.modifyEntriesEvent(toolsTabKey).register { entries ->
             entries.accept(LAND_PLOT)
             entries.accept(BLAST_TOTEM)
+        }
+        ItemGroupEvents.modifyEntriesEvent(foodTabKey).register { entries ->
+            entries.accept(HONEY_APPLE)
         }
     }
 

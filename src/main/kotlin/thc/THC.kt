@@ -21,6 +21,7 @@ import thc.item.THCBucklers
 import thc.item.THCItems
 import thc.network.BucklerSync
 import thc.network.BucklerStatePayload
+import thc.food.FoodStatsModifier
 import thc.world.MiningFatigue
 import thc.world.VillageProtection
 import thc.world.WorldRestrictions
@@ -45,6 +46,7 @@ object THC : ModInitializer {
 		WorldRestrictions.register()
 		VillageProtection.register()
 		MiningFatigue.register()
+		FoodStatsModifier.register()
 		PayloadTypeRegistry.playS2C().register(BucklerStatePayload.TYPE, BucklerStatePayload.STREAM_CODEC)
 
 		ServerTickEvents.END_SERVER_TICK.register(ServerTickEvents.EndTick { server ->

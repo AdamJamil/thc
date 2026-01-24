@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-01-23)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** Planning next milestone
+**Current focus:** v2.3 Monster Overhaul - 8 phases, 23 requirements
 
 ## Current Position
 
-Phase: Not started (defining requirements)
-Plan: —
-Status: Researching
-Last activity: 2026-01-23 — Milestone v2.3 started
+Phase: 37 (Global Monster Modifications)
+Plan: 1 of 1 complete
+Status: Phase complete
+Last activity: 2026-01-24 - Completed 37-01-PLAN.md
 
-Progress: ░░░░░░░░░░ 0% — v2.3 researching
+Progress: [█-------] 12.5% - v2.3 Phase 37/44 complete (1 of 8 phases)
 
 ## Performance Metrics
 
@@ -56,10 +56,17 @@ Progress: ░░░░░░░░░░ 0% — v2.3 researching
 - Total execution time: ~35 min
 - Timeline: 2 days (Jan 22-23, 2026)
 
+**v2.3 Milestone:**
+- Phases: 37-44 (8 phases)
+- Requirements: 23 (FR-01 through FR-23)
+- Status: In progress (1 of 8 phases complete)
+- Plans completed: 1
+- Total execution time: ~5 min
+
 **Cumulative:**
-- 58 plans completed across 7 milestones
-- ~4.5 hours total execution time
-- 9 days from project start to v2.2 ship
+- 59 plans completed across 7 milestones
+- ~4.6 hours total execution time
+- 10 days from project start
 
 ## Accumulated Context
 
@@ -142,6 +149,11 @@ Key patterns established:
 - Operator command pattern: .requires(source -> source.permissions().hasPermission(Permissions.COMMANDS_GAMEMASTER)) for MC 1.21.11
 - Late-joiner initialization: JOIN event with hasClass() check to distinguish new vs returning players
 - Minecraft 1.21.11 permission system: Permissions constants (COMMANDS_GAMEMASTER, COMMANDS_ADMIN, etc.) replace hasPermissionLevel()
+- ServerEntityEvents.ENTITY_LOAD for entity spawn modification (monster speed in v2.3)
+- Transient AttributeModifiers for runtime-only stat changes (no save bloat)
+- EntityType comparison for type-specific behavior in MC 1.21.11 (`mob.type == EntityType.ZOMBIE` not `instanceof`)
+- Identifier API replaces ResourceLocation in MC 1.21.11 (Identifier.fromNamespaceAndPath)
+- Counter-modifiers for negating vanilla bonuses (baby zombie speed normalization)
 
 ### Pending Todos
 
@@ -163,7 +175,7 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-01-23
-Stopped at: v2.3 milestone research starting
+Last session: 2026-01-24
+Stopped at: Completed 37-01-PLAN.md (Global Monster Modifications)
 Resume file: None
-Next: Complete research, then /gsd:plan-phase 37
+Next: /gsd:plan-phase 38

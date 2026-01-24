@@ -2,37 +2,50 @@ package thc.mixin;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.SpawnGroupData;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.monster.illager.Pillager;
 import net.minecraft.world.entity.monster.skeleton.AbstractSkeleton;
 import net.minecraft.world.entity.monster.skeleton.Stray;
 import net.minecraft.world.entity.monster.zombie.Husk;
 import net.minecraft.world.entity.monster.zombie.Zombie;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.NaturalSpawner;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import thc.spawn.PillagerVariant;
+import thc.spawn.SpawnDistributions;
 
 /**
- * Replaces natural surface zombie/skeleton spawns with husks/strays.
+ * Replaces natural spawns with regional custom mobs and surface variants.
  *
- * <p>THC increases surface difficulty by replacing basic undead with their
- * more dangerous variants:
+ * <p>Spawn replacement priority order:
+ * <ol>
+ *   <li><b>Base chunk blocking</b> - NaturalSpawnerMixin HEAD on isValidSpawnPostitionForType cancels
+ *       spawns in claimed chunks BEFORE this redirect runs</li>
+ *   <li><b>Regional distribution roll</b> - This redirect rolls SpawnDistributions.selectMob() to
+ *       potentially replace vanilla spawn with custom mob (witch, vex, pillager, blaze, etc.)</li>
+ *   <li><b>Surface variant replacement</b> - Only runs if vanilla fallback selected; replaces
+ *       surface zombies/skeletons with husks/strays</li>
+ * </ol>
+ *
+ * <p>Region detection uses canSeeSky(pos) per FR-18 spec:
  * <ul>
- *   <li>Zombies on surface -> Husks (apply hunger effect)</li>
- *   <li>Skeletons on surface -> Strays (apply slowness effect)</li>
+ *   <li>Any sky visibility = SURFACE (even through small holes)</li>
+ *   <li>No sky + Y &lt; 0 = LOWER_CAVE</li>
+ *   <li>No sky + Y &gt;= 0 = UPPER_CAVE</li>
  * </ul>
  *
- * <p>Exceptions preserved:
- * <ul>
- *   <li>Underground spawns (no sky visibility) - remain vanilla</li>
- *   <li>Spider jockey skeletons - detected via passenger check</li>
- *   <li>Spawner/structure spawns - use different code paths, not affected</li>
- * </ul>
+ * <p>Custom spawns bypass vanilla spawn conditions - witches spawn anywhere,
+ * blazes/breezes don't need fortresses. Pack spawning [1,4] with position collision checks.
  */
 @Mixin(NaturalSpawner.class)
 public class SpawnReplacementMixin {
@@ -44,11 +57,12 @@ public class SpawnReplacementMixin {
 	private static final EquipmentSlot[] EQUIPMENT_SLOTS = EquipmentSlot.values();
 
 	/**
-	 * Redirect addFreshEntityWithPassengers to conditionally replace
-	 * zombies/skeletons with husks/strays on surface spawns.
+	 * Redirect addFreshEntityWithPassengers to apply regional distributions
+	 * and surface variant replacements.
 	 *
 	 * <p>The spawnCategoryForPosition method is where natural spawning occurs.
-	 * We intercept the entity being added and replace it if conditions are met.
+	 * We intercept the entity being added and potentially replace it based on
+	 * regional distribution or surface variant rules.
 	 */
 	@Redirect(
 		method = "spawnCategoryForPosition(Lnet/minecraft/world/entity/MobCategory;Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/level/chunk/ChunkAccess;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/NaturalSpawner$SpawnPredicate;Lnet/minecraft/world/level/NaturalSpawner$AfterSpawnCallback;)V",
@@ -58,27 +72,141 @@ public class SpawnReplacementMixin {
 		)
 	)
 	private static void thc$replaceWithSurfaceVariant(ServerLevel level, Entity entity) {
-		// Check if entity should be replaced
+		// Preserve passenger checks (spider jockey protection)
+		if (!entity.getPassengers().isEmpty() || entity.getVehicle() != null) {
+			level.addFreshEntityWithPassengers(entity);
+			return;
+		}
+
+		BlockPos pos = entity.blockPosition();
+
+		// Step 2: Regional distribution roll (Overworld only)
+		String region = thc$detectRegion(level, pos);
+		if (region != null) {
+			SpawnDistributions.MobSelection selection = SpawnDistributions.selectMob(region, level.random);
+
+			if (!selection.isVanilla()) {
+				// Custom mob selected - spawn pack and skip vanilla entity
+				thc$spawnCustomPack(level, selection, pos);
+				// Don't spawn the vanilla entity - custom pack replaces it
+				return;
+			}
+		}
+
+		// Step 3: Vanilla fallback - apply surface variant replacement if applicable
 		Entity entityToSpawn = thc$getReplacementEntity(level, entity);
 		level.addFreshEntityWithPassengers(entityToSpawn);
 	}
 
 	/**
-	 * Determines if the entity should be replaced with a surface variant.
+	 * Detect region for spawn distribution based on position.
+	 * Uses canSeeSky(pos) per FR-18 spec for surface detection.
 	 *
 	 * @param level The server level
+	 * @param pos   The spawn position
+	 * @return Region string (OW_SURFACE, OW_UPPER_CAVE, OW_LOWER_CAVE) or null if non-Overworld
+	 */
+	@Unique
+	private static String thc$detectRegion(ServerLevel level, BlockPos pos) {
+		// Only Overworld has custom distributions
+		if (level.dimension() != Level.OVERWORLD) {
+			return null;
+		}
+
+		// FIRST check: if can see sky -> SURFACE (per FR-18 isSkyVisible semantics)
+		if (level.canSeeSky(pos)) {
+			return "OW_SURFACE";
+		}
+
+		// Underground: check Y level
+		if (pos.getY() < 0) {
+			return "OW_LOWER_CAVE";
+		}
+
+		return "OW_UPPER_CAVE";
+	}
+
+	/**
+	 * Spawn a pack of custom mobs at the given position.
+	 *
+	 * <p>Pack size is [1,4] with uniform distribution. Pack members spawn nearby
+	 * with position collision checks. Same mob type/variant for entire pack.
+	 *
+	 * @param level     The server level
+	 * @param selection The mob selection (type and variant)
+	 * @param origin    The origin position for the pack
+	 */
+	@Unique
+	private static void thc$spawnCustomPack(
+			ServerLevel level,
+			SpawnDistributions.MobSelection selection,
+			BlockPos origin) {
+
+		// Random pack size [1, 4] uniform distribution
+		int packSize = 1 + level.random.nextInt(4);
+
+		// Thread SpawnGroupData through pack members
+		SpawnGroupData groupData = null;
+
+		BlockPos currentPos = origin;
+
+		for (int i = 0; i < packSize; i++) {
+			// First mob uses origin; additional pack members offset from PREVIOUS position
+			if (i > 0) {
+				int dx = level.random.nextInt(11) - 5; // -5 to +5
+				int dz = level.random.nextInt(11) - 5;
+				currentPos = currentPos.offset(dx, 0, dz);
+			}
+
+			// Check spawn position is valid for this mob type
+			if (!SpawnPlacements.isSpawnPositionOk(selection.type(), level, currentPos)) {
+				// Skip this pack member (partial spawns allowed)
+				continue;
+			}
+
+			// Create the custom mob
+			Mob mob = (Mob) selection.type().create(level, EntitySpawnReason.NATURAL);
+			if (mob == null) {
+				continue;
+			}
+
+			// Position the mob (center of block, random yaw)
+			mob.snapTo(
+				currentPos.getX() + 0.5,
+				currentPos.getY(),
+				currentPos.getZ() + 0.5,
+				level.random.nextFloat() * 360.0f,
+				0.0f
+			);
+
+			// Apply variant equipment for pillagers BEFORE finalizeSpawn
+			// Note: equipment applied after finalizeSpawn's TAIL to avoid being overwritten
+			// We apply in finalizeSpawn's populateDefaultEquipmentSlots, then re-apply after
+
+			// Finalize spawn - triggers equipment setup and NBT tagging via MobFinalizeSpawnMixin
+			DifficultyInstance difficulty = level.getCurrentDifficultyAt(currentPos);
+			groupData = mob.finalizeSpawn(level, difficulty, EntitySpawnReason.NATURAL, groupData);
+
+			// Apply variant equipment AFTER finalizeSpawn (so it's not overwritten)
+			if (selection.variant() != null && mob instanceof Pillager pillager) {
+				PillagerVariant.valueOf(selection.variant()).applyEquipment(pillager);
+			}
+
+			// Add to world
+			level.addFreshEntityWithPassengers(mob);
+		}
+	}
+
+	/**
+	 * Determines if the entity should be replaced with a surface variant.
+	 * Only applies husk/stray replacement for vanilla fallback spawns on surface.
+	 *
+	 * @param level  The server level
 	 * @param entity The original entity
 	 * @return The replacement entity, or the original if no replacement needed
 	 */
 	@Unique
 	private static Entity thc$getReplacementEntity(ServerLevel level, Entity entity) {
-		// Skip replacement if entity has passengers (spider jockey spider)
-		// or is a passenger (would be the skeleton on a spider - but this case
-		// doesn't occur since passengers are added via finalizeSpawn)
-		if (!entity.getPassengers().isEmpty() || entity.getVehicle() != null) {
-			return entity;
-		}
-
 		BlockPos pos = entity.blockPosition();
 
 		// Only replace if surface (can see sky)

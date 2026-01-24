@@ -22,6 +22,7 @@ import thc.item.THCItems
 import thc.network.BucklerSync
 import thc.network.BucklerStatePayload
 import thc.food.FoodStatsModifier
+import thc.monster.MonsterModifications
 import thc.playerclass.ClassManager
 import thc.playerclass.SelectClassCommand
 import thc.stage.AdvanceStageCommand
@@ -53,6 +54,7 @@ object THC : ModInitializer {
 		FoodStatsModifier.register()
 		SelectClassCommand.register()
 		AdvanceStageCommand.register()
+		MonsterModifications.register()
 		PayloadTypeRegistry.playS2C().register(BucklerStatePayload.TYPE, BucklerStatePayload.STREAM_CODEC)
 
 		ServerTickEvents.END_SERVER_TICK.register(ServerTickEvents.EndTick { server ->
@@ -94,7 +96,36 @@ object THC : ModInitializer {
 			Items.NETHERITE_SPEAR,
 			Items.BOW,
 			Items.CROSSBOW,
-			Items.TOTEM_OF_UNDYING
+			Items.TOTEM_OF_UNDYING,
+			// FR-02: Equipment drops (armor)
+			Items.LEATHER_HELMET,
+			Items.LEATHER_CHESTPLATE,
+			Items.LEATHER_LEGGINGS,
+			Items.LEATHER_BOOTS,
+			Items.CHAINMAIL_HELMET,
+			Items.CHAINMAIL_CHESTPLATE,
+			Items.CHAINMAIL_LEGGINGS,
+			Items.CHAINMAIL_BOOTS,
+			Items.IRON_HELMET,
+			Items.IRON_CHESTPLATE,
+			Items.IRON_LEGGINGS,
+			Items.IRON_BOOTS,
+			Items.GOLDEN_HELMET,
+			Items.GOLDEN_CHESTPLATE,
+			Items.GOLDEN_LEGGINGS,
+			Items.GOLDEN_BOOTS,
+			Items.DIAMOND_HELMET,
+			Items.DIAMOND_CHESTPLATE,
+			Items.DIAMOND_LEGGINGS,
+			Items.DIAMOND_BOOTS,
+			// FR-02: Equipment drops (weapons)
+			Items.WOODEN_SWORD,
+			Items.STONE_SWORD,
+			Items.IRON_SWORD,
+			Items.GOLDEN_SWORD,
+			Items.DIAMOND_SWORD,
+			// FR-05: Iron ingot from zombies/husks
+			Items.IRON_INGOT
 		)
 		LootTableEvents.MODIFY_DROPS.register(LootTableEvents.ModifyDrops { _, _, drops ->
 			val hadTotem = drops.any { it.`is`(Items.TOTEM_OF_UNDYING) }

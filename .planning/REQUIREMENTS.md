@@ -318,10 +318,10 @@ Each feature should be verifiable via:
 |-------------|-------|--------|
 | FR-01 | Phase 37 | Complete |
 | FR-02 | Phase 37 | Complete |
-| FR-03 | Phase 38 | Pending |
+| FR-03 | Phase 38 | Complete |
 | FR-04 | Phase 37 | Complete |
 | FR-05 | Phase 37 | Complete |
-| FR-06 | Phase 38 | Pending |
+| FR-06 | Phase 38 | Complete |
 | FR-07 | Phase 40 | Pending |
 | FR-08 | Phase 40 | Pending |
 | FR-09 | Phase 40 | Pending |

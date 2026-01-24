@@ -77,7 +77,7 @@ Plans:
 **Plans:** 1 plan
 
 Plans:
-- [ ] 38-01-PLAN.md — Entity replacement mixin for surface spawns (FR-03, FR-06)
+- [x] 38-01-PLAN.md — Entity replacement mixin for surface spawns (FR-03, FR-06)
 
 **Success Criteria:**
 1. AFK 10 minutes in plains biome - zero zombies spawn, only husks
@@ -300,7 +300,7 @@ Plans:
 | Phase | Name | Plans | Status |
 |-------|------|-------|--------|
 | 37 | Global Monster Modifications | 1 | Complete |
-| 38 | Spawn Table Replacements | 1 | Planned |
+| 38 | Spawn Table Replacements | 1 | Complete |
 | 39 | Entity-Specific Behaviors (Simple) | - | Pending |
 | 40 | Entity-Specific Behaviors (Complex) | - | Pending |
 | 41 | NBT Spawn Origin Tagging | - | Pending |

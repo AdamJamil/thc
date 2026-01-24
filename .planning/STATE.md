@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-23)
 
 ## Current Position
 
-Phase: 42 (Regional Spawn System)
-Plan: 1 of 2 complete
-Status: In progress
-Last activity: 2026-01-24 - Completed 42-01-PLAN.md (Regional spawn distribution infrastructure)
+Phase: 42 (Regional Spawn System) COMPLETE
+Plan: 2 of 2 complete
+Status: Phase complete
+Last activity: 2026-01-24 - Completed 42-02-PLAN.md (Pillager melee AI modification)
 
-Progress: [██████--] 75% - v2.3 Phase 42/44 in progress (6 of 8 phases started)
+Progress: [███████-] 87.5% - v2.3 Phase 42/44 complete (7 of 8 phases complete)
 
 ## Performance Metrics
 
@@ -59,13 +59,13 @@ Progress: [██████--] 75% - v2.3 Phase 42/44 in progress (6 of 8 phas
 **v2.3 Milestone:**
 - Phases: 37-44 (8 phases)
 - Requirements: 23 (FR-01 through FR-23)
-- Status: In progress (6 of 8 phases started)
-- Plans completed: 8
-- Total execution time: ~58 min
+- Status: In progress (7 of 8 phases complete)
+- Plans completed: 9
+- Total execution time: ~62 min
 
 **Cumulative:**
-- 64 plans completed across 7 milestones
-- ~5.1 hours total execution time
+- 65 plans completed across 7 milestones
+- ~5.2 hours total execution time
 - 10 days from project start
 
 ## Accumulated Context
@@ -183,6 +183,9 @@ Key patterns established:
 - canSeeSky(pos) for spawn distribution region detection (FR-18 isSkyVisible semantics)
 - Pack spawning with offset positions (-5 to +5 X/Z from previous position)
 - monster.illager.Pillager import path in MC 1.21.11 (not monster.Pillager)
+- Equipment-based variant detection via Items.IRON_SWORD check in mainhand
+- GoalSelector.getAvailableGoals().removeIf() for goal removal by type
+- Pillager.finalizeSpawn TAIL for AI modification after equipment applied
 
 ### Pending Todos
 
@@ -205,6 +208,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-24
-Stopped at: Completed 42-01-PLAN.md (Regional spawn distribution infrastructure)
+Stopped at: Completed 42-02-PLAN.md (Pillager melee AI modification)
 Resume file: None
-Next: /gsd:execute-phase 42-02 (Regional spawn caps)
+Next: Phase 43 or 44 (remaining v2.3 phases)

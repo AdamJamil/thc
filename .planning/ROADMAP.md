@@ -295,7 +295,7 @@ Plans:
 
 | Phase | Name | Plans | Status |
 |-------|------|-------|--------|
-| 37 | Global Monster Modifications | 1 | Planned |
+| 37 | Global Monster Modifications | 1 | Complete |
 | 38 | Spawn Table Replacements | - | Pending |
 | 39 | Entity-Specific Behaviors (Simple) | - | Pending |
 | 40 | Entity-Specific Behaviors (Complex) | - | Pending |

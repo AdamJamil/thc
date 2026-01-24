@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-23)
 
 ## Current Position
 
-Phase: 42 (Regional Spawn System) COMPLETE
-Plan: 2 of 2 complete
+Phase: 43 (Monster Cap Partitioning) IN PROGRESS
+Plan: 1 of 1 complete
 Status: Phase complete
-Last activity: 2026-01-24 - Completed 42-02-PLAN.md (Pillager melee AI modification)
+Last activity: 2026-01-24 - Completed 43-01-PLAN.md (Regional monster cap implementation)
 
-Progress: [███████-] 87.5% - v2.3 Phase 42/44 complete (7 of 8 phases complete)
+Progress: [████████] 100% - v2.3 Phase 43/44 complete (8 of 8 phases complete)
 
 ## Performance Metrics
 
@@ -59,13 +59,13 @@ Progress: [███████-] 87.5% - v2.3 Phase 42/44 complete (7 of 8 pha
 **v2.3 Milestone:**
 - Phases: 37-44 (8 phases)
 - Requirements: 23 (FR-01 through FR-23)
-- Status: In progress (7 of 8 phases complete)
-- Plans completed: 9
-- Total execution time: ~62 min
+- Status: In progress (8 of 8 phases complete)
+- Plans completed: 10
+- Total execution time: ~67 min
 
 **Cumulative:**
-- 65 plans completed across 7 milestones
-- ~5.2 hours total execution time
+- 66 plans completed across 7 milestones
+- ~5.3 hours total execution time
 - 10 days from project start
 
 ## Accumulated Context
@@ -186,6 +186,9 @@ Key patterns established:
 - Equipment-based variant detection via Items.IRON_SWORD check in mainhand
 - GoalSelector.getAvailableGoals().removeIf() for goal removal by type
 - Pillager.finalizeSpawn TAIL for AI modification after equipment applied
+- ThreadLocal for spawn cycle state (HEAD init, RETURN cleanup) in regional cap counting
+- List<MobCategory> parameter for spawnForChunk method signature in MC 1.21.11
+- RegionalCapManager utility for independent regional monster caps (21/28/35)
 
 ### Pending Todos
 
@@ -208,6 +211,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-24
-Stopped at: Completed 42-02-PLAN.md (Pillager melee AI modification)
+Stopped at: Completed 43-01-PLAN.md (Regional monster cap implementation)
 Resume file: None
-Next: Phase 43 or 44 (remaining v2.3 phases)
+Next: Phase 44 (End spawning) - final v2.3 phase

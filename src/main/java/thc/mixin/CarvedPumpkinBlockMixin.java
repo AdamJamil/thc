@@ -25,7 +25,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class CarvedPumpkinBlockMixin {
 
     @Shadow
-    private static BlockPattern ironGolemFull;
+    private BlockPattern ironGolemFull;
 
     /**
      * Intercept golem spawn attempt and block iron golem creation.
@@ -59,7 +59,7 @@ public abstract class CarvedPumpkinBlockMixin {
     }
 
     @Shadow
-    private static BlockPattern getOrCreateIronGolemFull() {
+    private BlockPattern getOrCreateIronGolemFull() {
         throw new AssertionError();
     }
 }

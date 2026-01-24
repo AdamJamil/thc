@@ -30,8 +30,8 @@ public abstract class SmallFireballMixin {
     @ModifyArg(
         method = "onHitEntity",
         at = @At(value = "INVOKE",
-            target = "Lnet/minecraft/world/entity/LivingEntity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"),
-        index = 1
+            target = "Lnet/minecraft/world/entity/Entity;hurtServer(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;F)Z"),
+        index = 2
     )
     private float thc$reduceFireballDamage(float original) {
         return original * 0.76f;

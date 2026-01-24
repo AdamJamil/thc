@@ -30,8 +30,8 @@ public abstract class EvokerFangsMixin {
     @ModifyArg(
         method = "dealDamageTo",
         at = @At(value = "INVOKE",
-            target = "Lnet/minecraft/world/entity/LivingEntity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"),
-        index = 1
+            target = "Lnet/minecraft/world/entity/LivingEntity;hurtServer(Lnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/damagesource/DamageSource;F)Z"),
+        index = 2
     )
     private float thc$reduceFangDamage(float original) {
         return original * 0.417f;

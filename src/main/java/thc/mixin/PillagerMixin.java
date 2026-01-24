@@ -11,13 +11,12 @@ import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.level.ServerLevelAccessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import thc.mixin.access.MobAccessor;
 
 /**
  * Modifies pillager AI based on equipped weapon variant.
@@ -51,10 +50,6 @@ public abstract class PillagerMixin {
 	@Unique
 	private static final Logger LOGGER = LoggerFactory.getLogger("thc");
 
-	@Shadow
-	@Final
-	protected GoalSelector goalSelector;
-
 	/**
 	 * Configure melee AI for iron sword pillager variants.
 	 *
@@ -74,6 +69,8 @@ public abstract class PillagerMixin {
 			// Not a melee variant - leave vanilla RangedAttackGoal intact
 			return;
 		}
+
+		GoalSelector goalSelector = ((MobAccessor) this).getGoalSelector();
 
 		// Remove RangedAttackGoal - it won't fire without a ranged weapon anyway,
 		// but removing it cleans up the goal selector

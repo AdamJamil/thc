@@ -3,18 +3,16 @@ package thc.mixin;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.ai.goal.GoalSelector;
 import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.phys.Vec3;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import thc.entity.EndermanProximityAggroGoal;
 import thc.mixin.access.EnderManAccessor;
+import thc.mixin.access.MobAccessor;
 
 /**
  * Modifies Enderman behavior:
@@ -24,14 +22,10 @@ import thc.mixin.access.EnderManAccessor;
 @Mixin(EnderMan.class)
 public abstract class EndermanMixin {
 
-	@Shadow
-	@Final
-	protected GoalSelector targetSelector;
-
 	@Inject(method = "registerGoals", at = @At("TAIL"))
 	private void thc$addProximityAggroGoal(CallbackInfo ci) {
 		// Priority 1 = high priority, after ThreatTargetGoal (0) but before vanilla targeting (2+)
-		this.targetSelector.addGoal(1, new EndermanProximityAggroGoal((EnderMan) (Object) this));
+		((MobAccessor) this).getTargetSelector().addGoal(1, new EndermanProximityAggroGoal((EnderMan) (Object) this));
 	}
 
 	/**

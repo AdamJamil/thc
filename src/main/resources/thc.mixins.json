@@ -47,7 +47,8 @@
 		"access.ItemAccessor",
 		"access.AbstractArrowAccessor",
 		"access.EnderManAccessor",
-		"access.FoodDataAccessor"
+		"access.FoodDataAccessor",
+		"access.MobAccessor"
 	],
 	"injectors": {
 		"defaultRequire": 1

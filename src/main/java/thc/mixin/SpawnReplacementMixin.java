@@ -109,6 +109,8 @@ public class SpawnReplacementMixin {
 	@Unique
 	private static String thc$detectRegion(ServerLevel level, BlockPos pos) {
 		// Only Overworld has custom distributions
+		// Nether/End skip regional distribution, use vanilla spawning only
+		// End support deferred to Phase 44b (requires separate distribution table)
 		if (level.dimension() != Level.OVERWORLD) {
 			return null;
 		}
@@ -183,7 +185,10 @@ public class SpawnReplacementMixin {
 			// Note: equipment applied after finalizeSpawn's TAIL to avoid being overwritten
 			// We apply in finalizeSpawn's populateDefaultEquipmentSlots, then re-apply after
 
-			// Finalize spawn - triggers equipment setup and NBT tagging via MobFinalizeSpawnMixin
+			// Finalize spawn - triggers:
+			// 1. Equipment setup via populateDefaultEquipmentSlots
+			// 2. NBT tagging (SPAWN_REGION, SPAWN_COUNTED) via MobFinalizeSpawnMixin TAIL inject
+			// This ensures custom mobs are tracked in regional spawn caps just like vanilla mobs
 			DifficultyInstance difficulty = level.getCurrentDifficultyAt(currentPos);
 			groupData = mob.finalizeSpawn(level, difficulty, EntitySpawnReason.NATURAL, groupData);
 

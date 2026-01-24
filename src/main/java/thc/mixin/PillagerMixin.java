@@ -9,9 +9,12 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.level.ServerLevelAccessor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -44,6 +47,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  */
 @Mixin(Pillager.class)
 public abstract class PillagerMixin {
+
+	@Unique
+	private static final Logger LOGGER = LoggerFactory.getLogger("thc");
 
 	@Shadow
 	@Final
@@ -79,5 +85,7 @@ public abstract class PillagerMixin {
 		// - Speed multiplier 1.0: normal movement speed when attacking
 		// - pauseWhenMobIdle false: aggressive pursuit, doesn't pause when target stationary
 		goalSelector.addGoal(4, new MeleeAttackGoal(self, 1.0, false));
+
+		LOGGER.debug("Configured melee pillager AI at {}", self.blockPosition());
 	}
 }

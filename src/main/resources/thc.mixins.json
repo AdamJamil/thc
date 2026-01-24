@@ -16,6 +16,7 @@
 		"FoodDataMixin",
 		"GhastShootFireballGoalMixin",
 		"ItemEatingMixin",
+		"LargeFireballMixin",
 		"LivingEntityDrowningMixin",
 		"LivingEntityMixin",
 		"MobDamageThreatMixin",

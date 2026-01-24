@@ -174,7 +174,7 @@ Plans:
 **Plans:** 1 plan
 
 Plans:
-- [ ] 41-01-PLAN.md — Spawn attachments + MobFinalizeSpawnMixin for region tagging (FR-23)
+- [x] 41-01-PLAN.md — Spawn attachments + MobFinalizeSpawnMixin for region tagging (FR-23)
 
 **Success Criteria:**
 1. NBT viewer on surface-spawned mob shows `spawnSystem.region = "OW_SURFACE"`
@@ -317,7 +317,7 @@ Plans:
 | 38 | Spawn Table Replacements | 1 | Complete |
 | 39 | Entity-Specific Behaviors (Simple) | 2 | Complete |
 | 40 | Entity-Specific Behaviors (Complex) | 2 | Complete |
-| 41 | NBT Spawn Origin Tagging | 1 | Ready |
+| 41 | NBT Spawn Origin Tagging | 1 | Complete |
 | 42 | Regional Spawn System | - | Pending |
 | 43 | Monster Cap Partitioning | - | Pending |
 | 44 | Damage Rebalancing | - | Pending |

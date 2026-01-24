@@ -141,8 +141,8 @@ Plans:
 **Plans:** 2 plans
 
 Plans:
-- [ ] 40-01-PLAN.md — Ghast modifications (velocity, fire rate, fire spread)
-- [ ] 40-02-PLAN.md — Enderman modifications (proximity aggro, teleport-behind)
+- [x] 40-01-PLAN.md — Ghast modifications (velocity, fire rate, fire spread)
+- [x] 40-02-PLAN.md — Enderman modifications (proximity aggro, teleport-behind)
 
 **Success Criteria:**
 1. Ghast fireballs travel visibly faster (50% increase)
@@ -312,7 +312,7 @@ Plans:
 | 37 | Global Monster Modifications | 1 | Complete |
 | 38 | Spawn Table Replacements | 1 | Complete |
 | 39 | Entity-Specific Behaviors (Simple) | 2 | Complete |
-| 40 | Entity-Specific Behaviors (Complex) | 2 | Planned |
+| 40 | Entity-Specific Behaviors (Complex) | 2 | Complete |
 | 41 | NBT Spawn Origin Tagging | - | Pending |
 | 42 | Regional Spawn System | - | Pending |
 | 43 | Monster Cap Partitioning | - | Pending |

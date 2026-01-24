@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-01-23)
 Phase: 39 (Simple Entity Behaviors)
 Plan: 2 of 3 complete
 Status: In progress
-Last activity: 2026-01-24 - Completed 39-02-PLAN.md (Spawner HEAD Cancellations)
+Last activity: 2026-01-24 - Completed 39-01-PLAN.md (Vex Modifications)
 
 Progress: [██------] 25% - v2.3 Phase 39/44 in progress (2+ of 8 phases)
 
@@ -60,12 +60,12 @@ Progress: [██------] 25% - v2.3 Phase 39/44 in progress (2+ of 8 phases)
 - Phases: 37-44 (8 phases)
 - Requirements: 23 (FR-01 through FR-23)
 - Status: In progress (2 phases complete, phase 39 in progress)
-- Plans completed: 3
-- Total execution time: ~14 min
+- Plans completed: 4
+- Total execution time: ~23 min
 
 **Cumulative:**
-- 61 plans completed across 7 milestones
-- ~4.7 hours total execution time
+- 62 plans completed across 7 milestones
+- ~4.8 hours total execution time
 - 10 days from project start
 
 ## Accumulated Context
@@ -163,6 +163,9 @@ Key patterns established:
 - Stage-conditional spawning via StageManager.getCurrentStage check in mixin
 - Block pattern detection + cancellation for summon prevention (CarvedPumpkinBlock.trySpawnGolem)
 - Level.isClientSide() method in MC 1.21.11 (not field access)
+- BaseValue modification for permanent health changes (simpler than AttributeModifier for idempotent operations)
+- Equipment removal via setItemSlot(EquipmentSlot, ItemStack.EMPTY) for idempotent gear clearing
+- SimpleEntityBehaviors pattern: separate object for simple entity-specific modifications
 
 ### Pending Todos
 

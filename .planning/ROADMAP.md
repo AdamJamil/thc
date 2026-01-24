@@ -1,12 +1,12 @@
 # Milestone v2.3: Extra Features Batch 7 - Monster Overhaul
 
-**Status:** PLANNING
-**Phases:** 37-43
+**Status:** IN PROGRESS
+**Phases:** 37-44
 **Requirements:** 23 (FR-01 through FR-23)
 
 ## Overview
 
-Comprehensive monster overhaul creating distinct threat profiles across Overworld regions. Global modifications increase monster speed and remove equipment drops. Spawn table replacements substitute husks for zombies and strays for skeletons. Entity-specific behaviors modify Ghast, Enderman, Vex, Phantom, Iron Golem, and Illager patrols. Regional spawn system introduces three-way Overworld split (Surface/Upper Cave/Lower Cave) with custom mob distributions and Pillager variants. Partitioned monster caps prevent surface spawns from consuming cave capacity. NBT tagging enables region tracking and cap counting.
+Comprehensive monster overhaul creating distinct threat profiles across Overworld regions. Global modifications increase monster speed and remove equipment drops. Spawn table replacements substitute husks for zombies and strays for skeletons. Entity-specific behaviors modify Ghast, Enderman, Vex, Phantom, Iron Golem, and Illager patrols. Regional spawn system introduces three-way Overworld split (Surface/Upper Cave/Lower Cave) with custom mob distributions and Pillager variants. Partitioned monster caps prevent surface spawns from consuming cave capacity. NBT tagging enables region tracking and cap counting. Damage rebalancing tunes 6 mobs for THC balance.
 
 ## Phase Dependencies
 
@@ -261,9 +261,14 @@ Plans:
 
 ### Phase 44: Damage Rebalancing
 
-**Goal**: Seven mobs have damage values tuned for THC balance
+**Goal**: Six mobs have damage values tuned for THC balance
 **Depends on**: Phase 43
 **Requirements**: FR-16
+**Plans:** 2 plans
+
+Plans:
+- [ ] 44-01-PLAN.md — Melee damage modifiers (Vex, Vindicator, Magma Cube)
+- [ ] 44-02-PLAN.md — Projectile/fang damage (Blaze, Piglin, Evoker fangs)
 
 **Success Criteria:**
 1. Vex deals ~4 damage per hit (down from 13.5)
@@ -272,17 +277,19 @@ Plans:
 4. Blaze fireball deals ~3.8 damage (down from 7.5)
 5. Piglin arrow deals ~8 damage (up from 4)
 6. Large magma cube deals ~4.7 damage (down from 9)
-7. Ghast fireball deals ~9.3 damage (up from 9)
 
 **Details:**
-- FR-16: Damage modifications via ENTITY_LOAD attribute modifiers
-- Same pattern as speed modification in Phase 37
-- Projectile damage may require specific mixin on hit methods
+- FR-16: Damage modifications via ENTITY_LOAD attribute modifiers (melee) and @ModifyArg mixins (projectile/fang)
+- Melee: ATTACK_DAMAGE attribute with ADD_MULTIPLIED_TOTAL operation
+- Projectile: SmallFireballMixin, PiglinCrossbowMixin
+- Fangs: EvokerFangsMixin
+
+**Note:** Ghast fireball damage change (9->9.3) removed from scope per CONTEXT.md.
 
 **Research Flags:**
 - HIGH confidence: Same attribute pattern as speed modification
 - Melee damage: ATTACK_DAMAGE attribute
-- Projectile damage: May need hit event interception for Blaze, Ghast, Piglin
+- Projectile damage: @ModifyArg on hurt() calls
 
 ---
 
@@ -305,7 +312,7 @@ Plans:
 | FR-13 | 39 | Vex sword removal |
 | FR-14 | 39 | Phantom natural spawn removal |
 | FR-15 | 39 | Illager patrol stage-gating (stage 2+) |
-| FR-16 | 44 | Damage rebalancing (7 mobs) |
+| FR-16 | 44 | Damage rebalancing (6 mobs) |
 | FR-17 | 39 | Iron golem summon prevention |
 | FR-18 | 42 | Regional spawn system (3-way Overworld) |
 | FR-19 | 42 | Custom mob distributions per region |
@@ -329,7 +336,7 @@ Plans:
 | 41 | NBT Spawn Origin Tagging | 1 | Complete |
 | 42 | Regional Spawn System | 2 | Complete |
 | 43 | Monster Cap Partitioning | 1 | Complete |
-| 44 | Damage Rebalancing | - | Pending |
+| 44 | Damage Rebalancing | 2 | Planned |
 
 ---
 

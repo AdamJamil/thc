@@ -333,10 +333,10 @@ Each feature should be verifiable via:
 | FR-15 | Phase 39 | Complete |
 | FR-16 | Phase 44 | Pending |
 | FR-17 | Phase 39 | Complete |
-| FR-18 | Phase 42 | Pending |
-| FR-19 | Phase 42 | Pending |
-| FR-20 | Phase 42 | Pending |
-| FR-21 | Phase 42 | Pending |
+| FR-18 | Phase 42 | Complete |
+| FR-19 | Phase 42 | Complete |
+| FR-20 | Phase 42 | Complete |
+| FR-21 | Phase 42 | Complete |
 | FR-22 | Phase 43 | Pending |
 | FR-23 | Phase 41 | Complete |
 

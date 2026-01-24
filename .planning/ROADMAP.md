@@ -204,8 +204,8 @@ Plans:
 **Plans:** 2 plans
 
 Plans:
-- [ ] 42-01-PLAN.md — Regional distribution infrastructure + spawn replacement integration
-- [ ] 42-02-PLAN.md — Pillager melee AI modification
+- [x] 42-01-PLAN.md — Regional distribution infrastructure + spawn replacement integration
+- [x] 42-02-PLAN.md — Pillager melee AI modification
 
 **Success Criteria:**
 1. Surface has visibly different mob composition (5% witch, 95% vanilla)
@@ -323,7 +323,7 @@ Plans:
 | 39 | Entity-Specific Behaviors (Simple) | 2 | Complete |
 | 40 | Entity-Specific Behaviors (Complex) | 2 | Complete |
 | 41 | NBT Spawn Origin Tagging | 1 | Complete |
-| 42 | Regional Spawn System | 2 | Planned |
+| 42 | Regional Spawn System | 2 | Complete |
 | 43 | Monster Cap Partitioning | - | Pending |
 | 44 | Damage Rebalancing | - | Pending |
 

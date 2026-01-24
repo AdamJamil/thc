@@ -238,7 +238,7 @@ Plans:
 **Plans:** 1 plan
 
 Plans:
-- [ ] 43-01-PLAN.md — Regional cap manager + spawn cycle hooks + cap check integration
+- [x] 43-01-PLAN.md — Regional cap manager + spawn cycle hooks + cap check integration
 
 **Success Criteria:**
 1. Surface cap full (30% of 70 = 21 mobs) - cave spawns continue
@@ -328,7 +328,7 @@ Plans:
 | 40 | Entity-Specific Behaviors (Complex) | 2 | Complete |
 | 41 | NBT Spawn Origin Tagging | 1 | Complete |
 | 42 | Regional Spawn System | 2 | Complete |
-| 43 | Monster Cap Partitioning | 1 | Planned |
+| 43 | Monster Cap Partitioning | 1 | Complete |
 | 44 | Damage Rebalancing | - | Pending |
 
 ---

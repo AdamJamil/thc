@@ -166,6 +166,10 @@ Key patterns established:
 - BaseValue modification for permanent health changes (simpler than AttributeModifier for idempotent operations)
 - Equipment removal via setItemSlot(EquipmentSlot, ItemStack.EMPTY) for idempotent gear clearing
 - SimpleEntityBehaviors pattern: separate object for simple entity-specific modifications
+- Inner class mixin target: targets = "pkg.Outer$InnerClass" syntax for inner class modification
+- @ModifyConstant for single constant value replacement in methods
+- ENTITY_LOAD for projectile velocity modification at spawn time
+- TAIL inject on onHit for post-explosion fire placement
 - Invoker accessor pattern: @Invoker annotation for calling private methods in mixin targets (EnderManAccessor)
 - Vec3 behind-position calculation: playerPos.subtract(playerLook.scale(distance)) for flanking behavior
 - Random chance behavior: level.random.nextBoolean() for 50% probability checks

@@ -235,6 +235,10 @@ Plans:
 **Goal**: Regional caps prevent surface spawns from consuming all cave capacity
 **Depends on**: Phase 42 (requires regional spawns and NBT tagging)
 **Requirements**: FR-22
+**Plans:** 1 plan
+
+Plans:
+- [ ] 43-01-PLAN.md — Regional cap manager + spawn cycle hooks + cap check integration
 
 **Success Criteria:**
 1. Surface cap full (30% of 70 = 21 mobs) - cave spawns continue
@@ -324,7 +328,7 @@ Plans:
 | 40 | Entity-Specific Behaviors (Complex) | 2 | Complete |
 | 41 | NBT Spawn Origin Tagging | 1 | Complete |
 | 42 | Regional Spawn System | 2 | Complete |
-| 43 | Monster Cap Partitioning | - | Pending |
+| 43 | Monster Cap Partitioning | 1 | Planned |
 | 44 | Damage Rebalancing | - | Pending |
 
 ---

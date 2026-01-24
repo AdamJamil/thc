@@ -4,6 +4,7 @@
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
 		"AbstractArrowMixin",
+		"CarvedPumpkinBlockMixin",
 		"CropBlockMixin",
 		"AbstractVillagerMixin",
 		"AnvilMenuMixin",
@@ -20,6 +21,8 @@
 		"MonsterSpawnLightMixin",
 		"MonsterThreatGoalMixin",
 		"NaturalSpawnerMixin",
+		"PatrolSpawnerMixin",
+		"PhantomSpawnerMixin",
 		"PlayerAttackMixin",
 		"PlayerSleepMixin",
 		"PlayerFallDamageMixin",

@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-23)
 
 ## Current Position
 
-Phase: 40 (Complex Entity Behaviors)
-Plan: 2 of 2 complete
+Phase: 41 (NBT Spawn Origin Tagging)
+Plan: 1 of 1 complete
 Status: Phase complete
-Last activity: 2026-01-24 - Completed 40-02-PLAN.md (Enderman modifications)
+Last activity: 2026-01-24 - Completed 41-01-PLAN.md (Spawn origin attachments)
 
-Progress: [████----] 50% - v2.3 Phase 40/44 complete (4 of 8 phases)
+Progress: [█████---] 63% - v2.3 Phase 41/44 complete (5 of 8 phases)
 
 ## Performance Metrics
 
@@ -59,13 +59,13 @@ Progress: [████----] 50% - v2.3 Phase 40/44 complete (4 of 8 phases)
 **v2.3 Milestone:**
 - Phases: 37-44 (8 phases)
 - Requirements: 23 (FR-01 through FR-23)
-- Status: In progress (4 of 8 phases complete)
-- Plans completed: 6
-- Total execution time: ~42 min
+- Status: In progress (5 of 8 phases complete)
+- Plans completed: 7
+- Total execution time: ~46 min
 
 **Cumulative:**
-- 62 plans completed across 7 milestones
-- ~4.8 hours total execution time
+- 63 plans completed across 7 milestones
+- ~4.9 hours total execution time
 - 10 days from project start
 
 ## Accumulated Context
@@ -173,6 +173,9 @@ Key patterns established:
 - Invoker accessor pattern: @Invoker annotation for calling private methods in mixin targets (EnderManAccessor)
 - Vec3 behind-position calculation: playerPos.subtract(playerLook.scale(distance)) for flanking behavior
 - Random chance behavior: level.random.nextBoolean() for 50% probability checks
+- Mob.finalizeSpawn TAIL injection for spawn-time attachment setting
+- getHeight(Heightmap.Types.MOTION_BLOCKING, x, z) for surface detection
+- Persistent String attachment with null default (absence = not tagged)
 
 ### Pending Todos
 
@@ -195,6 +198,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-24
-Stopped at: Completed phase 40 (Complex Entity Behaviors)
+Stopped at: Completed phase 41 (NBT Spawn Origin Tagging)
 Resume file: None
-Next: /gsd:discuss-phase 41
+Next: /gsd:discuss-phase 42

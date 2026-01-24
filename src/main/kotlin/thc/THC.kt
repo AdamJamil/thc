@@ -23,6 +23,7 @@ import thc.network.BucklerSync
 import thc.network.BucklerStatePayload
 import thc.food.FoodStatsModifier
 import thc.monster.MonsterModifications
+import thc.monster.SimpleEntityBehaviors
 import thc.playerclass.ClassManager
 import thc.playerclass.SelectClassCommand
 import thc.stage.AdvanceStageCommand
@@ -55,6 +56,7 @@ object THC : ModInitializer {
 		SelectClassCommand.register()
 		AdvanceStageCommand.register()
 		MonsterModifications.register()
+		SimpleEntityBehaviors.register()
 		PayloadTypeRegistry.playS2C().register(BucklerStatePayload.TYPE, BucklerStatePayload.STREAM_CODEC)
 
 		ServerTickEvents.END_SERVER_TICK.register(ServerTickEvents.EndTick { server ->

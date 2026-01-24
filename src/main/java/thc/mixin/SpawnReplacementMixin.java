@@ -22,6 +22,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import thc.spawn.PillagerVariant;
+import thc.spawn.RegionalCapManager;
 import thc.spawn.SpawnDistributions;
 
 /**
@@ -80,8 +81,17 @@ public class SpawnReplacementMixin {
 
 		BlockPos pos = entity.blockPosition();
 
-		// Step 2: Regional distribution roll (Overworld only)
+		// Step 1: Detect region for cap check and distribution
 		String region = thc$detectRegion(level, pos);
+
+		// Step 2: Regional cap check - block spawn if cap reached
+		// Per spec: three independent caps, no fallback when cap reached
+		if (region != null && !RegionalCapManager.canSpawnInRegion(region)) {
+			// Regional cap reached - do not spawn this entity
+			return;
+		}
+
+		// Step 3: Regional distribution roll (Overworld only)
 		if (region != null) {
 			SpawnDistributions.MobSelection selection = SpawnDistributions.selectMob(region, level.random);
 
@@ -93,7 +103,7 @@ public class SpawnReplacementMixin {
 			}
 		}
 
-		// Step 3: Vanilla fallback - apply surface variant replacement if applicable
+		// Step 4: Vanilla fallback - apply surface variant replacement if applicable
 		Entity entityToSpawn = thc$getReplacementEntity(level, entity);
 		level.addFreshEntityWithPassengers(entityToSpawn);
 	}

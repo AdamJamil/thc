@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-23)
 
 ## Current Position
 
-Phase: 37 (Global Monster Modifications)
+Phase: 38 (Spawn Table Replacements)
 Plan: 1 of 1 complete
-Status: Phase verified
-Last activity: 2026-01-24 - Phase 37 executed and verified
+Status: Phase complete
+Last activity: 2026-01-24 - Completed 38-01-PLAN.md
 
-Progress: [█-------] 12.5% - v2.3 Phase 37/44 complete (1 of 8 phases)
+Progress: [██------] 25% - v2.3 Phase 38/44 complete (2 of 8 phases)
 
 ## Performance Metrics
 
@@ -59,13 +59,13 @@ Progress: [█-------] 12.5% - v2.3 Phase 37/44 complete (1 of 8 phases)
 **v2.3 Milestone:**
 - Phases: 37-44 (8 phases)
 - Requirements: 23 (FR-01 through FR-23)
-- Status: In progress (1 of 8 phases complete)
-- Plans completed: 1
-- Total execution time: ~5 min
+- Status: In progress (2 of 8 phases complete)
+- Plans completed: 2
+- Total execution time: ~11 min
 
 **Cumulative:**
-- 59 plans completed across 7 milestones
-- ~4.6 hours total execution time
+- 60 plans completed across 7 milestones
+- ~4.7 hours total execution time
 - 10 days from project start
 
 ## Accumulated Context
@@ -154,6 +154,11 @@ Key patterns established:
 - EntityType comparison for type-specific behavior in MC 1.21.11 (`mob.type == EntityType.ZOMBIE` not `instanceof`)
 - Identifier API replaces ResourceLocation in MC 1.21.11 (Identifier.fromNamespaceAndPath)
 - Counter-modifiers for negating vanilla bonuses (baby zombie speed normalization)
+- @Redirect on addFreshEntityWithPassengers for spawn-time entity replacement (NaturalSpawner)
+- canSeeSky(BlockPos) for surface vs underground determination
+- Entity subpackage paths in MC 1.21.11: monster.zombie.Zombie, monster.skeleton.Skeleton
+- snapTo() replaces moveTo() for entity positioning in MC 1.21.11
+- Passenger check for jockey preservation (!getPassengers().isEmpty() || getVehicle() != null)
 
 ### Pending Todos
 
@@ -176,6 +181,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-24
-Stopped at: Completed 37-01-PLAN.md (Global Monster Modifications)
+Stopped at: Completed 38-01-PLAN.md (Spawn Table Replacements)
 Resume file: None
-Next: /gsd:plan-phase 38
+Next: Phase 39 (Skeleton Modifications)

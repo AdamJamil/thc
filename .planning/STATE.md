@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-23)
 
 ## Current Position
 
-Phase: 39 (Simple Entity Behaviors)
+Phase: 40 (Complex Entity Behaviors)
 Plan: 2 of 2 complete
-Status: Phase verified
-Last activity: 2026-01-24 - Phase 39 executed and verified
+Status: Phase complete
+Last activity: 2026-01-24 - Completed 40-02-PLAN.md (Enderman modifications)
 
-Progress: [███-----] 37.5% - v2.3 Phase 39/44 complete (3 of 8 phases)
+Progress: [████----] 50% - v2.3 Phase 40/44 complete (4 of 8 phases)
 
 ## Performance Metrics
 
@@ -59,9 +59,9 @@ Progress: [███-----] 37.5% - v2.3 Phase 39/44 complete (3 of 8 phases)
 **v2.3 Milestone:**
 - Phases: 37-44 (8 phases)
 - Requirements: 23 (FR-01 through FR-23)
-- Status: In progress (3 of 8 phases complete)
-- Plans completed: 4
-- Total execution time: ~23 min
+- Status: In progress (4 of 8 phases complete)
+- Plans completed: 6
+- Total execution time: ~42 min
 
 **Cumulative:**
 - 62 plans completed across 7 milestones
@@ -166,6 +166,9 @@ Key patterns established:
 - BaseValue modification for permanent health changes (simpler than AttributeModifier for idempotent operations)
 - Equipment removal via setItemSlot(EquipmentSlot, ItemStack.EMPTY) for idempotent gear clearing
 - SimpleEntityBehaviors pattern: separate object for simple entity-specific modifications
+- Invoker accessor pattern: @Invoker annotation for calling private methods in mixin targets (EnderManAccessor)
+- Vec3 behind-position calculation: playerPos.subtract(playerLook.scale(distance)) for flanking behavior
+- Random chance behavior: level.random.nextBoolean() for 50% probability checks
 
 ### Pending Todos
 
@@ -188,6 +191,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-24
-Stopped at: Completed phase 39 (Simple Entity Behaviors)
+Stopped at: Completed phase 40 (Complex Entity Behaviors)
 Resume file: None
-Next: /gsd:discuss-phase 40
+Next: /gsd:discuss-phase 41

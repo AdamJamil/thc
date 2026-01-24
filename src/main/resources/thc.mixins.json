@@ -6,6 +6,7 @@
 		"AbstractArrowMixin",
 		"CarvedPumpkinBlockMixin",
 		"CropBlockMixin",
+		"EndermanMixin",
 		"AbstractVillagerMixin",
 		"AnvilMenuMixin",
 		"BeeMixin",

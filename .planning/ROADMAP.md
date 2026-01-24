@@ -201,6 +201,11 @@ Plans:
 **Goal**: Overworld spawns follow region-based distributions with custom mob types
 **Depends on**: Phase 41 (requires NBT tagging for region assignment)
 **Requirements**: FR-18, FR-19, FR-20, FR-21
+**Plans:** 2 plans
+
+Plans:
+- [ ] 42-01-PLAN.md — Regional distribution infrastructure + spawn replacement integration
+- [ ] 42-02-PLAN.md — Pillager melee AI modification
 
 **Success Criteria:**
 1. Surface has visibly different mob composition (5% witch, 95% vanilla)
@@ -318,7 +323,7 @@ Plans:
 | 39 | Entity-Specific Behaviors (Simple) | 2 | Complete |
 | 40 | Entity-Specific Behaviors (Complex) | 2 | Complete |
 | 41 | NBT Spawn Origin Tagging | 1 | Complete |
-| 42 | Regional Spawn System | - | Pending |
+| 42 | Regional Spawn System | 2 | Planned |
 | 43 | Monster Cap Partitioning | - | Pending |
 | 44 | Damage Rebalancing | - | Pending |
 

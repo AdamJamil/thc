@@ -47,7 +47,7 @@ Note: Phase 42 (NBT Tagging) is prerequisite for both Phase 41 and Phase 43. Exe
 **Plans:** 1 plan
 
 Plans:
-- [ ] 37-01-PLAN.md — Speed modifications + loot filtering (FR-01, FR-02, FR-04, FR-05)
+- [x] 37-01-PLAN.md — Speed modifications + loot filtering (FR-01, FR-02, FR-04, FR-05)
 
 **Success Criteria:**
 1. Zombies visibly outpace creepers when pursuing player
@@ -74,6 +74,10 @@ Plans:
 **Goal**: Overworld surface threats shift from basic zombies/skeletons to more dangerous variants
 **Depends on**: Phase 37
 **Requirements**: FR-03, FR-06
+**Plans:** 1 plan
+
+Plans:
+- [ ] 38-01-PLAN.md — Entity replacement mixin for surface spawns (FR-03, FR-06)
 
 **Success Criteria:**
 1. AFK 10 minutes in plains biome - zero zombies spawn, only husks
@@ -296,7 +300,7 @@ Plans:
 | Phase | Name | Plans | Status |
 |-------|------|-------|--------|
 | 37 | Global Monster Modifications | 1 | Complete |
-| 38 | Spawn Table Replacements | - | Pending |
+| 38 | Spawn Table Replacements | 1 | Planned |
 | 39 | Entity-Specific Behaviors (Simple) | - | Pending |
 | 40 | Entity-Specific Behaviors (Complex) | - | Pending |
 | 41 | NBT Spawn Origin Tagging | - | Pending |

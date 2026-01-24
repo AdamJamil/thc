@@ -267,8 +267,8 @@ Plans:
 **Plans:** 2 plans
 
 Plans:
-- [ ] 44-01-PLAN.md — Melee damage modifiers (Vex, Vindicator, Magma Cube)
-- [ ] 44-02-PLAN.md — Projectile/fang damage (Blaze, Piglin, Evoker fangs)
+- [x] 44-01-PLAN.md — Melee damage modifiers (Vex, Vindicator, Magma Cube)
+- [x] 44-02-PLAN.md — Projectile/fang damage (Blaze, Piglin, Evoker fangs)
 
 **Success Criteria:**
 1. Vex deals ~4 damage per hit (down from 13.5)
@@ -336,7 +336,7 @@ Plans:
 | 41 | NBT Spawn Origin Tagging | 1 | Complete |
 | 42 | Regional Spawn System | 2 | Complete |
 | 43 | Monster Cap Partitioning | 1 | Complete |
-| 44 | Damage Rebalancing | 2 | Planned |
+| 44 | Damage Rebalancing | 2 | Complete |
 
 ---
 

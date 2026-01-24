@@ -104,6 +104,11 @@ Plans:
 **Goal**: Individual mob modifications that are straightforward HEAD cancellation or attribute changes
 **Depends on**: Phase 38, Stage System (v2.2)
 **Requirements**: FR-12, FR-13, FR-14, FR-15, FR-17
+**Plans:** 2 plans
+
+Plans:
+- [ ] 39-01-PLAN.md — Vex modifications (health reduction, sword removal)
+- [ ] 39-02-PLAN.md — Spawner cancellations (phantom, patrol) + iron golem prevention
 
 **Success Criteria:**
 1. Spawned vex shows 8 HP (4 hearts) in F3 debug
@@ -301,7 +306,7 @@ Plans:
 |-------|------|-------|--------|
 | 37 | Global Monster Modifications | 1 | Complete |
 | 38 | Spawn Table Replacements | 1 | Complete |
-| 39 | Entity-Specific Behaviors (Simple) | - | Pending |
+| 39 | Entity-Specific Behaviors (Simple) | 2 | Planned |
 | 40 | Entity-Specific Behaviors (Complex) | - | Pending |
 | 41 | NBT Spawn Origin Tagging | - | Pending |
 | 42 | Regional Spawn System | - | Pending |

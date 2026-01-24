@@ -171,6 +171,10 @@ Plans:
 **Goal**: Every spawned mob has region origin tracked for cap counting
 **Depends on**: Phase 40
 **Requirements**: FR-23
+**Plans:** 1 plan
+
+Plans:
+- [ ] 41-01-PLAN.md — Spawn attachments + MobFinalizeSpawnMixin for region tagging (FR-23)
 
 **Success Criteria:**
 1. NBT viewer on surface-spawned mob shows `spawnSystem.region = "OW_SURFACE"`
@@ -181,10 +185,10 @@ Plans:
 
 **Details:**
 - FR-23: Two entity attachments - SPAWN_REGION (String) and SPAWN_COUNTED (Boolean)
-- Region calculated at spawn time from position: isSkyVisible + Y level
-- Region values: OW_SURFACE, OW_UPPER_CAVE, OW_LOWER_CAVE, NETHER, END, OTHER
+- Region calculated at spawn time from position: heightmap comparison + Y level
+- Region values: OW_SURFACE, OW_UPPER_CAVE, OW_LOWER_CAVE
 - Counted = true only for: NATURAL spawn reason + MONSTER category + THC-processed
-- Use byte-encoded region attachment to minimize save bloat
+- Use string encoding for simplicity (byte encoding is premature optimization)
 
 **Research Flags:**
 - HIGH confidence: Existing THCAttachments pattern
@@ -313,7 +317,7 @@ Plans:
 | 38 | Spawn Table Replacements | 1 | Complete |
 | 39 | Entity-Specific Behaviors (Simple) | 2 | Complete |
 | 40 | Entity-Specific Behaviors (Complex) | 2 | Complete |
-| 41 | NBT Spawn Origin Tagging | - | Pending |
+| 41 | NBT Spawn Origin Tagging | 1 | Ready |
 | 42 | Regional Spawn System | - | Pending |
 | 43 | Monster Cap Partitioning | - | Pending |
 | 44 | Damage Rebalancing | - | Pending |

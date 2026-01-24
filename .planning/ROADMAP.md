@@ -107,8 +107,8 @@ Plans:
 **Plans:** 2 plans
 
 Plans:
-- [ ] 39-01-PLAN.md — Vex modifications (health reduction, sword removal)
-- [ ] 39-02-PLAN.md — Spawner cancellations (phantom, patrol) + iron golem prevention
+- [x] 39-01-PLAN.md — Vex modifications (health reduction, sword removal)
+- [x] 39-02-PLAN.md — Spawner cancellations (phantom, patrol) + iron golem prevention
 
 **Success Criteria:**
 1. Spawned vex shows 8 HP (4 hearts) in F3 debug
@@ -306,7 +306,7 @@ Plans:
 |-------|------|-------|--------|
 | 37 | Global Monster Modifications | 1 | Complete |
 | 38 | Spawn Table Replacements | 1 | Complete |
-| 39 | Entity-Specific Behaviors (Simple) | 2 | Planned |
+| 39 | Entity-Specific Behaviors (Simple) | 2 | Complete |
 | 40 | Entity-Specific Behaviors (Complex) | - | Pending |
 | 41 | NBT Spawn Origin Tagging | - | Pending |
 | 42 | Regional Spawn System | - | Pending |

@@ -327,12 +327,12 @@ Each feature should be verifiable via:
 | FR-09 | Phase 40 | Pending |
 | FR-10 | Phase 40 | Pending |
 | FR-11 | Phase 40 | Pending |
-| FR-12 | Phase 39 | Pending |
-| FR-13 | Phase 39 | Pending |
-| FR-14 | Phase 39 | Pending |
-| FR-15 | Phase 39 | Pending |
+| FR-12 | Phase 39 | Complete |
+| FR-13 | Phase 39 | Complete |
+| FR-14 | Phase 39 | Complete |
+| FR-15 | Phase 39 | Complete |
 | FR-16 | Phase 44 | Pending |
-| FR-17 | Phase 39 | Pending |
+| FR-17 | Phase 39 | Complete |
 | FR-18 | Phase 42 | Pending |
 | FR-19 | Phase 42 | Pending |
 | FR-20 | Phase 42 | Pending |

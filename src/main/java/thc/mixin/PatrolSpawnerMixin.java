@@ -5,7 +5,7 @@ import net.minecraft.world.level.levelgen.PatrolSpawner;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import thc.stage.StageManager;
 
 /**
@@ -23,20 +23,16 @@ public abstract class PatrolSpawnerMixin {
 
     /**
      * Block patrol spawns if server stage is below 2.
-     *
-     * PatrolSpawner.tick returns int count of spawned patrols.
-     * Returning 0 blocks spawn for this tick.
      */
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     private void thc$gatePatrolsToStage2(
             ServerLevel level,
             boolean spawnEnemies,
-            boolean spawnFriendlies,
-            CallbackInfoReturnable<Integer> cir) {
+            CallbackInfo ci) {
 
         int currentStage = StageManager.getCurrentStage(level.getServer());
         if (currentStage < 2) {
-            cir.setReturnValue(0);
+            ci.cancel();
         }
         // If stage >= 2, allow vanilla patrol spawn logic to proceed
     }

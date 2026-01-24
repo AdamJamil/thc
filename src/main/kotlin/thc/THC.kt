@@ -22,6 +22,7 @@ import thc.item.THCItems
 import thc.network.BucklerSync
 import thc.network.BucklerStatePayload
 import thc.food.FoodStatsModifier
+import thc.monster.GhastModifications
 import thc.monster.MonsterModifications
 import thc.monster.SimpleEntityBehaviors
 import thc.playerclass.ClassManager
@@ -56,6 +57,7 @@ object THC : ModInitializer {
 		SelectClassCommand.register()
 		AdvanceStageCommand.register()
 		MonsterModifications.register()
+		GhastModifications.register()
 		SimpleEntityBehaviors.register()
 		PayloadTypeRegistry.playS2C().register(BucklerStatePayload.TYPE, BucklerStatePayload.STREAM_CODEC)
 

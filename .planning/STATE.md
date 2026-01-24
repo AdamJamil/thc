@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-23)
 
 ## Current Position
 
-Phase: 41 (NBT Spawn Origin Tagging)
-Plan: 1 of 1 complete
-Status: Phase complete
-Last activity: 2026-01-24 - Completed 41-01-PLAN.md (Spawn origin attachments)
+Phase: 42 (Regional Spawn System)
+Plan: 1 of 2 complete
+Status: In progress
+Last activity: 2026-01-24 - Completed 42-01-PLAN.md (Regional spawn distribution infrastructure)
 
-Progress: [█████---] 63% - v2.3 Phase 41/44 complete (5 of 8 phases)
+Progress: [██████--] 75% - v2.3 Phase 42/44 in progress (6 of 8 phases started)
 
 ## Performance Metrics
 
@@ -59,13 +59,13 @@ Progress: [█████---] 63% - v2.3 Phase 41/44 complete (5 of 8 phases)
 **v2.3 Milestone:**
 - Phases: 37-44 (8 phases)
 - Requirements: 23 (FR-01 through FR-23)
-- Status: In progress (5 of 8 phases complete)
-- Plans completed: 7
-- Total execution time: ~46 min
+- Status: In progress (6 of 8 phases started)
+- Plans completed: 8
+- Total execution time: ~58 min
 
 **Cumulative:**
-- 63 plans completed across 7 milestones
-- ~4.9 hours total execution time
+- 64 plans completed across 7 milestones
+- ~5.1 hours total execution time
 - 10 days from project start
 
 ## Accumulated Context
@@ -176,6 +176,13 @@ Key patterns established:
 - Mob.finalizeSpawn TAIL injection for spawn-time attachment setting
 - getHeight(Heightmap.Types.MOTION_BLOCKING, x, z) for surface detection
 - Persistent String attachment with null default (absence = not tagged)
+- Weighted random selection for spawn distributions (cumulative weight matching)
+- SpawnPlacements.isSpawnPositionOk for pack spawn collision checks
+- SpawnGroupData threading through pack members for consistent equipment
+- Pillager equipment variants (MELEE/RANGED) applied after finalizeSpawn to avoid overwrite
+- canSeeSky(pos) for spawn distribution region detection (FR-18 isSkyVisible semantics)
+- Pack spawning with offset positions (-5 to +5 X/Z from previous position)
+- monster.illager.Pillager import path in MC 1.21.11 (not monster.Pillager)
 
 ### Pending Todos
 
@@ -198,6 +205,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-24
-Stopped at: Completed phase 41 (NBT Spawn Origin Tagging)
+Stopped at: Completed 42-01-PLAN.md (Regional spawn distribution infrastructure)
 Resume file: None
-Next: /gsd:discuss-phase 42
+Next: /gsd:execute-phase 42-02 (Regional spawn caps)

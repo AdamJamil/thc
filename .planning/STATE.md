@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-23)
 
 ## Current Position
 
-Phase: 38 (Spawn Table Replacements)
-Plan: 1 of 1 complete
-Status: Phase verified
-Last activity: 2026-01-24 - Phase 38 executed and verified
+Phase: 39 (Simple Entity Behaviors)
+Plan: 2 of 3 complete
+Status: In progress
+Last activity: 2026-01-24 - Completed 39-02-PLAN.md (Spawner HEAD Cancellations)
 
-Progress: [██------] 25% - v2.3 Phase 38/44 complete (2 of 8 phases)
+Progress: [██------] 25% - v2.3 Phase 39/44 in progress (2+ of 8 phases)
 
 ## Performance Metrics
 
@@ -59,12 +59,12 @@ Progress: [██------] 25% - v2.3 Phase 38/44 complete (2 of 8 phases)
 **v2.3 Milestone:**
 - Phases: 37-44 (8 phases)
 - Requirements: 23 (FR-01 through FR-23)
-- Status: In progress (2 of 8 phases complete)
-- Plans completed: 2
-- Total execution time: ~11 min
+- Status: In progress (2 phases complete, phase 39 in progress)
+- Plans completed: 3
+- Total execution time: ~14 min
 
 **Cumulative:**
-- 60 plans completed across 7 milestones
+- 61 plans completed across 7 milestones
 - ~4.7 hours total execution time
 - 10 days from project start
 
@@ -159,6 +159,10 @@ Key patterns established:
 - Entity subpackage paths in MC 1.21.11: monster.zombie.Zombie, monster.skeleton.Skeleton
 - snapTo() replaces moveTo() for entity positioning in MC 1.21.11
 - Passenger check for jockey preservation (!getPassengers().isEmpty() || getVehicle() != null)
+- HEAD cancellation on custom spawners for complete spawn removal (PhantomSpawner, PatrolSpawner)
+- Stage-conditional spawning via StageManager.getCurrentStage check in mixin
+- Block pattern detection + cancellation for summon prevention (CarvedPumpkinBlock.trySpawnGolem)
+- Level.isClientSide() method in MC 1.21.11 (not field access)
 
 ### Pending Todos
 
@@ -181,6 +185,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-24
-Stopped at: Completed 38-01-PLAN.md (Spawn Table Replacements)
+Stopped at: Completed 39-02-PLAN.md (Spawner HEAD Cancellations)
 Resume file: None
-Next: /gsd:discuss-phase 39
+Next: Continue with 39-03-PLAN.md or /gsd:discuss-phase 39 for remaining work

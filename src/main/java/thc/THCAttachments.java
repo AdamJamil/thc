@@ -73,6 +73,20 @@ public final class THCAttachments {
 			builder.copyOnDeath();
 		}
 	);
+	public static final AttachmentType<String> SPAWN_REGION = AttachmentRegistry.create(
+		Identifier.fromNamespaceAndPath("thc", "spawn_region"),
+		builder -> {
+			builder.initializer(() -> null);
+			builder.persistent(Codec.STRING);
+		}
+	);
+	public static final AttachmentType<Boolean> SPAWN_COUNTED = AttachmentRegistry.create(
+		Identifier.fromNamespaceAndPath("thc", "spawn_counted"),
+		builder -> {
+			builder.initializer(() -> Boolean.FALSE);
+			builder.persistent(Codec.BOOL);
+		}
+	);
 
 	private THCAttachments() {
 	}

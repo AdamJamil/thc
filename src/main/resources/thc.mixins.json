@@ -29,6 +29,7 @@
 		"ServerLevelSleepMixin",
 		"ServerPlayerMixin",
 		"SnowballItemMixin",
+		"SpawnReplacementMixin",
 		"StructureTemplateMixin",
 		"VillagerMixin",
 		"WindChargePlayerBoostMixin",

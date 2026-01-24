@@ -24,7 +24,25 @@ public abstract class ServerPlayerMixin implements ServerPlayerHealthAccess {
 
 	@Inject(method = "restoreFrom", at = @At("TAIL"))
 	private void thc$restoreFrom(ServerPlayer oldPlayer, boolean alive, CallbackInfo ci) {
-		this.thcAppliedMaxHealth = this.thc$applyMaxHealth();
+		// Read class from oldPlayer since attachment copy may not have completed
+		AttachmentTarget oldTarget = (AttachmentTarget) oldPlayer;
+		String className = oldTarget.getAttached(THCAttachments.PLAYER_CLASS);
+		if (className != null) {
+			PlayerClass playerClass = PlayerClass.fromString(className);
+			if (playerClass != null) {
+				LivingEntity self = (LivingEntity) (Object) this;
+				double maxHealth = THC_DEFAULT_MAX_HEALTH + playerClass.getHealthBonus();
+				AttributeInstance instance = self.getAttribute(Attributes.MAX_HEALTH);
+				if (instance != null) {
+					instance.setBaseValue(maxHealth);
+					// Cap health if above new max (respawning sets health to 20)
+					if (self.getHealth() > maxHealth) {
+						self.setHealth((float) maxHealth);
+					}
+				}
+			}
+		}
+		this.thcAppliedMaxHealth = true;
 	}
 
 	@Inject(method = "tick", at = @At("HEAD"))

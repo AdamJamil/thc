@@ -42,6 +42,10 @@ Plans:
 **Goal**: Saddles are completely unobtainable, removing mounted combat
 **Depends on**: Nothing (independent)
 **Requirements**: SADL-01, SADL-02, SADL-03
+**Plans:** 1 plan
+
+Plans:
+- [ ] 47-01-PLAN.md — Recipe removal, villager trade filtering, and loot table overrides
 
 **Success Criteria:**
 1. Player cannot find saddles in any chest loot (dungeons, temples, etc.)
@@ -157,7 +161,7 @@ Plans:
 | Phase | Name | Status | Plans |
 |-------|------|--------|-------|
 | 46 | Iron Boat | Planned | 0/3 |
-| 47 | Saddle Removal | Pending | 0/? |
+| 47 | Saddle Removal | Planned | 0/1 |
 | 48 | Copper Bucket | Pending | 0/? |
 | 49 | Fluid Placement Mechanics | Pending | 0/? |
 | 50 | Elytra Flight Changes | Pending | 0/? |

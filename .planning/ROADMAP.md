@@ -363,7 +363,7 @@ Plans:
 | 42 | Regional Spawn System | 2 | Complete |
 | 43 | Monster Cap Partitioning | 1 | Complete |
 | 44 | Damage Rebalancing | 2 | Complete |
-| 45 | Unify Region Detection | 1 | Not started |
+| 45 | Unify Region Detection | 1 | Complete |
 
 ---
 

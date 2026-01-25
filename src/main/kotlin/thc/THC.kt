@@ -47,6 +47,7 @@ object THC : ModInitializer {
 		THCAttachments.init()
 		THCArrows.init()
 		THCBucklers.init()
+		thc.entity.THCEntities.init()
 		THCItems.init()
 		THCSounds.init()
 		BellHandler.register()

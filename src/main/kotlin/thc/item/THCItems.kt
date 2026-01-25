@@ -2,12 +2,15 @@ package thc.item
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
 import net.minecraft.core.Registry
+import net.minecraft.core.component.DataComponents
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.core.registries.Registries
 import net.minecraft.resources.Identifier
 import net.minecraft.resources.ResourceKey
+import net.minecraft.tags.DamageTypeTags
 import net.minecraft.world.item.CreativeModeTab
 import net.minecraft.world.item.Item
+import net.minecraft.world.item.component.DamageResistant
 
 object THCItems {
     private val toolsTabKey: ResourceKey<CreativeModeTab> = ResourceKey.create(
@@ -47,10 +50,24 @@ object THCItems {
         )
     }
 
+    @JvmField
+    val IRON_BOAT: Item = register("iron_boat") { key ->
+        IronBoatItem(
+            Item.Properties()
+                .setId(key)
+                .stacksTo(1)
+                .component(DataComponents.DAMAGE_RESISTANT, DamageResistant(DamageTypeTags.IS_FIRE))
+        )
+    }
+
     fun init() {
+        // Set the drop item for IronBoat entity after items are initialized
+        thc.entity.IronBoat.ironBoatDropItem = IRON_BOAT
+
         ItemGroupEvents.modifyEntriesEvent(toolsTabKey).register { entries ->
             entries.accept(LAND_PLOT)
             entries.accept(BLAST_TOTEM)
+            entries.accept(IRON_BOAT)
         }
         ItemGroupEvents.modifyEntriesEvent(foodTabKey).register { entries ->
             entries.accept(HONEY_APPLE)

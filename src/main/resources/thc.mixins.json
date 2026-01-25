@@ -48,6 +48,7 @@
 		"WindChargePlayerBoostMixin",
 		"access.ItemAccessor",
 		"access.AbstractArrowAccessor",
+		"access.AbstractBoatAccessor",
 		"access.EnderManAccessor",
 		"access.FoodDataAccessor",
 		"access.MobAccessor"

@@ -17,12 +17,34 @@ class IronBoat(type: EntityType<out Boat>, level: Level) : Boat(type, level, Sup
         // Will be set after THCItems initialization
         @JvmStatic
         var ironBoatDropItem: Item = Items.AIR
+
+        // Height buffer above boat Y for passenger protection zone
+        // Same value used in IronBoatPassengerMixin
+        private const val BOAT_PROTECTION_HEIGHT = 1.5
     }
 
     // Fire immunity - boat won't burn
     override fun fireImmune(): Boolean = true
 
     override fun isOnFire(): Boolean = false
+
+    // Override tick to clear fire visual from protected passengers
+    override fun tick() {
+        super.tick()
+
+        // Clear fire ticks for passengers at protected height
+        val boatSurfaceY = y + BOAT_PROTECTION_HEIGHT
+
+        for (passenger in passengers) {
+            // Only clear fire if passenger is within protection zone
+            if (passenger.eyeY <= boatSurfaceY) {
+                // Clear fire ticks to remove burning visual
+                if (passenger.remainingFireTicks > 0) {
+                    passenger.clearFire()
+                }
+            }
+        }
+    }
 
     // Damage filtering - only allow player attacks
     override fun hurtServer(serverLevel: ServerLevel, damageSource: DamageSource, amount: Float): Boolean {

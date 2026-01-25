@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-01-25)
 ## Current Position
 
 Phase: 46 - Iron Boat
-Plan: Awaiting planning
-Status: Roadmap created
-Last activity: 2026-01-25 — v2.4 roadmap created
+Plan: 01 of 3
+Status: In progress
+Last activity: 2026-01-25 — Completed 46-01-PLAN.md
 
-Progress: [-------] 0/7 phases complete
+Progress: [█------] 1/7 phases complete
 
 ## Performance Metrics
 
@@ -195,6 +195,12 @@ Key patterns established:
 - ATTACK_DAMAGE attribute modifier for melee mob damage (Vex, Vindicator, Magma Cube)
 - RegionDetector static utility for shared heightmap-based region detection (replaces canSeeSky mismatches)
 - Heightmap.Types.MOTION_BLOCKING for surface detection (excludes leaves, matches player intuition)
+- Custom entity type registration with ResourceKey in MC 1.21.11 (build() requires ResourceKey not String)
+- Supplier parameter in Boat constructor for drop item (MC 1.21.11 AbstractBoat)
+- Mixin on parent class checking instanceof for subclass-specific behavior
+- Companion object for deferred initialization to avoid circular dependencies
+- DataComponents.DAMAGE_RESISTANT with DamageTypeTags.IS_FIRE for item fire/lava immunity
+- Injection into private methods via parent class mixin with instanceof check
 
 ### Pending Todos
 
@@ -217,6 +223,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-25
-Stopped at: v2.4 roadmap created
+Stopped at: Completed 46-01-PLAN.md (Iron Boat entity and item)
 Resume file: None
-Next: /gsd:plan-phase 46 to plan Iron Boat phase
+Next: Plan and execute 46-02 (client rendering) or 46-03 (crafting recipe)

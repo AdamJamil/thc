@@ -45,7 +45,7 @@ Plans:
 **Plans:** 1 plan
 
 Plans:
-- [ ] 47-01-PLAN.md — Recipe removal, villager trade filtering, and loot table overrides
+- [x] 47-01-PLAN.md — Recipe removal, villager trade filtering, and loot table overrides
 
 **Success Criteria:**
 1. Player cannot find saddles in any chest loot (dungeons, temples, etc.)
@@ -161,7 +161,7 @@ Plans:
 | Phase | Name | Status | Plans |
 |-------|------|--------|-------|
 | 46 | Iron Boat | Planned | 0/3 |
-| 47 | Saddle Removal | Planned | 0/1 |
+| 47 | Saddle Removal | ✓ Complete | 1/1 |
 | 48 | Copper Bucket | Pending | 0/? |
 | 49 | Fluid Placement Mechanics | Pending | 0/? |
 | 50 | Elytra Flight Changes | Pending | 0/? |
@@ -177,9 +177,9 @@ Plans:
 | BOAT-03 | 46 | Pending |
 | BOAT-04 | 46 | Pending |
 | BOAT-05 | 46 | Pending |
-| SADL-01 | 47 | Pending |
-| SADL-02 | 47 | Pending |
-| SADL-03 | 47 | Pending |
+| SADL-01 | 47 | Complete |
+| SADL-02 | 47 | Complete |
+| SADL-03 | 47 | Complete |
 | BUCK-01 | 48 | Pending |
 | BUCK-02 | 48 | Pending |
 | BUCK-03 | 48 | Pending |

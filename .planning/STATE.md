@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-23)
 
 ## Current Position
 
-Phase: 45 (Unify Region Detection) NOT STARTED
-Plan: 0 of 1 complete
-Status: Gap closure phase added after audit
-Last activity: 2026-01-24 - Added Phase 45 to close region detection mismatch
+Phase: 45 (Unify Region Detection) COMPLETE
+Plan: 1 of 1 complete
+Status: v2.3 Monster Overhaul COMPLETE (all 23 requirements met)
+Last activity: 2026-01-25 - Completed 45-01-PLAN.md (unified region detection)
 
-Progress: [███████████░] 92% - v2.3 gap closure (9 phases, 12/13 plans)
+Progress: [████████████] 100% - v2.3 gap closure (9 phases, 13/13 plans)
 
 ## Performance Metrics
 
@@ -57,16 +57,16 @@ Progress: [███████████░] 92% - v2.3 gap closure (9 phase
 - Timeline: 2 days (Jan 22-23, 2026)
 
 **v2.3 Milestone:**
-- Phases: 37-44 (8 phases)
+- Phases: 37-45 (9 phases)
 - Requirements: 23 (FR-01 through FR-23)
 - Status: COMPLETE
-- Plans completed: 12
-- Total execution time: ~79 min
+- Plans completed: 13
+- Total execution time: ~84 min
 
 **Cumulative:**
-- 68 plans completed across 7 milestones
-- ~5.6 hours total execution time
-- 10 days from project start
+- 69 plans completed across 7 milestones
+- ~5.7 hours total execution time
+- 11 days from project start
 
 ## Accumulated Context
 
@@ -192,6 +192,8 @@ Key patterns established:
 - @ModifyArg index=1 for hurt() float damage parameter (SmallFireball, EvokerFangs)
 - CrossbowItem TAIL injection for shooter-specific projectile modification (Piglin arrow boost)
 - ATTACK_DAMAGE attribute modifier for melee mob damage (Vex, Vindicator, Magma Cube)
+- RegionDetector static utility for shared heightmap-based region detection (replaces canSeeSky mismatches)
+- Heightmap.Types.MOTION_BLOCKING for surface detection (excludes leaves, matches player intuition)
 
 ### Pending Todos
 
@@ -213,7 +215,7 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-01-24
-Stopped at: Added Phase 45 gap closure
+Last session: 2026-01-25
+Stopped at: Completed 45-01-PLAN.md (unified region detection)
 Resume file: None
-Next: Plan and execute Phase 45 (Unify Region Detection), then complete milestone
+Next: v2.3 Monster Overhaul COMPLETE - all 23 requirements met across 9 phases

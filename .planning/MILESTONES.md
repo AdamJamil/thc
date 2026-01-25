@@ -1,5 +1,33 @@
 # Project Milestones: THC (True Hardcore)
 
+## v2.3 Extra Features Batch 7 (Shipped: 2026-01-25)
+
+**Delivered:** Comprehensive monster overhaul with regional spawn distributions, behavior modifications for 10+ mob types, and partitioned monster caps creating distinct threat profiles across Overworld regions.
+
+**Phases completed:** 37-45 (13 plans total)
+
+**Key accomplishments:**
+
+- Global monster threat increase: 20% speed boost, baby zombie normalization, complete equipment loot filtering
+- Spawn table overhaul: Surface zombies → husks, skeletons → strays with jockey preservation
+- Entity behavior modifications: Ghast (faster fireballs, expanded fire), Enderman (teleport-behind, proximity aggro), Vex (health/sword), Phantom removal, Patrol stage-gating, Iron golem prevention
+- Regional spawn system: Three-way Overworld split with custom mob distributions (witches, pillagers, blazes, breezes, vindicators, evokers)
+- Pillager MELEE/RANGED variants with equipment loadouts
+- Partitioned monster caps (30%/40%/50%) preventing surface spawns from consuming cave capacity
+
+**Stats:**
+
+- 78 files created/modified
+- ~6,807 lines of Kotlin/Java (cumulative)
+- 9 phases, 13 plans, 23 requirements
+- 3 days from start to ship (Jan 23-25, 2026)
+
+**Git range:** `feat(37-01)` → `feat(45-01)`
+
+**What's next:** To be determined
+
+---
+
 ## v2.2 Extra Features Batch 6 (Shipped: 2026-01-23)
 
 **Delivered:** Food economy overhaul with cooking progression gates and meaningful food choices, plus class/stage system foundation for multiplayer role differentiation.

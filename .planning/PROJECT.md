@@ -141,28 +141,25 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
   - Server-wide stage, per-player boon level
   - Late-joiner sync (new players get current stage as boon level)
   - Boon level scaffolding for future expansion
+- Monster overhaul — v2.3
+  - 20% speed increase (except creepers/baby zombies)
+  - Equipment/iron drops removed from monsters
+  - Zombie → Husk, Skeleton → Stray surface replacements
+  - Ghast: faster fireballs, slower fire rate, expanded fire spread
+  - Enderman: teleport-behind, proximity aggro
+  - Vex: reduced health, no sword
+  - Phantom spawns disabled, Patrols stage-gated (stage 2+)
+  - Iron golem summon prevention
+  - Regional spawn system (Surface/Upper Cave/Lower Cave)
+  - Custom mob distributions with witches, pillagers, blazes, breezes, vindicators, evokers
+  - Pillager MELEE/RANGED variants
+  - Partitioned monster caps (30%/40%/50%)
+  - NBT spawn origin tagging
+  - Damage rebalancing for 6 mobs (Vex, Vindicator, Magma Cube, Blaze, Piglin, Evoker fangs)
 
 ### Active
 
-- Monster speed increase (20% faster, except creepers/baby zombies)
-- Monster loot removal (no armor/weapon drops)
-- Zombie → Husk replacement in all spawn tables
-- Baby zombie speed normalization
-- Zombie iron drop removal
-- Skeleton → Stray replacement in all spawn tables
-- Ghast projectile modifications (speed +50%, fire rate -25%, fire spread +100%)
-- Enderman teleport-behind mechanic (50% after damage)
-- Enderman proximity aggro (3 block radius)
-- Vex health reduction (4 hearts) and iron sword removal
-- Phantom natural spawn removal
-- Illager patrol stage-gating (stage 2+)
-- Monster damage rebalancing (7 mobs)
-- Iron golem summon prevention
-- Regional spawn system (Overworld 3-way split)
-- Custom mob distributions per region (surface/upper cave/lower cave)
-- Pillager variants (MELEE/RANGED equipment loadouts)
-- Partitioned monster caps per region
-- NBT spawn origin tagging
+(None — ship to validate)
 
 ### Out of Scope
 
@@ -225,39 +222,28 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 | HEAD cancellation for FoodData.tick() | Complete control over exhaustion and healing logic | Good |
 | Fixed interval + variable heal amount | Simpler than variable intervals for saturation tier healing | Good |
 
-## Current Milestone: v2.3 Extra Features Batch 7
+## Current Milestone: None (planning next)
 
-**Goal:** Comprehensive monster overhaul with regional spawn distributions, mob behavior modifications, and damage rebalancing to create distinct threat profiles across Overworld regions.
-
-**Target features:**
-- All mobs 20% faster (except creepers/baby zombies)
-- Zombies → Husks, Skeletons → Strays in spawn tables
-- Ghast, Enderman, Vex behavior modifications
-- Phantom natural spawn removal, Illager patrol stage-gating
-- Damage rebalancing for 7 mobs
-- Iron golem summon prevention
-- Regional spawn system (Surface/Upper Cave/Lower Cave)
-- Custom mob distributions with probability-based mixing
-- Pillager MELEE/RANGED variants
-- Partitioned monster caps per region (30%/40%/50%)
-- NBT spawn origin tagging
+**Previous milestone:** v2.3 Extra Features Batch 7 (Monster Overhaul) shipped 2026-01-25
 
 ## Current State
 
-**Latest Ship:** v2.2 Extra Features Batch 6 (2026-01-23)
+**Latest Ship:** v2.3 Extra Features Batch 7 (2026-01-25)
 
 **Codebase:**
-- ~5,145 LOC Kotlin/Java
+- ~6,807 LOC Kotlin/Java
 - Mixed mixin + event-driven architecture
-- 58 plans across 36 phases in 7 milestones
-- Attachment patterns for player state, mob threat, one-time effects, class, boon level
+- 71 plans across 45 phases in 8 milestones
+- Attachment patterns for player state, mob threat, one-time effects, class, boon level, spawn region
 - Client visual overrides for twilight sky
-- Comprehensive spawn/behavior modifications
+- Comprehensive spawn/behavior modifications (10+ mob types)
 - Position-based structure protection
 - Saturation-tiered healing system
 - Food economy with cooking progression gates
 - Class system with permanent role differentiation
 - Stage system with boon level scaffolding
+- Regional spawn system with partitioned caps
+- Custom mob distributions per Overworld region
 
 **Known issues:**
 - PlayerSleepMixin broken from MC 1.21.11 upgrade (blocks smoke test, not functionality)
@@ -265,4 +251,4 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 **Technical debt:** None identified
 
 ---
-*Last updated: 2026-01-23 after v2.3 milestone started*
+*Last updated: 2026-01-25 after v2.3 milestone complete*

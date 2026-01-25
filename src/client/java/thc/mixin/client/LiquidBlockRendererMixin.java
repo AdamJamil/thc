@@ -1,5 +1,6 @@
 package thc.mixin.client;
 
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.block.LiquidBlockRenderer;
 import net.minecraft.core.BlockPos;
@@ -32,6 +33,7 @@ public class LiquidBlockRendererMixin {
     private void thc$skipLavaInsideIronBoat(
             BlockAndTintGetter blockAndTintGetter,
             BlockPos blockPos,
+            VertexConsumer vertexConsumer,
             BlockState blockState,
             FluidState fluidState,
             CallbackInfo ci) {

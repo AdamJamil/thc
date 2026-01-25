@@ -68,36 +68,36 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| BOAT-01 | TBD | Pending |
-| BOAT-02 | TBD | Pending |
-| BOAT-03 | TBD | Pending |
-| BOAT-04 | TBD | Pending |
-| BOAT-05 | TBD | Pending |
-| SADL-01 | TBD | Pending |
-| SADL-02 | TBD | Pending |
-| SADL-03 | TBD | Pending |
-| BUCK-01 | TBD | Pending |
-| BUCK-02 | TBD | Pending |
-| BUCK-03 | TBD | Pending |
-| BUCK-04 | TBD | Pending |
-| WATR-01 | TBD | Pending |
-| WATR-02 | TBD | Pending |
-| ELYT-01 | TBD | Pending |
-| ELYT-02 | TBD | Pending |
-| ELYT-03 | TBD | Pending |
-| BREW-01 | TBD | Pending |
-| BREW-02 | TBD | Pending |
-| BREW-03 | TBD | Pending |
-| ARMR-01 | TBD | Pending |
-| ARMR-02 | TBD | Pending |
-| ARMR-03 | TBD | Pending |
-| ARMR-04 | TBD | Pending |
+| BOAT-01 | Phase 46 | Pending |
+| BOAT-02 | Phase 46 | Pending |
+| BOAT-03 | Phase 46 | Pending |
+| BOAT-04 | Phase 46 | Pending |
+| BOAT-05 | Phase 46 | Pending |
+| SADL-01 | Phase 47 | Pending |
+| SADL-02 | Phase 47 | Pending |
+| SADL-03 | Phase 47 | Pending |
+| BUCK-01 | Phase 48 | Pending |
+| BUCK-02 | Phase 48 | Pending |
+| BUCK-03 | Phase 48 | Pending |
+| BUCK-04 | Phase 49 | Pending |
+| WATR-01 | Phase 49 | Pending |
+| WATR-02 | Phase 49 | Pending |
+| ELYT-01 | Phase 50 | Pending |
+| ELYT-02 | Phase 50 | Pending |
+| ELYT-03 | Phase 50 | Pending |
+| BREW-01 | Phase 51 | Pending |
+| BREW-02 | Phase 51 | Pending |
+| BREW-03 | Phase 51 | Pending |
+| ARMR-01 | Phase 52 | Pending |
+| ARMR-02 | Phase 52 | Pending |
+| ARMR-03 | Phase 52 | Pending |
+| ARMR-04 | Phase 52 | Pending |
 
 **Coverage:**
 - v2.4 requirements: 24 total
-- Mapped to phases: 0
-- Unmapped: 24
+- Mapped to phases: 24
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-01-25*
-*Last updated: 2026-01-25 after initial definition*
+*Last updated: 2026-01-25 after roadmap creation*

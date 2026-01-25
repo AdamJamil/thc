@@ -24,8 +24,9 @@ public class MobFinalizeSpawnMixin {
 			EntitySpawnReason reason, SpawnGroupData groupData,
 			CallbackInfoReturnable<SpawnGroupData> cir) {
 
-		// Only tag NATURAL and CHUNK_GENERATION spawns (excludes spawners, commands, etc.)
-		if (reason != EntitySpawnReason.NATURAL && reason != EntitySpawnReason.CHUNK_GENERATION) {
+		// Only tag NATURAL spawns (excludes spawners, commands, etc.)
+		// Skip CHUNK_GENERATION - heightmap query isn't safe during chunk gen
+		if (reason != EntitySpawnReason.NATURAL) {
 			return;
 		}
 

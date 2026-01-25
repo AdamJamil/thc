@@ -5,8 +5,7 @@
 	"client": [
 		"ClientLevelTimeMixin",
 		"ExampleClientMixin",
-		"IronBoatRendererMixin",
-		"LiquidBlockRendererMixin"
+		"IronBoatRendererMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

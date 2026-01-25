@@ -66,13 +66,13 @@ public final class SpawnDistributions {
 		surface.add(new WeightedEntry(null, null, 95)); // vanilla fallback
 		TABLES.put("OW_SURFACE", surface);
 
-		// OW_UPPER_CAVE: 5% witch, 2% vex, 10% pillager ranged, 25% pillager melee, 58% vanilla
+		// OW_UPPER_CAVE: 5% witch, 10% pillager ranged, 25% pillager melee, 60% vanilla
+		// (vex removed - they fly up through ground to surface)
 		List<WeightedEntry> upperCave = new ArrayList<>();
 		upperCave.add(new WeightedEntry(EntityType.WITCH, 5));
-		upperCave.add(new WeightedEntry(EntityType.VEX, 2));
 		upperCave.add(new WeightedEntry(EntityType.PILLAGER, "RANGED", 10));
 		upperCave.add(new WeightedEntry(EntityType.PILLAGER, "MELEE", 25));
-		upperCave.add(new WeightedEntry(null, null, 58)); // vanilla fallback
+		upperCave.add(new WeightedEntry(null, null, 60)); // vanilla fallback
 		TABLES.put("OW_UPPER_CAVE", upperCave);
 
 		// OW_LOWER_CAVE: 8% blaze, 8% breeze, 12% vindicator, 25% pillager melee, 2% evoker, 45% vanilla

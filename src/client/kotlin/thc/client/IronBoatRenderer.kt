@@ -33,11 +33,18 @@ class IronBoatRenderer(context: EntityRendererProvider.Context) :
         var renderingIronBoat = false
     }
 
-    // Create our own water/lava patch model for fluid masking
+    // Create our own patch model for fluid masking
     // We need our own because parent's waterPatchModel is private
-    private val fluidPatchModel: Model.Simple = Model.Simple(
+    // For water: use waterMask() which works with translucent water rendering
+    // For lava: use entitySolid() which renders an opaque surface to cover lava
+    private val waterPatchModel: Model.Simple = Model.Simple(
         context.bakeLayer(ModelLayers.BOAT_WATER_PATCH)
     ) { RenderTypes.waterMask() }
+
+    // Opaque patch model for lava - renders a solid surface that covers lava
+    private val lavaPatchModel: Model.Simple = Model.Simple(
+        context.bakeLayer(ModelLayers.BOAT_WATER_PATCH)
+    ) { identifier -> RenderTypes.entitySolid(identifier) }
 
     /**
      * Override renderType to use the iron boat texture instead of oak.
@@ -48,9 +55,10 @@ class IronBoatRenderer(context: EntityRendererProvider.Context) :
     }
 
     /**
-     * Override to render the fluid mask patch when floating on lava.
-     * The vanilla implementation only renders this for water, but iron boats
-     * need it for lava too to prevent lava rendering inside the hull.
+     * Override to render fluid covering patches when floating.
+     * For iron boats, we render:
+     * 1. An opaque solid patch to cover lava (lava is rendered before entities)
+     * 2. A water mask patch to handle water (water is rendered after entities)
      */
     override fun submitTypeAdditions(
         state: BoatRenderState,
@@ -58,14 +66,27 @@ class IronBoatRenderer(context: EntityRendererProvider.Context) :
         collector: SubmitNodeCollector,
         light: Int
     ) {
-        // Render the fluid patch if not submerged (same condition as vanilla)
-        // This masks both water AND lava from appearing inside the boat
+        // Only render patches if not fully submerged
         if (!state.isUnderWater) {
+            // Render opaque lava patch - this physically covers lava with a solid surface
+            // Uses entitySolid render type which draws an opaque floor inside the boat
             collector.submitModel(
-                fluidPatchModel,
+                lavaPatchModel,
                 Unit.INSTANCE,
                 poseStack,
-                fluidPatchModel.renderType(IRON_BOAT_TEXTURE),
+                lavaPatchModel.renderType(IRON_BOAT_TEXTURE),
+                light,
+                OverlayTexture.NO_OVERLAY,
+                state.outlineColor,
+                null
+            )
+
+            // Also render water mask patch for when on water (same as vanilla boats)
+            collector.submitModel(
+                waterPatchModel,
+                Unit.INSTANCE,
+                poseStack,
+                waterPatchModel.renderType(IRON_BOAT_TEXTURE),
                 light,
                 OverlayTexture.NO_OVERLAY,
                 state.outlineColor,

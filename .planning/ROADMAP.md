@@ -1,7 +1,7 @@
 # Milestone v2.3: Extra Features Batch 7 - Monster Overhaul
 
 **Status:** IN PROGRESS
-**Phases:** 37-44
+**Phases:** 37-45
 **Requirements:** 23 (FR-01 through FR-23)
 
 ## Overview
@@ -293,6 +293,32 @@ Plans:
 
 ---
 
+### Phase 45: Unify Region Detection (Gap Closure)
+
+**Goal**: Fix region detection mismatch between spawn distribution and NBT tagging
+**Depends on**: Phase 42, Phase 41
+**Requirements**: FR-22, FR-23 (integration fix)
+**Gap Closure**: Closes integration gap from v2.3 audit
+**Plans:** 1 plan
+
+Plans:
+- [ ] 45-01-PLAN.md — Extract shared RegionDetector utility, update both mixins
+
+**Success Criteria:**
+1. SpawnReplacementMixin and MobFinalizeSpawnMixin use identical region detection
+2. Mob spawned under tree cover gets same region for distribution AND cap counting
+3. Surface cap counting matches spawn distribution decisions
+
+**Details:**
+- Root cause: SpawnReplacementMixin uses `canSeeSky()`, MobFinalizeSpawnMixin uses heightmap
+- Fix: Shared `RegionDetector.getRegion(level, pos)` utility using heightmap-based detection
+- Heightmap chosen per audit recommendation (matches player intuition of "surface")
+
+**Research Flags:**
+- HIGH confidence: Simple refactor, established patterns
+
+---
+
 ## Requirement Coverage
 
 | Requirement | Phase | Description |
@@ -337,6 +363,7 @@ Plans:
 | 42 | Regional Spawn System | 2 | Complete |
 | 43 | Monster Cap Partitioning | 1 | Complete |
 | 44 | Damage Rebalancing | 2 | Complete |
+| 45 | Unify Region Detection | 1 | Not started |
 
 ---
 

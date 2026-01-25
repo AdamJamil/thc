@@ -22,6 +22,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import thc.spawn.PillagerVariant;
+import thc.spawn.RegionDetector;
 import thc.spawn.RegionalCapManager;
 import thc.spawn.SpawnDistributions;
 
@@ -38,11 +39,11 @@ import thc.spawn.SpawnDistributions;
  *       surface zombies/skeletons with husks/strays</li>
  * </ol>
  *
- * <p>Region detection uses canSeeSky(pos) per FR-18 spec:
+ * <p>Region detection uses heightmap-based approach via RegionDetector:
  * <ul>
- *   <li>Any sky visibility = SURFACE (even through small holes)</li>
- *   <li>No sky + Y &lt; 0 = LOWER_CAVE</li>
- *   <li>No sky + Y &gt;= 0 = UPPER_CAVE</li>
+ *   <li>Y &gt;= MOTION_BLOCKING heightmap = SURFACE (includes under-tree)</li>
+ *   <li>Y &lt; 0 = LOWER_CAVE</li>
+ *   <li>Y &gt;= 0 but below heightmap = UPPER_CAVE</li>
  * </ul>
  *
  * <p>Custom spawns bypass vanilla spawn conditions - witches spawn anywhere,
@@ -82,7 +83,7 @@ public class SpawnReplacementMixin {
 		BlockPos pos = entity.blockPosition();
 
 		// Step 1: Detect region for cap check and distribution
-		String region = thc$detectRegion(level, pos);
+		String region = RegionDetector.getRegion(level, pos);
 
 		// Step 2: Regional cap check - block spawn if cap reached
 		// Per spec: three independent caps, no fallback when cap reached
@@ -104,38 +105,8 @@ public class SpawnReplacementMixin {
 		}
 
 		// Step 4: Vanilla fallback - apply surface variant replacement if applicable
-		Entity entityToSpawn = thc$getReplacementEntity(level, entity);
+		Entity entityToSpawn = thc$getReplacementEntity(level, entity, region);
 		level.addFreshEntityWithPassengers(entityToSpawn);
-	}
-
-	/**
-	 * Detect region for spawn distribution based on position.
-	 * Uses canSeeSky(pos) per FR-18 spec for surface detection.
-	 *
-	 * @param level The server level
-	 * @param pos   The spawn position
-	 * @return Region string (OW_SURFACE, OW_UPPER_CAVE, OW_LOWER_CAVE) or null if non-Overworld
-	 */
-	@Unique
-	private static String thc$detectRegion(ServerLevel level, BlockPos pos) {
-		// Only Overworld has custom distributions
-		// Nether/End skip regional distribution, use vanilla spawning only
-		// End support deferred to Phase 44b (requires separate distribution table)
-		if (level.dimension() != Level.OVERWORLD) {
-			return null;
-		}
-
-		// FIRST check: if can see sky -> SURFACE (per FR-18 isSkyVisible semantics)
-		if (level.canSeeSky(pos)) {
-			return "OW_SURFACE";
-		}
-
-		// Underground: check Y level
-		if (pos.getY() < 0) {
-			return "OW_LOWER_CAVE";
-		}
-
-		return "OW_UPPER_CAVE";
 	}
 
 	/**
@@ -218,14 +189,13 @@ public class SpawnReplacementMixin {
 	 *
 	 * @param level  The server level
 	 * @param entity The original entity
+	 * @param region The detected region (may be null for non-Overworld)
 	 * @return The replacement entity, or the original if no replacement needed
 	 */
 	@Unique
-	private static Entity thc$getReplacementEntity(ServerLevel level, Entity entity) {
-		BlockPos pos = entity.blockPosition();
-
-		// Only replace if surface (can see sky)
-		if (!level.canSeeSky(pos)) {
+	private static Entity thc$getReplacementEntity(ServerLevel level, Entity entity, String region) {
+		// Only replace if surface region
+		if (!"OW_SURFACE".equals(region)) {
 			return entity;
 		}
 

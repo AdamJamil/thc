@@ -18,6 +18,7 @@
 		"ExperienceOrbXpMixin",
 		"FoodDataMixin",
 		"GhastShootFireballGoalMixin",
+		"IronBoatLavaMixin",
 		"ItemEatingMixin",
 		"LargeFireballMixin",
 		"LivingEntityDrowningMixin",

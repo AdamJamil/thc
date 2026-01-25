@@ -4,15 +4,16 @@ import net.minecraft.client.renderer.entity.BoatRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 
 /**
- * Placeholder mixin for IronBoat rendering.
- * The IronBoatRenderer extends BoatRenderer and uses the oak boat model.
- * In a future update, this could be used to customize texture handling.
+ * Mixin placeholder for potential future BoatRenderer customizations.
  *
- * Note: Iron boat will render with oak boat texture until MC 1.21 rendering
- * API changes are better understood.
+ * Current iron boat rendering is handled via IronBoatRenderer which extends
+ * BoatRenderer and overrides:
+ * - renderType() for custom texture
+ * - submitTypeAdditions() for lava fluid masking
+ *
+ * This mixin is kept for potential future needs but has no active injections.
  */
 @Mixin(BoatRenderer.class)
 public abstract class IronBoatRendererMixin {
-    // Currently no injections needed - IronBoatRenderer handles via inheritance
-    // The boat will be visible but may use oak boat texture
+    // No injections currently needed - IronBoatRenderer handles via inheritance
 }

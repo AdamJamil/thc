@@ -51,7 +51,8 @@
 		"access.AbstractBoatAccessor",
 		"access.EnderManAccessor",
 		"access.FoodDataAccessor",
-		"access.MobAccessor"
+		"access.MobAccessor",
+		"access.EntityAccessor"
 	],
 	"injectors": {
 		"defaultRequire": 1

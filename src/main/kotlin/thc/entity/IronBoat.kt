@@ -1,6 +1,9 @@
 package thc.entity
 
+import net.minecraft.core.BlockPos
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.tags.FluidTags
+import net.minecraft.util.Mth
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.item.ItemEntity
@@ -10,6 +13,7 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
+import thc.mixin.access.EntityAccessor
 import java.util.function.Supplier
 
 class IronBoat(type: EntityType<out Boat>, level: Level) : Boat(type, level, Supplier { Items.AIR }) {
@@ -42,6 +46,9 @@ class IronBoat(type: EntityType<out Boat>, level: Level) : Boat(type, level, Sup
                 if (passenger.remainingFireTicks > 0) {
                     passenger.clearFire()
                 }
+                // ALSO clear the fire visual flag (shared flag bit 0)
+                // clearFire() only clears remainingFireTicks, not the visual flag
+                (passenger as EntityAccessor).invokeSetSharedFlagOnFire(false)
             }
         }
     }
@@ -53,6 +60,30 @@ class IronBoat(type: EntityType<out Boat>, level: Level) : Boat(type, level, Sup
             return super.hurtServer(serverLevel, damageSource, amount)
         }
         // Block all other damage: lava, fire, mob attacks, cacti, collisions
+        return false
+    }
+
+    // Override isUnderWater to also check for lava submersion
+    // This affects rendering - when true, the fluid masking patch is not rendered
+    override fun isUnderWater(): Boolean {
+        // Check vanilla water submersion first
+        if (super.isUnderWater()) return true
+
+        // Also check if submerged in lava (lava above boat top)
+        val aabb = boundingBox
+        val topY = Mth.ceil(aabb.maxY)
+        val blockPos = BlockPos.MutableBlockPos()
+
+        // Check if lava is above the boat top
+        for (x in Mth.floor(aabb.minX) until Mth.ceil(aabb.maxX)) {
+            for (z in Mth.floor(aabb.minZ) until Mth.ceil(aabb.maxZ)) {
+                blockPos.set(x, topY, z)
+                val fluid = level().getFluidState(blockPos)
+                if (fluid.`is`(FluidTags.LAVA) && fluid.getHeight(level(), blockPos) > 0) {
+                    return true // Submerged in lava
+                }
+            }
+        }
         return false
     }
 

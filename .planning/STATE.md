@@ -10,9 +10,9 @@ See: .planning/PROJECT.md (updated 2026-01-25)
 ## Current Position
 
 Phase: 46 - Iron Boat
-Plan: 01 of 3
+Plan: 02 of 3
 Status: In progress
-Last activity: 2026-01-25 — Completed 46-01-PLAN.md
+Last activity: 2026-01-25 — Completed 46-02-PLAN.md
 
 Progress: [█------] 1/7 phases complete
 
@@ -201,6 +201,9 @@ Key patterns established:
 - Companion object for deferred initialization to avoid circular dependencies
 - DataComponents.DAMAGE_RESISTANT with DamageTypeTags.IS_FIRE for item fire/lava immunity
 - Injection into private methods via parent class mixin with instanceof check
+- EntityRenderer<T, EntityRenderState> basic pattern for entity registration (MC 1.21.11 rendering API)
+- Separate entity vs item textures: entity/boat/ for world rendering, item/ for inventory icons
+- Item icon texture pattern: {item}_icon.png for inventory display vs full texture for entities
 
 ### Pending Todos
 
@@ -223,6 +226,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-25
-Stopped at: Completed 46-01-PLAN.md (Iron Boat entity and item)
+Stopped at: Completed 46-02-PLAN.md (Iron Boat client rendering and assets)
 Resume file: None
-Next: Plan and execute 46-02 (client rendering) or 46-03 (crafting recipe)
+Next: Plan and execute 46-03 (in-game testing)

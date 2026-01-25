@@ -159,7 +159,30 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ### Active
 
-(None — ship to validate)
+- Iron boats — v2.4
+  - Craftable with 5 iron ingots + magma cream (minecart shape)
+  - Works on lava like regular boats work on water
+  - Item drop is lava-proof, floats, flies to player when broken
+  - Custom textures (iron_boat.png, iron_boat_icon.png)
+- Saddle removal — v2.4
+  - Removed from all chest loot tables
+  - Mobs no longer drop saddles
+  - Cannot be crafted
+- Bucket changes — v2.4
+  - Lava buckets cannot be placed
+  - Copper buckets craftable (water/milk only)
+  - Water placement creates non-source water at max height
+- Elytra changes — v2.4
+  - Fireworks no longer propel during flight
+  - 2x speed gain when diving, 1.8x speed loss when ascending
+- Brewing removal — v2.4
+  - Brewing stands removed from natural spawns
+  - Brewing stands cannot be crafted
+  - Potions removed from piglin bartering
+- Armor rebalancing — v2.4
+  - New armor values: leather 7, copper 10, iron 15, diamond 18, netherite 10
+  - New toughness values: leather 0, copper 0, iron 0, diamond 4, netherite 6
+  - Half armor points allowed per piece
 
 ### Out of Scope
 
@@ -222,7 +245,9 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 | HEAD cancellation for FoodData.tick() | Complete control over exhaustion and healing logic | Good |
 | Fixed interval + variable heal amount | Simpler than variable intervals for saturation tier healing | Good |
 
-## Current Milestone: None (planning next)
+## Current Milestone: v2.4 Extra Features Batch 8
+
+**Goal:** Add mobility and survival mechanics (iron boats, copper buckets, elytra changes) while removing trivializing features (brewing, easy saddles) and rebalancing armor progression.
 
 **Previous milestone:** v2.3 Extra Features Batch 7 (Monster Overhaul) shipped 2026-01-25
 
@@ -251,4 +276,4 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 **Technical debt:** None identified
 
 ---
-*Last updated: 2026-01-25 after v2.3 milestone complete*
+*Last updated: 2026-01-25 after v2.4 milestone started*

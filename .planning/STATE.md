@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-01-25)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** Planning next milestone
+**Current focus:** v2.4 Extra Features Batch 8
 
 ## Current Position
 
-Phase: None (milestone complete)
-Plan: N/A
-Status: v2.3 Monster Overhaul SHIPPED
-Last activity: 2026-01-25 - v2.3 milestone archived
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-01-25 — Milestone v2.4 started
 
-Progress: Ready for /gsd:new-milestone
+Progress: Creating roadmap
 
 ## Performance Metrics
 

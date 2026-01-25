@@ -64,6 +64,10 @@ Plans:
 **Goal**: Players have early-game bucket option with water/milk restriction
 **Depends on**: Nothing (independent)
 **Requirements**: BUCK-01, BUCK-02, BUCK-03
+**Plans:** 1 plan
+
+Plans:
+- [ ] 48-01-PLAN.md — Copper bucket items with fluid restriction and cow milking
 
 **Success Criteria:**
 1. Player can craft copper bucket using 3 copper ingots in bucket pattern
@@ -162,7 +166,7 @@ Plans:
 |-------|------|--------|-------|
 | 46 | Iron Boat | Planned | 0/3 |
 | 47 | Saddle Removal | ✓ Complete | 1/1 |
-| 48 | Copper Bucket | Pending | 0/? |
+| 48 | Copper Bucket | Planned | 0/1 |
 | 49 | Fluid Placement Mechanics | Pending | 0/? |
 | 50 | Elytra Flight Changes | Pending | 0/? |
 | 51 | Brewing Removal | Pending | 0/? |

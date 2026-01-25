@@ -1,5 +1,6 @@
 package thc.mixin;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,7 +14,7 @@ import thc.entity.IronBoat;
 public abstract class IronBoatPassengerMixin {
 
     @Inject(method = "hurtServer", at = @At("HEAD"), cancellable = true)
-    private void thc$cancelFireDamageInIronBoat(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+    private void thc$cancelFireDamageInIronBoat(ServerLevel level, DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         LivingEntity self = (LivingEntity) (Object) this;
         Entity vehicle = self.getVehicle();
 

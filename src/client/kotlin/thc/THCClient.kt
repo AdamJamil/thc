@@ -17,6 +17,7 @@ object THCClient : ClientModInitializer {
 	override fun onInitializeClient() {
 		logger.info("THC client init")
 		// This entrypoint is suitable for setting up client-specific logic, such as rendering.
+
 		BucklerUseHandler.register()
 		ClientPlayNetworking.registerGlobalReceiver(BucklerStatePayload.TYPE) { payload, context ->
 			context.client().execute {

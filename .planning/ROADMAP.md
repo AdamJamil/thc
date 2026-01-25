@@ -15,6 +15,12 @@ Mobility and survival mechanics expansion with resource economy restrictions. Ir
 **Goal**: Players can craft and use iron boats for safe lava navigation
 **Depends on**: Nothing (first phase)
 **Requirements**: BOAT-01, BOAT-02, BOAT-03, BOAT-04, BOAT-05
+**Plans:** 3 plans
+
+Plans:
+- [ ] 46-01-PLAN.md — Entity + item registration with lava physics and damage immunity
+- [ ] 46-02-PLAN.md — Client renderer and asset files (recipe, models, lang)
+- [ ] 46-03-PLAN.md — Passenger fire protection mixin and verification
 
 **Success Criteria:**
 1. Player can craft iron boat using 5 iron ingots + magma cream in minecart shape
@@ -150,7 +156,7 @@ Mobility and survival mechanics expansion with resource economy restrictions. Ir
 
 | Phase | Name | Status | Plans |
 |-------|------|--------|-------|
-| 46 | Iron Boat | Pending | 0/? |
+| 46 | Iron Boat | Planned | 0/3 |
 | 47 | Saddle Removal | Pending | 0/? |
 | 48 | Copper Bucket | Pending | 0/? |
 | 49 | Fluid Placement Mechanics | Pending | 0/? |

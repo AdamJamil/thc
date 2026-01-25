@@ -15,7 +15,7 @@ import net.minecraft.world.item.component.DamageResistant
 object THCItems {
     private val toolsTabKey: ResourceKey<CreativeModeTab> = ResourceKey.create(
         Registries.CREATIVE_MODE_TAB,
-        Identifier.withDefaultNamespace("tools")
+        Identifier.withDefaultNamespace("tools_and_utilities")
     )
 
     private val foodTabKey: ResourceKey<CreativeModeTab> = ResourceKey.create(

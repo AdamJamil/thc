@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-25)
 
 ## Current Position
 
-Phase: 46 - Iron Boat
-Plan: 02 of 3
-Status: In progress
-Last activity: 2026-01-25 — Completed 46-02-PLAN.md
+Phase: 47 - Saddle Removal
+Plan: 01 of 1
+Status: Complete
+Last activity: 2026-01-25 — Completed 47-01-PLAN.md
 
-Progress: [█------] 1/7 phases complete
+Progress: [██-----] 2/7 phases complete
 
 ## Performance Metrics
 
@@ -63,9 +63,16 @@ Progress: [█------] 1/7 phases complete
 - Plans completed: 13
 - Total execution time: ~84 min
 
+**v2.4 Milestone (in progress):**
+- Phases: 46-52 (7 phases)
+- Requirements: 7 (EF8-01 through EF8-07)
+- Status: In progress
+- Plans completed: 1
+- Total execution time: ~5 min
+
 **Cumulative:**
-- 71 plans completed across 8 milestones
-- ~5.7 hours total execution time
+- 72 plans completed across 8 complete + 1 in-progress milestone
+- ~5.8 hours total execution time
 - 11 days from project start
 
 ## Accumulated Context
@@ -204,6 +211,7 @@ Key patterns established:
 - EntityRenderer<T, EntityRenderState> basic pattern for entity registration (MC 1.21.11 rendering API)
 - Separate entity vs item textures: entity/boat/ for world rendering, item/ for inventory icons
 - Item icon texture pattern: {item}_icon.png for inventory display vs full texture for entities
+- Loot table data pack overrides for complete item removal (saddles from 8 sources)
 
 ### Pending Todos
 
@@ -226,6 +234,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-25
-Stopped at: Completed 46-02-PLAN.md (Iron Boat client rendering and assets)
+Stopped at: Completed 47-01-PLAN.md (Saddle removal implementation)
 Resume file: None
-Next: Plan and execute 46-03 (in-game testing)
+Next: Continue v2.4 Extra Features Batch 8 phases

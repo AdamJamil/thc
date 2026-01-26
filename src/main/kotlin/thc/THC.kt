@@ -3,11 +3,16 @@ package thc
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
+import net.fabricmc.fabric.api.event.player.UseEntityCallback
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents
 import net.minecraft.server.MinecraftServer
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.sounds.SoundEvents
+import net.minecraft.world.InteractionResult
+import net.minecraft.world.entity.animal.cow.Cow
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import net.minecraft.world.level.gamerules.GameRules
 import org.slf4j.LoggerFactory
@@ -63,6 +68,30 @@ object THC : ModInitializer {
 		SimpleEntityBehaviors.register()
 		DamageRebalancing.register()
 		PayloadTypeRegistry.playS2C().register(BucklerStatePayload.TYPE, BucklerStatePayload.STREAM_CODEC)
+
+		// Cow milking with copper bucket
+		UseEntityCallback.EVENT.register { player, level, hand, entity, _ ->
+			val stack = player.getItemInHand(hand)
+
+			// Check if player is holding empty copper bucket and targeting an adult cow
+			if (stack.item == THCItems.COPPER_BUCKET && entity is Cow && !entity.isBaby) {
+				if (!level.isClientSide()) {
+					// Play milking sound
+					player.playSound(SoundEvents.COW_MILK, 1.0f, 1.0f)
+
+					// Replace copper bucket with copper milk bucket
+					stack.shrink(1)
+					val milkBucket = ItemStack(THCItems.COPPER_BUCKET_OF_MILK)
+					if (!player.inventory.add(milkBucket)) {
+						player.drop(milkBucket, false)
+					}
+				}
+
+				return@register InteractionResult.SUCCESS
+			}
+
+			InteractionResult.PASS
+		}
 
 		ServerTickEvents.END_SERVER_TICK.register(ServerTickEvents.EndTick { server ->
 			updateBucklerState(server)

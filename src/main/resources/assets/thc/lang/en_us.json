@@ -12,5 +12,8 @@
   "item.thc.netherite_arrow": "Netherite Arrow",
   "item.minecraft.rabbit_stew": "Hearty Stew",
   "item.thc.honey_apple": "Honey Apple",
-  "item.thc.iron_boat": "Iron Boat"
+  "item.thc.iron_boat": "Iron Boat",
+  "item.thc.copper_bucket": "Copper Bucket",
+  "item.thc.copper_bucket_of_water": "Copper Bucket of Water",
+  "item.thc.copper_bucket_of_milk": "Copper Bucket of Milk"
 }

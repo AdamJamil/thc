@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-25)
 
 ## Current Position
 
-Phase: 50 - Elytra Flight Changes
+Phase: 51 - Brewing Removal
 Plan: 01 of 1
 Status: Complete
-Last activity: 2026-01-26 — Completed 50-01-PLAN.md
+Last activity: 2026-01-26 — Completed 51-01-PLAN.md
 
-Progress: [█████--] 5/7 phases complete
+Progress: [██████-] 6/7 phases complete
 
 ## Performance Metrics
 
@@ -67,12 +67,12 @@ Progress: [█████--] 5/7 phases complete
 - Phases: 46-52 (7 phases)
 - Requirements: 24 (BOAT/SADL/BUCK/WATR/ELYT/BREW/ARMR)
 - Status: In progress
-- Plans completed: 5
-- Total execution time: ~19 min
+- Plans completed: 6
+- Total execution time: ~22 min
 
 **Cumulative:**
-- 74 plans completed across 8 complete + 1 in-progress milestone
-- ~5.9 hours total execution time
+- 75 plans completed across 8 complete + 1 in-progress milestone
+- ~6.0 hours total execution time
 - 12 days from project start
 
 ## Accumulated Context
@@ -222,6 +222,7 @@ Key patterns established:
 - @Redirect on setDeltaMovement for velocity boost cancellation (FireworkRocketEntity)
 - HEAD+TAIL velocity capture on travel() for delta calculation and multiplier application
 - Pitch-based multiplier selection: getXRot() >= 0 for diving vs ascending behavior
+- Loot table data pack override for gameplay loot tables (piglin bartering without fire resistance potions)
 
 ### Pending Todos
 
@@ -244,6 +245,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-26
-Stopped at: Completed 50-01-PLAN.md (Elytra Flight Changes)
+Stopped at: Completed 51-01-PLAN.md (Brewing Removal)
 Resume file: None
-Next: Phase 51 (Brewing Recipe Changes)
+Next: Phase 52 (Armor Crafting Changes)

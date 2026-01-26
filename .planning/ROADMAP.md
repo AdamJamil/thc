@@ -154,13 +154,17 @@ Plans:
 **Goal**: Armor progression provides clear upgrade tiers with copper insertion
 **Depends on**: Nothing (independent)
 **Requirements**: ARMR-01, ARMR-02, ARMR-03, ARMR-04
+**Plans:** 1 plan
+
+Plans:
+- [ ] 52-01-PLAN.md — Armor attribute modifier registration for all 5 tiers
 
 **Success Criteria:**
 1. Full leather armor provides 7 total armor points
 2. Full copper armor provides 10 total armor points
 3. Full iron armor provides 15 total armor points
 4. Full diamond armor provides 18 armor + 4 toughness
-5. Full netherite armor provides 10 armor + 6 toughness (glass cannon tier)
+5. Full netherite armor provides 20 armor + 6 toughness
 6. Each armor tier upgrade gives strictly more protection than previous
 7. Individual pieces can have half armor points (bar display rounds down)
 
@@ -168,7 +172,7 @@ Plans:
 - ArmorMaterial modification via DefaultItemComponentEvents.MODIFY
 - Per-piece armor distribution calculated to ensure monotonic progression
 - Half armor point rendering handled by vanilla (supports fractions internally)
-- Netherite intentionally weaker armor but highest toughness
+- Netherite is ultimate tier with highest armor AND toughness
 
 ---
 
@@ -177,12 +181,12 @@ Plans:
 | Phase | Name | Status | Plans |
 |-------|------|--------|-------|
 | 46 | Iron Boat | Planned | 0/3 |
-| 47 | Saddle Removal | ✓ Complete | 1/1 |
-| 48 | Copper Bucket | ✓ Complete | 1/1 |
-| 49 | Fluid Placement Mechanics | ✓ Complete | 1/1 |
-| 50 | Elytra Flight Changes | ✓ Complete | 1/1 |
-| 51 | Brewing Removal | ✓ Complete | 1/1 |
-| 52 | Armor Rebalancing | Pending | 0/? |
+| 47 | Saddle Removal | Complete | 1/1 |
+| 48 | Copper Bucket | Complete | 1/1 |
+| 49 | Fluid Placement Mechanics | Complete | 1/1 |
+| 50 | Elytra Flight Changes | Complete | 1/1 |
+| 51 | Brewing Removal | Complete | 1/1 |
+| 52 | Armor Rebalancing | Planned | 0/1 |
 
 ## Coverage
 

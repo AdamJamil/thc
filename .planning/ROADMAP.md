@@ -132,6 +132,10 @@ Plans:
 **Goal**: Potions are completely unobtainable, removing buff/heal economy
 **Depends on**: Nothing (independent)
 **Requirements**: BREW-01, BREW-02, BREW-03
+**Plans:** 1 plan
+
+Plans:
+- [ ] 51-01-PLAN.md — Structure filtering, recipe removal, and piglin bartering loot override
 
 **Success Criteria:**
 1. Brewing stands do not spawn in villages, igloos, or any structure
@@ -177,7 +181,7 @@ Plans:
 | 48 | Copper Bucket | ✓ Complete | 1/1 |
 | 49 | Fluid Placement Mechanics | ✓ Complete | 1/1 |
 | 50 | Elytra Flight Changes | ✓ Complete | 1/1 |
-| 51 | Brewing Removal | Pending | 0/? |
+| 51 | Brewing Removal | Planned | 0/1 |
 | 52 | Armor Rebalancing | Pending | 0/? |
 
 ## Coverage

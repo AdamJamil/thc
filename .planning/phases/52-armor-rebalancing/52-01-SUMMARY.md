@@ -45,12 +45,12 @@ metrics:
 
 # Phase 52 Plan 01: Armor Rebalancing Summary
 
-**One-liner:** Rebalanced 16 vanilla armor pieces with fractional values supporting leather (7), iron (15), diamond (18+4), netherite (20+6) progression
+**One-liner:** Rebalanced 20 vanilla armor pieces with fractional values supporting leather (7), copper (10), iron (15), diamond (18+4), netherite (20+6) progression
 
 ## What Was Built
 
 ### ArmorRebalancing System
-Created `ArmorRebalancing.kt` that modifies vanilla armor items using `DefaultItemComponentEvents.MODIFY`:
+Created `ArmorRebalancing.kt` that modifies all 20 vanilla armor items using `DefaultItemComponentEvents.MODIFY`:
 
 **Armor Value Distribution (per piece):**
 
@@ -62,7 +62,7 @@ Created `ArmorRebalancing.kt` that modifies vanilla armor items using `DefaultIt
 | Diamond | 3.0 | 7.0 | 5.0 | 3.0 | **18** | 4 (1.0 each) | 0 |
 | Netherite | 3.0 | 8.0 | 6.0 | 3.0 | **20** | 6 (1.5 each) | 0.4 (0.1 each) |
 
-*Copper tier is placeholder only - mod doesn't have copper armor items yet
+*Copper armor added in vanilla MC 1.21.11 (Copper Age update)
 
 ### Key Features
 1. **Fractional Armor Values:** Supports half-point armor (1.5, 2.0, 3.0) for smooth progression
@@ -98,7 +98,7 @@ context.modify(Items.LEATHER_HELMET) { builder ->
 ## Verification Results
 
 ✅ **Build Success:** `./gradlew build` completed with BUILD SUCCESSFUL
-✅ **Code Inspection:** ArmorRebalancing.kt modifies 16 armor items (4 tiers x 4 pieces)
+✅ **Code Inspection:** ArmorRebalancing.kt modifies 20 armor items (5 tiers x 4 pieces)
 ✅ **Math Check:** Per-piece values sum correctly to tier totals
 ✅ **Toughness Check:** Diamond = 4 total (1.0 x 4), Netherite = 6 total (1.5 x 4)
 ✅ **Knockback Check:** Only Netherite pieces have KB resistance (0.1 x 4 = 0.4)
@@ -137,19 +137,19 @@ context.modify(Items.LEATHER_HELMET) { builder ->
 
 ---
 
-### ARMR-03: Copper Tier Placeholder
-**Decision:** Add copper tier comment but don't implement armor items
+### ARMR-03: Copper Armor Support
+**Decision:** Include copper armor in rebalancing (vanilla MC 1.21.11)
 
-**Context:** Plan includes copper tier (10 armor) but THC mod doesn't have copper armor items registered
+**Context:** Copper armor was added in vanilla Minecraft 1.21.11 (Copper Age update)
 
-**Options:**
-- **Placeholder comment:** Document values, implement when items added (CHOSEN)
-- **Skip copper tier:** Remove from plan entirely
-- **Create copper armor items now:** Full item registration (out of scope)
+**Implementation:** Added copper armor modifications with values:
+- Helmet: 1.5 armor
+- Chestplate: 4.0 armor
+- Leggings: 3.0 armor
+- Boots: 1.5 armor
+- Total: 10 armor points
 
-**Rationale:** Plan focuses on rebalancing existing armor. Copper armor item registration is separate feature requiring item class, textures, recipes. Placeholder documents intended values for future implementation.
-
-**Impact:** Phase 52-01 completes with 16 items modified (leather/iron/diamond/netherite). Copper tier values documented for phase 52-02 or future copper armor feature.
+**Impact:** Phase 52-01 completes with all 20 vanilla armor items modified (leather/copper/iron/diamond/netherite).
 
 ## Deviations from Plan
 
@@ -183,19 +183,20 @@ Each tier provides clear combat advantage over previous.
 
 ## Next Phase Readiness
 
-**Phase 52-02 (Armor Crafting Changes):**
-- ✅ Armor values rebalanced and tested
+**Milestone v2.4 Complete:**
+- ✅ All 5 armor tiers rebalanced (leather/copper/iron/diamond/netherite)
+- ✅ All 20 vanilla armor items modified
 - ✅ Build system verified working
-- ⚠️ Copper armor items not registered yet (out of scope for rebalancing)
-- ✅ Pattern established for future armor item modifications
+- ✅ Pattern established for future armor modifications
 
 **Blockers:** None
 
-**Concerns:** Copper tier values documented but items don't exist. Future copper armor feature needs to reference these values.
+**Concerns:** None - all armor tiers implemented.
 
 ## Commit History
 
 ```
+fbcf747 fix(52-01): add copper armor attribute modifications
 26cee80 feat(52-01): register ArmorRebalancing in THC initialization
 a769173 feat(52-01): create ArmorRebalancing with attribute modifiers
 ```

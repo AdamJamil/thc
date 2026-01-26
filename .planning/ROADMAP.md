@@ -157,7 +157,7 @@ Plans:
 **Plans:** 1 plan
 
 Plans:
-- [ ] 52-01-PLAN.md — Armor attribute modifier registration for all 5 tiers
+- [x] 52-01-PLAN.md — Armor attribute modifier registration for all 5 tiers
 
 **Success Criteria:**
 1. Full leather armor provides 7 total armor points
@@ -186,7 +186,7 @@ Plans:
 | 49 | Fluid Placement Mechanics | Complete | 1/1 |
 | 50 | Elytra Flight Changes | Complete | 1/1 |
 | 51 | Brewing Removal | Complete | 1/1 |
-| 52 | Armor Rebalancing | Planned | 0/1 |
+| 52 | Armor Rebalancing | Complete | 1/1 |
 
 ## Coverage
 
@@ -212,10 +212,10 @@ Plans:
 | BREW-01 | 51 | Complete |
 | BREW-02 | 51 | Complete |
 | BREW-03 | 51 | Complete |
-| ARMR-01 | 52 | Pending |
-| ARMR-02 | 52 | Pending |
-| ARMR-03 | 52 | Pending |
-| ARMR-04 | 52 | Pending |
+| ARMR-01 | 52 | Complete |
+| ARMR-02 | 52 | Complete |
+| ARMR-03 | 52 | Complete |
+| ARMR-04 | 52 | Complete |
 
 **Coverage:** 24/24 requirements mapped (100%)
 

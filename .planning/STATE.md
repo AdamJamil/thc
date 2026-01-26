@@ -65,7 +65,7 @@ Progress: [███----] 3/7 phases complete
 
 **v2.4 Milestone (in progress):**
 - Phases: 46-52 (7 phases)
-- Requirements: 7 (EF8-01 through EF8-07)
+- Requirements: 24 (BOAT/SADL/BUCK/WATR/ELYT/BREW/ARMR)
 - Status: In progress
 - Plans completed: 2
 - Total execution time: ~10 min
@@ -239,4 +239,4 @@ None.
 Last session: 2026-01-26
 Stopped at: Completed 48-01-PLAN.md (Copper bucket implementation)
 Resume file: None
-Next: Continue v2.4 Extra Features Batch 8 phases
+Next: Plan Phase 49 (Fluid Placement Mechanics)

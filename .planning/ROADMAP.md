@@ -67,7 +67,7 @@ Plans:
 **Plans:** 1 plan
 
 Plans:
-- [ ] 48-01-PLAN.md — Copper bucket items with fluid restriction and cow milking
+- [x] 48-01-PLAN.md — Copper bucket items with fluid restriction and cow milking
 
 **Success Criteria:**
 1. Player can craft copper bucket using 3 copper ingots in bucket pattern
@@ -166,7 +166,7 @@ Plans:
 |-------|------|--------|-------|
 | 46 | Iron Boat | Planned | 0/3 |
 | 47 | Saddle Removal | ✓ Complete | 1/1 |
-| 48 | Copper Bucket | Planned | 0/1 |
+| 48 | Copper Bucket | ✓ Complete | 1/1 |
 | 49 | Fluid Placement Mechanics | Pending | 0/? |
 | 50 | Elytra Flight Changes | Pending | 0/? |
 | 51 | Brewing Removal | Pending | 0/? |
@@ -184,9 +184,9 @@ Plans:
 | SADL-01 | 47 | Complete |
 | SADL-02 | 47 | Complete |
 | SADL-03 | 47 | Complete |
-| BUCK-01 | 48 | Pending |
-| BUCK-02 | 48 | Pending |
-| BUCK-03 | 48 | Pending |
+| BUCK-01 | 48 | Complete |
+| BUCK-02 | 48 | Complete |
+| BUCK-03 | 48 | Complete |
 | BUCK-04 | 49 | Pending |
 | WATR-01 | 49 | Pending |
 | WATR-02 | 49 | Pending |

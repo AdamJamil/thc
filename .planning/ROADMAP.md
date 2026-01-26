@@ -135,7 +135,7 @@ Plans:
 **Plans:** 1 plan
 
 Plans:
-- [ ] 51-01-PLAN.md — Structure filtering, recipe removal, and piglin bartering loot override
+- [x] 51-01-PLAN.md — Structure filtering, recipe removal, and piglin bartering loot override
 
 **Success Criteria:**
 1. Brewing stands do not spawn in villages, igloos, or any structure
@@ -181,7 +181,7 @@ Plans:
 | 48 | Copper Bucket | ✓ Complete | 1/1 |
 | 49 | Fluid Placement Mechanics | ✓ Complete | 1/1 |
 | 50 | Elytra Flight Changes | ✓ Complete | 1/1 |
-| 51 | Brewing Removal | Planned | 0/1 |
+| 51 | Brewing Removal | ✓ Complete | 1/1 |
 | 52 | Armor Rebalancing | Pending | 0/? |
 
 ## Coverage
@@ -205,9 +205,9 @@ Plans:
 | ELYT-01 | 50 | Complete |
 | ELYT-02 | 50 | Complete |
 | ELYT-03 | 50 | Complete |
-| BREW-01 | 51 | Pending |
-| BREW-02 | 51 | Pending |
-| BREW-03 | 51 | Pending |
+| BREW-01 | 51 | Complete |
+| BREW-02 | 51 | Complete |
+| BREW-03 | 51 | Complete |
 | ARMR-01 | 52 | Pending |
 | ARMR-02 | 52 | Pending |
 | ARMR-03 | 52 | Pending |

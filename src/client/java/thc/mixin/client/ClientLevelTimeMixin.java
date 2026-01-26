@@ -23,10 +23,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(SkyRenderer.class)
 public abstract class ClientLevelTimeMixin {
 
-	// Dusk sun angle: ~11800 ticks equivalent
-	// Sun angle formula: (dayTime / 24000.0 - 0.25) mod 1.0
-	// For 11800 ticks: 11800/24000 - 0.25 = 0.241667
-	private static final float DUSK_SUN_ANGLE = 0.241667F;
+	// Dusk sun angle in RADIANS (vanilla multiplies degrees by π/180)
+	// Sunset is at 180 degrees = π radians ≈ 3.14159
+	// Dusk (sun below horizon) is around 200 degrees = 3.49 radians
+	private static final float DUSK_SUN_ANGLE = 3.49f;
 
 	@Inject(
 		method = "extractRenderState",
@@ -36,8 +36,8 @@ public abstract class ClientLevelTimeMixin {
 		// Only modify Overworld sky
 		if (level.dimension() == Level.OVERWORLD) {
 			state.sunAngle = DUSK_SUN_ANGLE;
-			// Moon and star angles follow sun
-			state.moonAngle = DUSK_SUN_ANGLE + 0.5F;
+			// Moon is opposite sun (π radians offset)
+			state.moonAngle = DUSK_SUN_ANGLE + (float) Math.PI;
 			state.starAngle = DUSK_SUN_ANGLE;
 		}
 	}

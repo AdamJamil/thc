@@ -245,20 +245,18 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 | HEAD cancellation for FoodData.tick() | Complete control over exhaustion and healing logic | Good |
 | Fixed interval + variable heal amount | Simpler than variable intervals for saturation tier healing | Good |
 
-## Current Milestone: v2.4 Extra Features Batch 8
+## Current Milestone
 
-**Goal:** Add mobility and survival mechanics (iron boats, copper buckets, elytra changes) while removing trivializing features (brewing, easy saddles) and rebalancing armor progression.
-
-**Previous milestone:** v2.3 Extra Features Batch 7 (Monster Overhaul) shipped 2026-01-25
+None — awaiting `/gsd:new-milestone` to define next milestone
 
 ## Current State
 
-**Latest Ship:** v2.3 Extra Features Batch 7 (2026-01-25)
+**Latest Ship:** v2.4 Extra Features Batch 8 (2026-01-26)
 
 **Codebase:**
-- ~6,807 LOC Kotlin/Java
+- ~14,506 LOC Kotlin/Java
 - Mixed mixin + event-driven architecture
-- 71 plans across 45 phases in 8 milestones
+- 78 plans across 52 phases in 9 milestones
 - Attachment patterns for player state, mob threat, one-time effects, class, boon level, spawn region
 - Client visual overrides for twilight sky
 - Comprehensive spawn/behavior modifications (10+ mob types)
@@ -269,6 +267,12 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 - Stage system with boon level scaffolding
 - Regional spawn system with partitioned caps
 - Custom mob distributions per Overworld region
+- Iron boat entity for lava navigation
+- Copper bucket system (water/milk only)
+- Fluid placement restrictions (no lava, flowing water)
+- Skill-based elytra flight (no fireworks, pitch multipliers)
+- Brewing economy removal
+- Armor progression rebalancing (5 tiers)
 
 **Known issues:**
 - PlayerSleepMixin broken from MC 1.21.11 upgrade (blocks smoke test, not functionality)
@@ -276,4 +280,4 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 **Technical debt:** None identified
 
 ---
-*Last updated: 2026-01-25 after v2.4 milestone started*
+*Last updated: 2026-01-26 after v2.4 milestone completed*

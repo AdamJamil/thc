@@ -88,6 +88,10 @@ Plans:
 **Goal**: Bucket-based fluid economy restricts infinite water and lava placement
 **Depends on**: Phase 48 (copper bucket must exist first)
 **Requirements**: BUCK-04, WATR-01, WATR-02
+**Plans:** 1 plan
+
+Plans:
+- [ ] 49-01-PLAN.md — Lava placement blocking and flowing water placement
 
 **Success Criteria:**
 1. Right-clicking with lava bucket does nothing (lava placement blocked)
@@ -167,7 +171,7 @@ Plans:
 | 46 | Iron Boat | Planned | 0/3 |
 | 47 | Saddle Removal | ✓ Complete | 1/1 |
 | 48 | Copper Bucket | ✓ Complete | 1/1 |
-| 49 | Fluid Placement Mechanics | Pending | 0/? |
+| 49 | Fluid Placement Mechanics | Planned | 0/1 |
 | 50 | Elytra Flight Changes | Pending | 0/? |
 | 51 | Brewing Removal | Pending | 0/? |
 | 52 | Armor Rebalancing | Pending | 0/? |

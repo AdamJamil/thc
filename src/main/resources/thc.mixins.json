@@ -48,6 +48,7 @@
 		"VillagerMixin",
 		"WindChargePlayerBoostMixin",
 		"FireworkRocketEntityMixin",
+		"PlayerElytraMixin",
 		"access.ItemAccessor",
 		"access.AbstractArrowAccessor",
 		"access.AbstractBoatAccessor",

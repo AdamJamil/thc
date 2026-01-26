@@ -76,8 +76,54 @@ object ArmorRebalancing {
             }
 
             // ===== COPPER ARMOR (10 total armor) =====
-            // Note: Copper armor is added by THC mod, not vanilla
-            // These entries are placeholders for when copper armor is added to the game
+            context.modify(Items.COPPER_HELMET) { builder ->
+                builder.set(DataComponents.ATTRIBUTE_MODIFIERS,
+                    ItemAttributeModifiers.builder()
+                        .add(Attributes.ARMOR,
+                            AttributeModifier(
+                                Identifier.fromNamespaceAndPath("thc", "copper_helmet_armor"),
+                                1.5,
+                                AttributeModifier.Operation.ADD_VALUE
+                            ),
+                            EquipmentSlotGroup.HEAD)
+                        .build())
+            }
+            context.modify(Items.COPPER_CHESTPLATE) { builder ->
+                builder.set(DataComponents.ATTRIBUTE_MODIFIERS,
+                    ItemAttributeModifiers.builder()
+                        .add(Attributes.ARMOR,
+                            AttributeModifier(
+                                Identifier.fromNamespaceAndPath("thc", "copper_chestplate_armor"),
+                                4.0,
+                                AttributeModifier.Operation.ADD_VALUE
+                            ),
+                            EquipmentSlotGroup.CHEST)
+                        .build())
+            }
+            context.modify(Items.COPPER_LEGGINGS) { builder ->
+                builder.set(DataComponents.ATTRIBUTE_MODIFIERS,
+                    ItemAttributeModifiers.builder()
+                        .add(Attributes.ARMOR,
+                            AttributeModifier(
+                                Identifier.fromNamespaceAndPath("thc", "copper_leggings_armor"),
+                                3.0,
+                                AttributeModifier.Operation.ADD_VALUE
+                            ),
+                            EquipmentSlotGroup.LEGS)
+                        .build())
+            }
+            context.modify(Items.COPPER_BOOTS) { builder ->
+                builder.set(DataComponents.ATTRIBUTE_MODIFIERS,
+                    ItemAttributeModifiers.builder()
+                        .add(Attributes.ARMOR,
+                            AttributeModifier(
+                                Identifier.fromNamespaceAndPath("thc", "copper_boots_armor"),
+                                1.5,
+                                AttributeModifier.Operation.ADD_VALUE
+                            ),
+                            EquipmentSlotGroup.FEET)
+                        .build())
+            }
 
             // ===== IRON ARMOR (15 total armor) =====
             context.modify(Items.IRON_HELMET) { builder ->

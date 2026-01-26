@@ -91,7 +91,7 @@ Plans:
 **Plans:** 1 plan
 
 Plans:
-- [ ] 49-01-PLAN.md — Lava placement blocking and flowing water placement
+- [x] 49-01-PLAN.md — Lava placement blocking and flowing water placement
 
 **Success Criteria:**
 1. Right-clicking with lava bucket does nothing (lava placement blocked)
@@ -171,7 +171,7 @@ Plans:
 | 46 | Iron Boat | Planned | 0/3 |
 | 47 | Saddle Removal | ✓ Complete | 1/1 |
 | 48 | Copper Bucket | ✓ Complete | 1/1 |
-| 49 | Fluid Placement Mechanics | Planned | 0/1 |
+| 49 | Fluid Placement Mechanics | ✓ Complete | 1/1 |
 | 50 | Elytra Flight Changes | Pending | 0/? |
 | 51 | Brewing Removal | Pending | 0/? |
 | 52 | Armor Rebalancing | Pending | 0/? |
@@ -191,9 +191,9 @@ Plans:
 | BUCK-01 | 48 | Complete |
 | BUCK-02 | 48 | Complete |
 | BUCK-03 | 48 | Complete |
-| BUCK-04 | 49 | Pending |
-| WATR-01 | 49 | Pending |
-| WATR-02 | 49 | Pending |
+| BUCK-04 | 49 | Complete |
+| WATR-01 | 49 | Complete |
+| WATR-02 | 49 | Complete |
 | ELYT-01 | 50 | Pending |
 | ELYT-02 | 50 | Pending |
 | ELYT-03 | 50 | Pending |

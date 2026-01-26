@@ -113,7 +113,7 @@ Plans:
 **Plans:** 1 plan
 
 Plans:
-- [ ] 50-01-PLAN.md — Firework boost cancellation and pitch-based velocity multipliers
+- [x] 50-01-PLAN.md — Firework boost cancellation and pitch-based velocity multipliers
 
 **Success Criteria:**
 1. Using firework rocket during elytra flight does not boost player speed
@@ -176,7 +176,7 @@ Plans:
 | 47 | Saddle Removal | ✓ Complete | 1/1 |
 | 48 | Copper Bucket | ✓ Complete | 1/1 |
 | 49 | Fluid Placement Mechanics | ✓ Complete | 1/1 |
-| 50 | Elytra Flight Changes | Planned | 0/1 |
+| 50 | Elytra Flight Changes | ✓ Complete | 1/1 |
 | 51 | Brewing Removal | Pending | 0/? |
 | 52 | Armor Rebalancing | Pending | 0/? |
 
@@ -198,9 +198,9 @@ Plans:
 | BUCK-04 | 49 | Complete |
 | WATR-01 | 49 | Complete |
 | WATR-02 | 49 | Complete |
-| ELYT-01 | 50 | Pending |
-| ELYT-02 | 50 | Pending |
-| ELYT-03 | 50 | Pending |
+| ELYT-01 | 50 | Complete |
+| ELYT-02 | 50 | Complete |
+| ELYT-03 | 50 | Complete |
 | BREW-01 | 51 | Pending |
 | BREW-02 | 51 | Pending |
 | BREW-03 | 51 | Pending |

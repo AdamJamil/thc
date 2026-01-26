@@ -26,6 +26,7 @@ import thc.item.THCBucklers
 import thc.item.THCItems
 import thc.network.BucklerSync
 import thc.network.BucklerStatePayload
+import thc.armor.ArmorRebalancing
 import thc.food.FoodStatsModifier
 import thc.monster.DamageRebalancing
 import thc.monster.GhastModifications
@@ -60,6 +61,7 @@ object THC : ModInitializer {
 		WorldRestrictions.register()
 		VillageProtection.register()
 		MiningFatigue.register()
+		ArmorRebalancing.register()
 		FoodStatsModifier.register()
 		SelectClassCommand.register()
 		AdvanceStageCommand.register()

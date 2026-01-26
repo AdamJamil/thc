@@ -37,7 +37,8 @@ public class RecipeManagerMixin {
 		"mushroom_stew",
 		"beetroot_soup",
 		"sugar_from_sugar_cane",
-		"saddle"
+		"saddle",
+		"brewing_stand"
 	);
 
 	@Inject(

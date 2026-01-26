@@ -60,6 +60,35 @@ object THCItems {
         )
     }
 
+    @JvmField
+    val COPPER_BUCKET: Item = register("copper_bucket") { key ->
+        CopperBucketItem(
+            Item.Properties()
+                .setId(key)
+                .stacksTo(16)  // Empty buckets can stack
+        )
+    }
+
+    @JvmField
+    val COPPER_BUCKET_OF_WATER: Item = register("copper_bucket_of_water") { key ->
+        CopperWaterBucketItem(
+            Item.Properties()
+                .setId(key)
+                .stacksTo(1)
+                .craftRemainder(COPPER_BUCKET)  // Returns empty bucket in crafting
+        )
+    }
+
+    @JvmField
+    val COPPER_BUCKET_OF_MILK: Item = register("copper_bucket_of_milk") { key ->
+        CopperMilkBucketItem(
+            Item.Properties()
+                .setId(key)
+                .stacksTo(1)
+                .craftRemainder(COPPER_BUCKET)
+        )
+    }
+
     fun init() {
         // Set the drop item for IronBoat entity after items are initialized
         thc.entity.IronBoat.ironBoatDropItem = IRON_BOAT
@@ -68,6 +97,9 @@ object THCItems {
             entries.accept(LAND_PLOT)
             entries.accept(BLAST_TOTEM)
             entries.accept(IRON_BOAT)
+            entries.accept(COPPER_BUCKET)
+            entries.accept(COPPER_BUCKET_OF_WATER)
+            entries.accept(COPPER_BUCKET_OF_MILK)
         }
         ItemGroupEvents.modifyEntriesEvent(foodTabKey).register { entries ->
             entries.accept(HONEY_APPLE)

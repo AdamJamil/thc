@@ -9,11 +9,13 @@ import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.ClipContext
 import net.minecraft.world.level.Level
-import net.minecraft.world.level.block.Blocks
+import net.minecraft.world.level.material.FlowingFluid
+import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.phys.HitResult
 
 /**
- * Water-filled copper bucket that can place water source blocks.
+ * Water-filled copper bucket that places flowing water (not source blocks).
+ * Placed water flows and drains naturally, preventing infinite water exploits.
  * Returns empty copper bucket after use.
  */
 class CopperWaterBucketItem(properties: Properties) : Item(properties) {
@@ -35,8 +37,16 @@ class CopperWaterBucketItem(properties: Properties) : Item(properties) {
             // Check permission to interact
             if (level.mayInteract(player, blockPos) && player.mayUseItemAt(targetPos, hitResult.direction, stack)) {
                 if (!level.isClientSide()) {
-                    // Place water source block
-                    level.setBlock(targetPos, Blocks.WATER.defaultBlockState(), 11)
+                    // Place flowing water at level 8 (max height, spreads and drains)
+                    val flowingWater = Fluids.FLOWING_WATER
+                        .defaultFluidState()
+                        .setValue(FlowingFluid.LEVEL, 8)
+                        .createLegacyBlock()
+
+                    level.setBlock(targetPos, flowingWater, 11)
+
+                    // Schedule tick for water to start flowing
+                    level.scheduleTick(targetPos, Fluids.FLOWING_WATER, Fluids.FLOWING_WATER.getTickDelay(level))
 
                     // Return empty copper bucket
                     stack.shrink(1)

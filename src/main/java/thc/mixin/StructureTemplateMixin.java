@@ -14,11 +14,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 /**
- * Filters furnace and blast furnace blocks from structure generation.
+ * Filters furnace, blast furnace, smoker, and brewing stand blocks from structure generation.
  *
  * <p>Villages generate with furnaces by default. THC requires players to craft
  * furnaces with blaze powder, gating smelting behind Nether access. This mixin
- * intercepts structure block placement and skips furnaces.
+ * intercepts structure block placement and skips furnaces and brewing stands.
  */
 @Mixin(StructureTemplate.class)
 public class StructureTemplateMixin {
@@ -26,12 +26,14 @@ public class StructureTemplateMixin {
 	/**
 	 * Blocks to filter from structure generation.
 	 * Furnaces require blaze powder, smokers require iron to craft in THC.
+	 * Brewing stands removed entirely from game economy.
 	 */
 	@Unique
 	private static final Set<Block> FILTERED_STRUCTURE_BLOCKS = Set.of(
 		Blocks.FURNACE,
 		Blocks.BLAST_FURNACE,
-		Blocks.SMOKER
+		Blocks.SMOKER,
+		Blocks.BREWING_STAND
 	);
 
 	/**

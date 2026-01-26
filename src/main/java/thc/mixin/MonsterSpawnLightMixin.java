@@ -60,13 +60,11 @@ public abstract class MonsterSpawnLightMixin {
 			return;
 		}
 
-		// Preserve the final brightness test (uses combined light in some cases)
-		int brightness = level.getLevel().isThundering()
-			? level.getMaxLocalRawBrightness(pos, 10)
-			: level.getMaxLocalRawBrightness(pos);
+		// Use ONLY block light for final check (not getMaxLocalRawBrightness which includes sky)
+		// This allows daytime spawns while still letting torches prevent spawns
+		int blockLight = level.getBrightness(LightLayer.BLOCK, pos);
 
-		// Only check block-based brightness contribution
 		// The monsterSpawnLightTest is dimension-specific randomized threshold
-		cir.setReturnValue(brightness <= dimensionType.monsterSpawnLightTest().sample(random));
+		cir.setReturnValue(blockLight <= dimensionType.monsterSpawnLightTest().sample(random));
 	}
 }

@@ -39,6 +39,7 @@ import thc.stage.StageManager
 import thc.world.MiningFatigue
 import thc.world.VillageProtection
 import thc.world.WorldRestrictions
+import thc.enchant.EnchantmentEnforcement
 
 object THC : ModInitializer {
 	private val logger = LoggerFactory.getLogger("thc")
@@ -170,6 +171,11 @@ object THC : ModInitializer {
 			drops.removeIf { stack -> removedItems.any { stack.`is`(it) } }
 			if (hadTotem) {
 				drops.add(THCItems.BLAST_TOTEM.defaultInstance)
+			}
+
+			// Enchantment enforcement: strip removed enchants, normalize levels
+			drops.forEach { stack ->
+				EnchantmentEnforcement.correctStack(stack)
 			}
 		})
 

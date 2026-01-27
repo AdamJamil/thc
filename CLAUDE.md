@@ -1,5 +1,15 @@
 # Claude Instructions for THC
 
+## Gradle Build Errors
+
+If you see **"Gradle could not start your build"** with IO errors, it means the user is already running Gradle (e.g., `runClient`). **STOP IMMEDIATELY** and notify the user. Do not:
+- Retry the build
+- Kill Java processes
+- Delete .gradle directories
+- Attempt any other troubleshooting
+
+Just tell the user: "Gradle is already running. Let me know when it's free."
+
 ## After Minecraft Version Updates
 
 Run `gradle runClient` immediately after updating MC version to catch mixin breakages while the upgrade is the focus. Mixin injection targets change between versions and errors are much cheaper to fix with fresh context than weeks later.

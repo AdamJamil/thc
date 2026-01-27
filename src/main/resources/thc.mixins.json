@@ -21,6 +21,7 @@
 		"GhastShootFireballGoalMixin",
 		"IronBoatLavaMixin",
 		"IronBoatPassengerMixin",
+		"ItemEnchantmentsMixin",
 		"ItemEatingMixin",
 		"LargeFireballMixin",
 		"LivingEntityDrowningMixin",

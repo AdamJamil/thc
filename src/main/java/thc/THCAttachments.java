@@ -87,6 +87,15 @@ public final class THCAttachments {
 			builder.persistent(Codec.BOOL);
 		}
 	);
+	/**
+	 * Tracks the source of fire damage for custom damage rates.
+	 * Values: "flame" (Flame enchantment), "fire_aspect" (Fire Aspect enchantment), or null (normal fire)
+	 * Non-persistent - resets on entity reload/respawn.
+	 */
+	public static final AttachmentType<String> FIRE_SOURCE = AttachmentRegistry.create(
+		Identifier.fromNamespaceAndPath("thc", "fire_source"),
+		builder -> builder.initializer(() -> null)
+	);
 
 	private THCAttachments() {
 	}

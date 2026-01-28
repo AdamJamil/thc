@@ -11,8 +11,11 @@ import net.minecraft.world.inventory.EnchantmentMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.block.EnchantingTableBlock;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -150,5 +153,80 @@ public abstract class EnchantmentMenuMixin extends AbstractContainerMenu {
             }
         }
         return true;
+    }
+
+    @Inject(method = "clickMenuButton", at = @At("HEAD"), cancellable = true)
+    private void thc$applyBookEnchantment(Player player, int buttonId, CallbackInfoReturnable<Boolean> cir) {
+        // Only handle button 0 (our single enchant button)
+        if (buttonId != 0) {
+            cir.setReturnValue(false);
+            return;
+        }
+
+        // Verify cost is set (button should be visible)
+        if (costs[0] <= 0) {
+            cir.setReturnValue(false);
+            return;
+        }
+
+        // Check player level
+        if (player.experienceLevel < costs[0]) {
+            cir.setReturnValue(false);
+            return;
+        }
+
+        // Get item and book
+        ItemStack item = enchantSlots.getItem(0);
+        ItemStack book = enchantSlots.getItem(1);
+
+        if (item.isEmpty() || !book.is(Items.ENCHANTED_BOOK)) {
+            cir.setReturnValue(false);
+            return;
+        }
+
+        ItemEnchantments storedEnchants = book.get(DataComponents.STORED_ENCHANTMENTS);
+        if (storedEnchants == null || storedEnchants.isEmpty()) {
+            cir.setReturnValue(false);
+            return;
+        }
+
+        // Re-validate bookshelves on server
+        access.execute((level, pos) -> {
+            int bookshelfCount = 0;
+            for (BlockPos offset : EnchantingTableBlock.BOOKSHELF_OFFSETS) {
+                if (EnchantingTableBlock.isValidBookShelf(level, pos, offset)) {
+                    bookshelfCount++;
+                }
+            }
+            if (bookshelfCount < 15) {
+                return;
+            }
+
+            // Get first enchantment from book
+            var entry = storedEnchants.entrySet().iterator().next();
+            Holder<Enchantment> enchantHolder = entry.getKey();
+
+            // Final compatibility check
+            if (!thc$isCompatible(enchantHolder, item)) {
+                return;
+            }
+
+            // Apply enchantment using the proven LecternEnchanting pattern
+            EnchantmentHelper.updateEnchantments(item, mutable -> {
+                mutable.set(enchantHolder, entry.getIntValue());
+            });
+
+            // Deduct 3 levels (always 3 per CONTEXT.md)
+            player.giveExperienceLevels(-3);
+
+            // Play sound
+            level.playSound(null, pos, SoundEvents.ENCHANTMENT_TABLE_USE,
+                SoundSource.BLOCKS, 1.0f, 1.0f);
+
+            // Broadcast slot changes
+            this.broadcastChanges();
+        });
+
+        cir.setReturnValue(true);
     }
 }

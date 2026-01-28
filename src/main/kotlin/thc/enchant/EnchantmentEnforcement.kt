@@ -49,6 +49,7 @@ object EnchantmentEnforcement {
     /**
      * Strips removed enchantments and normalizes levels to INTERNAL_LEVELS values.
      * Returns the original if no changes needed (avoids unnecessary object creation).
+     * Preserves the showInTooltip flag from the original enchantments.
      */
     fun stripAndNormalize(enchantments: ItemEnchantments): ItemEnchantments {
         if (enchantments.isEmpty) {

@@ -13,35 +13,21 @@ object EnchantmentEnforcement {
 
     /**
      * Set of enchantment IDs allowed on lecterns (Stage 1-2).
-     * These are early-game, basic effect enchantments.
-     * Fortune/Looting (economy), Mending/Respiration/Aqua/Depth/Frost (mob drops),
-     * Flame/Fire Aspect (damage) are stage 3+ (enchanting table only).
+     *
+     * Stage 1: mending, unbreaking
+     * Stage 2: efficiency, fortune, silk touch
+     *
+     * Stage 3+ enchantments require enchanting table.
      */
     val STAGE_1_2_ENCHANTMENTS = setOf(
-        // Damage enchantments (basic)
-        "minecraft:sharpness",
-        "minecraft:power",
-        "minecraft:smite",
-        "minecraft:bane_of_arthropods",
-
-        // Defense enchantments (all protection types)
-        "minecraft:protection",
-        "minecraft:fire_protection",
-        "minecraft:blast_protection",
-        "minecraft:projectile_protection",
-        "minecraft:feather_falling",
-
-        // Tool enchantments (basic utility)
-        "minecraft:efficiency",
+        // Stage 1
+        "minecraft:mending",
         "minecraft:unbreaking",
-        "minecraft:silk_touch",
 
-        // Crossbow basic
-        "minecraft:piercing",
-
-        // Fishing basic
-        "minecraft:lure",
-        "minecraft:luck_of_the_sea"
+        // Stage 2
+        "minecraft:efficiency",
+        "minecraft:fortune",
+        "minecraft:silk_touch"
     )
 
     /**

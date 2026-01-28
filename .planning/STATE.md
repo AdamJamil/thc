@@ -10,9 +10,9 @@ See: .planning/PROJECT.md (updated 2026-01-27)
 ## Current Position
 
 Phase: 56 of 56 (Acquisition Gating) ✓ Complete
-Plan: 1/1 complete
+Plan: 2/2 complete
 Status: v2.5 Enchantment Overhaul milestone COMPLETE
-Last activity: 2026-01-28 — Completed 56-01-PLAN.md (acquisition gating via loot filtering)
+Last activity: 2026-01-28 — Completed 56-02-PLAN.md (mob enchanted book drops)
 
 Progress: [██████████] 100% (4/4 phases complete)
 
@@ -74,11 +74,11 @@ Progress: [██████████] 100% (4/4 phases complete)
 - Phases: 53-56 (4 phases)
 - Requirements: 12 (REM-01 through REM-03, LVL-01 through LVL-04, TBL-01 through TBL-03, FIRE-01/02)
 - Status: COMPLETE
-- Plans completed: 8 (53-01, 53-02, 53-03, 54-01, 55-01, 55-02, 55-03, 56-01)
-- Total execution time: ~71 min
+- Plans completed: 9 (53-01, 53-02, 53-03, 54-01, 55-01, 55-02, 55-03, 56-01, 56-02)
+- Total execution time: ~74 min
 
 **Cumulative:**
-- 83 plans completed across 10 complete milestones
+- 84 plans completed across 10 complete milestones
 - ~7 hours total execution time
 - 14 days from project start
 
@@ -253,6 +253,8 @@ Key patterns established:
 - isStage3Plus() for enchantment tier classification (stage 3+ = not in STAGE_1_2 and not REMOVED)
 - hasStage3PlusEnchantment() for ItemEnchantments stage 3+ checking
 - MODIFY_DROPS stage 3+ filtering: removeIf with ENCHANTED_BOOK branch and enchants check (v2.5)
+- random_chance_with_enchanted_bonus with flat Looting bonus: per_level_above_first: 0.0 for +1% regardless of level (v2.5)
+- Mob enchanted book drops: independent pools per enchantment with is_baby:false or size>=2 conditions (v2.5)
 
 ### Pending Todos
 

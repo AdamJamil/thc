@@ -175,6 +175,18 @@ object THC : ModInitializer {
 				drops.add(THCItems.BLAST_TOTEM.defaultInstance)
 			}
 
+			// Filter stage 3+ enchanted books and items (gate to mob drops only)
+			drops.removeIf { stack ->
+				if (stack.`is`(Items.ENCHANTED_BOOK)) {
+					val stored = stack.get(net.minecraft.core.component.DataComponents.STORED_ENCHANTMENTS)
+					EnchantmentEnforcement.hasStage3PlusEnchantment(stored)
+				} else {
+					// Filter items (armor, weapons) with stage 3+ enchantments
+					val enchants = stack.get(net.minecraft.core.component.DataComponents.ENCHANTMENTS)
+					EnchantmentEnforcement.hasStage3PlusEnchantment(enchants)
+				}
+			}
+
 			// Enchantment enforcement: strip removed enchants, normalize levels
 			drops.forEach { stack ->
 				EnchantmentEnforcement.correctStack(stack)

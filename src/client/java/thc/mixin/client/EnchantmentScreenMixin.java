@@ -1,20 +1,34 @@
 package thc.mixin.client;
 
+import com.mojang.blaze3d.pipeline.RenderPipeline;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.EnchantmentScreen;
+import net.minecraft.resources.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Redirect;
 
 /**
- * Client-side mixin for the enchanting table screen.
- *
- * TODO: Hide the "1" lapis cost display since we use enchanted books instead.
- * The vanilla UI shows buttonIndex + 1 as the lapis requirement, but our
- * book-slot system doesn't consume lapis. This is a cosmetic issue - the
- * enchanting still works correctly, but the "1" is misleading.
- *
- * To fix: Find the render method that draws the lapis cost and suppress it,
- * or modify the argument to render empty string instead.
+ * Client-side mixin to hide the lapis cost display in the enchanting table UI.
+ * Our book-slot enchanting doesn't use lapis, so we hide the cost indicators.
  */
 @Mixin(EnchantmentScreen.class)
 public class EnchantmentScreenMixin {
-    // Placeholder for future lapis cost display fix
+
+    /**
+     * Intercept blitSprite calls to skip rendering the lapis cost sprites.
+     * The vanilla UI uses level_1, level_2, level_3 sprites to show lapis costs.
+     */
+    @Redirect(method = "renderBg",
+              at = @At(value = "INVOKE",
+                       target = "Lnet/minecraft/client/gui/GuiGraphics;blitSprite(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIII)V"))
+    private void thc$skipLapisCostSprite(GuiGraphics guiGraphics, RenderPipeline pipeline, Identifier sprite, int x, int y, int width, int height) {
+        // Skip rendering lapis cost sprites (level_1, level_2, level_3)
+        String path = sprite.getPath();
+        if (path.contains("level_1") || path.contains("level_2") || path.contains("level_3")) {
+            return; // Don't render
+        }
+        // Render all other sprites normally
+        guiGraphics.blitSprite(pipeline, sprite, x, y, width, height);
+    }
 }

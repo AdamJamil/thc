@@ -78,8 +78,8 @@ Plans:
 **Requirements**: TBL-01, TBL-02, TBL-03, TBL-04, TBL-05, TBL-06
 
 **Success Criteria** (what must be TRUE):
-1. Enchanting tables require new recipe (quartz/netherrack/obsidian/book in QNQ/OBO/QNQ pattern)
-2. Enchanting tables require exactly 16 bookshelves to function (lower counts show disabled UI)
+1. Enchanting tables require new recipe (ISI/SBS/ISI with iron blocks, soul dust, book)
+2. Enchanting tables require 15 bookshelves to function (vanilla max detectable, lower counts show disabled UI)
 3. Lapis slot replaced with enchanted book slot in enchanting table GUI
 4. Book placed in slot determines exact enchantment applied (no RNG)
 5. Stage 3 enchantments require level 20 minimum and cost 3 levels

@@ -26,9 +26,9 @@ Transform enchanting tables from RNG-based enchanting to deterministic book-slot
   - Stage 4-5: Level 30 minimum, costs 3 levels
 
 ### Bookshelf Validation
-- Minimum 16 bookshelves required (16+ is valid, more than 16 works fine)
+- Minimum 15 bookshelves required (all valid positions filled — vanilla max detectable is 15)
 - No visual indicator of bookshelf count in GUI
-- Silent disabled state when <16 bookshelves (no tooltip explanation)
+- Silent disabled state when <15 bookshelves (no tooltip explanation)
 - Keep vanilla bookshelf placement rules (2-block radius, same level or 1 above, no obstructions)
 
 ### Enchanting Flow
@@ -40,7 +40,7 @@ Transform enchanting tables from RNG-based enchanting to deterministic book-slot
   - Enchantment incompatible with item type
   - Item already has the enchantment from the book
   - Player level too low
-  - Fewer than 16 bookshelves
+  - Fewer than 15 bookshelves
 
 ### Recipe Change
 - New recipe: ISI/SBS/ISI where I = Block of Iron, S = Soul Dust, B = Book

@@ -69,7 +69,7 @@ Plans:
 
 ---
 
-### Phase 55: Enchanting Table Overhaul
+### Phase 55: Enchanting Table Overhaul ✓
 
 **Goal**: Enchanting tables use book-slot mechanic for deterministic stage 3+ enchanting
 
@@ -78,19 +78,19 @@ Plans:
 **Requirements**: TBL-01, TBL-02, TBL-03, TBL-04, TBL-05, TBL-06
 
 **Success Criteria** (what must be TRUE):
-1. Enchanting tables require new recipe (ISI/SBS/ISI with iron blocks, soul dust, book)
-2. Enchanting tables require 15 bookshelves to function (vanilla max detectable, lower counts show disabled UI)
-3. Lapis slot replaced with enchanted book slot in enchanting table GUI
-4. Book placed in slot determines exact enchantment applied (no RNG)
-5. Stage 3 enchantments require level 20 minimum and cost 3 levels
-6. Stage 4-5 enchantments require level 30 minimum and cost 3 levels
+1. ✓ Enchanting tables require new recipe (ISI/SBS/ISI with iron blocks, soul dust, book)
+2. ✓ Enchanting tables require 15 bookshelves to function (vanilla max detectable, lower counts show disabled UI)
+3. ✓ Lapis slot replaced with enchanted book slot in enchanting table GUI
+4. ✓ Book placed in slot determines exact enchantment applied (no RNG)
+5. ✓ Stage 3 enchantments require level 20 minimum and cost 3 levels
+6. ✓ Stage 4-5 enchantments require level 30 minimum and cost 3 levels
 
-**Plans**: 3 plans
+**Plans**: 3/3 complete
 
 Plans:
-- [ ] 55-01-PLAN.md — Soul Dust item + stage classification (level requirements)
-- [ ] 55-02-PLAN.md — New recipe (ISI/SBS/ISI) + vanilla recipe removal
-- [ ] 55-03-PLAN.md — EnchantmentMenuMixin (deterministic book-slot enchanting)
+- [x] 55-01-PLAN.md — Soul Dust item + stage classification (level requirements)
+- [x] 55-02-PLAN.md — New recipe (ISI/SBS/ISI) + vanilla recipe removal
+- [x] 55-03-PLAN.md — EnchantmentMenuMixin (deterministic book-slot enchanting)
 
 ---
 
@@ -126,9 +126,9 @@ Plans:
 |-------|----------------|--------|-----------|
 | 53. Enforcement Foundation | 3/3 | ✓ Complete | 2026-01-27 |
 | 54. Lectern Enchanting | 1/1 | ✓ Complete | 2026-01-27 |
-| 55. Enchanting Table Overhaul | 0/TBD | Not started | - |
+| 55. Enchanting Table Overhaul | 3/3 | ✓ Complete | 2026-01-28 |
 | 56. Acquisition Gating | 0/TBD | Not started | - |
 
 ---
 
-*Roadmap last updated: 2026-01-27*
+*Roadmap last updated: 2026-01-28*

@@ -68,42 +68,42 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SOUL-01 | TBD | Pending |
-| SOUL-02 | TBD | Pending |
-| SPAWN-01 | TBD | Pending |
-| SPAWN-02 | TBD | Pending |
-| SPAWN-03 | TBD | Pending |
-| THRT-01 | TBD | Pending |
-| THRT-02 | TBD | Pending |
-| WRLD-01 | TBD | Pending |
-| WRLD-02 | TBD | Pending |
-| WRLD-03 | TBD | Pending |
-| WRLD-04 | TBD | Pending |
-| WRLD-05 | TBD | Pending |
-| WRLD-06 | TBD | Pending |
-| WRLD-07 | TBD | Pending |
-| WRLD-08 | TBD | Pending |
-| CMBT-01 | TBD | Pending |
-| CMBT-02 | TBD | Pending |
-| TERR-01 | TBD | Pending |
-| TERR-02 | TBD | Pending |
-| SMTH-01 | TBD | Pending |
-| SMTH-02 | TBD | Pending |
-| SMTH-03 | TBD | Pending |
-| SMTH-04 | TBD | Pending |
-| SMTH-05 | TBD | Pending |
-| SMTH-06 | TBD | Pending |
-| SMTH-07 | TBD | Pending |
-| SMTH-08 | TBD | Pending |
-| SMTH-09 | TBD | Pending |
-| SMTH-10 | TBD | Pending |
-| SMTH-11 | TBD | Pending |
+| SOUL-01 | 57 | Pending |
+| SOUL-02 | 57 | Pending |
+| SPAWN-01 | 59 | Pending |
+| SPAWN-02 | 59 | Pending |
+| SPAWN-03 | 59 | Pending |
+| THRT-01 | 59 | Pending |
+| THRT-02 | 59 | Pending |
+| WRLD-01 | 58 | Pending |
+| WRLD-02 | 58 | Pending |
+| WRLD-03 | 58 | Pending |
+| WRLD-04 | 58 | Pending |
+| WRLD-05 | 58 | Pending |
+| WRLD-06 | 58 | Pending |
+| WRLD-07 | 58 | Pending |
+| WRLD-08 | 58 | Pending |
+| CMBT-01 | 57 | Pending |
+| CMBT-02 | 57 | Pending |
+| TERR-01 | 60 | Pending |
+| TERR-02 | 60 | Pending |
+| SMTH-01 | 61 | Pending |
+| SMTH-02 | 61 | Pending |
+| SMTH-03 | 61 | Pending |
+| SMTH-04 | 61 | Pending |
+| SMTH-05 | 61 | Pending |
+| SMTH-06 | 61 | Pending |
+| SMTH-07 | 61 | Pending |
+| SMTH-08 | 61 | Pending |
+| SMTH-09 | 61 | Pending |
+| SMTH-10 | 61 | Pending |
+| SMTH-11 | 61 | Pending |
 
 **Coverage:**
 - v2.6 requirements: 30 total
-- Mapped to phases: 0
-- Unmapped: 30
+- Mapped to phases: 30
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-01-28*
-*Last updated: 2026-01-28 after initial definition*
+*Last updated: 2026-01-28 after roadmap creation*

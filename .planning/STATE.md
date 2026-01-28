@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-28)
 
 ## Current Position
 
-Phase: Not started (defining requirements)
-Plan: —
-Status: Defining requirements
-Last activity: 2026-01-28 — Milestone v2.6 started
+Phase: 57 (Soul Economy & Combat Tuning)
+Plan: Ready to plan
+Status: Roadmap complete, awaiting phase planning
+Last activity: 2026-01-28 — v2.6 roadmap created
 
-Progress: v2.5 complete, defining v2.6
+Progress: [===>                    ] Phase 57/61 (0%)
 
 ## Performance Metrics
 
@@ -77,6 +77,12 @@ Progress: v2.5 complete, defining v2.6
 - Plans completed: 9 (53-01, 53-02, 53-03, 54-01, 55-01, 55-02, 55-03, 56-01, 56-02)
 - Total execution time: ~74 min
 
+**v2.6 Milestone:**
+- Phases: 57-61 (5 phases)
+- Requirements: 30 (SOUL/SPAWN/THRT/WRLD/CMBT/TERR/SMTH)
+- Status: In Progress
+- Plans completed: 0
+
 **Cumulative:**
 - 87 plans completed across 10 shipped milestones
 - ~7 hours total execution time
@@ -96,6 +102,7 @@ See milestone archives for full decision logs:
 - .planning/milestones/v2.2-ROADMAP.md
 - .planning/milestones/v2.3-ROADMAP.md
 - .planning/milestones/v2.4-ROADMAP.md
+- .planning/milestones/v2.5-ROADMAP.md
 
 Key patterns established:
 - ItemAttributeModifiers.builder() for armor attribute modification
@@ -277,6 +284,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-28
-Stopped at: v2.6 milestone started
+Stopped at: v2.6 roadmap created
 Resume file: None
-Next: Define requirements and create roadmap
+Next: `/gsd:plan-phase 57`

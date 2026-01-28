@@ -15,7 +15,7 @@
 
 ## Current Milestone
 
-None — awaiting `/gsd:new-milestone` to define next milestone
+- [v2.6](milestones/v2.6-ROADMAP.md) — Extra Features Batch 10 (phases 57-61)
 
 ## Progress
 
@@ -31,8 +31,9 @@ None — awaiting `/gsd:new-milestone` to define next milestone
 | v2.3 | 37-45 | 13 | Complete | 2026-01-25 |
 | v2.4 | 46-52 | 7 | Complete | 2026-01-26 |
 | v2.5 | 53-56 | 9 | Complete | 2026-01-28 |
+| v2.6 | 57-61 | TBD | In Progress | — |
 
-**Total:** 56 phases, 87 plans across 10 milestones
+**Total:** 61 phases, 87+ plans across 11 milestones
 
 ---
 

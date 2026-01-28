@@ -40,6 +40,7 @@ import thc.world.MiningFatigue
 import thc.world.VillageProtection
 import thc.world.WorldRestrictions
 import thc.enchant.EnchantmentEnforcement
+import thc.lectern.LecternEnchanting
 
 object THC : ModInitializer {
 	private val logger = LoggerFactory.getLogger("thc")
@@ -58,6 +59,7 @@ object THC : ModInitializer {
 		THCItems.init()
 		THCSounds.init()
 		BellHandler.register()
+		LecternEnchanting.register()
 		BasePermissions.register()
 		WorldRestrictions.register()
 		VillageProtection.register()

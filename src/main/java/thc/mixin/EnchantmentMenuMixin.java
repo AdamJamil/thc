@@ -194,8 +194,10 @@ public abstract class EnchantmentMenuMixin extends AbstractContainerMenu {
 
     @Unique
     private boolean thc$isCompatible(Holder<Enchantment> enchantHolder, ItemStack item) {
-        // Can this enchantment go on this item type?
-        if (!enchantHolder.value().canEnchant(item)) {
+        // Check if item type supports this enchantment
+        // Use isSupportedItem which checks the enchantment's supportedItems definition
+        // This works for already-enchanted items unlike canEnchant()
+        if (!enchantHolder.value().isSupportedItem(item)) {
             return false;
         }
 

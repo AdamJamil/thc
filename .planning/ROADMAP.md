@@ -111,10 +111,11 @@ Plans:
 6. Magma cubes drop flame and fire aspect books at 5% each (stage 3+ only)
 7. Fishing lure and luck of the sea enchantments only obtainable at stage 3+
 
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 56-01: TBD
+- [ ] 56-01-PLAN.md — Stage 3+ classification and loot filtering (EnchantmentEnforcement + MODIFY_DROPS)
+- [ ] 56-02-PLAN.md — Mob enchanted book drops (6 mob loot tables, 10 pools)
 
 ---
 
@@ -127,7 +128,7 @@ Plans:
 | 53. Enforcement Foundation | 3/3 | ✓ Complete | 2026-01-27 |
 | 54. Lectern Enchanting | 1/1 | ✓ Complete | 2026-01-27 |
 | 55. Enchanting Table Overhaul | 3/3 | ✓ Complete | 2026-01-28 |
-| 56. Acquisition Gating | 0/TBD | Not started | - |
+| 56. Acquisition Gating | 0/2 | Not started | - |
 
 ---
 

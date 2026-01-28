@@ -59,10 +59,10 @@ Plans:
 4. Lectern enchanting requires player level 10 minimum and costs 3 levels
 5. Players below level 10 see action bar message "You must be level 10!" when attempting to enchant
 
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 54-01: TBD
+- [ ] 54-01-PLAN.md — Lectern enchanting handler (stage 1-2 set, UseBlockCallback, book placement, gear enchanting)
 
 ---
 
@@ -120,7 +120,7 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 53. Enforcement Foundation | 3/3 | ✓ Complete | 2026-01-27 |
-| 54. Lectern Enchanting | 0/TBD | Not started | - |
+| 54. Lectern Enchanting | 0/1 | Planned | - |
 | 55. Enchanting Table Overhaul | 0/TBD | Not started | - |
 | 56. Acquisition Gating | 0/TBD | Not started | - |
 

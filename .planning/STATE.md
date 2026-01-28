@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-01-28)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** None — awaiting `/gsd:new-milestone`
+**Current focus:** v2.6 Extra Features Batch 10
 
 ## Current Position
 
-Phase: None (milestone complete)
-Plan: N/A
-Status: Ready for next milestone
-Last activity: 2026-01-28 — v2.5 Enchantment Overhaul shipped
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-01-28 — Milestone v2.6 started
 
-Progress: v2.5 complete, 10 milestones shipped
+Progress: v2.5 complete, defining v2.6
 
 ## Performance Metrics
 
@@ -277,6 +277,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-28
-Stopped at: v2.5 milestone archived
+Stopped at: v2.6 milestone started
 Resume file: None
-Next: `/gsd:new-milestone` to begin v2.6 planning (recommend `/clear` first)
+Next: Define requirements and create roadmap

@@ -205,7 +205,18 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ### Active
 
-None — awaiting `/gsd:new-milestone` to define next milestone requirements
+**v2.6 Extra Features Batch 10:**
+- [ ] Soul dust drops from illagers (20% from Pillager, Vindicator, Evoker, Illusioner, Ravager, Witch)
+- [ ] Soul soil crafting (4 soul dust in 2x2 = 1 soul soil)
+- [ ] Deepslate spawn distribution (+15% wither skeleton, pillager 25%→20%, vanilla 45%→35%)
+- [ ] Proximity threat (dealing X damage adds ceil(X/4) threat to mobs within 5 blocks of you)
+- [ ] Gravel flint (shovel always drops flint)
+- [ ] Mining fatigue exemptions (+gravel, grass, flowers, ores, glass, placeable blocks, beds)
+- [ ] Arrow speed nerf (Speed IV → Speed III)
+- [ ] Melee pillager damage buff (4.5 → 6.5)
+- [ ] Village deregistration (claimed chunks don't count for village mechanics)
+- [ ] Smithing table tier upgrades (preserving enchantments, material cost = crafting cost)
+- [ ] Smithing table copper recipe (copper alternative to iron)
 
 ### Out of Scope
 
@@ -276,7 +287,21 @@ None — awaiting `/gsd:new-milestone` to define next milestone requirements
 
 ## Current Milestone
 
-None — awaiting `/gsd:new-milestone` to define next milestone
+**v2.6 Extra Features Batch 10**
+
+**Goal:** Quality-of-life improvements across combat, crafting, and world interaction — soul economy expansion, threat system refinement, smithing progression overhaul.
+
+**Target features:**
+- Soul dust mob drops + soul soil crafting
+- Deepslate spawn rebalancing with wither skeletons
+- Proximity threat when dealing damage
+- Mining fatigue exemption expansion
+- Gravel always drops flint with shovel
+- Arrow speed reduction (IV → III)
+- Melee pillager damage buff
+- Village deregistration in claimed chunks
+- Smithing table tier upgrades with enchantment preservation
+- Smithing table copper recipe alternative
 
 ## Current State
 
@@ -312,4 +337,4 @@ None — awaiting `/gsd:new-milestone` to define next milestone
 **Technical debt:** None identified
 
 ---
-*Last updated: 2026-01-28 after v2.5 milestone completed*
+*Last updated: 2026-01-28 after v2.6 milestone started*

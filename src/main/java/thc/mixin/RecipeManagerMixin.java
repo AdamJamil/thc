@@ -38,7 +38,8 @@ public class RecipeManagerMixin {
 		"beetroot_soup",
 		"sugar_from_sugar_cane",
 		"saddle",
-		"brewing_stand"
+		"brewing_stand",
+		"enchanting_table"
 	);
 
 	@Inject(

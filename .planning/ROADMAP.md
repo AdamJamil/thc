@@ -85,10 +85,12 @@ Plans:
 5. Stage 3 enchantments require level 20 minimum and cost 3 levels
 6. Stage 4-5 enchantments require level 30 minimum and cost 3 levels
 
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 55-01: TBD
+- [ ] 55-01-PLAN.md — Soul Dust item + stage classification (level requirements)
+- [ ] 55-02-PLAN.md — New recipe (ISI/SBS/ISI) + vanilla recipe removal
+- [ ] 55-03-PLAN.md — EnchantmentMenuMixin (deterministic book-slot enchanting)
 
 ---
 

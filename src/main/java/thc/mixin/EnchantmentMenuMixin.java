@@ -10,6 +10,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.EnchantmentMenu;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -51,24 +52,25 @@ public abstract class EnchantmentMenuMixin extends AbstractContainerMenu {
     @Shadow public int[] enchantClue;
     @Shadow public int[] levelClue;
 
+    @Unique
+    private static final Identifier EMPTY_SLOT_BOOK = Identifier.fromNamespaceAndPath("thc", "container/slot/book_slot");
+
     protected EnchantmentMenuMixin() { super(null, 0); }
 
     /**
-     * Replace slots to implement book-slot enchanting:
+     * Replace slots at end of constructor to implement book-slot enchanting:
      * - Slot 0 (item slot): accepts enchantable items EXCEPT enchanted books
      * - Slot 1 (book slot): accepts ONLY enchanted books
      */
     @Inject(method = "<init>(ILnet/minecraft/world/entity/player/Inventory;Lnet/minecraft/world/inventory/ContainerLevelAccess;)V", at = @At("TAIL"))
     private void thc$replaceSlotWithBookSlot(int syncId, Inventory playerInventory, ContainerLevelAccess access, CallbackInfo ci) {
         // Slot 0: item slot - accepts enchantable items but NOT enchanted books
-        this.slots.set(0, new Slot(enchantSlots, 0, 15, 47) {
+        Slot itemSlot = new Slot(enchantSlots, 0, 15, 47) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                // Reject enchanted books - they go in slot 1
                 if (stack.is(Items.ENCHANTED_BOOK)) {
                     return false;
                 }
-                // Accept items that can be enchanted (same as vanilla)
                 return stack.isEnchantable();
             }
 
@@ -76,10 +78,12 @@ public abstract class EnchantmentMenuMixin extends AbstractContainerMenu {
             public int getMaxStackSize() {
                 return 1;
             }
-        });
+        };
+        itemSlot.index = 0;
+        this.slots.set(0, itemSlot);
 
         // Slot 1: book slot - accepts ONLY enchanted books
-        this.slots.set(1, new Slot(enchantSlots, 1, 35, 47) {
+        Slot bookSlot = new Slot(enchantSlots, 1, 35, 47) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.is(Items.ENCHANTED_BOOK);
@@ -89,7 +93,14 @@ public abstract class EnchantmentMenuMixin extends AbstractContainerMenu {
             public int getMaxStackSize() {
                 return 1;
             }
-        });
+
+            @Override
+            public Identifier getNoItemIcon() {
+                return EMPTY_SLOT_BOOK;
+            }
+        };
+        bookSlot.index = 1;
+        this.slots.set(1, bookSlot);
     }
 
     @Inject(method = "method_17411", at = @At("HEAD"), cancellable = true)
@@ -269,5 +280,37 @@ public abstract class EnchantmentMenuMixin extends AbstractContainerMenu {
         });
 
         cir.setReturnValue(true);
+    }
+
+    /**
+     * Handle shift-click for enchanted books to go to slot 1 (book slot).
+     */
+    @Inject(method = "quickMoveStack", at = @At("HEAD"), cancellable = true)
+    private void thc$quickMoveEnchantedBook(Player player, int slotIndex, CallbackInfoReturnable<ItemStack> cir) {
+        // Only handle clicks from player inventory (slots 2+)
+        if (slotIndex < 2) {
+            return;
+        }
+
+        Slot slot = this.slots.get(slotIndex);
+        if (slot == null || !slot.hasItem()) {
+            return;
+        }
+
+        ItemStack itemStack = slot.getItem();
+        if (itemStack.is(Items.ENCHANTED_BOOK)) {
+            // Try to move enchanted book to slot 1 (book slot)
+            ItemStack copy = itemStack.copy();
+            if (this.moveItemStackTo(itemStack, 1, 2, false)) {
+                if (itemStack.isEmpty()) {
+                    slot.setByPlayer(ItemStack.EMPTY);
+                } else {
+                    slot.setChanged();
+                }
+                cir.setReturnValue(copy);
+            } else {
+                cir.setReturnValue(ItemStack.EMPTY);
+            }
+        }
     }
 }

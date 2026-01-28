@@ -89,6 +89,15 @@ object THCItems {
         )
     }
 
+    @JvmField
+    val SOUL_DUST: Item = register("soul_dust") { key ->
+        Item(
+            Item.Properties()
+                .setId(key)
+                .stacksTo(64)
+        )
+    }
+
     fun init() {
         // Set the drop item for IronBoat entity after items are initialized
         thc.entity.IronBoat.ironBoatDropItem = IRON_BOAT
@@ -96,6 +105,7 @@ object THCItems {
         ItemGroupEvents.modifyEntriesEvent(toolsTabKey).register { entries ->
             entries.accept(LAND_PLOT)
             entries.accept(BLAST_TOTEM)
+            entries.accept(SOUL_DUST)
             entries.accept(IRON_BOAT)
             entries.accept(COPPER_BUCKET)
             entries.accept(COPPER_BUCKET_OF_WATER)

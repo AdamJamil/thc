@@ -27,7 +27,11 @@ object EnchantmentEnforcement {
         // Stage 2
         "minecraft:efficiency",
         "minecraft:fortune",
-        "minecraft:silk_touch"
+        "minecraft:silk_touch",
+
+        // Fishing (stage 1-2 for lectern access)
+        "minecraft:lure",
+        "minecraft:luck_of_the_sea"
     )
 
     /**
@@ -80,6 +84,28 @@ object EnchantmentEnforcement {
         stage <= 2 -> 10   // Stage 1-2: level 10
         stage == 3 -> 20   // Stage 3: level 20
         else -> 30         // Stage 4-5: level 30
+    }
+
+    /**
+     * Check if an enchantment is stage 3 or higher.
+     * Stage 3+ enchantments are NOT in STAGE_1_2_ENCHANTMENTS and NOT in REMOVED_ENCHANTMENTS.
+     * Used for filtering loot tables to gate powerful enchantments to mob drops.
+     */
+    fun isStage3Plus(enchantId: String?): Boolean {
+        if (enchantId == null) return false
+        return !STAGE_1_2_ENCHANTMENTS.contains(enchantId) &&
+               !REMOVED_ENCHANTMENTS.contains(enchantId)
+    }
+
+    /**
+     * Check if ItemEnchantments contains any stage 3+ enchantments.
+     */
+    fun hasStage3PlusEnchantment(enchantments: ItemEnchantments?): Boolean {
+        if (enchantments == null || enchantments.isEmpty) return false
+        return enchantments.entrySet().any { entry ->
+            val enchantId = entry.key.unwrapKey().orElse(null)?.identifier()?.toString()
+            isStage3Plus(enchantId)
+        }
     }
 
     /**

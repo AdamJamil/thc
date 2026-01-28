@@ -9,26 +9,29 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 /**
- * Client-side mixin to hide the lapis cost display in the enchanting table UI.
- * Our book-slot enchanting doesn't use lapis, so we hide the cost indicators.
+ * Client-side mixin to show cost of 3 in the enchanting table UI.
+ * Our book-slot enchanting always costs 3 levels, so we show level_3 sprite.
  */
 @Mixin(EnchantmentScreen.class)
 public class EnchantmentScreenMixin {
 
+    private static final Identifier LEVEL_3_SPRITE = Identifier.withDefaultNamespace("container/enchanting_table/level_3");
+
     /**
-     * Intercept blitSprite calls to skip rendering the lapis cost sprites.
-     * The vanilla UI uses level_1, level_2, level_3 sprites to show lapis costs.
+     * Intercept blitSprite calls to replace level_1/level_2 with level_3.
+     * This shows "3" as the cost since our enchanting always costs 3 levels.
      */
     @Redirect(method = "renderBg",
               at = @At(value = "INVOKE",
                        target = "Lnet/minecraft/client/gui/GuiGraphics;blitSprite(Lcom/mojang/blaze3d/pipeline/RenderPipeline;Lnet/minecraft/resources/Identifier;IIII)V"))
-    private void thc$skipLapisCostSprite(GuiGraphics guiGraphics, RenderPipeline pipeline, Identifier sprite, int x, int y, int width, int height) {
-        // Skip rendering lapis cost sprites (level_1, level_2, level_3)
+    private void thc$showCostOfThree(GuiGraphics guiGraphics, RenderPipeline pipeline, Identifier sprite, int x, int y, int width, int height) {
         String path = sprite.getPath();
-        if (path.contains("level_1") || path.contains("level_2") || path.contains("level_3")) {
-            return; // Don't render
+        // Replace level_1 or level_2 with level_3 to show cost of 3
+        if (path.contains("level_1") || path.contains("level_2")) {
+            guiGraphics.blitSprite(pipeline, LEVEL_3_SPRITE, x, y, width, height);
+            return;
         }
-        // Render all other sprites normally
+        // Render all other sprites normally (including level_3)
         guiGraphics.blitSprite(pipeline, sprite, x, y, width, height);
     }
 }

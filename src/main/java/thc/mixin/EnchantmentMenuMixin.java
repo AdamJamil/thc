@@ -55,6 +55,13 @@ public abstract class EnchantmentMenuMixin extends AbstractContainerMenu {
     @Unique
     private static final Identifier EMPTY_SLOT_BOOK = Identifier.fromNamespaceAndPath("thc", "container/slot/book_slot");
 
+    @Unique
+    private static final int ENCHANT_COST = 3;
+
+    /** The minimum level required for the current enchantment (stage-based: 10/20/30) */
+    @Unique
+    private int thc$levelRequirement = 0;
+
     protected EnchantmentMenuMixin() { super(null, 0); }
 
     /**
@@ -174,12 +181,13 @@ public abstract class EnchantmentMenuMixin extends AbstractContainerMenu {
             return;
         }
 
-        // Get level requirement based on stage
+        // Get level requirement based on stage (10/20/30)
         int stage = EnchantmentEnforcement.INSTANCE.getStageForEnchantment(enchantId);
-        int levelReq = EnchantmentEnforcement.INSTANCE.getLevelRequirementForStage(stage);
+        thc$levelRequirement = EnchantmentEnforcement.INSTANCE.getLevelRequirementForStage(stage);
 
-        // Set cost for button 0 (only button we use)
-        costs[0] = levelReq;
+        // Display cost of 3 (what player actually pays)
+        // The level requirement is checked separately in clickMenuButton
+        costs[0] = ENCHANT_COST;
 
         ci.cancel();
     }
@@ -223,8 +231,8 @@ public abstract class EnchantmentMenuMixin extends AbstractContainerMenu {
             return;
         }
 
-        // Check player level
-        if (player.experienceLevel < costs[0]) {
+        // Check player meets level requirement (10/20/30 based on stage)
+        if (player.experienceLevel < thc$levelRequirement) {
             cir.setReturnValue(false);
             return;
         }

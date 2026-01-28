@@ -54,15 +54,43 @@ public abstract class EnchantmentMenuMixin extends AbstractContainerMenu {
     protected EnchantmentMenuMixin() { super(null, 0); }
 
     /**
-     * Replace the lapis slot (slot 1) with a slot that accepts enchanted books instead.
+     * Replace slots to implement book-slot enchanting:
+     * - Slot 0 (item slot): accepts enchantable items EXCEPT enchanted books
+     * - Slot 1 (book slot): accepts ONLY enchanted books
      */
     @Inject(method = "<init>(ILnet/minecraft/world/entity/player/Inventory;Lnet/minecraft/world/inventory/ContainerLevelAccess;)V", at = @At("TAIL"))
     private void thc$replaceSlotWithBookSlot(int syncId, Inventory playerInventory, ContainerLevelAccess access, CallbackInfo ci) {
-        // Slot 1 is the lapis slot - replace it with one that accepts enchanted books
+        // Get original slot 0 to preserve its mayPlace logic
+        Slot originalItemSlot = this.slots.get(0);
+
+        // Slot 0: item slot - accepts enchantable items but NOT enchanted books
+        this.slots.set(0, new Slot(enchantSlots, 0, 15, 47) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                // Reject enchanted books - they go in slot 1
+                if (stack.is(Items.ENCHANTED_BOOK)) {
+                    return false;
+                }
+                // Use original logic for other items
+                return originalItemSlot.mayPlace(stack);
+            }
+
+            @Override
+            public int getMaxStackSize() {
+                return 1;
+            }
+        });
+
+        // Slot 1: book slot - accepts ONLY enchanted books
         this.slots.set(1, new Slot(enchantSlots, 1, 35, 47) {
             @Override
             public boolean mayPlace(ItemStack stack) {
                 return stack.is(Items.ENCHANTED_BOOK);
+            }
+
+            @Override
+            public int getMaxStackSize() {
+                return 1;
             }
         });
     }

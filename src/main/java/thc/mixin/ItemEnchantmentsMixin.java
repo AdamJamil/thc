@@ -43,15 +43,10 @@ public abstract class ItemEnchantmentsMixin {
 
         ItemEnchantments self = (ItemEnchantments) (Object) this;
 
-        // Debug: log that mixin is being called
-        System.out.println("[THC] ItemEnchantmentsMixin.addToTooltip called, keySet size: " + self.keySet().size());
-
         // Iterate all enchantments and add their names WITHOUT level suffix
         for (Holder<Enchantment> holder : self.keySet()) {
             // Use the enchantment description directly (name without level)
-            Component name = holder.value().description();
-            System.out.println("[THC] Adding enchantment to tooltip: " + name.getString());
-            consumer.accept(name);
+            consumer.accept(holder.value().description());
         }
 
         ci.cancel();

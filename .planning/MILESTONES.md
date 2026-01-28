@@ -1,5 +1,60 @@
 # Project Milestones: THC (True Hardcore)
 
+## v2.5 Enchantment Overhaul (Shipped: 2026-01-28)
+
+**Delivered:** Complete enchantment system overhaul with 12 enchantments removed, single-level display, custom fire damage, lectern enchanting for early-stage books, deterministic book-slot enchanting table, and mob-specific acquisition gating for powerful enchantments.
+
+**Phases completed:** 53-56 (9 plans total)
+
+**Key accomplishments:**
+
+- Removed 12 enchantments from game (loyalty, impaling, riptide, infinity, knockback, punch, quick charge, lunge, thorns, wind burst, multishot, density)
+- Single-level enchantment display (no I/II/III suffix) and custom fire damage (Flame 6HP, Fire Aspect 9HP over 6s)
+- Lectern enchanting system for stage 1-2 books (mending, unbreaking, efficiency, fortune, silk_touch, lure, luck_of_the_sea) with unlimited use
+- Deterministic enchanting table with book-slot mechanic, 15 bookshelf requirement, stage-based level requirements (10/20/30)
+- Stage 3+ enchantments removed from Overworld chest loot, now only from specific mob drops (drowned, spider, husk, stray, blaze, magma cube)
+- New Soul Dust crafting ingredient and enchanting table recipe (iron blocks + soul dust + book)
+
+**Stats:**
+
+- 49 files created/modified
+- ~9,304 lines of Kotlin/Java (cumulative)
+- 4 phases, 9 plans, ~24 tasks
+- 2 days from start to ship (Jan 27-28, 2026)
+
+**Git range:** `feat(53-01)` → `feat(56-02)`
+
+**What's next:** To be determined
+
+---
+
+## v2.4 Extra Features Batch 8 (Shipped: 2026-01-26)
+
+**Delivered:** Quality-of-life features including iron boats for lava navigation, saddle removal, copper buckets, elytra flight rebalancing, brewing removal, and comprehensive armor stat rebalancing.
+
+**Phases completed:** 46-52 (7 plans total)
+
+**Key accomplishments:**
+
+- Iron boat entity for lava navigation with custom textures and fire immunity
+- Saddle removal from all loot sources (no more passive mob riding)
+- Copper bucket system (water/milk only, lava placement blocked)
+- Skill-based elytra flight (no firework propulsion, pitch-based speed multipliers)
+- Brewing economy removal (stands removed from spawns and crafting)
+- Armor progression rebalancing (5 tiers with half-point values)
+
+**Stats:**
+
+- ~14,506 lines of Kotlin/Java (cumulative)
+- 7 phases, 7 plans
+- 1 day (Jan 26, 2026)
+
+**Git range:** `feat(46-01)` → `feat(52-01)`
+
+**What's next:** v2.5 Enchantment Overhaul
+
+---
+
 ## v2.3 Extra Features Batch 7 (Shipped: 2026-01-25)
 
 **Delivered:** Comprehensive monster overhaul with regional spawn distributions, behavior modifications for 10+ mob types, and partitioned monster caps creating distinct threat profiles across Overworld regions.

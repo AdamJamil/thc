@@ -2,7 +2,7 @@
 
 ## What This Is
 
-A Minecraft mod that creates a "true hardcore" experience where players must always take meaningful risks to achieve anything. The mod replaces tedium-as-difficulty with risk-as-progression through multiple interconnected systems including combat overhaul (buckler replacing shields), territorial base claiming mechanics, threat-based aggro management, world difficulty tuning, and a twilight system creating perpetual hostility where mobs spawn in daylight and the sky stays at dusk.
+A Minecraft mod that creates a "true hardcore" experience where players must always take meaningful risks to achieve anything. The mod replaces tedium-as-difficulty with risk-as-progression through multiple interconnected systems including combat overhaul (buckler replacing shields), territorial base claiming mechanics, threat-based aggro management, world difficulty tuning, a twilight system creating perpetual hostility where mobs spawn in daylight and the sky stays at dusk, and a stage-gated enchantment system where powerful enchantments require specific mob farming rather than chest looting.
 
 ## Core Value
 
@@ -156,9 +156,6 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
   - Partitioned monster caps (30%/40%/50%)
   - NBT spawn origin tagging
   - Damage rebalancing for 6 mobs (Vex, Vindicator, Magma Cube, Blaze, Piglin, Evoker fangs)
-
-### Active
-
 - Iron boats — v2.4
   - Craftable with 5 iron ingots + magma cream (minecart shape)
   - Works on lava like regular boats work on water
@@ -183,6 +180,32 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
   - New armor values: leather 7, copper 10, iron 15, diamond 18, netherite 10
   - New toughness values: leather 0, copper 0, iron 0, diamond 4, netherite 6
   - Half armor points allowed per piece
+- Enchantment removal — v2.5
+  - 12 enchantments removed: loyalty, impaling, riptide, infinity, knockback, punch, quick charge, lunge, thorns, wind burst, multishot, density
+  - Purged from loot tables, mob spawns, and equipment
+- Single-level enchantments — v2.5
+  - All enchantments display without level suffix (no I/II/III)
+  - Flame deals 6 HP over 6 seconds (1 dmg/s)
+  - Fire Aspect deals 9 HP over 6 seconds (1.5 dmg/s via accumulator)
+- Lectern enchanting — v2.5
+  - Stage 1-2 books placeable on lecterns (mending, unbreaking, efficiency, fortune, silk_touch, lure, luck_of_the_sea)
+  - Right-click with compatible gear to enchant (level 10+, costs 3 levels)
+  - Book remains on lectern (unlimited use)
+  - Stage 3+ books rejected
+- Enchanting table overhaul — v2.5
+  - New recipe: iron blocks + soul dust + book
+  - Requires 15 bookshelves to function
+  - Book-slot mechanic replaces RNG (book determines enchantment)
+  - Stage 3: level 20 minimum, Stage 4-5: level 30 minimum
+  - Costs 3 levels, book remains (unlimited use)
+- Acquisition gating — v2.5
+  - Stage 3+ enchantments removed from Overworld chest loot
+  - Mob drops: drowned (aqua affinity, depth strider, frost walker, respiration), spider (bane of arthropods), husk/stray (smite), blaze (fire protection), magma cube (flame, fire aspect)
+  - 2.5% base drop rate, +1% with Looting
+
+### Active
+
+None — awaiting `/gsd:new-milestone` to define next milestone requirements
 
 ### Out of Scope
 
@@ -239,6 +262,12 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 | Boolean attachment for one-time effects | Wind charge fall negation tracks state without complex logic | Good |
 | HEAD inject for spawn blocking | NaturalSpawner.isValidSpawnPostitionForType interception | Good |
 | BedRule redirect for sleep | Cleanest approach for 24/7 bed usage | Good |
+| String IDs for enchantment comparison | Stable across registry reloads vs Holder references | Good |
+| Non-persistent FIRE_SOURCE attachment | Fire is temporary, no need to persist | Good |
+| Accumulator pattern for Fire Aspect | Minecraft only supports whole damage, alternate 1/2 HP for 1.5 avg | Good |
+| 140 ticks fire duration | First tick immune, 140 = 6 actual damage applications | Good |
+| Book stays in slot after enchanting | Unlimited uses for both lectern and table | Good |
+| Flat +1% Looting bonus | Simpler than scaling per level for mob book drops | Good |
 | Brain schedule redirect for villagers | Force night activity without modifying multiple AI systems | Good |
 | Position-based village protection | Structure bounding boxes vs chunk detection for granular protection | Good |
 | ThreadLocal for cross-injection state | Store saturation in HEAD, compare in RETURN for cap behavior | Good |
@@ -251,13 +280,13 @@ None — awaiting `/gsd:new-milestone` to define next milestone
 
 ## Current State
 
-**Latest Ship:** v2.4 Extra Features Batch 8 (2026-01-26)
+**Latest Ship:** v2.5 Enchantment Overhaul (2026-01-28)
 
 **Codebase:**
-- ~14,506 LOC Kotlin/Java
+- ~9,304 LOC Kotlin/Java
 - Mixed mixin + event-driven architecture
-- 78 plans across 52 phases in 9 milestones
-- Attachment patterns for player state, mob threat, one-time effects, class, boon level, spawn region
+- 87 plans across 56 phases in 10 milestones
+- Attachment patterns for player state, mob threat, one-time effects, class, boon level, spawn region, fire source
 - Client visual overrides for twilight sky
 - Comprehensive spawn/behavior modifications (10+ mob types)
 - Position-based structure protection
@@ -273,6 +302,9 @@ None — awaiting `/gsd:new-milestone` to define next milestone
 - Skill-based elytra flight (no fireworks, pitch multipliers)
 - Brewing economy removal
 - Armor progression rebalancing (5 tiers)
+- Stage-gated enchantment system (lectern for 1-2, table for 3+)
+- Mob-specific enchantment book drops
+- Custom fire enchantment damage (Flame 6HP, Fire Aspect 9HP)
 
 **Known issues:**
 - PlayerSleepMixin broken from MC 1.21.11 upgrade (blocks smoke test, not functionality)
@@ -280,4 +312,4 @@ None — awaiting `/gsd:new-milestone` to define next milestone
 **Technical debt:** None identified
 
 ---
-*Last updated: 2026-01-26 after v2.4 milestone completed*
+*Last updated: 2026-01-28 after v2.5 milestone completed*

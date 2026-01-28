@@ -2,19 +2,19 @@
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-01-27)
+See: .planning/PROJECT.md (updated 2026-01-28)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v2.5 Enchantment Overhaul
+**Current focus:** None — awaiting `/gsd:new-milestone`
 
 ## Current Position
 
-Phase: 56 of 56 (Acquisition Gating) ✓ Complete
-Plan: 2/2 complete
-Status: v2.5 Enchantment Overhaul milestone COMPLETE
-Last activity: 2026-01-28 — Completed 56-02-PLAN.md (mob enchanted book drops)
+Phase: None (milestone complete)
+Plan: N/A
+Status: Ready for next milestone
+Last activity: 2026-01-28 — v2.5 Enchantment Overhaul shipped
 
-Progress: [██████████] 100% (4/4 phases complete)
+Progress: v2.5 complete, 10 milestones shipped
 
 ## Performance Metrics
 
@@ -72,13 +72,13 @@ Progress: [██████████] 100% (4/4 phases complete)
 
 **v2.5 Milestone:**
 - Phases: 53-56 (4 phases)
-- Requirements: 12 (REM-01 through REM-03, LVL-01 through LVL-04, TBL-01 through TBL-03, FIRE-01/02)
-- Status: COMPLETE
+- Requirements: Enchantment removal, single-level display, fire damage, lectern enchanting, table overhaul, acquisition gating
+- Status: SHIPPED 2026-01-28
 - Plans completed: 9 (53-01, 53-02, 53-03, 54-01, 55-01, 55-02, 55-03, 56-01, 56-02)
 - Total execution time: ~74 min
 
 **Cumulative:**
-- 84 plans completed across 10 complete milestones
+- 87 plans completed across 10 shipped milestones
 - ~7 hours total execution time
 - 14 days from project start
 
@@ -277,6 +277,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-28
-Stopped at: v2.5 milestone complete
+Stopped at: v2.5 milestone archived
 Resume file: None
-Next: Begin v2.6 milestone planning or continue with next roadmap phase
+Next: `/gsd:new-milestone` to begin v2.6 planning (recommend `/clear` first)

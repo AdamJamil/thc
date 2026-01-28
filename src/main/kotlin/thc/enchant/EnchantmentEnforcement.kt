@@ -31,10 +31,55 @@ object EnchantmentEnforcement {
     )
 
     /**
+     * Set of enchantment IDs that are stage 4-5 (require level 30 at enchanting table).
+     * These are high-tier enchantments with powerful effects.
+     */
+    val STAGE_4_5_ENCHANTMENTS = setOf(
+        "minecraft:flame",
+        "minecraft:fire_aspect",
+        "minecraft:looting",
+        "minecraft:feather_falling",
+        "minecraft:respiration",
+        "minecraft:aqua_affinity",
+        "minecraft:depth_strider",
+        "minecraft:frost_walker",
+        "minecraft:fire_protection"
+    )
+
+    /**
      * Check if an enchantment ID is a stage 1-2 enchantment (lectern-compatible).
      */
     fun isStage12Enchantment(enchantId: String?): Boolean {
         return enchantId != null && STAGE_1_2_ENCHANTMENTS.contains(enchantId)
+    }
+
+    /**
+     * Returns the stage tier for an enchantment.
+     * Stage 1-2: Basic enchantments (lectern-compatible)
+     * Stage 3: Mid-tier enchantments (default)
+     * Stage 4-5: High-tier enchantments
+     */
+    fun getStageForEnchantment(enchantId: String?): Int {
+        if (enchantId == null) return 0
+        return when {
+            STAGE_1_2_ENCHANTMENTS.contains(enchantId) -> 1  // Stage 1-2
+            STAGE_4_5_ENCHANTMENTS.contains(enchantId) -> 4  // Stage 4-5
+            else -> 3  // Default to stage 3
+        }
+    }
+
+    /**
+     * Returns the player level requirement for a given stage tier.
+     * Stage 1-2: level 10 minimum
+     * Stage 3: level 20 minimum
+     * Stage 4-5: level 30 minimum
+     *
+     * Note: The XP cost is always 3 levels regardless of stage.
+     */
+    fun getLevelRequirementForStage(stage: Int): Int = when {
+        stage <= 2 -> 10   // Stage 1-2: level 10
+        stage == 3 -> 20   // Stage 3: level 20
+        else -> 30         // Stage 4-5: level 30
     }
 
     /**

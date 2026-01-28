@@ -44,7 +44,7 @@ Plans:
 
 ---
 
-### Phase 54: Lectern Enchanting
+### Phase 54: Lectern Enchanting ✓
 
 **Goal**: Players can use lecterns to apply stage 1-2 enchantments repeatedly without consuming books
 
@@ -52,17 +52,20 @@ Plans:
 
 **Requirements**: LEC-01, LEC-02, LEC-03, LEC-04, LEC-05, LEC-06
 
-**Success Criteria** (what must be TRUE):
-1. Stage 1-2 enchantment books can be placed on empty lecterns by right-clicking
-2. Right-clicking a lectern holding a book while holding compatible gear applies the enchantment
-3. Enchantment book remains on lectern after use (unlimited applications)
-4. Lectern enchanting requires player level 10 minimum and costs 3 levels
-5. Players below level 10 see action bar message "You must be level 10!" when attempting to enchant
+**Stage 1-2 Enchantments**: mending, unbreaking, efficiency, fortune, silk_touch
 
-**Plans**: 1 plan
+**Success Criteria** (what must be TRUE):
+1. ✓ Stage 1-2 enchantment books can be placed on empty lecterns by right-clicking
+2. ✓ Right-clicking a lectern holding a book while holding compatible gear applies the enchantment
+3. ✓ Enchantment book remains on lectern after use (unlimited applications)
+4. ✓ Lectern enchanting requires player level 10 minimum and costs 3 levels
+5. ✓ Players below level 10 see action bar message "You must be level 10!" when attempting to enchant
+6. ✓ Stage 3+ books rejected with "This enchantment requires an enchanting table!"
+
+**Plans**: 1/1 complete
 
 Plans:
-- [ ] 54-01-PLAN.md — Lectern enchanting handler (stage 1-2 set, UseBlockCallback, book placement, gear enchanting)
+- [x] 54-01-PLAN.md — Lectern enchanting handler (stage 1-2 set, UseBlockCallback, book placement, gear enchanting)
 
 ---
 
@@ -120,7 +123,7 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 53. Enforcement Foundation | 3/3 | ✓ Complete | 2026-01-27 |
-| 54. Lectern Enchanting | 0/1 | Planned | - |
+| 54. Lectern Enchanting | 1/1 | ✓ Complete | 2026-01-27 |
 | 55. Enchanting Table Overhaul | 0/TBD | Not started | - |
 | 56. Acquisition Gating | 0/TBD | Not started | - |
 

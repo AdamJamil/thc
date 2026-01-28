@@ -168,22 +168,26 @@ object THC : ModInitializer {
 			// FR-05: Iron ingot from zombies/husks
 			Items.IRON_INGOT
 		)
-		LootTableEvents.MODIFY_DROPS.register(LootTableEvents.ModifyDrops { _, _, drops ->
+		LootTableEvents.MODIFY_DROPS.register(LootTableEvents.ModifyDrops { key, _, drops ->
 			val hadTotem = drops.any { it.`is`(Items.TOTEM_OF_UNDYING) }
 			drops.removeIf { stack -> removedItems.any { stack.`is`(it) } }
 			if (hadTotem) {
 				drops.add(THCItems.BLAST_TOTEM.defaultInstance)
 			}
 
-			// Filter stage 3+ enchanted books and items (gate to mob drops only)
-			drops.removeIf { stack ->
-				if (stack.`is`(Items.ENCHANTED_BOOK)) {
-					val stored = stack.get(net.minecraft.core.component.DataComponents.STORED_ENCHANTMENTS)
-					EnchantmentEnforcement.hasStage3PlusEnchantment(stored)
-				} else {
-					// Filter items (armor, weapons) with stage 3+ enchantments
-					val enchants = stack.get(net.minecraft.core.component.DataComponents.ENCHANTMENTS)
-					EnchantmentEnforcement.hasStage3PlusEnchantment(enchants)
+			// Filter stage 3+ enchanted books and items from chests/fishing only
+			// Skip entity loot tables - mob drops are the intended acquisition path
+			val keyString = key.toString()
+			if (!keyString.contains("entities/")) {
+				drops.removeIf { stack ->
+					if (stack.`is`(Items.ENCHANTED_BOOK)) {
+						val stored = stack.get(net.minecraft.core.component.DataComponents.STORED_ENCHANTMENTS)
+						EnchantmentEnforcement.hasStage3PlusEnchantment(stored)
+					} else {
+						// Filter items (armor, weapons) with stage 3+ enchantments
+						val enchants = stack.get(net.minecraft.core.component.DataComponents.ENCHANTMENTS)
+						EnchantmentEnforcement.hasStage3PlusEnchantment(enchants)
+					}
 				}
 			}
 

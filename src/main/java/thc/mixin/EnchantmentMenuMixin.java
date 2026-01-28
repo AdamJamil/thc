@@ -60,9 +60,6 @@ public abstract class EnchantmentMenuMixin extends AbstractContainerMenu {
      */
     @Inject(method = "<init>(ILnet/minecraft/world/entity/player/Inventory;Lnet/minecraft/world/inventory/ContainerLevelAccess;)V", at = @At("TAIL"))
     private void thc$replaceSlotWithBookSlot(int syncId, Inventory playerInventory, ContainerLevelAccess access, CallbackInfo ci) {
-        // Get original slot 0 to preserve its mayPlace logic
-        Slot originalItemSlot = this.slots.get(0);
-
         // Slot 0: item slot - accepts enchantable items but NOT enchanted books
         this.slots.set(0, new Slot(enchantSlots, 0, 15, 47) {
             @Override
@@ -71,8 +68,8 @@ public abstract class EnchantmentMenuMixin extends AbstractContainerMenu {
                 if (stack.is(Items.ENCHANTED_BOOK)) {
                     return false;
                 }
-                // Use original logic for other items
-                return originalItemSlot.mayPlace(stack);
+                // Accept items that can be enchanted (same as vanilla)
+                return stack.isEnchantable();
             }
 
             @Override

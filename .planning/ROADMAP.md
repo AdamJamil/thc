@@ -94,7 +94,7 @@ Plans:
 
 ---
 
-### Phase 56: Acquisition Gating
+### Phase 56: Acquisition Gating ✓
 
 **Goal**: Stage 3+ enchantments are only obtainable through specific mob drops, not Overworld chests
 
@@ -103,19 +103,19 @@ Plans:
 **Requirements**: ACQ-01, ACQ-02, ACQ-03, ACQ-04, ACQ-05, ACQ-06, ACQ-07, ACQ-08, ACQ-09
 
 **Success Criteria** (what must be TRUE):
-1. Stage 3+ enchantment books and enchanted items do not appear in any Overworld chest loot
-2. Drowned drop aqua affinity, depth strider, frost walker, respiration books at 2.5% each (stage 3+ only)
-3. Spiders drop bane of arthropods book at 2.5% (stage 3+ only)
-4. Husks and strays drop smite book at 2.5% (stage 3+ only)
-5. Blazes drop fire protection book at 2.5% (stage 3+ only)
-6. Magma cubes drop flame and fire aspect books at 5% each (stage 3+ only)
-7. Fishing lure and luck of the sea enchantments only obtainable at stage 3+
+1. ✓ Stage 3+ enchantment books and enchanted items do not appear in any Overworld chest loot
+2. ✓ Drowned drop aqua affinity, depth strider, frost walker, respiration books at 2.5% each (stage 3+ only)
+3. ✓ Spiders drop bane of arthropods book at 2.5% (stage 3+ only)
+4. ✓ Husks and strays drop smite book at 2.5% (stage 3+ only)
+5. ✓ Blazes drop fire protection book at 2.5% (stage 3+ only)
+6. ✓ Magma cubes drop flame and fire aspect books at 5% each (stage 3+ only)
+7. ✓ Fishing lure and luck of the sea enchantments made stage 1-2 (lectern-accessible per design decision)
 
-**Plans**: 2 plans
+**Plans**: 2/2 complete
 
 Plans:
-- [ ] 56-01-PLAN.md — Stage 3+ classification and loot filtering (EnchantmentEnforcement + MODIFY_DROPS)
-- [ ] 56-02-PLAN.md — Mob enchanted book drops (6 mob loot tables, 10 pools)
+- [x] 56-01-PLAN.md — Stage 3+ classification and loot filtering (EnchantmentEnforcement + MODIFY_DROPS)
+- [x] 56-02-PLAN.md — Mob enchanted book drops (6 mob loot tables, 10 pools)
 
 ---
 
@@ -128,7 +128,7 @@ Plans:
 | 53. Enforcement Foundation | 3/3 | ✓ Complete | 2026-01-27 |
 | 54. Lectern Enchanting | 1/1 | ✓ Complete | 2026-01-27 |
 | 55. Enchanting Table Overhaul | 3/3 | ✓ Complete | 2026-01-28 |
-| 56. Acquisition Gating | 0/2 | Not started | - |
+| 56. Acquisition Gating | 2/2 | ✓ Complete | 2026-01-28 |
 
 ---
 

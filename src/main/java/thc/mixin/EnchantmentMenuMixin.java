@@ -123,8 +123,6 @@ public abstract class EnchantmentMenuMixin extends AbstractContainerMenu {
             return;
         }
 
-        System.out.println("[THC DEBUG] slotsChanged called");
-
         // Reset all costs first
         costs[0] = 0;
         costs[1] = 0;
@@ -139,12 +137,9 @@ public abstract class EnchantmentMenuMixin extends AbstractContainerMenu {
         // Get item and book from slots
         ItemStack item = enchantSlots.getItem(0);
         ItemStack book = enchantSlots.getItem(1);
-        System.out.println("[THC DEBUG] Item: " + item.getItem() + ", Book: " + book.getItem());
 
         // Need both item and enchanted book for our system
         if (item.isEmpty() || !book.is(Items.ENCHANTED_BOOK)) {
-            System.out.println("[THC DEBUG] FAIL: Item empty=" + item.isEmpty() + ", isEnchantedBook=" + book.is(Items.ENCHANTED_BOOK));
-            // Let vanilla handle it (or reset costs)
             this.broadcastChanges();
             ci.cancel();
             return;
@@ -168,32 +163,27 @@ public abstract class EnchantmentMenuMixin extends AbstractContainerMenu {
                 bookshelfCount++;
             }
         }
-        System.out.println("[THC DEBUG] Bookshelf count: " + bookshelfCount);
 
         // Require 15 bookshelves (all valid positions filled)
         if (bookshelfCount < 15) {
-            System.out.println("[THC DEBUG] FAIL: Not enough bookshelves (" + bookshelfCount + "/15)");
             return;
         }
 
         // Get enchantment from book
         ItemEnchantments storedEnchants = book.get(DataComponents.STORED_ENCHANTMENTS);
         if (storedEnchants == null || storedEnchants.isEmpty()) {
-            System.out.println("[THC DEBUG] FAIL: No stored enchantments on book");
             return;
         }
 
         // Get first enchantment (require single-enchantment books)
         var entries = storedEnchants.entrySet().iterator();
         if (!entries.hasNext()) {
-            System.out.println("[THC DEBUG] FAIL: No enchantment entries");
             return;
         }
         var entry = entries.next();
 
         // Reject multi-enchantment books
         if (entries.hasNext()) {
-            System.out.println("[THC DEBUG] FAIL: Multi-enchantment book");
             return;
         }
 
@@ -201,22 +191,19 @@ public abstract class EnchantmentMenuMixin extends AbstractContainerMenu {
         String enchantId = enchantHolder.unwrapKey().orElse(null) != null
             ? enchantHolder.unwrapKey().get().identifier().toString()
             : null;
-        System.out.println("[THC DEBUG] Enchantment: " + enchantId);
 
         // Check compatibility
         if (!thc$isCompatible(enchantHolder, item)) {
-            System.out.println("[THC DEBUG] FAIL: Enchantment not compatible with item");
             return;
         }
 
         // Get level requirement based on stage (10/20/30)
         int stage = EnchantmentEnforcement.INSTANCE.getStageForEnchantment(enchantId);
         thc$levelRequirement = EnchantmentEnforcement.INSTANCE.getLevelRequirementForStage(stage);
-        System.out.println("[THC DEBUG] Stage: " + stage + ", Level requirement: " + thc$levelRequirement);
 
-        // Display cost of 3 (what player actually pays)
-        costs[0] = ENCHANT_COST;
-        System.out.println("[THC DEBUG] SUCCESS: Setting costs[0] = " + ENCHANT_COST);
+        // Display level requirement (what player needs to have)
+        // Actual cost deducted is ENCHANT_COST (3) in clickMenuButton
+        costs[0] = thc$levelRequirement;
     }
 
     @Unique
@@ -224,9 +211,7 @@ public abstract class EnchantmentMenuMixin extends AbstractContainerMenu {
         // Check if item type supports this enchantment
         // Use isSupportedItem which checks the enchantment's supportedItems definition
         // This works for already-enchanted items unlike canEnchant()
-        boolean supported = enchantHolder.value().isSupportedItem(item);
-        System.out.println("[THC DEBUG] isSupportedItem(" + item.getItem() + "): " + supported);
-        if (!supported) {
+        if (!enchantHolder.value().isSupportedItem(item)) {
             return false;
         }
 
@@ -234,19 +219,13 @@ public abstract class EnchantmentMenuMixin extends AbstractContainerMenu {
         ItemEnchantments existingEnchants = item.get(DataComponents.ENCHANTMENTS);
         if (existingEnchants != null) {
             // Already has this exact enchantment?
-            int existingLevel = existingEnchants.getLevel(enchantHolder);
-            System.out.println("[THC DEBUG] Existing level of this enchantment: " + existingLevel);
-            if (existingLevel > 0) {
-                System.out.println("[THC DEBUG] FAIL: Already has this enchantment");
+            if (existingEnchants.getLevel(enchantHolder) > 0) {
                 return false;
             }
 
             // Conflicts with existing enchantments?
             for (Holder<Enchantment> existing : existingEnchants.keySet()) {
-                boolean compatible = Enchantment.areCompatible(enchantHolder, existing);
-                System.out.println("[THC DEBUG] Compatible with " + existing.unwrapKey().orElse(null) + ": " + compatible);
-                if (!compatible) {
-                    System.out.println("[THC DEBUG] FAIL: Conflicts with existing enchantment");
+                if (!Enchantment.areCompatible(enchantHolder, existing)) {
                     return false;
                 }
             }
@@ -268,8 +247,8 @@ public abstract class EnchantmentMenuMixin extends AbstractContainerMenu {
             return;
         }
 
-        // Check player meets level requirement (10/20/30 based on stage)
-        if (player.experienceLevel < thc$levelRequirement) {
+        // Check player meets level requirement
+        if (player.experienceLevel < costs[0]) {
             cir.setReturnValue(false);
             return;
         }
@@ -310,13 +289,13 @@ public abstract class EnchantmentMenuMixin extends AbstractContainerMenu {
                 return;
             }
 
-            // Apply enchantment using the proven LecternEnchanting pattern
+            // Apply enchantment
             EnchantmentHelper.updateEnchantments(item, mutable -> {
                 mutable.set(enchantHolder, entry.getIntValue());
             });
 
             // Deduct 3 levels (always 3 per CONTEXT.md)
-            player.giveExperienceLevels(-3);
+            player.giveExperienceLevels(-ENCHANT_COST);
 
             // Play sound
             level.playSound(null, pos, SoundEvents.ENCHANTMENT_TABLE_USE,

@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-28)
 
 ## Current Position
 
-Phase: 57 of 61 (Soul Economy & Combat Tuning)
+Phase: 58 of 61 (Mining Fatigue Exemptions)
 Plan: 1 of 1
 Status: Phase complete
-Last activity: 2026-01-29 — Completed 57-01-PLAN.md
+Last activity: 2026-01-29 - Completed 58-01-PLAN.md
 
-Progress: [====>                   ] Phase 57/61 (1.6%)
+Progress: [=====>                  ] Phase 58/61 (3.3%)
 
 ## Performance Metrics
 
@@ -81,8 +81,8 @@ Progress: [====>                   ] Phase 57/61 (1.6%)
 - Phases: 57-61 (5 phases)
 - Requirements: 30 (SOUL/SPAWN/THRT/WRLD/CMBT/TERR/SMTH)
 - Status: In Progress
-- Plans completed: 1 (57-01)
-- Total execution time: ~5 min
+- Plans completed: 2 (57-01, 58-01)
+- Total execution time: ~7 min
 
 **Cumulative:**
 - 88 plans completed across 10 shipped milestones
@@ -99,6 +99,8 @@ Progress: [====>                   ] Phase 57/61 (1.6%)
 | SOUL-CRAFT-01 | 57 | 2x2 recipe (4 dust -> 1 soil) | Accessible but not trivial | 2026-01-29 |
 | CMBT-ARROW-01 | 57 | Arrow Speed III (reduced from V) | Reduces kiting effectiveness | 2026-01-29 |
 | CMBT-PILLAGER-01 | 57 | Equipment-based damage modifier | Iron sword check for melee detection | 2026-01-29 |
+| WRLD-EXEMPT-01 | 58 | BlockTags for exempt categories | Auto-covers all variants (flowers, beds, glass) | 2026-01-29 |
+| WRLD-GRAVEL-01 | 58 | Gravel in both isExemptBlock() AND loot table | Complete coverage for fatigue + flint | 2026-01-29 |
 
 See milestone archives for full decision logs:
 - .planning/milestones/v1.0-ROADMAP.md
@@ -270,6 +272,8 @@ Key patterns established:
 - MODIFY_DROPS stage 3+ filtering: removeIf with ENCHANTED_BOOK branch and enchants check (v2.5)
 - random_chance_with_enchanted_bonus with flat Looting bonus: per_level_above_first: 0.0 for +1% regardless of level (v2.5)
 - Mob enchanted book drops: independent pools per enchantment with is_baby:false or size>=2 conditions (v2.5)
+- isExemptBlock(): BlockTags-based category checking for mining fatigue exemptions (v2.6)
+- Loot table match_tool predicate with #minecraft:shovels item tag for tool-specific drops (v2.6)
 
 ### Pending Todos
 
@@ -292,6 +296,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-29
-Stopped at: Completed 57-01-PLAN.md (soul economy & combat tuning)
+Stopped at: Completed 58-01-PLAN.md (mining fatigue exemptions)
 Resume file: None
-Next: `/gsd:plan-phase 58`
+Next: `/gsd:plan-phase 59`

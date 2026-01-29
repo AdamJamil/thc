@@ -229,7 +229,20 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ### Active
 
-None — all milestones complete. Use `/gsd:new-milestone` to define next milestone requirements.
+**v2.7 Extra Features Batch 11:**
+- Mining fatigue cap at displayed level 10
+- Poise meter icon spacing (~7-10% smaller)
+- Bell ringing without land plot drops
+- Arrow recipe yields 16 (from 4)
+- Pillager arrow damage 3-5 (from 5-7)
+- Stray arrow damage 2-4 (from 4-8)
+- Bread recipe removed, replaced with dough system
+- Dough item (shapeless: 3 wheat + water bucket, bucket preserved)
+- Dough cooks to bread in furnace
+- Pig/sheep leather drops match cows
+- Experience bottles restore XP functionality
+- Protection enchantments non-exclusive (all 4 stackable)
+- Damage enchantments non-exclusive (smite/sharpness/bane stackable)
 
 ### Out of Scope
 
@@ -300,7 +313,16 @@ None — all milestones complete. Use `/gsd:new-milestone` to define next milest
 
 ## Current Milestone
 
-None — all milestones complete. Use `/gsd:new-milestone` to start next milestone.
+**v2.7 Extra Features Batch 11**
+
+**Goal:** QoL fixes, combat balance tweaks, and enchantment compatibility improvements.
+
+**Target features:**
+- Mining fatigue cap, poise meter spacing, bell behavior fix
+- Arrow recipe buff, pillager/stray arrow damage nerfs
+- Dough crafting system replacing bread recipe
+- Pig/sheep leather normalization, XP bottle fix
+- Protection and damage enchantment stacking
 
 ## Current State
 
@@ -341,4 +363,4 @@ None — all milestones complete. Use `/gsd:new-milestone` to start next milesto
 **Technical debt:** None identified
 
 ---
-*Last updated: 2026-01-29 after v2.6 milestone complete*
+*Last updated: 2026-01-29 after v2.7 milestone started*

@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-01-29)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** All milestones complete — use /gsd:new-milestone for next version
+**Current focus:** v2.7 Extra Features Batch 11 — QoL, combat balance, enchantment stacking
 
 ## Current Position
 
-Phase: Ready for next milestone
-Plan: Not started
-Status: v2.6 shipped
-Last activity: 2026-01-29 - v2.6 milestone archived
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-01-29 — Milestone v2.7 started
 
 Progress: [========================] 11 milestones shipped (61 phases, 94 plans)
 
@@ -318,6 +318,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-29
-Stopped at: v2.6 milestone archived
+Stopped at: v2.7 milestone started, defining requirements
 Resume file: None
-Next: `/gsd:new-milestone`
+Next: Define requirements, then create roadmap

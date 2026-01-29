@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": "minecraft:barrier",
+  "base": "minecraft:wooden_sword",
+  "addition": "minecraft:smooth_stone",
+  "result": {
+    "id": "minecraft:stone_sword"
+  }
+}

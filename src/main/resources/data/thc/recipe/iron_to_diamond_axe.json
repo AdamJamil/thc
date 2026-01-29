@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": "minecraft:barrier",
+  "base": "minecraft:iron_axe",
+  "addition": "minecraft:diamond",
+  "result": {
+    "id": "minecraft:diamond_axe"
+  }
+}

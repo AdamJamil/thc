@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": "minecraft:barrier",
+  "base": "minecraft:wooden_hoe",
+  "addition": "minecraft:smooth_stone",
+  "result": {
+    "id": "minecraft:stone_hoe"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": "minecraft:barrier",
+  "base": "minecraft:stone_pickaxe",
+  "addition": "minecraft:copper_ingot",
+  "result": {
+    "id": "minecraft:copper_pickaxe"
+  }
+}

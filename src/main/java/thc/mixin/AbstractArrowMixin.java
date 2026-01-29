@@ -63,8 +63,8 @@ public abstract class AbstractArrowMixin {
 			return;
 		}
 
-		// Apply Speed 5 and Glowing for 6 seconds
-		target.addEffect(new MobEffectInstance(MobEffects.SPEED, THC_EFFECT_DURATION_TICKS, 4), player);
+		// Apply Speed 3 and Glowing for 6 seconds
+		target.addEffect(new MobEffectInstance(MobEffects.SPEED, THC_EFFECT_DURATION_TICKS, 2), player);
 		target.addEffect(new MobEffectInstance(MobEffects.GLOWING, THC_EFFECT_DURATION_TICKS, 0), player);
 
 		if (target instanceof Mob mob) {

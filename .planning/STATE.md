@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-01-28)
 ## Current Position
 
 Phase: 61 of 61 (Smithing Table Tier Upgrades)
-Plan: 1 of 3
+Plan: 2 of 3
 Status: In progress
-Last activity: 2026-01-29 - Completed 61-01-PLAN.md
+Last activity: 2026-01-29 - Completed 61-02-PLAN.md
 
-Progress: [=====================>  ] Phase 61/61 (85%)
+Progress: [=====================>  ] Phase 61/61 (87%)
 
 ## Performance Metrics
 
@@ -81,12 +81,12 @@ Progress: [=====================>  ] Phase 61/61 (85%)
 - Phases: 57-61 (5 phases)
 - Requirements: 30 (SOUL/SPAWN/THRT/WRLD/CMBT/TERR/SMTH)
 - Status: In Progress
-- Plans completed: 6 (57-01, 58-01, 59-01, 60-01, 61-01, 61-03)
-- Total execution time: ~22 min
+- Plans completed: 7 (57-01, 58-01, 59-01, 60-01, 61-01, 61-02, 61-03)
+- Total execution time: ~25 min
 
 **Cumulative:**
-- 92 plans completed across 10 shipped milestones
-- ~7 hours 20 min total execution time
+- 93 plans completed across 10 shipped milestones
+- ~7 hours 23 min total execution time
 - 15 days from project start
 
 ## Accumulated Context
@@ -111,6 +111,7 @@ Progress: [=====================>  ] Phase 61/61 (85%)
 | SMTH-COUNT-01 | 61 | Material counts match vanilla crafting costs (5/8/7/4) | Players provide equivalent materials to crafting new armor | 2026-01-29 |
 | SMTH-COMPONENT-01 | 61 | Component copying for enchantment preservation | Preserves all data components while resetting durability | 2026-01-29 |
 | SMTH-COPPER-01 | 61 | Alternative recipe pattern with mod namespace | thc:smithing_table_copper does not override vanilla | 2026-01-29 |
+| SMTH-TOOL-01 | 61 | Smooth stone for wooden->stone tool upgrades | Matches crafting-equivalent feel, adds processing step | 2026-01-29 |
 
 See milestone archives for full decision logs:
 - .planning/milestones/v1.0-ROADMAP.md
@@ -317,6 +318,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-29
-Stopped at: Completed 61-01-PLAN.md (armor tier upgrades)
+Stopped at: Completed 61-02-PLAN.md (tool tier upgrades)
 Resume file: None
-Next: `/gsd:plan-phase 61` (plan 02 - tool tier upgrades)
+Next: Phase 61 complete (61-01, 61-02, 61-03 all done)

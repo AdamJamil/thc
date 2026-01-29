@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-01-28)
 ## Current Position
 
 Phase: 61 of 61 (Smithing Table Tier Upgrades)
-Plan: 3 of 3
-Status: Plan 61-03 complete
-Last activity: 2026-01-29 - Completed 61-03-PLAN.md
+Plan: 1 of 3
+Status: In progress
+Last activity: 2026-01-29 - Completed 61-01-PLAN.md
 
-Progress: [=====================>  ] Phase 61/61 (83%)
+Progress: [=====================>  ] Phase 61/61 (85%)
 
 ## Performance Metrics
 
@@ -81,12 +81,12 @@ Progress: [=====================>  ] Phase 61/61 (83%)
 - Phases: 57-61 (5 phases)
 - Requirements: 30 (SOUL/SPAWN/THRT/WRLD/CMBT/TERR/SMTH)
 - Status: In Progress
-- Plans completed: 5 (57-01, 58-01, 59-01, 60-01, 61-03)
-- Total execution time: ~18 min
+- Plans completed: 6 (57-01, 58-01, 59-01, 60-01, 61-01, 61-03)
+- Total execution time: ~22 min
 
 **Cumulative:**
-- 91 plans completed across 10 shipped milestones
-- ~7 hours 16 min total execution time
+- 92 plans completed across 10 shipped milestones
+- ~7 hours 20 min total execution time
 - 15 days from project start
 
 ## Accumulated Context
@@ -107,6 +107,9 @@ Progress: [=====================>  ] Phase 61/61 (83%)
 | VILL-POI-01 | 60 | Intercept ServerLevel.updatePOIOnBlockStateChange | PoiManager lacks server access; ServerLevel is upstream caller | 2026-01-29 |
 | VILL-BRAIN-01 | 60 | ServerHolder singleton for Brain mixin | Brain has no owner reference; avoids ThreadLocal complexity | 2026-01-29 |
 | VILL-MEMORY-01 | 60 | Filter POI memory types (HOME/JOB_SITE/etc) | Prevents over-blocking non-POI brain memories | 2026-01-29 |
+| SMTH-BARRIER-01 | 61 | Barrier block as dummy template in recipes | Mixin bypasses template requirement for tier upgrades | 2026-01-29 |
+| SMTH-COUNT-01 | 61 | Material counts match vanilla crafting costs (5/8/7/4) | Players provide equivalent materials to crafting new armor | 2026-01-29 |
+| SMTH-COMPONENT-01 | 61 | Component copying for enchantment preservation | Preserves all data components while resetting durability | 2026-01-29 |
 | SMTH-COPPER-01 | 61 | Alternative recipe pattern with mod namespace | thc:smithing_table_copper does not override vanilla | 2026-01-29 |
 
 See milestone archives for full decision logs:
@@ -288,6 +291,10 @@ Key patterns established:
 - ServerHolder singleton for server access in Brain mixin: Brain lacks owner reference, ServerHolder.setServer() called in SERVER_STARTED event (v2.6)
 - POI registration blocking: HEAD cancellation on ServerLevel.updatePOIOnBlockStateChange for claimed chunk filtering (v2.6)
 - Brain memory filtering: instanceof GlobalPos + MemoryModuleType whitelist for POI-specific blocking (v2.6)
+- SmithingMenu HEAD injection for tier upgrade result override with material count validation (v2.6)
+- SmithingMenu onTake RETURN injection for extra material consumption beyond vanilla (v2.6)
+- applyComponents() + remove(DataComponents.DAMAGE) for enchantment preservation with durability restoration (v2.6)
+- Barrier template in smithing recipes for mixin-only validation (template slot required by UI) (v2.6)
 
 ### Pending Todos
 
@@ -310,6 +317,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-29
-Stopped at: Completed 61-03-PLAN.md (copper smithing table recipe)
+Stopped at: Completed 61-01-PLAN.md (armor tier upgrades)
 Resume file: None
-Next: Continue phase 61 execution
+Next: `/gsd:plan-phase 61` (plan 02 - tool tier upgrades)

@@ -75,14 +75,15 @@ public final class SpawnDistributions {
 		upperCave.add(new WeightedEntry(null, null, 60)); // vanilla fallback
 		TABLES.put("OW_UPPER_CAVE", upperCave);
 
-		// OW_LOWER_CAVE: 8% blaze, 8% breeze, 12% vindicator, 25% pillager melee, 2% evoker, 45% vanilla
+		// OW_LOWER_CAVE: 15% wither skeleton, 8% blaze, 8% breeze, 12% vindicator, 20% pillager melee, 2% evoker, 35% vanilla
 		List<WeightedEntry> lowerCave = new ArrayList<>();
+		lowerCave.add(new WeightedEntry(EntityType.WITHER_SKELETON, 15));
 		lowerCave.add(new WeightedEntry(EntityType.BLAZE, 8));
 		lowerCave.add(new WeightedEntry(EntityType.BREEZE, 8));
 		lowerCave.add(new WeightedEntry(EntityType.VINDICATOR, 12));
-		lowerCave.add(new WeightedEntry(EntityType.PILLAGER, "MELEE", 25));
+		lowerCave.add(new WeightedEntry(EntityType.PILLAGER, "MELEE", 20)); // was 25
 		lowerCave.add(new WeightedEntry(EntityType.EVOKER, 2));
-		lowerCave.add(new WeightedEntry(null, null, 45)); // vanilla fallback
+		lowerCave.add(new WeightedEntry(null, null, 35)); // was 45
 		TABLES.put("OW_LOWER_CAVE", lowerCave);
 
 		// Validate each table sums to 100

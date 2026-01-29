@@ -14,7 +14,7 @@ Plan: 1 of 1
 Status: Phase complete
 Last activity: 2026-01-29 - Completed 60-01-PLAN.md
 
-Progress: [=====>                  ] Phase 60/61 (5.1%)
+Progress: [====================>   ] Phase 60/61 (80%)
 
 ## Performance Metrics
 
@@ -284,6 +284,9 @@ Key patterns established:
 - Loot table match_tool predicate with #minecraft:shovels item tag for tool-specific drops (v2.6)
 - Player-centered AABB for proximity checks: player.getBoundingBox().inflate(5.0) for tactical positioning rewards (v2.6)
 - Direct target exclusion in threat propagation: if (nearby == damagedMob) continue for cleaner combat (v2.6)
+- ServerHolder singleton for server access in Brain mixin: Brain lacks owner reference, ServerHolder.setServer() called in SERVER_STARTED event (v2.6)
+- POI registration blocking: HEAD cancellation on ServerLevel.updatePOIOnBlockStateChange for claimed chunk filtering (v2.6)
+- Brain memory filtering: instanceof GlobalPos + MemoryModuleType whitelist for POI-specific blocking (v2.6)
 
 ### Pending Todos
 

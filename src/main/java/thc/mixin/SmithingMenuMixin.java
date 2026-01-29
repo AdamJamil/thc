@@ -1,9 +1,10 @@
 package thc.mixin;
 
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.ItemCombinerMenu;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.inventory.SmithingMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -14,23 +15,28 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import thc.smithing.TierUpgradeConfig;
 
+import java.util.List;
+
 @Mixin(SmithingMenu.class)
-public abstract class SmithingMenuMixin extends ItemCombinerMenu {
+public abstract class SmithingMenuMixin extends AbstractContainerMenu {
 
     @Unique
     private boolean thc$wasTierUpgrade = false;
 
-    // Dummy constructor required for extending ItemCombinerMenu
+    @Unique
+    private int thc$requiredMaterialCount = 0;
+
+    // Dummy constructor required for extending AbstractContainerMenu
     protected SmithingMenuMixin() {
-        super(null, 0, null, null, null);
+        super(null, 0);
     }
 
     @Inject(method = "createResult", at = @At("HEAD"), cancellable = true)
     private void thc$handleTierUpgrade(CallbackInfo ci) {
-        // SmithingMenu slots: inputSlots.getItem(0) = template, getItem(1) = base, getItem(2) = addition
-        ItemStack template = this.inputSlots.getItem(0);
-        ItemStack base = this.inputSlots.getItem(1);
-        ItemStack addition = this.inputSlots.getItem(2);
+        // SmithingMenu slots: 0 = template, 1 = base, 2 = addition, 3 = result
+        List<Slot> slots = this.slots;
+        ItemStack base = slots.get(1).getItem();
+        ItemStack addition = slots.get(2).getItem();
 
         // Reset upgrade flag
         thc$wasTierUpgrade = false;
@@ -43,65 +49,84 @@ public abstract class SmithingMenuMixin extends ItemCombinerMenu {
         Item baseItem = base.getItem();
         Item additionItem = addition.getItem();
 
-        if (!TierUpgradeConfig.INSTANCE.isValidTierUpgrade(baseItem, additionItem)) {
+        // Check if this is a valid tier upgrade and get result in one lookup
+        Item resultItem = TierUpgradeConfig.INSTANCE.getUpgradeResult(baseItem, additionItem);
+        if (resultItem == null) {
+            // Not a tier upgrade - let vanilla handle it
             return;
         }
 
-        // This is a tier upgrade - mark it
-        thc$wasTierUpgrade = true;
+        // This IS a tier upgrade - we handle it entirely, vanilla should not run
+        // Get required material count for the RESULT item (what we're creating)
+        int requiredCount = TierUpgradeConfig.INSTANCE.getRequiredMaterialCount(resultItem);
+        if (requiredCount == 0) {
+            // Fallback to base item count if result not in map
+            requiredCount = TierUpgradeConfig.INSTANCE.getRequiredMaterialCount(baseItem);
+        }
+        if (requiredCount == 0) {
+            // Safety fallback
+            requiredCount = 1;
+        }
 
-        // Get required material count
-        int requiredCount = TierUpgradeConfig.INSTANCE.getRequiredMaterialCount(baseItem);
+        // Store for onTake
+        thc$wasTierUpgrade = true;
+        thc$requiredMaterialCount = requiredCount;
 
         // Check if sufficient materials
         if (addition.getCount() < requiredCount) {
-            // Insufficient materials - clear result and cancel
-            this.resultSlots.setItem(0, ItemStack.EMPTY);
+            // Insufficient materials - show no result
+            slots.get(3).set(ItemStack.EMPTY);
             ci.cancel();
             return;
         }
 
-        // Get upgrade result
-        Item resultItem = TierUpgradeConfig.INSTANCE.getUpgradeResult(baseItem, additionItem);
-        if (resultItem == null) {
-            return;
-        }
-
-        // Create result item with enchantments from base (vanilla smithing_transform copies these)
+        // Create result item and selectively copy user-applied components
+        // DO NOT copy item-type-specific components (EQUIPPABLE, ITEM_MODEL, ATTRIBUTE_MODIFIERS, etc.)
         ItemStack result = new ItemStack(resultItem);
 
-        // Copy all components from base except damage (restores durability)
-        result.applyComponents(base.getComponents());
-        result.remove(DataComponents.DAMAGE);
+        // Copy only user modifications that should transfer
+        copyComponentIfPresent(base, result, DataComponents.ENCHANTMENTS);
+        copyComponentIfPresent(base, result, DataComponents.CUSTOM_NAME);
+        copyComponentIfPresent(base, result, DataComponents.LORE);
+        copyComponentIfPresent(base, result, DataComponents.REPAIR_COST);
 
-        // Set result
-        this.resultSlots.setItem(0, result);
+        // Set result using Slot.set() for proper client sync
+        slots.get(3).set(result);
         ci.cancel();
     }
 
-    @Inject(method = "onTake", at = @At("RETURN"))
+    @Unique
+    private <T> void copyComponentIfPresent(ItemStack source, ItemStack dest, DataComponentType<T> component) {
+        T value = source.get(component);
+        if (value != null) {
+            dest.set(component, value);
+        }
+    }
+
+    @Inject(method = "onTake", at = @At("HEAD"))
     private void thc$consumeExtraMaterials(Player player, ItemStack result, CallbackInfo ci) {
         if (!thc$wasTierUpgrade) {
             return;
         }
 
-        // Get the base and addition items
-        ItemStack base = this.inputSlots.getItem(1);
-        ItemStack addition = this.inputSlots.getItem(2);
+        // Get the addition item before vanilla processes it
+        List<Slot> slots = this.slots;
+        ItemStack addition = slots.get(2).getItem();
 
-        if (base.isEmpty() || addition.isEmpty()) {
+        if (addition.isEmpty()) {
+            thc$wasTierUpgrade = false;
+            thc$requiredMaterialCount = 0;
             return;
         }
 
-        Item baseItem = base.getItem();
-        int requiredCount = TierUpgradeConfig.INSTANCE.getRequiredMaterialCount(baseItem);
-
-        // Consume extra materials (vanilla already consumed 1)
-        if (requiredCount > 1) {
-            addition.shrink(requiredCount - 1);
+        // Consume extra materials (vanilla will consume 1, we consume the rest)
+        // We need to shrink by (required - 1) because vanilla shrinks by 1
+        if (thc$requiredMaterialCount > 1) {
+            addition.shrink(thc$requiredMaterialCount - 1);
         }
 
-        // Reset flag
+        // Reset flags
         thc$wasTierUpgrade = false;
+        thc$requiredMaterialCount = 0;
     }
 }

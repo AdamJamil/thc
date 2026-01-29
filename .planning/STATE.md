@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-28)
 
 ## Current Position
 
-Phase: 57 (Soul Economy & Combat Tuning)
-Plan: Ready to plan
-Status: Roadmap complete, awaiting phase planning
-Last activity: 2026-01-28 — v2.6 roadmap created
+Phase: 57 of 61 (Soul Economy & Combat Tuning)
+Plan: 1 of 1
+Status: Phase complete
+Last activity: 2026-01-29 — Completed 57-01-PLAN.md
 
-Progress: [===>                    ] Phase 57/61 (0%)
+Progress: [====>                   ] Phase 57/61 (1.6%)
 
 ## Performance Metrics
 
@@ -81,16 +81,24 @@ Progress: [===>                    ] Phase 57/61 (0%)
 - Phases: 57-61 (5 phases)
 - Requirements: 30 (SOUL/SPAWN/THRT/WRLD/CMBT/TERR/SMTH)
 - Status: In Progress
-- Plans completed: 0
+- Plans completed: 1 (57-01)
+- Total execution time: ~5 min
 
 **Cumulative:**
-- 87 plans completed across 10 shipped milestones
-- ~7 hours total execution time
-- 14 days from project start
+- 88 plans completed across 10 shipped milestones
+- ~7 hours 5 min total execution time
+- 15 days from project start
 
 ## Accumulated Context
 
 ### Decisions
+
+| ID | Phase | Decision | Rationale | Date |
+|----|-------|----------|-----------|------|
+| SOUL-LOOT-01 | 57 | Flat Looting bonus (+1% regardless of level) | Matches v2.5 blaze pattern | 2026-01-29 |
+| SOUL-CRAFT-01 | 57 | 2x2 recipe (4 dust -> 1 soil) | Accessible but not trivial | 2026-01-29 |
+| CMBT-ARROW-01 | 57 | Arrow Speed III (reduced from V) | Reduces kiting effectiveness | 2026-01-29 |
+| CMBT-PILLAGER-01 | 57 | Equipment-based damage modifier | Iron sword check for melee detection | 2026-01-29 |
 
 See milestone archives for full decision logs:
 - .planning/milestones/v1.0-ROADMAP.md
@@ -283,7 +291,7 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-01-28
-Stopped at: v2.6 roadmap created
+Last session: 2026-01-29
+Stopped at: Completed 57-01-PLAN.md (soul economy & combat tuning)
 Resume file: None
-Next: `/gsd:plan-phase 57`
+Next: `/gsd:plan-phase 58`

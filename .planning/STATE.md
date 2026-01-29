@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-28)
 
 ## Current Position
 
-Phase: 59 of 61 (Spawn Distribution & Proximity Threat)
+Phase: 60 of 61 (Village Deregistration)
 Plan: 1 of 1
 Status: Phase complete
-Last activity: 2026-01-29 - Completed 59-01-PLAN.md
+Last activity: 2026-01-29 - Completed 60-01-PLAN.md
 
-Progress: [=====>                  ] Phase 59/61 (5.0%)
+Progress: [=====>                  ] Phase 60/61 (5.1%)
 
 ## Performance Metrics
 
@@ -81,12 +81,12 @@ Progress: [=====>                  ] Phase 59/61 (5.0%)
 - Phases: 57-61 (5 phases)
 - Requirements: 30 (SOUL/SPAWN/THRT/WRLD/CMBT/TERR/SMTH)
 - Status: In Progress
-- Plans completed: 3 (57-01, 58-01, 59-01)
-- Total execution time: ~10 min
+- Plans completed: 4 (57-01, 58-01, 59-01, 60-01)
+- Total execution time: ~16 min
 
 **Cumulative:**
-- 89 plans completed across 10 shipped milestones
-- ~7 hours 8 min total execution time
+- 90 plans completed across 10 shipped milestones
+- ~7 hours 14 min total execution time
 - 15 days from project start
 
 ## Accumulated Context
@@ -104,6 +104,9 @@ Progress: [=====>                  ] Phase 59/61 (5.0%)
 | SPAWN-WITHER-01 | 59 | Wither skeleton at 15% weight in deepslate | Adds high-threat mob without overwhelming spawn rate | 2026-01-29 |
 | THRT-PROX-01 | 59 | 5 block radius centered on player | Tactical awareness zone, rewards positioning | 2026-01-29 |
 | THRT-CALC-01 | 59 | ceil(damage/4) for proximity threat | Scales with damage but prevents instant aggro | 2026-01-29 |
+| VILL-POI-01 | 60 | Intercept ServerLevel.updatePOIOnBlockStateChange | PoiManager lacks server access; ServerLevel is upstream caller | 2026-01-29 |
+| VILL-BRAIN-01 | 60 | ServerHolder singleton for Brain mixin | Brain has no owner reference; avoids ThreadLocal complexity | 2026-01-29 |
+| VILL-MEMORY-01 | 60 | Filter POI memory types (HOME/JOB_SITE/etc) | Prevents over-blocking non-POI brain memories | 2026-01-29 |
 
 See milestone archives for full decision logs:
 - .planning/milestones/v1.0-ROADMAP.md
@@ -161,6 +164,8 @@ Key patterns established:
 - BedRule redirect: @Redirect on EnvironmentAttributeSystem.getValue for sleep restriction bypass
 - Sleep time skip prevention: @Redirect on GameRules.get for ADVANCE_TIME in sleep block
 - Loot table item replacement: detect before remove, add replacement after (MODIFY_DROPS pattern)
+- ServerHolder singleton: Static server reference for mixin contexts without server access
+- Brain.setMemory GlobalPos filtering: Type check + memory type check for POI-specific blocking
 - @Redirect setBlock for structure block filtering: intercept ServerLevelAccessor.setBlock in placeInWorld
 - Position-based structure protection: getStructureWithPieceAt(pos) for precise bounding box checks
 - ThreadLocal for paired injection state: store in HEAD, use in RETURN (eating saturation cap)
@@ -301,6 +306,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-29
-Stopped at: Completed 59-01-PLAN.md (spawn distribution & proximity threat)
+Stopped at: Completed 60-01-PLAN.md (village deregistration)
 Resume file: None
-Next: `/gsd:plan-phase 60`
+Next: `/gsd:plan-phase 61`

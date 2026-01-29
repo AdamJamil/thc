@@ -4,7 +4,6 @@ import net.fabricmc.fabric.api.item.v1.DefaultItemComponentEvents
 import net.minecraft.core.component.DataComponents
 import net.minecraft.world.food.FoodProperties
 import net.minecraft.world.item.Items
-import thc.item.THCItems
 
 /**
  * Rebalances vanilla food items' nutrition and saturation values.
@@ -242,14 +241,6 @@ object FoodStatsModifier {
                     .build())
             }
 
-            // ===== HONEY APPLE - mid-tier healing food =====
-            // 8 hunger, 2.73 sat -> modifier = 2.73 / 16 = 0.170625
-            context.modify(THCItems.HONEY_APPLE) { builder ->
-                builder.set(DataComponents.FOOD, FoodProperties.Builder()
-                    .nutrition(8)
-                    .saturationModifier(0.170625f)
-                    .build())
-            }
         }
     }
 }

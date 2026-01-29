@@ -11,6 +11,7 @@ import net.minecraft.tags.DamageTypeTags
 import net.minecraft.world.item.CreativeModeTab
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.component.DamageResistant
+import net.minecraft.world.food.FoodProperties
 
 object THCItems {
     private val toolsTabKey: ResourceKey<CreativeModeTab> = ResourceKey.create(
@@ -47,6 +48,10 @@ object THCItems {
             Item.Properties()
                 .setId(key)
                 .stacksTo(64)
+                .food(FoodProperties.Builder()
+                    .nutrition(8)
+                    .saturationModifier(0.170625f)
+                    .build())
         )
     }
 

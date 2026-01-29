@@ -21,7 +21,6 @@ import thc.threat.ThreatManager;
  */
 @Mixin(LivingEntity.class)
 public abstract class MobDamageThreatMixin {
-	private static final double THC_THREAT_RADIUS = 15.0;
 
 	@Inject(method = "hurtServer", at = @At("TAIL"))
 	private void thc$propagateThreatOnDamage(
@@ -32,7 +31,7 @@ public abstract class MobDamageThreatMixin {
 	) {
 		// Only run for Mob instances
 		LivingEntity self = (LivingEntity) (Object) this;
-		if (!(self instanceof Mob mob)) {
+		if (!(self instanceof Mob damagedMob)) {
 			return;
 		}
 
@@ -47,10 +46,17 @@ public abstract class MobDamageThreatMixin {
 			return;
 		}
 
-		// Add threat to all hostile/neutral mobs within 15 blocks
-		AABB area = mob.getBoundingBox().inflate(THC_THREAT_RADIUS);
+		// Calculate proximity threat: ceil(damage / 4)
+		double proximityThreat = Math.ceil(amount / 4.0);
+
+		// Find mobs within 5 blocks of PLAYER (not target)
+		AABB area = player.getBoundingBox().inflate(5.0);
 		for (Mob nearby : level.getEntitiesOfClass(Mob.class, area, MobDamageThreatMixin::thc$isHostileOrNeutral)) {
-			ThreatManager.addThreat(nearby, player.getUUID(), amount);
+			// THRT-02: Skip the direct damage target
+			if (nearby == damagedMob) {
+				continue;
+			}
+			ThreatManager.addThreat(nearby, player.getUUID(), proximityThreat);
 		}
 	}
 

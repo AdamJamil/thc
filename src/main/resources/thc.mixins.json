@@ -15,6 +15,7 @@
 		"AnvilMenuMixin",
 		"BeeMixin",
 		"BellBlockMixin",
+		"BrainPoiMemoryMixin",
 		"BucketItemLavaMixin",
 		"ExampleMixin",
 		"ExperienceOrbXpMixin",

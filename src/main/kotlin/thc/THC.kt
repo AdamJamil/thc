@@ -121,6 +121,9 @@ object THC : ModInitializer {
 		})
 
 		ServerLifecycleEvents.SERVER_STARTED.register(ServerLifecycleEvents.ServerStarted { server ->
+			// Set server reference for village deregistration in claimed chunks
+			thc.village.ServerHolder.setServer(server)
+
 			server.allLevels.forEach { world ->
 				world.gameRules.set(GameRules.MOB_GRIEFING, false, server)
 			}

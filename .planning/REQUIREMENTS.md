@@ -7,8 +7,8 @@
 
 ### Soul Economy
 
-- [ ] **SOUL-01**: Illagers drop soul dust at 20% rate (Pillager, Vindicator, Evoker, Illusioner, Ravager, Witch)
-- [ ] **SOUL-02**: 4 soul dust crafts 1 soul soil (2x2 pattern)
+- [x] **SOUL-01**: Illagers drop soul dust at 20% rate (Pillager, Vindicator, Evoker, Illusioner, Ravager, Witch)
+- [x] **SOUL-02**: 4 soul dust crafts 1 soul soil (2x2 pattern)
 
 ### Spawn Distribution
 
@@ -34,8 +34,8 @@
 
 ### Combat
 
-- [ ] **CMBT-01**: Arrow hit speed effect reduced from Speed IV to Speed III
-- [ ] **CMBT-02**: Melee pillager attack damage increased from 4.5 to 6.5
+- [x] **CMBT-01**: Arrow hit speed effect reduced from Speed IV to Speed III
+- [x] **CMBT-02**: Melee pillager attack damage increased from 4.5 to 6.5
 
 ### Territory
 
@@ -68,8 +68,8 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SOUL-01 | 57 | Pending |
-| SOUL-02 | 57 | Pending |
+| SOUL-01 | 57 | Complete |
+| SOUL-02 | 57 | Complete |
 | SPAWN-01 | 59 | Pending |
 | SPAWN-02 | 59 | Pending |
 | SPAWN-03 | 59 | Pending |
@@ -83,8 +83,8 @@
 | WRLD-06 | 58 | Pending |
 | WRLD-07 | 58 | Pending |
 | WRLD-08 | 58 | Pending |
-| CMBT-01 | 57 | Pending |
-| CMBT-02 | 57 | Pending |
+| CMBT-01 | 57 | Complete |
+| CMBT-02 | 57 | Complete |
 | TERR-01 | 60 | Pending |
 | TERR-02 | 60 | Pending |
 | SMTH-01 | 61 | Pending |

@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.Blocks
 import net.minecraft.world.level.block.state.BlockState
 import thc.claim.ChunkValidator
 import thc.claim.ClaimManager
+import thc.world.WorldRestrictions
 import java.util.UUID
 
 /**
@@ -97,6 +98,16 @@ object MiningFatigue {
                 return@register true
             }
 
+            // No fatigue for exempt block categories (flowers, grass, glass, beds, gravel)
+            if (isExemptBlock(state)) {
+                return@register true
+            }
+
+            // No fatigue for placeable-anywhere blocks (torches, chests, crafting tables, etc.)
+            if (WorldRestrictions.ALLOWED_BLOCKS.contains(state.block)) {
+                return@register true
+            }
+
             // Apply/stack mining fatigue
             applyFatigue(player as ServerPlayer)
 
@@ -152,5 +163,17 @@ object MiningFatigue {
             state.`is`(BlockTags.DIAMOND_ORES) ||
             state.`is`(BlockTags.EMERALD_ORES) ||
             state.`is`(Blocks.NETHER_QUARTZ_ORE)
+    }
+
+    /**
+     * Checks if a block state is exempt from mining fatigue.
+     * Includes flowers, grass-type blocks, glass, beds, and gravel.
+     */
+    private fun isExemptBlock(state: BlockState): Boolean {
+        return state.`is`(BlockTags.FLOWERS) ||     // All flower variants (17+)
+            state.`is`(BlockTags.DIRT) ||           // Grass blocks, podzol, mycelium, moss, mud
+            state.`is`(BlockTags.IMPERMEABLE) ||    // All glass variants (plain, 16 stained, tinted, barrier)
+            state.`is`(BlockTags.BEDS) ||           // All 16 bed colors
+            state.`is`(Blocks.GRAVEL)               // Gravel blocks
     }
 }

@@ -6,6 +6,7 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.entity.Mob
 import net.minecraft.world.entity.ai.attributes.AttributeModifier
 import net.minecraft.world.entity.ai.attributes.Attributes
+import net.minecraft.world.item.Items
 
 /**
  * Damage rebalancing for melee mobs in v2.3 Monster Overhaul.
@@ -21,6 +22,7 @@ object DamageRebalancing {
     private val VEX_DAMAGE_ID = Identifier.fromNamespaceAndPath("thc", "vex_damage_reduction")
     private val VINDICATOR_DAMAGE_ID = Identifier.fromNamespaceAndPath("thc", "vindicator_damage_reduction")
     private val MAGMA_CUBE_DAMAGE_ID = Identifier.fromNamespaceAndPath("thc", "magma_cube_damage_reduction")
+    private val PILLAGER_MELEE_DAMAGE_ID = Identifier.fromNamespaceAndPath("thc", "pillager_melee_damage")
 
     fun register() {
         ServerEntityEvents.ENTITY_LOAD.register { entity, world ->
@@ -28,6 +30,7 @@ object DamageRebalancing {
             applyVexDamage(entity)
             applyVindicatorDamage(entity)
             applyMagmaCubeDamage(entity)
+            applyPillagerMeleeDamage(entity)
         }
     }
 
@@ -73,6 +76,24 @@ object DamageRebalancing {
         if (!damageAttr.hasModifier(MAGMA_CUBE_DAMAGE_ID)) {
             damageAttr.addTransientModifier(
                 AttributeModifier(MAGMA_CUBE_DAMAGE_ID, -0.478, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
+            )
+        }
+    }
+
+    /**
+     * Increase melee pillager damage from ~4.5 to 6.5.
+     * Melee pillagers have iron swords - check mainhand to distinguish from ranged.
+     * Multiplier: 6.5 / 4.5 = 1.444, modifier = +0.444
+     */
+    private fun applyPillagerMeleeDamage(mob: Mob) {
+        if (mob.type != EntityType.PILLAGER) return
+        // Only melee variants have iron sword in mainhand
+        if (!mob.mainHandItem.`is`(Items.IRON_SWORD)) return
+
+        val damageAttr = mob.getAttribute(Attributes.ATTACK_DAMAGE) ?: return
+        if (!damageAttr.hasModifier(PILLAGER_MELEE_DAMAGE_ID)) {
+            damageAttr.addTransientModifier(
+                AttributeModifier(PILLAGER_MELEE_DAMAGE_ID, 0.444, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
             )
         }
     }

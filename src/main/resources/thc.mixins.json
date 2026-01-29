@@ -49,6 +49,7 @@
 		"ServerLevelSleepMixin",
 		"ServerPlayerMixin",
 		"SmallFireballMixin",
+		"SmithingMenuMixin",
 		"SnowballItemMixin",
 		"SpawnReplacementMixin",
 		"StructureTemplateMixin",

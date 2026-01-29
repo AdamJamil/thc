@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-28)
 
 ## Current Position
 
-Phase: 60 of 61 (Village Deregistration)
-Plan: 1 of 1
-Status: Phase complete
-Last activity: 2026-01-29 - Completed 60-01-PLAN.md
+Phase: 61 of 61 (Smithing Table Tier Upgrades)
+Plan: 3 of 3
+Status: Plan 61-03 complete
+Last activity: 2026-01-29 - Completed 61-03-PLAN.md
 
-Progress: [====================>   ] Phase 60/61 (80%)
+Progress: [=====================>  ] Phase 61/61 (83%)
 
 ## Performance Metrics
 
@@ -81,12 +81,12 @@ Progress: [====================>   ] Phase 60/61 (80%)
 - Phases: 57-61 (5 phases)
 - Requirements: 30 (SOUL/SPAWN/THRT/WRLD/CMBT/TERR/SMTH)
 - Status: In Progress
-- Plans completed: 4 (57-01, 58-01, 59-01, 60-01)
-- Total execution time: ~16 min
+- Plans completed: 5 (57-01, 58-01, 59-01, 60-01, 61-03)
+- Total execution time: ~18 min
 
 **Cumulative:**
-- 90 plans completed across 10 shipped milestones
-- ~7 hours 14 min total execution time
+- 91 plans completed across 10 shipped milestones
+- ~7 hours 16 min total execution time
 - 15 days from project start
 
 ## Accumulated Context
@@ -107,6 +107,7 @@ Progress: [====================>   ] Phase 60/61 (80%)
 | VILL-POI-01 | 60 | Intercept ServerLevel.updatePOIOnBlockStateChange | PoiManager lacks server access; ServerLevel is upstream caller | 2026-01-29 |
 | VILL-BRAIN-01 | 60 | ServerHolder singleton for Brain mixin | Brain has no owner reference; avoids ThreadLocal complexity | 2026-01-29 |
 | VILL-MEMORY-01 | 60 | Filter POI memory types (HOME/JOB_SITE/etc) | Prevents over-blocking non-POI brain memories | 2026-01-29 |
+| SMTH-COPPER-01 | 61 | Alternative recipe pattern with mod namespace | thc:smithing_table_copper does not override vanilla | 2026-01-29 |
 
 See milestone archives for full decision logs:
 - .planning/milestones/v1.0-ROADMAP.md
@@ -309,6 +310,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-29
-Stopped at: Completed 60-01-PLAN.md (village deregistration)
+Stopped at: Completed 61-03-PLAN.md (copper smithing table recipe)
 Resume file: None
-Next: `/gsd:plan-phase 61`
+Next: Continue phase 61 execution

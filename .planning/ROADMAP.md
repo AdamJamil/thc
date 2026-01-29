@@ -16,7 +16,7 @@
 
 ## Current Milestone
 
-None — all milestones complete. Use `/gsd:new-milestone` to start next milestone.
+- [v2.7](milestones/v2.7-ROADMAP.md) — Extra Features Batch 11 (phases 62-65)
 
 ## Progress
 
@@ -33,8 +33,9 @@ None — all milestones complete. Use `/gsd:new-milestone` to start next milesto
 | v2.4 | 46-52 | 7 | Complete | 2026-01-26 |
 | v2.5 | 53-56 | 9 | Complete | 2026-01-28 |
 | v2.6 | 57-61 | 7 | Complete | 2026-01-29 |
+| v2.7 | 62-65 | TBD | In Progress | — |
 
-**Total:** 61 phases, 94 plans across 11 milestones
+**Total:** 65 phases, 94+ plans across 12 milestones
 
 ---
 

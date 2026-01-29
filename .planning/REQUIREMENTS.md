@@ -48,26 +48,26 @@ None — all identified features scoped to v2.7.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| QOL-01 | TBD | Pending |
-| QOL-02 | TBD | Pending |
-| QOL-03 | TBD | Pending |
-| QOL-04 | TBD | Pending |
-| CMBT-01 | TBD | Pending |
-| CMBT-02 | TBD | Pending |
-| CMBT-03 | TBD | Pending |
-| FOOD-01 | TBD | Pending |
-| FOOD-02 | TBD | Pending |
-| FOOD-03 | TBD | Pending |
-| FOOD-04 | TBD | Pending |
-| FOOD-05 | TBD | Pending |
-| ENCH-01 | TBD | Pending |
-| ENCH-02 | TBD | Pending |
+| QOL-01 | Phase 62 | Pending |
+| QOL-02 | Phase 62 | Pending |
+| QOL-03 | Phase 62 | Pending |
+| QOL-04 | Phase 62 | Pending |
+| CMBT-01 | Phase 63 | Pending |
+| CMBT-02 | Phase 63 | Pending |
+| CMBT-03 | Phase 63 | Pending |
+| FOOD-01 | Phase 64 | Pending |
+| FOOD-02 | Phase 64 | Pending |
+| FOOD-03 | Phase 64 | Pending |
+| FOOD-04 | Phase 64 | Pending |
+| FOOD-05 | Phase 64 | Pending |
+| ENCH-01 | Phase 65 | Pending |
+| ENCH-02 | Phase 65 | Pending |
 
 **Coverage:**
 - v2.7 requirements: 13 total
-- Mapped to phases: 0
-- Unmapped: 13
+- Mapped to phases: 13
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-01-29*
-*Last updated: 2026-01-29 after initial definition*
+*Last updated: 2026-01-29 after roadmap creation*

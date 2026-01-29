@@ -1,5 +1,36 @@
 # Project Milestones: THC (True Hardcore)
 
+## v2.6 Extra Features Batch 10 (Shipped: 2026-01-29)
+
+**Delivered:** Quality-of-life features including soul economy (illager soul dust drops + crafting), expanded mining fatigue exemptions, proximity threat system, village deregistration in claimed chunks, and smithing table tier upgrades with enchantment preservation.
+
+**Phases completed:** 57-61 (7 plans total)
+
+**Key accomplishments:**
+
+- Soul economy: 6 illager types drop soul dust at 20% (+1% Looting), 4 soul dust crafts 1 soul soil
+- Mining fatigue exempts flowers, grass, glass, beds, ores, gravel, and all placeable blocks
+- Proximity threat: Dealing X damage adds ceil(X/4) threat to mobs within 5 blocks of player
+- Village deregistration: Beds/workstations in claimed chunks don't register POI, preventing village formation in bases
+- Wither skeletons added to deepslate spawn pool at 15% weight
+- Smithing table tier upgrades (leather→copper→iron→diamond) preserving enchantments and restoring durability
+- Tool tier upgrades (wooden→stone→copper→iron→diamond) with crafting-equivalent material costs
+- Alternative copper smithing table recipe for earlier progression access
+- Combat tuning: Arrow speed reduced to Speed III, melee pillager damage buffed to 6.5
+
+**Stats:**
+
+- 84 files created/modified
+- ~9,759 lines of Kotlin/Java (cumulative)
+- 5 phases, 7 plans, 30 requirements
+- 1 day (2026-01-28 → 2026-01-29)
+
+**Git range:** `feat(57-01)` → `docs(61)`
+
+**What's next:** To be determined
+
+---
+
 ## v2.5 Enchantment Overhaul (Shipped: 2026-01-28)
 
 **Delivered:** Complete enchantment system overhaul with 12 enchantments removed, single-level display, custom fire damage, lectern enchanting for early-stage books, deterministic book-slot enchanting table, and mob-specific acquisition gating for powerful enchantments.

@@ -202,21 +202,34 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
   - Stage 3+ enchantments removed from Overworld chest loot
   - Mob drops: drowned (aqua affinity, depth strider, frost walker, respiration), spider (bane of arthropods), husk/stray (smite), blaze (fire protection), magma cube (flame, fire aspect)
   - 2.5% base drop rate, +1% with Looting
+- Soul economy — v2.6
+  - Soul dust drops from all 6 illager types (20% + 1% Looting)
+  - 4 soul dust crafts 1 soul soil (2x2 pattern)
+- Mining fatigue exemptions — v2.6
+  - Gravel always drops flint with shovel
+  - Exempts: flowers, grass, glass, beds, ores, gravel, all placeable blocks
+- Combat tuning — v2.6
+  - Arrow hit speed reduced from Speed IV to Speed III
+  - Melee pillager damage buffed from 4.5 to 6.5
+- Spawn distribution — v2.6
+  - Wither skeletons spawn in deepslate caves at 15%
+  - Deepslate pillager weight reduced from 25% to 20%
+  - Deepslate vanilla fallback reduced from 45% to 35%
+- Proximity threat — v2.6
+  - Dealing X damage adds ceil(X/4) threat to mobs within 5 blocks of player
+  - Direct damage target excluded from proximity threat
+- Village deregistration — v2.6
+  - Beds/workstations in claimed chunks don't register POI
+  - Villagers cannot claim POI in claimed chunks (memory blocking)
+- Smithing table upgrades — v2.6
+  - Leather→copper→iron→diamond armor upgrades with enchantment preservation
+  - Wooden→stone→copper→iron→diamond tool upgrades with crafting-equivalent costs
+  - Diamond→netherite unchanged (vanilla passthrough)
+  - Alternative copper recipe for smithing table
 
 ### Active
 
-**v2.6 Extra Features Batch 10:**
-- [ ] Soul dust drops from illagers (20% from Pillager, Vindicator, Evoker, Illusioner, Ravager, Witch)
-- [ ] Soul soil crafting (4 soul dust in 2x2 = 1 soul soil)
-- [ ] Deepslate spawn distribution (+15% wither skeleton, pillager 25%→20%, vanilla 45%→35%)
-- [ ] Proximity threat (dealing X damage adds ceil(X/4) threat to mobs within 5 blocks of you)
-- [ ] Gravel flint (shovel always drops flint)
-- [ ] Mining fatigue exemptions (+gravel, grass, flowers, ores, glass, placeable blocks, beds)
-- [ ] Arrow speed nerf (Speed IV → Speed III)
-- [ ] Melee pillager damage buff (4.5 → 6.5)
-- [ ] Village deregistration (claimed chunks don't count for village mechanics)
-- [ ] Smithing table tier upgrades (preserving enchantments, material cost = crafting cost)
-- [ ] Smithing table copper recipe (copper alternative to iron)
+None — all milestones complete. Use `/gsd:new-milestone` to define next milestone requirements.
 
 ### Out of Scope
 
@@ -287,30 +300,16 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ## Current Milestone
 
-**v2.6 Extra Features Batch 10**
-
-**Goal:** Quality-of-life improvements across combat, crafting, and world interaction — soul economy expansion, threat system refinement, smithing progression overhaul.
-
-**Target features:**
-- Soul dust mob drops + soul soil crafting
-- Deepslate spawn rebalancing with wither skeletons
-- Proximity threat when dealing damage
-- Mining fatigue exemption expansion
-- Gravel always drops flint with shovel
-- Arrow speed reduction (IV → III)
-- Melee pillager damage buff
-- Village deregistration in claimed chunks
-- Smithing table tier upgrades with enchantment preservation
-- Smithing table copper recipe alternative
+None — all milestones complete. Use `/gsd:new-milestone` to start next milestone.
 
 ## Current State
 
-**Latest Ship:** v2.5 Enchantment Overhaul (2026-01-28)
+**Latest Ship:** v2.6 Extra Features Batch 10 (2026-01-29)
 
 **Codebase:**
-- ~9,304 LOC Kotlin/Java
+- ~9,759 LOC Kotlin/Java
 - Mixed mixin + event-driven architecture
-- 87 plans across 56 phases in 10 milestones
+- 94 plans across 61 phases in 11 milestones
 - Attachment patterns for player state, mob threat, one-time effects, class, boon level, spawn region, fire source
 - Client visual overrides for twilight sky
 - Comprehensive spawn/behavior modifications (10+ mob types)
@@ -320,7 +319,7 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 - Class system with permanent role differentiation
 - Stage system with boon level scaffolding
 - Regional spawn system with partitioned caps
-- Custom mob distributions per Overworld region
+- Custom mob distributions per Overworld region (including wither skeletons in deepslate)
 - Iron boat entity for lava navigation
 - Copper bucket system (water/milk only)
 - Fluid placement restrictions (no lava, flowing water)
@@ -330,6 +329,11 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 - Stage-gated enchantment system (lectern for 1-2, table for 3+)
 - Mob-specific enchantment book drops
 - Custom fire enchantment damage (Flame 6HP, Fire Aspect 9HP)
+- Soul economy (illager drops + soul soil crafting)
+- Expanded mining fatigue exemptions (flowers, grass, glass, beds, ores, gravel)
+- Proximity threat propagation (player-centered, 5 blocks)
+- Village deregistration in claimed chunks (POI + memory blocking)
+- Smithing table tier upgrades (armor + tools with enchantment preservation)
 
 **Known issues:**
 - PlayerSleepMixin broken from MC 1.21.11 upgrade (blocks smoke test, not functionality)
@@ -337,4 +341,4 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 **Technical debt:** None identified
 
 ---
-*Last updated: 2026-01-28 after v2.6 milestone started*
+*Last updated: 2026-01-29 after v2.6 milestone complete*

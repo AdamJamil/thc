@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": "minecraft:barrier",
+  "base": "minecraft:iron_boots",
+  "addition": "minecraft:diamond",
+  "result": {
+    "id": "minecraft:diamond_boots"
+  }
+}

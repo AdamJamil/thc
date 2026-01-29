@@ -12,10 +12,11 @@
 - [v2.3](milestones/v2.3-ROADMAP.md) — Monster Overhaul (phases 37-45)
 - [v2.4](milestones/v2.4-ROADMAP.md) — Extra Features Batch 8 (phases 46-52)
 - [v2.5](milestones/v2.5-ROADMAP.md) — Enchantment Overhaul (phases 53-56)
+- [v2.6](milestones/v2.6-ROADMAP.md) — Extra Features Batch 10 (phases 57-61)
 
 ## Current Milestone
 
-- [v2.6](milestones/v2.6-ROADMAP.md) — Extra Features Batch 10 (phases 57-61)
+None — all milestones complete. Use `/gsd:new-milestone` to start next milestone.
 
 ## Progress
 
@@ -31,10 +32,10 @@
 | v2.3 | 37-45 | 13 | Complete | 2026-01-25 |
 | v2.4 | 46-52 | 7 | Complete | 2026-01-26 |
 | v2.5 | 53-56 | 9 | Complete | 2026-01-28 |
-| v2.6 | 57-61 | TBD | In Progress | — |
+| v2.6 | 57-61 | 7 | Complete | 2026-01-29 |
 
-**Total:** 61 phases, 87+ plans across 11 milestones
+**Total:** 61 phases, 94 plans across 11 milestones
 
 ---
 
-*Roadmap last updated: 2026-01-28*
+*Roadmap last updated: 2026-01-29*

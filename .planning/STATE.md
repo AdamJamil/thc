@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-01-28)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v2.6 Extra Features Batch 10
+**Current focus:** v2.6 complete — use /gsd:new-milestone for next version
 
 ## Current Position
 
 Phase: 61 of 61 (Smithing Table Tier Upgrades)
-Plan: 2 of 3
-Status: In progress
-Last activity: 2026-01-29 - Completed 61-02-PLAN.md
+Plan: 3 of 3
+Status: Milestone v2.6 complete
+Last activity: 2026-01-29 - Completed all phase 61 plans
 
-Progress: [=====================>  ] Phase 61/61 (87%)
+Progress: [========================] Milestone v2.6 complete (100%)
 
 ## Performance Metrics
 
@@ -80,12 +80,12 @@ Progress: [=====================>  ] Phase 61/61 (87%)
 **v2.6 Milestone:**
 - Phases: 57-61 (5 phases)
 - Requirements: 30 (SOUL/SPAWN/THRT/WRLD/CMBT/TERR/SMTH)
-- Status: In Progress
+- Status: SHIPPED 2026-01-29
 - Plans completed: 7 (57-01, 58-01, 59-01, 60-01, 61-01, 61-02, 61-03)
 - Total execution time: ~25 min
 
 **Cumulative:**
-- 93 plans completed across 10 shipped milestones
+- 94 plans completed across 11 shipped milestones
 - ~7 hours 23 min total execution time
 - 15 days from project start
 
@@ -318,6 +318,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-29
-Stopped at: Completed 61-02-PLAN.md (tool tier upgrades)
+Stopped at: Completed milestone v2.6 (all phases 57-61 shipped)
 Resume file: None
-Next: Phase 61 complete (61-01, 61-02, 61-03 all done)
+Next: `/gsd:audit-milestone` or `/gsd:new-milestone`

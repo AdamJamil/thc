@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-29)
 
 ## Current Position
 
-Phase: 64 - Food Economy Dough System
-Plan: 02 of 2
+Phase: 65 - Enchantment Compatibility
+Plan: 01 of 1
 Status: Phase Complete
-Last activity: 2026-01-30 — Completed 64-02-PLAN.md
+Last activity: 2026-01-30 — Completed 65-01-PLAN.md
 
-Progress: [========================] 11 milestones shipped (64 phases, 98 plans)
+Progress: [========================] 11 milestones shipped (65 phases, 99 plans)
 
 ## Performance Metrics
 
@@ -120,6 +120,8 @@ Progress: [========================] 11 milestones shipped (64 phases, 98 plans)
 | CMBT-STRAY-01 | 63 | Stray arrow damage 0.5x | Reduces 4-8 to 2-4 | 2026-01-30 |
 | FOOD-DOUGH-01 | 64 | Dough requires water bucket (iron or copper) not just wheat | Adds processing step to bread creation | 2026-01-30 |
 | FOOD-LEATHER-01 | 64 | Leather pool as first pool in pig/sheep loot tables | Consistency with cow.json structure | 2026-01-30 |
+| ENCH-STACK-01 | 65 | Data-driven tag override vs mixin approach | Tag override is simpler, no code required | 2026-01-30 |
+| ENCH-DAMAGE-01 | 65 | Empty entire damage exclusive set including impaling/density/breach | Impaling/density in REMOVED_ENCHANTMENTS; breach stacking consistent | 2026-01-30 |
 
 See milestone archives for full decision logs:
 - .planning/milestones/v1.0-ROADMAP.md
@@ -309,6 +311,8 @@ Key patterns established:
 - Matrix3x2fStack transformations for HUD icon scaling (v2.7)
 - minOf() for capping incremental values (v2.7)
 - EntityType owner check for mob-specific arrow damage modification (v2.7)
+- Tag override with replace:true for emptying vanilla tags (v2.7)
+- Data-driven enchantment exclusivity via exclusive_set tags (v2.7)
 
 ### Pending Todos
 
@@ -331,6 +335,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-30
-Stopped at: Completed phase 64 (food economy dough system)
+Stopped at: Completed phase 65 (enchantment compatibility)
 Resume file: None
-Next: Phase 65 (enchantment compatibility)
+Next: v2.7 milestone completion or next phase

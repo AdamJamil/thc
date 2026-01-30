@@ -34,6 +34,12 @@ object MiningFatigue {
     private const val DECAY_TICKS = 12 * 20
 
     /**
+     * Maximum amplifier for mining fatigue (level 10 display = amplifier 9).
+     * Caps stacking to prevent extreme mining slowdown.
+     */
+    private const val MAX_AMPLIFIER = 9
+
+    /**
      * Tracks players with mining fatigue.
      * Maps player UUID to their current fatigue amplifier when effect was applied.
      * Used for decay logic to know when to reapply at lower level.
@@ -129,9 +135,8 @@ object MiningFatigue {
         val currentEffect = player.getEffect(MobEffects.MINING_FATIGUE)
 
         val newAmplifier = if (currentEffect != null) {
-            // Stack: increment amplifier
-            val currentAmplifier = currentEffect.amplifier
-            currentAmplifier + 1
+            // Stack: increment amplifier, cap at MAX_AMPLIFIER (level 10)
+            minOf(currentEffect.amplifier + 1, MAX_AMPLIFIER)
         } else {
             // First application: amplifier 0 = Fatigue I
             0

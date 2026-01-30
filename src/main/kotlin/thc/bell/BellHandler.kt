@@ -19,14 +19,14 @@ object BellHandler {
                 return@UseBlockCallback InteractionResult.PASS
             }
 
-            // Server-side only
+            // Server-side only - PASS allows vanilla to ring the bell
             if (level.isClientSide) {
-                return@UseBlockCallback InteractionResult.SUCCESS
+                return@UseBlockCallback InteractionResult.PASS
             }
 
-            // Check if already activated
+            // Check if already activated - PASS allows vanilla to ring the bell
             if (BellState.isActivated(level, pos)) {
-                return@UseBlockCallback InteractionResult.SUCCESS
+                return@UseBlockCallback InteractionResult.PASS
             }
 
             // Mark as activated
@@ -37,7 +37,8 @@ object BellHandler {
             val itemEntity = ItemEntity(level, pos.x + 0.5, pos.y + 1.0, pos.z + 0.5, landPlot)
             level.addFreshEntity(itemEntity)
 
-            return@UseBlockCallback InteractionResult.SUCCESS
+            // PASS allows vanilla to ring the bell after dropping land plot
+            return@UseBlockCallback InteractionResult.PASS
         })
     }
 }

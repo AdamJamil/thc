@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-01-29)
 ## Current Position
 
 Phase: 62 - QoL Fixes
-Plan: —
-Status: Roadmap created, awaiting plan breakdown
-Last activity: 2026-01-29 — Roadmap created for v2.7
+Plan: 01 of 1
+Status: Phase complete
+Last activity: 2026-01-29 — Completed 62-01-PLAN.md
 
-Progress: [========================] 11 milestones shipped (61 phases, 94 plans)
+Progress: [========================] 11 milestones shipped (62 phases, 95 plans)
 
 ## Performance Metrics
 
@@ -112,6 +112,9 @@ Progress: [========================] 11 milestones shipped (61 phases, 94 plans)
 | SMTH-COMPONENT-01 | 61 | Component copying for enchantment preservation | Preserves all data components while resetting durability | 2026-01-29 |
 | SMTH-COPPER-01 | 61 | Alternative recipe pattern with mod namespace | thc:smithing_table_copper does not override vanilla | 2026-01-29 |
 | SMTH-TOOL-01 | 61 | Smooth stone for wooden->stone tool upgrades | Matches crafting-equivalent feel, adds processing step | 2026-01-29 |
+| QOL-FATIGUE-01 | 62 | Cap mining fatigue at amplifier 9 (level 10) | Prevents extreme slowdown while maintaining penalty | 2026-01-29 |
+| QOL-BELL-01 | 62 | Use InteractionResult.PASS instead of SUCCESS | Allows vanilla bell ringing to continue after our handler | 2026-01-29 |
+| QOL-POISE-01 | 62 | 0.92f scale with 9px spacing | ~8% smaller icons with visible gaps between them | 2026-01-29 |
 
 See milestone archives for full decision logs:
 - .planning/milestones/v1.0-ROADMAP.md
@@ -297,6 +300,9 @@ Key patterns established:
 - SmithingMenu onTake RETURN injection for extra material consumption beyond vanilla (v2.6)
 - applyComponents() + remove(DataComponents.DAMAGE) for enchantment preservation with durability restoration (v2.6)
 - Barrier template in smithing recipes for mixin-only validation (template slot required by UI) (v2.6)
+- InteractionResult.PASS for vanilla passthrough in UseBlockCallback (v2.7)
+- Matrix3x2fStack transformations for HUD icon scaling (v2.7)
+- minOf() for capping incremental values (v2.7)
 
 ### Pending Todos
 
@@ -319,6 +325,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-29
-Stopped at: v2.7 roadmap created with 4 phases (62-65)
+Stopped at: Completed 62-01-PLAN.md (QoL fixes)
 Resume file: None
-Next: /gsd:plan-phase 62
+Next: Phase 63 (Combat Hardcap Balance)

@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-01-29)
 ## Current Position
 
 Phase: 64 - Food Economy Dough System
-Plan: 01 of 2
-Status: Complete
-Last activity: 2026-01-30 — Completed 64-01-PLAN.md
+Plan: 02 of 2
+Status: Phase Complete
+Last activity: 2026-01-30 — Completed 64-02-PLAN.md
 
-Progress: [========================] 11 milestones shipped (64 phases, 97 plans)
+Progress: [========================] 11 milestones shipped (64 phases, 98 plans)
 
 ## Performance Metrics
 
@@ -119,6 +119,7 @@ Progress: [========================] 11 milestones shipped (64 phases, 97 plans)
 | CMBT-PILLAGER-02 | 63 | Pillager arrow damage 0.667x | Reduces 5-7 to 3-5, less frustrating | 2026-01-30 |
 | CMBT-STRAY-01 | 63 | Stray arrow damage 0.5x | Reduces 4-8 to 2-4 | 2026-01-30 |
 | FOOD-DOUGH-01 | 64 | Dough requires water bucket (iron or copper) not just wheat | Adds processing step to bread creation | 2026-01-30 |
+| FOOD-LEATHER-01 | 64 | Leather pool as first pool in pig/sheep loot tables | Consistency with cow.json structure | 2026-01-30 |
 
 See milestone archives for full decision logs:
 - .planning/milestones/v1.0-ROADMAP.md
@@ -330,6 +331,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-30
-Stopped at: Completed 64-01-PLAN.md (dough item and recipes)
+Stopped at: Completed 64-02-PLAN.md (leather drops for pigs and sheep)
 Resume file: None
-Next: 64-02-PLAN.md (cake recipe modification)
+Next: Phase 64 complete - next phase TBD

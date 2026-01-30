@@ -16,7 +16,8 @@ object BucklerHudRenderer {
     private val BUCKLER_EMPTY = Identifier.fromNamespaceAndPath("thc", "textures/item/stone_buckler_empty.png")
 
     private const val ICON_RENDER_SIZE = 9
-    private const val ICON_SPACING = 8
+    private const val ICON_SCALE = 0.92f  // ~8% smaller icons
+    private const val ICON_SPACING = 9    // Spacing between icons (scaled size + gap)
     private const val BAR_HEIGHT = 10
     private const val FULL_DISPLAY_TICKS = 160
 
@@ -47,15 +48,21 @@ object BucklerHudRenderer {
 
         val left = (guiGraphics.guiWidth() / 2) - 91
         val top = guiGraphics.guiHeight() - HudStatusBarHeightRegistry.getHeight(POISE_ID)
+        val matrices = guiGraphics.pose()
         for (i in 0 until totalIcons) {
-            val x = left + (i * ICON_SPACING)
+            val baseX = left + (i * ICON_SPACING)
             val iconHalf = poiseHalf - (i * 2)
             val icon = if (iconHalf >= 2) BUCKLER_FULL else if (iconHalf == 1) BUCKLER_HALF else BUCKLER_EMPTY
+
+            matrices.pushMatrix()
+            matrices.translate(baseX.toFloat(), top.toFloat())
+            matrices.scale(ICON_SCALE, ICON_SCALE)
+
             guiGraphics.blit(
                 RenderPipelines.GUI_TEXTURED,
                 icon,
-                x,
-                top,
+                0,      // x now 0 since we translated
+                0,      // y now 0 since we translated
                 0.0f,
                 0.0f,
                 ICON_RENDER_SIZE,
@@ -65,6 +72,8 @@ object BucklerHudRenderer {
                 16,
                 16
             )
+
+            matrices.popMatrix()
         }
     }
 

@@ -103,6 +103,15 @@ object THCItems {
         )
     }
 
+    @JvmField
+    val DOUGH: Item = register("dough") { key ->
+        Item(
+            Item.Properties()
+                .setId(key)
+                .stacksTo(64)
+        )
+    }
+
     fun init() {
         // Set the drop item for IronBoat entity after items are initialized
         thc.entity.IronBoat.ironBoatDropItem = IRON_BOAT
@@ -118,6 +127,7 @@ object THCItems {
         }
         ItemGroupEvents.modifyEntriesEvent(foodTabKey).register { entries ->
             entries.accept(HONEY_APPLE)
+            entries.accept(DOUGH)
         }
     }
 

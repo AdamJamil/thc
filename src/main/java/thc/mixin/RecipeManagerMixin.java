@@ -39,7 +39,8 @@ public class RecipeManagerMixin {
 		"sugar_from_sugar_cane",
 		"saddle",
 		"brewing_stand",
-		"enchanting_table"
+		"enchanting_table",
+		"bread"
 	);
 
 	@Inject(

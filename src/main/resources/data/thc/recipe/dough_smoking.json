@@ -2,7 +2,9 @@
   "type": "minecraft:smoking",
   "category": "food",
   "ingredient": "thc:dough",
-  "result": "minecraft:bread",
+  "result": {
+    "id": "minecraft:bread"
+  },
   "experience": 0.35,
   "cookingtime": 100
 }

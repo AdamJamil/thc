@@ -1,5 +1,38 @@
 # Project Milestones: THC (True Hardcore)
 
+## v2.7 Extra Features Batch 11 (Shipped: 2026-01-30)
+
+**Delivered:** QoL fixes (mining fatigue cap, poise meter scaling, bell ringing, XP bottles), combat balancing (arrow recipe buff, Pillager/Stray damage nerfs), dough crafting system replacing direct bread, leather drops from pigs/sheep, and enchantment compatibility allowing protection and damage enchantment stacking.
+
+**Phases completed:** 62-65 (5 plans total)
+
+**Key accomplishments:**
+
+- Mining fatigue capped at level 10 (prevents extreme slowdown during exploration)
+- Poise meter icons scaled ~8% smaller with visible spacing between them
+- Bells ring normally after land plot has been obtained
+- Arrow recipe yields 16 (4x vanilla) for improved ranged economy
+- Pillager arrow damage reduced to 67% (5-7 → 3-5)
+- Stray arrow damage reduced to 50% (4-8 → 2-4)
+- Dough item craftable from 3 wheat + water bucket (iron or copper, bucket preserved)
+- Dough cooks to bread in furnace/smoker (bread recipe removed)
+- Pigs and sheep drop leather at cow rates (0-2 base, +1 per looting)
+- Protection enchantments stackable (all 4 types on same armor)
+- Damage enchantments stackable (smite/sharpness/bane on same weapon)
+
+**Stats:**
+
+- 39 files created/modified
+- ~9,823 lines of Kotlin/Java (cumulative)
+- 4 phases, 5 plans, 14 requirements
+- 2 days (2026-01-29 → 2026-01-30)
+
+**Git range:** `feat(62-01)` → `feat(65-01)`
+
+**What's next:** To be determined
+
+---
+
 ## v2.6 Extra Features Batch 10 (Shipped: 2026-01-29)
 
 **Delivered:** Quality-of-life features including soul economy (illager soul dust drops + crafting), expanded mining fatigue exemptions, proximity threat system, village deregistration in claimed chunks, and smithing table tier upgrades with enchantment preservation.

@@ -229,20 +229,7 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ### Active
 
-**v2.7 Extra Features Batch 11:**
-- Mining fatigue cap at displayed level 10
-- Poise meter icon spacing (~7-10% smaller)
-- Bell ringing without land plot drops
-- Arrow recipe yields 16 (from 4)
-- Pillager arrow damage 3-5 (from 5-7)
-- Stray arrow damage 2-4 (from 4-8)
-- Bread recipe removed, replaced with dough system
-- Dough item (shapeless: 3 wheat + water bucket, bucket preserved)
-- Dough cooks to bread in furnace
-- Pig/sheep leather drops match cows
-- Experience bottles restore XP functionality
-- Protection enchantments non-exclusive (all 4 stackable)
-- Damage enchantments non-exclusive (smite/sharpness/bane stackable)
+None — ready for next milestone planning
 
 ### Out of Scope
 
@@ -313,25 +300,16 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ## Current Milestone
 
-**v2.7 Extra Features Batch 11**
-
-**Goal:** QoL fixes, combat balance tweaks, and enchantment compatibility improvements.
-
-**Target features:**
-- Mining fatigue cap, poise meter spacing, bell behavior fix
-- Arrow recipe buff, pillager/stray arrow damage nerfs
-- Dough crafting system replacing bread recipe
-- Pig/sheep leather normalization, XP bottle fix
-- Protection and damage enchantment stacking
+None — ready for next milestone planning
 
 ## Current State
 
-**Latest Ship:** v2.6 Extra Features Batch 10 (2026-01-29)
+**Latest Ship:** v2.7 Extra Features Batch 11 (2026-01-30)
 
 **Codebase:**
-- ~9,759 LOC Kotlin/Java
+- ~9,823 LOC Kotlin/Java
 - Mixed mixin + event-driven architecture
-- 94 plans across 61 phases in 11 milestones
+- 99 plans across 65 phases in 12 milestones
 - Attachment patterns for player state, mob threat, one-time effects, class, boon level, spawn region, fire source
 - Client visual overrides for twilight sky
 - Comprehensive spawn/behavior modifications (10+ mob types)
@@ -356,6 +334,15 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 - Proximity threat propagation (player-centered, 5 blocks)
 - Village deregistration in claimed chunks (POI + memory blocking)
 - Smithing table tier upgrades (armor + tools with enchantment preservation)
+- Mining fatigue cap at level 10 — v2.7
+- Poise meter icon scaling with spacing — v2.7
+- Bell ringing fix (PASS instead of SUCCESS) — v2.7
+- Arrow recipe 16x yield — v2.7
+- Pillager/Stray arrow damage reduction — v2.7
+- Dough crafting system (wheat + water bucket → dough → bread) — v2.7
+- Leather drops from pigs and sheep — v2.7
+- Protection enchantments stackable (all 4 types) — v2.7
+- Damage enchantments stackable (smite/sharpness/bane) — v2.7
 
 **Known issues:**
 - PlayerSleepMixin broken from MC 1.21.11 upgrade (blocks smoke test, not functionality)
@@ -363,4 +350,4 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 **Technical debt:** None identified
 
 ---
-*Last updated: 2026-01-29 after v2.7 milestone started*
+*Last updated: 2026-01-30 after v2.7 milestone shipped*

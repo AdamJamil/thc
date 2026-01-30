@@ -13,10 +13,11 @@
 - [v2.4](milestones/v2.4-ROADMAP.md) — Extra Features Batch 8 (phases 46-52)
 - [v2.5](milestones/v2.5-ROADMAP.md) — Enchantment Overhaul (phases 53-56)
 - [v2.6](milestones/v2.6-ROADMAP.md) — Extra Features Batch 10 (phases 57-61)
+- [v2.7](milestones/v2.7-ROADMAP.md) — Extra Features Batch 11 (phases 62-65)
 
 ## Current Milestone
 
-- [v2.7](milestones/v2.7-ROADMAP.md) — Extra Features Batch 11 (phases 62-65)
+None — ready for next milestone planning
 
 ## Progress
 
@@ -33,10 +34,10 @@
 | v2.4 | 46-52 | 7 | Complete | 2026-01-26 |
 | v2.5 | 53-56 | 9 | Complete | 2026-01-28 |
 | v2.6 | 57-61 | 7 | Complete | 2026-01-29 |
-| v2.7 | 62-65 | TBD | In Progress | — |
+| v2.7 | 62-65 | 5 | Complete | 2026-01-30 |
 
-**Total:** 65 phases, 94+ plans across 12 milestones
+**Total:** 65 phases, 99 plans across 12 milestones
 
 ---
 
-*Roadmap last updated: 2026-01-29*
+*Roadmap last updated: 2026-01-30*

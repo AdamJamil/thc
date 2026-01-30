@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-29)
 
 ## Current Position
 
-Phase: 62 - QoL Fixes
+Phase: 63 - Combat Balancing
 Plan: 01 of 1
-Status: Automated verification passed, human testing required
-Last activity: 2026-01-29 — Phase 62 execution complete, VERIFICATION.md created
+Status: Complete
+Last activity: 2026-01-30 — Completed 63-01-PLAN.md
 
-Progress: [========================] 11 milestones shipped (62 phases, 95 plans)
+Progress: [========================] 11 milestones shipped (63 phases, 96 plans)
 
 ## Performance Metrics
 
@@ -115,6 +115,9 @@ Progress: [========================] 11 milestones shipped (62 phases, 95 plans)
 | QOL-FATIGUE-01 | 62 | Cap mining fatigue at amplifier 9 (level 10) | Prevents extreme slowdown while maintaining penalty | 2026-01-29 |
 | QOL-BELL-01 | 62 | Use InteractionResult.PASS instead of SUCCESS | Allows vanilla bell ringing to continue after our handler | 2026-01-29 |
 | QOL-POISE-01 | 62 | 0.92f scale with 9px spacing | ~8% smaller icons with visible gaps between them | 2026-01-29 |
+| CMBT-ARROW-02 | 63 | Arrow recipe yields 16 (4x vanilla) | Improves arrow economy for ranged combat | 2026-01-30 |
+| CMBT-PILLAGER-02 | 63 | Pillager arrow damage 0.667x | Reduces 5-7 to 3-5, less frustrating | 2026-01-30 |
+| CMBT-STRAY-01 | 63 | Stray arrow damage 0.5x | Reduces 4-8 to 2-4 | 2026-01-30 |
 
 See milestone archives for full decision logs:
 - .planning/milestones/v1.0-ROADMAP.md
@@ -303,6 +306,7 @@ Key patterns established:
 - InteractionResult.PASS for vanilla passthrough in UseBlockCallback (v2.7)
 - Matrix3x2fStack transformations for HUD icon scaling (v2.7)
 - minOf() for capping incremental values (v2.7)
+- EntityType owner check for mob-specific arrow damage modification (v2.7)
 
 ### Pending Todos
 
@@ -324,7 +328,7 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-01-29
-Stopped at: Completed 62-01-PLAN.md (QoL fixes)
+Last session: 2026-01-30
+Stopped at: Completed 63-01-PLAN.md (combat balancing)
 Resume file: None
-Next: Human verification for phase 62, then /gsd:plan-phase 63
+Next: Phase 64 (food economy)

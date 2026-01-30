@@ -335,6 +335,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-30
-Stopped at: Completed phase 65 (enchantment compatibility)
+Stopped at: Completed phase 65 (enchantment compatibility) — v2.7 milestone complete
 Resume file: None
-Next: v2.7 milestone completion or next phase
+Next: Milestone audit (/gsd:audit-milestone)

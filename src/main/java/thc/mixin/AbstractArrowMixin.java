@@ -4,6 +4,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
@@ -39,6 +40,18 @@ public abstract class AbstractArrowMixin {
 	private void thc$applyArrowHitEffects(EntityHitResult entityHitResult, CallbackInfo ci) {
 		AbstractArrow self = (AbstractArrow) (Object) this;
 		Entity owner = self.getOwner();
+
+		// Reduce Pillager arrow damage by ~33% (5-7 -> 3-5)
+		if (owner != null && owner.getType() == EntityType.PILLAGER) {
+			baseDamage = baseDamage * 0.667;
+			return;
+		}
+
+		// Reduce Stray arrow damage by 50% (4-8 -> 2-4)
+		if (owner != null && owner.getType() == EntityType.STRAY) {
+			baseDamage = baseDamage * 0.5;
+			return;
+		}
 
 		if (!(owner instanceof ServerPlayer player)) {
 			return;

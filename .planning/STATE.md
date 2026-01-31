@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-01-30)
 ## Current Position
 
 Phase: 66 of 71 (Structure Locators)
-Plan: 0 of 2 in current phase
-Status: Ready to plan
-Last activity: 2026-01-30 — Roadmap created for v2.8
+Plan: 1 of 2 in current phase
+Status: In progress
+Last activity: 2026-01-31 — Completed 66-01-PLAN.md
 
-Progress: [========================] 12 milestones shipped (65 phases, 99 plans)
+Progress: [========================] 12 milestones shipped (65 phases, 100 plans)
 
 ## Performance Metrics
 
@@ -95,12 +95,13 @@ Progress: [========================] 12 milestones shipped (65 phases, 99 plans)
 - Phases: 66-71 (6 phases)
 - Requirements: 59 (SLOC/VJOB/VLEV/VCYC/TLIB/TBUT/TMAS/TCRT/RAIL)
 - Status: In progress
-- Plans completed: 0/11
+- Plans completed: 1/11 (66-01)
+- Total execution time: ~6 min
 
 **Cumulative:**
-- 99 plans completed across 12 shipped milestones
+- 100 plans completed across 12 shipped milestones
 - ~8 hours total execution time
-- 16 days from project start
+- 17 days from project start
 
 ## Accumulated Context
 
@@ -114,6 +115,8 @@ Key patterns established for v2.8:
 - POI blocking via ServerLevelPoiMixin (proven in village deregistration)
 - StageManager.getCurrentStage() for level gates (proven in patrol spawning)
 - Brain memory filtering (proven in v2.6 villager deregistration)
+- lodestone_tracker with tracked=false for compass items (proven in structure locators)
+- Custom TagKey creation for structures without StructureTags constants (proven in 66-01)
 
 ### Pending Todos
 
@@ -127,7 +130,7 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-01-30
-Stopped at: Roadmap created for v2.8 Villager Overhaul
+Last session: 2026-01-31
+Stopped at: Completed 66-01-PLAN.md
 Resume file: None
-Next: `/gsd:plan-phase 66` to plan Structure Locators phase
+Next: `/gsd:execute-phase` to run 66-02-PLAN.md (item models and textures)

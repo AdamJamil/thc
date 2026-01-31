@@ -55,6 +55,7 @@
 		"SpawnReplacementMixin",
 		"StructureTemplateMixin",
 		"VillagerMixin",
+		"VillagerProfessionMixin",
 		"WindChargePlayerBoostMixin",
 		"FireworkRocketEntityMixin",
 		"PlayerElytraMixin",

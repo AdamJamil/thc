@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-01-30)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v2.8 Villager Overhaul — Phase 67 complete, ready for Phase 68
+**Current focus:** v2.8 Villager Overhaul — Phase 68 in progress
 
 ## Current Position
 
-Phase: 67 of 71 (Job Restriction) - COMPLETE
-Plan: 2 of 2 in current phase (67-02 complete)
-Status: Phase complete
-Last activity: 2026-01-31 — Completed 67-02-PLAN.md
+Phase: 68 of 71 (Custom Trade Tables)
+Plan: 1 of 3 in current phase (68-01 complete)
+Status: In progress
+Last activity: 2026-01-31 — Completed 68-01-PLAN.md
 
-Progress: [========================] 12 milestones shipped (67 phases, 104 plans)
+Progress: [========================] 12 milestones shipped (68 phases, 105 plans)
 
 ## Performance Metrics
 
@@ -95,11 +95,11 @@ Progress: [========================] 12 milestones shipped (67 phases, 104 plans
 - Phases: 66-71 (6 phases)
 - Requirements: 59 (SLOC/VJOB/VLEV/VCYC/TLIB/TBUT/TMAS/TCRT/RAIL)
 - Status: In progress
-- Plans completed: 4/11 (66-01, 66-02, 67-01, 67-02)
-- Total execution time: ~19 min
+- Plans completed: 5/11 (66-01, 66-02, 67-01, 67-02, 68-01)
+- Total execution time: ~23 min
 
 **Cumulative:**
-- 104 plans completed across 12 shipped milestones
+- 105 plans completed across 12 shipped milestones
 - ~8 hours total execution time
 - 17 days from project start
 
@@ -121,6 +121,8 @@ Key patterns established for v2.8:
 - setVillagerData interception for profession filtering (proven in 67-01)
 - registryAccess().lookupOrThrow().getOrThrow() for Holder lookup in MC 1.21 (proven in 67-01)
 - POI blocking extended for disallowed job blocks via AllowedProfessions (proven in 67-02)
+- Trade interception via updateTrades() mixin with cancellable (proven in 68-01)
+- Factory method pattern for deterministic MerchantOffer creation (proven in 68-01)
 
 ### Pending Todos
 
@@ -135,6 +137,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-31
-Stopped at: Completed 67-02-PLAN.md
+Stopped at: Completed 68-01-PLAN.md
 Resume file: None
-Next: 68-01 (Custom Trade Tables)
+Next: 68-02 (Librarian Trades)

@@ -3,19 +3,25 @@ package thc.mixin;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import thc.claim.ClaimManager;
+import thc.villager.AllowedProfessions;
 
 /**
- * Block POI registration for beds/workstations/bells in claimed chunks.
+ * Block POI registration in two scenarios:
  *
- * <p>When a POI-eligible block is placed in a claimed chunk, this mixin
- * cancels the POI registration, preventing villagers from seeing it as
- * part of a village.
+ * <ol>
+ *   <li>All POI in claimed chunks (beds, workstations, bells)</li>
+ *   <li>Disallowed job blocks everywhere (brewing stand, smithing table, etc.)</li>
+ * </ol>
+ *
+ * <p>This provides defense-in-depth for profession restriction. Even if a villager
+ * somehow tried to acquire a disallowed profession, the job site POI wouldn't exist.
  */
 @Mixin(ServerLevel.class)
 public class ServerLevelPoiMixin {
@@ -34,8 +40,16 @@ public class ServerLevelPoiMixin {
         ServerLevel self = (ServerLevel) (Object) this;
         ChunkPos chunkPos = new ChunkPos(pos);
 
+        // Block all POI in claimed chunks
         if (ClaimManager.INSTANCE.isClaimed(self.getServer(), chunkPos)) {
-            ci.cancel(); // Block POI registration/removal in claimed chunks
+            ci.cancel();
+            return;
+        }
+
+        // Block disallowed job site POI everywhere
+        Block newBlock = newState.getBlock();
+        if (AllowedProfessions.isDisallowedJobBlock(newBlock)) {
+            ci.cancel();
         }
     }
 }

@@ -92,9 +92,9 @@ Requirements for villager system overhaul. Each maps to roadmap phases.
 
 ### Rail Transportation
 
-- [ ] **RAIL-01**: Rails craftable with copper OR iron (alternative recipe)
-- [ ] **RAIL-02**: Rails yield 64 per recipe (up from 16, 4x increase)
-- [ ] **RAIL-03**: Powered rails yield 64 per recipe (up from 6, ~10x increase)
+- [x] **RAIL-01**: Rails craftable with copper OR iron (alternative recipe)
+- [x] **RAIL-02**: Rails yield 64 per recipe (up from 16, 4x increase)
+- [x] **RAIL-03**: Powered rails yield 64 per recipe (up from 6, ~10x increase)
 
 ## Future Requirements
 
@@ -179,9 +179,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | VCYC-01 | 70 | Complete |
 | VCYC-02 | 70 | Complete |
 | VCYC-03 | 70 | Complete |
-| RAIL-01 | 71 | Pending |
-| RAIL-02 | 71 | Pending |
-| RAIL-03 | 71 | Pending |
+| RAIL-01 | 71 | Complete |
+| RAIL-02 | 71 | Complete |
+| RAIL-03 | 71 | Complete |
 
 **Coverage:**
 - v2.8 requirements: 59 total

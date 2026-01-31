@@ -16,6 +16,7 @@ import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.item.trading.ItemCost;
 import net.minecraft.world.item.trading.MerchantOffer;
 import thc.enchant.EnchantmentEnforcement;
+import thc.item.THCItems;
 
 import java.util.List;
 import java.util.Optional;
@@ -94,8 +95,11 @@ public final class CustomTradeTables {
         if (profession.equals(VillagerProfession.MASON)) {
             return getMasonTrades(level, random);
         }
+        if (profession.equals(VillagerProfession.CARTOGRAPHER)) {
+            return getCartographerTrades(level);
+        }
 
-        // Placeholder - CARTOGRAPHER added next
+        // All 4 professions implemented
         return List.of();
     }
 
@@ -213,8 +217,136 @@ public final class CustomTradeTables {
     }
 
     // =====================================================================
+    // Mason trades (TMAS-01 through TMAS-10)
+    // =====================================================================
+
+    /**
+     * Get mason trades for a specific level.
+     * Level 1 is deterministic, levels 2-5 have 50/50 variants.
+     * Per REQUIREMENTS.md TMAS-01 through TMAS-10.
+     */
+    private static List<MerchantOffer> getMasonTrades(int level, RandomSource random) {
+        return switch (level) {
+            case 1 -> List.of(
+                // TMAS-01: 1e -> 64 cobblestone (deterministic)
+                createSimpleTrade(Items.EMERALD, 1, Items.COBBLESTONE, 64),
+                // TMAS-02: 1e -> 64 stone bricks (deterministic)
+                createSimpleTrade(Items.EMERALD, 1, Items.STONE_BRICKS, 64),
+                // TMAS-03: 1e -> 64 bricks (deterministic)
+                createSimpleTrade(Items.EMERALD, 1, Items.BRICKS, 64),
+                // TMAS-04: 1e -> 64 polished andesite (deterministic)
+                createSimpleTrade(Items.EMERALD, 1, Items.POLISHED_ANDESITE, 64)
+            );
+            case 2 -> List.of(
+                // TMAS-05: 1e -> 64 polished granite OR 1e -> 64 polished diorite (50/50)
+                getVariantTrade(random,
+                    () -> createSimpleTrade(Items.EMERALD, 1, Items.POLISHED_GRANITE, 64),
+                    () -> createSimpleTrade(Items.EMERALD, 1, Items.POLISHED_DIORITE, 64)
+                ),
+                // TMAS-06: 1e -> 64 smooth stone OR 1e -> 64 calcite (50/50)
+                getVariantTrade(random,
+                    () -> createSimpleTrade(Items.EMERALD, 1, Items.SMOOTH_STONE, 64),
+                    () -> createSimpleTrade(Items.EMERALD, 1, Items.CALCITE, 64)
+                )
+            );
+            case 3 -> List.of(
+                // TMAS-07: 1e -> 64 tuff OR 1e -> 64 mud bricks (50/50)
+                getVariantTrade(random,
+                    () -> createSimpleTrade(Items.EMERALD, 1, Items.TUFF, 64),
+                    () -> createSimpleTrade(Items.EMERALD, 1, Items.MUD_BRICKS, 64)
+                ),
+                // TMAS-08: 1e -> 32 deepslate bricks OR 1e -> 32 deepslate tiles (50/50)
+                getVariantTrade(random,
+                    () -> createSimpleTrade(Items.EMERALD, 1, Items.DEEPSLATE_BRICKS, 32),
+                    () -> createSimpleTrade(Items.EMERALD, 1, Items.DEEPSLATE_TILES, 32)
+                )
+            );
+            case 4 -> List.of(
+                // TMAS-09: 1e -> 32 polished blackstone OR 1e -> 32 polished blackstone bricks (50/50)
+                getVariantTrade(random,
+                    () -> createSimpleTrade(Items.EMERALD, 1, Items.POLISHED_BLACKSTONE, 32),
+                    () -> createSimpleTrade(Items.EMERALD, 1, Items.POLISHED_BLACKSTONE_BRICKS, 32)
+                )
+            );
+            case 5 -> List.of(
+                // TMAS-10: 1e -> 16 copper block OR 1e -> 16 quartz block (50/50)
+                getVariantTrade(random,
+                    () -> createSimpleTrade(Items.EMERALD, 1, Items.COPPER_BLOCK, 16),
+                    () -> createSimpleTrade(Items.EMERALD, 1, Items.QUARTZ_BLOCK, 16)
+                )
+            );
+            default -> List.of();
+        };
+    }
+
+    // =====================================================================
+    // Cartographer trades (TCRT-01 through TCRT-10)
+    // =====================================================================
+
+    /**
+     * Get cartographer trades for a specific level.
+     * All cartographer trades are deterministic.
+     * Structure locators from Phase 66 are sold at higher levels.
+     * Per REQUIREMENTS.md TCRT-01 through TCRT-10.
+     */
+    private static List<MerchantOffer> getCartographerTrades(int level) {
+        return switch (level) {
+            case 1 -> List.of(
+                // TCRT-01: 24 paper -> 1e (deterministic)
+                createSimpleTrade(Items.PAPER, 24, Items.EMERALD, 1),
+                // TCRT-02: 5e -> empty map (deterministic)
+                createSimpleTrade(Items.EMERALD, 5, Items.MAP, 1),
+                // TCRT-03: 10e -> trial chamber locator (deterministic)
+                createLocatorTrade(10, THCItems.TRIAL_CHAMBER_LOCATOR)
+            );
+            case 2 -> List.of(
+                // TCRT-04: 15e -> pillager outpost locator (deterministic)
+                createLocatorTrade(15, THCItems.PILLAGER_OUTPOST_LOCATOR),
+                // TCRT-05: 1e -> 8 glass panes (deterministic)
+                createSimpleTrade(Items.EMERALD, 1, Items.GLASS_PANE, 8),
+                // TCRT-06: 3e -> spyglass (deterministic)
+                createSimpleTrade(Items.EMERALD, 3, Items.SPYGLASS, 1)
+            );
+            case 3 -> List.of(
+                // TCRT-07: 20e -> nether fortress locator (deterministic)
+                createLocatorTrade(20, THCItems.FORTRESS_LOCATOR),
+                // TCRT-08: 20e -> bastion locator (deterministic)
+                createLocatorTrade(20, THCItems.BASTION_LOCATOR)
+            );
+            case 4 -> List.of(
+                // TCRT-09: 25e -> ancient city locator (deterministic)
+                createLocatorTrade(25, THCItems.ANCIENT_CITY_LOCATOR)
+            );
+            case 5 -> List.of(
+                // TCRT-10: 30e -> stronghold locator (deterministic)
+                createLocatorTrade(30, THCItems.STRONGHOLD_LOCATOR)
+            );
+            default -> List.of();
+        };
+    }
+
+    // =====================================================================
     // Factory methods for trade creation
     // =====================================================================
+
+    /**
+     * Creates a structure locator trade for cartographer.
+     *
+     * @param emeraldCost Emerald cost for the trade
+     * @param locator Structure locator item from THCItems
+     * @return MerchantOffer for the locator trade
+     */
+    public static MerchantOffer createLocatorTrade(int emeraldCost, Item locator) {
+        return new MerchantOffer(
+            new ItemCost(Items.EMERALD, emeraldCost),
+            Optional.empty(),
+            new ItemStack(locator, 1),
+            0,                   // uses (starts at 0)
+            Integer.MAX_VALUE,   // maxUses (unlimited)
+            0,                   // xp (no XP gain)
+            0.05f                // priceMultiplier (standard)
+        );
+    }
 
     /**
      * Create a simple one-input trade.

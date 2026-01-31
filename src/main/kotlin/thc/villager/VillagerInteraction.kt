@@ -3,12 +3,14 @@ package thc.villager
 import net.fabricmc.fabric.api.event.player.UseEntityCallback
 import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.network.chat.Component
+import net.minecraft.resources.ResourceKey
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.sounds.SoundEvents
 import net.minecraft.sounds.SoundSource
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.npc.villager.Villager
+import net.minecraft.world.entity.npc.villager.VillagerProfession
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
 import thc.mixin.access.VillagerAccessor
@@ -66,9 +68,9 @@ object VillagerInteraction {
 
         val maxXp = VillagerXpConfig.getMaxXpForLevel(currentLevel)
 
-        // At 0 XP - reserved for Phase 70 cycling, pass through
+        // At 0 XP - handle trade cycling
         if (currentXp == 0) {
-            return InteractionResult.PASS
+            return handleTradeCycling(player, level, villager, stack)
         }
 
         // Not enough XP yet
@@ -119,5 +121,115 @@ object VillagerInteraction {
         )
 
         return InteractionResult.SUCCESS
+    }
+
+    /**
+     * Handle trade cycling at 0 XP.
+     * Right-click with emerald rerolls current level trades if pool > 1.
+     */
+    private fun handleTradeCycling(
+        player: ServerPlayer,
+        level: ServerLevel,
+        villager: Villager,
+        stack: ItemStack
+    ): InteractionResult {
+        val data = villager.villagerData
+        val currentLevel = data.level
+
+        // Get profession key for trade table lookup
+        val profKey = data.profession.unwrapKey().orElse(null)
+            ?: return InteractionResult.PASS
+
+        // Only handle professions with custom trades
+        if (!CustomTradeTables.hasCustomTrades(profKey)) {
+            return InteractionResult.PASS
+        }
+
+        // Check if cycling is possible (pool > 1)
+        val poolSize = CustomTradeTables.getTradePoolSize(profKey, currentLevel)
+        if (poolSize <= 1) {
+            // Single-trade pool - cannot cycle, play failure sound
+            playFailureEffects(villager, level)
+            return InteractionResult.SUCCESS // Block GUI, no emerald consumed
+        }
+
+        // Success - consume emerald and cycle trades
+        stack.shrink(1)
+        cycleCurrentLevelTrades(villager, profKey, currentLevel, level)
+        playSuccessEffects(villager, level)
+
+        return InteractionResult.SUCCESS
+    }
+
+    /**
+     * Remove current-level trades and regenerate from trade table.
+     * Earlier level trades are preserved unchanged.
+     */
+    private fun cycleCurrentLevelTrades(
+        villager: Villager,
+        profKey: ResourceKey<VillagerProfession>,
+        currentLevel: Int,
+        level: ServerLevel
+    ) {
+        val offers = villager.offers
+
+        // Calculate how many trades exist before current level
+        val tradesBeforeCurrentLevel = (1 until currentLevel).sumOf {
+            CustomTradeTables.getTradeCount(profKey, it)
+        }
+
+        // Remove current level trades (they're at the end of the list)
+        while (offers.size > tradesBeforeCurrentLevel) {
+            offers.removeAt(offers.size - 1)
+        }
+
+        // Regenerate current-level trades with fresh random
+        val newTrades = CustomTradeTables.getTradesFor(
+            profKey,
+            currentLevel,
+            level,
+            level.random
+        )
+        offers.addAll(newTrades)
+    }
+
+    /**
+     * Play success feedback: particles + sound
+     */
+    private fun playSuccessEffects(villager: Villager, level: ServerLevel) {
+        level.sendParticles(
+            ParticleTypes.HAPPY_VILLAGER,
+            villager.x,
+            villager.y + 1.0,
+            villager.z,
+            10,    // count
+            0.5,   // spread X
+            0.5,   // spread Y
+            0.5,   // spread Z
+            0.0    // speed
+        )
+
+        level.playSound(
+            null,
+            villager.blockPosition(),
+            SoundEvents.VILLAGER_YES,
+            SoundSource.NEUTRAL,
+            1.0f,
+            1.0f
+        )
+    }
+
+    /**
+     * Play failure feedback: sound only (villager head shake)
+     */
+    private fun playFailureEffects(villager: Villager, level: ServerLevel) {
+        level.playSound(
+            null,
+            villager.blockPosition(),
+            SoundEvents.VILLAGER_NO,
+            SoundSource.NEUTRAL,
+            1.0f,
+            1.0f
+        )
     }
 }

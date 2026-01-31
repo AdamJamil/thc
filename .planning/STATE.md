@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-01-30)
 
 ## Current Position
 
-Phase: 66 of 71 (Structure Locators) - COMPLETE
-Plan: 2 of 2 in current phase (66-02 complete)
-Status: Phase complete
-Last activity: 2026-01-31 — Completed 66-02-PLAN.md
+Phase: 67 of 71 (Job Restriction)
+Plan: 1 of 2 in current phase (67-01 complete)
+Status: In progress
+Last activity: 2026-01-31 — Completed 67-01-PLAN.md
 
-Progress: [========================] 12 milestones shipped (65 phases, 101 plans)
+Progress: [========================] 12 milestones shipped (65 phases, 102 plans)
 
 ## Performance Metrics
 
@@ -95,11 +95,11 @@ Progress: [========================] 12 milestones shipped (65 phases, 101 plans
 - Phases: 66-71 (6 phases)
 - Requirements: 59 (SLOC/VJOB/VLEV/VCYC/TLIB/TBUT/TMAS/TCRT/RAIL)
 - Status: In progress
-- Plans completed: 2/11 (66-01, 66-02)
-- Total execution time: ~11 min
+- Plans completed: 3/11 (66-01, 66-02, 67-01)
+- Total execution time: ~16 min
 
 **Cumulative:**
-- 101 plans completed across 12 shipped milestones
+- 102 plans completed across 12 shipped milestones
 - ~8 hours total execution time
 - 17 days from project start
 
@@ -118,6 +118,8 @@ Key patterns established for v2.8:
 - lodestone_tracker with tracked=false for compass items (proven in structure locators)
 - Custom TagKey creation for structures without StructureTags constants (proven in 66-01)
 - range_dispatch with compass property for directional item rendering (proven in 66-02)
+- setVillagerData interception for profession filtering (proven in 67-01)
+- registryAccess().lookupOrThrow().getOrThrow() for Holder lookup in MC 1.21 (proven in 67-01)
 
 ### Pending Todos
 
@@ -132,6 +134,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-31
-Stopped at: Completed 66-02-PLAN.md (Phase 66 complete)
+Stopped at: Completed 67-01-PLAN.md
 Resume file: None
-Next: `/gsd:plan-phase 67` to plan Job Restriction phase
+Next: 67-02 (POI blocking for job blocks)

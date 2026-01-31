@@ -10,10 +10,10 @@ Requirements for revival system. Each maps to roadmap phases.
 ### Downed State
 
 - [ ] **DOWN-01**: Player enters downed state when HP reaches 0 (instead of dying)
-- [ ] **DOWN-02**: Downed player displays in laying/horizontal pose
-- [ ] **DOWN-03**: Downed player cannot perform any actions (movement, items, camera)
-- [ ] **DOWN-04**: Downed player is invulnerable to all damage sources
-- [ ] **DOWN-05**: Downed player is ignored by mob AI (not targeted)
+- [ ] **DOWN-02**: Downed player is set to spectator mode
+- [ ] **DOWN-03**: Downed player's downed location is tracked (for tether and revival)
+- [ ] **DOWN-04**: Downed player is teleported back if more than 50 blocks from downed location
+- [ ] **DOWN-05**: Spectator mode provides invulnerability and mob AI exclusion automatically
 
 ### Revival Mechanics
 
@@ -31,10 +31,11 @@ Requirements for revival system. Each maps to roadmap phases.
 
 ### Revival Outcome
 
-- [ ] **RVOU-01**: Revived player returns to normal play state
-- [ ] **RVOU-02**: Revived player has 50% of max HP
-- [ ] **RVOU-03**: Revived player has 0 hunger
-- [ ] **RVOU-04**: Green particles play on successful revival
+- [ ] **RVOU-01**: Revived player is set back to survival mode
+- [ ] **RVOU-02**: Revived player is teleported to their downed location
+- [ ] **RVOU-03**: Revived player has 50% of max HP
+- [ ] **RVOU-04**: Revived player has 0 hunger
+- [ ] **RVOU-05**: Green particles play on successful revival
 
 ## Future Requirements
 
@@ -51,12 +52,11 @@ Explicitly excluded. Documented to prevent scope creep.
 | Feature | Reason |
 |---------|--------|
 | Bleedout timer | User specified indefinite downed duration |
-| Crawling while downed | User specified no actions while downed |
 | Self-revive | Against cooperative design intent |
 | Revive items | Keep revival purely cooperative |
-| Downed player damage | User specified invulnerable while downed |
 | Knockdown shield | Complexity, not part of spec |
 | Multiple revivers stacking | Single reviver model simpler |
+| Visible downed body | Spectator mode approach - body is invisible |
 
 ## Traceability
 
@@ -64,29 +64,30 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| DOWN-01 | TBD | Pending |
-| DOWN-02 | TBD | Pending |
-| DOWN-03 | TBD | Pending |
-| DOWN-04 | TBD | Pending |
-| DOWN-05 | TBD | Pending |
-| REVV-01 | TBD | Pending |
-| REVV-02 | TBD | Pending |
-| REVV-03 | TBD | Pending |
-| REVV-04 | TBD | Pending |
-| REVV-05 | TBD | Pending |
-| RVUI-01 | TBD | Pending |
-| RVUI-02 | TBD | Pending |
-| RVUI-03 | TBD | Pending |
-| RVOU-01 | TBD | Pending |
-| RVOU-02 | TBD | Pending |
-| RVOU-03 | TBD | Pending |
-| RVOU-04 | TBD | Pending |
+| DOWN-01 | Phase 72 | Pending |
+| DOWN-02 | Phase 72 | Pending |
+| DOWN-03 | Phase 72 | Pending |
+| DOWN-04 | Phase 72 | Pending |
+| DOWN-05 | Phase 72 | Pending |
+| REVV-01 | Phase 73 | Pending |
+| REVV-02 | Phase 73 | Pending |
+| REVV-03 | Phase 73 | Pending |
+| REVV-04 | Phase 73 | Pending |
+| REVV-05 | Phase 73 | Pending |
+| RVUI-01 | Phase 74 | Pending |
+| RVUI-02 | Phase 74 | Pending |
+| RVUI-03 | Phase 74 | Pending |
+| RVOU-01 | Phase 73 | Pending |
+| RVOU-02 | Phase 73 | Pending |
+| RVOU-03 | Phase 73 | Pending |
+| RVOU-04 | Phase 73 | Pending |
+| RVOU-05 | Phase 73 | Pending |
 
 **Coverage:**
-- v3.0 requirements: 17 total
-- Mapped to phases: 0 (pending roadmap)
-- Unmapped: 17
+- v3.0 requirements: 18 total
+- Mapped to phases: 18
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-01-31*
-*Last updated: 2026-01-31 after initial definition*
+*Last updated: 2026-01-31 after roadmap creation*

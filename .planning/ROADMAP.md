@@ -1,5 +1,9 @@
 # THC Roadmap
 
+## Current Milestone
+
+- **v3.0** — Revival System (phases 72-74) (in progress)
+
 ## Completed Milestones
 
 - [v1.0](milestones/v1.0-ROADMAP.md) — Base Claiming & Crafting Foundation (phases 1-13)
@@ -33,8 +37,9 @@
 | v2.6 | 57-61 | 7 | Complete | 2026-01-29 |
 | v2.7 | 62-65 | 5 | Complete | 2026-01-30 |
 | v2.8 | 66-71 | 11 | Complete | 2026-01-31 |
+| v3.0 | 72-74 | 5 | In progress | - |
 
-**Total:** 71 phases, 110 plans across 13 milestones
+**Total:** 74 phases, 115 plans across 14 milestones
 
 ---
 

@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-01-31)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v3.0 Revival System — Defining requirements
+**Current focus:** v3.0 Revival System — Phase 72 (Core Downed State)
 
 ## Current Position
 
-Phase: Not started (defining requirements)
-Plan: —
-Status: Defining requirements for v3.0
-Last activity: 2026-01-31 — Milestone v3.0 started
+Phase: 72 - Core Downed State
+Plan: Not started
+Status: Ready for planning
+Last activity: 2026-01-31 — Roadmap created for v3.0
 
 Progress: [==========================] 13 milestones shipped (71 phases, 110 plans)
 
@@ -108,31 +108,17 @@ Progress: [==========================] 13 milestones shipped (71 phases, 110 pla
 ### Decisions
 
 See milestone archives for full decision logs:
-- .planning/milestones/v2.7-ROADMAP.md (most recent)
+- .planning/milestones/v2.8-ROADMAP.md (most recent)
 
-Key patterns established for v2.8:
-- UseEntityCallback for emerald interactions (proven in cow milking)
-- POI blocking via ServerLevelPoiMixin (proven in village deregistration)
-- StageManager.getCurrentStage() for level gates (proven in patrol spawning)
-- Brain memory filtering (proven in v2.6 villager deregistration)
-- lodestone_tracker with tracked=false for compass items (proven in structure locators)
-- Custom TagKey creation for structures without StructureTags constants (proven in 66-01)
-- range_dispatch with compass property for directional item rendering (proven in 66-02)
-- setVillagerData interception for profession filtering (proven in 67-01)
-- registryAccess().lookupOrThrow().getOrThrow() for Holder lookup in MC 1.21 (proven in 67-01)
-- POI blocking extended for disallowed job blocks via AllowedProfessions (proven in 67-02)
-- Trade interception via updateTrades() mixin with cancellable (proven in 68-01)
-- Factory method pattern for deterministic MerchantOffer creation (proven in 68-01)
-- Enchanted book creation via DataComponents.STORED_ENCHANTMENTS + ItemEnchantments.Mutable (proven in 68-02)
-- EnchantmentEnforcement.INTERNAL_LEVELS for trade book enchantment levels (proven in 68-02)
-- Profession-specific trade method pattern: get{Profession}Trades(level, [random]) (proven in 68-03)
-- Structure locator trades via createLocatorTrade(emeraldCost, THCItems.LOCATOR) (proven in 68-03)
-- VillagerAccessor mixin for tradingXp field access (proven in 69-02)
-- Emerald level-up via UseEntityCallback with stage gates (proven in 69-02)
-- Trade cycling via 0 XP path with pool size validation (proven in 70-01)
-- Trade index calculation: sum getTradeCount(1..currentLevel-1) for earlier trade preservation (proven in 70-01)
-- Vanilla recipe override for yield changes (proven in 71-01)
-- Alternative recipe in thc namespace for ingredient variants (proven in 71-01)
+Key patterns established for v3.0 (from research):
+- Fabric API `ServerLivingEntityEvents.ALLOW_DEATH` for death interception (not mixin)
+- Non-persistent attachment for downed state (session-scoped)
+- `LivingEntity.canBeSeenAsEnemy()` mixin for mob targeting exclusion
+- `LivingEntity.isInvulnerableTo(DamageSource)` mixin for invulnerability
+- `Pose.SWIMMING` for laying visual (crawling pose)
+- Existing BucklerSync pattern for revival state sync
+- Existing BucklerHudRenderer pattern for radial progress rendering
+- ClassManager integration for Support 2x revival speed
 
 ### Pending Todos
 
@@ -147,6 +133,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-31
-Stopped at: Started v3.0 milestone
+Stopped at: Created v3.0 roadmap
 Resume file: None
-Next: Define requirements and create roadmap
+Next: Plan Phase 72 (Core Downed State)

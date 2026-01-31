@@ -9,10 +9,10 @@ Requirements for villager system overhaul. Each maps to roadmap phases.
 
 ### Villager Job Restriction
 
-- [ ] **VJOB-01**: Only 4 professions allowed (mason, librarian, butcher, cartographer)
-- [ ] **VJOB-02**: Disallowed professions reset to NONE (jobless villager)
-- [ ] **VJOB-03**: Job blocks for disallowed professions don't grant jobs (POI blocking)
-- [ ] **VJOB-04**: Naturally spawned villagers with disallowed jobs become jobless
+- [x] **VJOB-01**: Only 4 professions allowed (mason, librarian, butcher, cartographer)
+- [x] **VJOB-02**: Disallowed professions reset to NONE (jobless villager)
+- [x] **VJOB-03**: Job blocks for disallowed professions don't grant jobs (POI blocking)
+- [x] **VJOB-04**: Naturally spawned villagers with disallowed jobs become jobless
 
 ### Manual Leveling
 
@@ -130,10 +130,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SLOC-08 | 66 | Complete |
 | SLOC-09 | 66 | Complete |
 | SLOC-10 | 66 | Complete |
-| VJOB-01 | 67 | Pending |
-| VJOB-02 | 67 | Pending |
-| VJOB-03 | 67 | Pending |
-| VJOB-04 | 67 | Pending |
+| VJOB-01 | 67 | Complete |
+| VJOB-02 | 67 | Complete |
+| VJOB-03 | 67 | Complete |
+| VJOB-04 | 67 | Complete |
 | TLIB-01 | 68 | Pending |
 | TLIB-02 | 68 | Pending |
 | TLIB-03 | 68 | Pending |

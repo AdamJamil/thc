@@ -41,6 +41,7 @@ import thc.world.VillageProtection
 import thc.world.WorldRestrictions
 import thc.enchant.EnchantmentEnforcement
 import thc.lectern.LecternEnchanting
+import thc.villager.VillagerInteraction
 
 object THC : ModInitializer {
 	private val logger = LoggerFactory.getLogger("thc")
@@ -72,6 +73,7 @@ object THC : ModInitializer {
 		GhastModifications.register()
 		SimpleEntityBehaviors.register()
 		DamageRebalancing.register()
+		VillagerInteraction.register()
 		PayloadTypeRegistry.playS2C().register(BucklerStatePayload.TYPE, BucklerStatePayload.STREAM_CODEC)
 
 		// Cow milking with copper bucket

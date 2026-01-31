@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-01-30)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v2.8 Villager Overhaul — Phase 68 complete, Phase 69 next
+**Current focus:** v2.8 Villager Overhaul — Phase 70 complete, Phase 71 next
 
 ## Current Position
 
-Phase: 69 of 71 (Manual Leveling)
-Plan: 2 of 2 in current phase
-Status: Phase 69 complete
-Last activity: 2026-01-31 — Completed 69-02-PLAN.md
+Phase: 70 of 71 (Trade Cycling)
+Plan: 1 of 1 in current phase
+Status: Phase 70 complete
+Last activity: 2026-01-31 — Completed 70-01-PLAN.md
 
-Progress: [========================] 12 milestones shipped (68 phases, 109 plans)
+Progress: [=========================] 12 milestones shipped (69 phases, 110 plans)
 
 ## Performance Metrics
 
@@ -95,11 +95,11 @@ Progress: [========================] 12 milestones shipped (68 phases, 109 plans
 - Phases: 66-71 (6 phases)
 - Requirements: 59 (SLOC/VJOB/VLEV/VCYC/TLIB/TBUT/TMAS/TCRT/RAIL)
 - Status: In progress
-- Plans completed: 9/11 (66-01, 66-02, 67-01, 67-02, 68-01, 68-02, 68-03, 69-01, 69-02)
-- Total execution time: ~40 min
+- Plans completed: 10/11 (66-01, 66-02, 67-01, 67-02, 68-01, 68-02, 68-03, 69-01, 69-02, 70-01)
+- Total execution time: ~43 min
 
 **Cumulative:**
-- 106 plans completed across 12 shipped milestones
+- 107 plans completed across 12 shipped milestones
 - ~8 hours total execution time
 - 17 days from project start
 
@@ -129,6 +129,8 @@ Key patterns established for v2.8:
 - Structure locator trades via createLocatorTrade(emeraldCost, THCItems.LOCATOR) (proven in 68-03)
 - VillagerAccessor mixin for tradingXp field access (proven in 69-02)
 - Emerald level-up via UseEntityCallback with stage gates (proven in 69-02)
+- Trade cycling via 0 XP path with pool size validation (proven in 70-01)
+- Trade index calculation: sum getTradeCount(1..currentLevel-1) for earlier trade preservation (proven in 70-01)
 
 ### Pending Todos
 
@@ -143,6 +145,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-31
-Stopped at: Completed 69-02-PLAN.md (Phase 69 complete)
+Stopped at: Completed 70-01-PLAN.md (Phase 70 complete)
 Resume file: None
-Next: Phase 70 (Trade Cycling)
+Next: Phase 71 (Rail Locator)

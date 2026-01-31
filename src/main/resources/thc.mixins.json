@@ -54,6 +54,7 @@
 		"SnowballItemMixin",
 		"SpawnReplacementMixin",
 		"StructureTemplateMixin",
+		"VillagerLevelingMixin",
 		"VillagerMixin",
 		"VillagerProfessionMixin",
 		"VillagerTradesMixin",

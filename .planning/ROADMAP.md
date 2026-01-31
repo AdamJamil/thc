@@ -17,7 +17,7 @@
 
 ## Current Milestone
 
-None — ready for next milestone planning
+- [v2.8](milestones/v2.8-ROADMAP.md) — Villager Overhaul (phases 66-71)
 
 ## Progress
 
@@ -35,8 +35,9 @@ None — ready for next milestone planning
 | v2.5 | 53-56 | 9 | Complete | 2026-01-28 |
 | v2.6 | 57-61 | 7 | Complete | 2026-01-29 |
 | v2.7 | 62-65 | 5 | Complete | 2026-01-30 |
+| v2.8 | 66-71 | 11 | In progress | - |
 
-**Total:** 65 phases, 99 plans across 12 milestones
+**Total:** 71 phases, 110 plans across 13 milestones
 
 ---
 

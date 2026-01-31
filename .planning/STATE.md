@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-01-30)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v2.8 Villager Overhaul — Researching
+**Current focus:** v2.8 Villager Overhaul — Phase 66 (Structure Locators)
 
 ## Current Position
 
-Phase: Not started (researching)
-Plan: —
-Status: Researching villager system
-Last activity: 2026-01-30 — Milestone v2.8 started
+Phase: 66 of 71 (Structure Locators)
+Plan: 0 of 2 in current phase
+Status: Ready to plan
+Last activity: 2026-01-30 — Roadmap created for v2.8
 
 Progress: [========================] 12 milestones shipped (65 phases, 99 plans)
 
@@ -91,6 +91,12 @@ Progress: [========================] 12 milestones shipped (65 phases, 99 plans)
 - Plans completed: 5 (62-01, 63-01, 64-01, 64-02, 65-01)
 - Total execution time: ~16 min
 
+**v2.8 Milestone:**
+- Phases: 66-71 (6 phases)
+- Requirements: 59 (SLOC/VJOB/VLEV/VCYC/TLIB/TBUT/TMAS/TCRT/RAIL)
+- Status: In progress
+- Plans completed: 0/11
+
 **Cumulative:**
 - 99 plans completed across 12 shipped milestones
 - ~8 hours total execution time
@@ -100,227 +106,14 @@ Progress: [========================] 12 milestones shipped (65 phases, 99 plans)
 
 ### Decisions
 
-| ID | Phase | Decision | Rationale | Date |
-|----|-------|----------|-----------|------|
-| SOUL-LOOT-01 | 57 | Flat Looting bonus (+1% regardless of level) | Matches v2.5 blaze pattern | 2026-01-29 |
-| SOUL-CRAFT-01 | 57 | 2x2 recipe (4 dust -> 1 soil) | Accessible but not trivial | 2026-01-29 |
-| CMBT-ARROW-01 | 57 | Arrow Speed III (reduced from V) | Reduces kiting effectiveness | 2026-01-29 |
-| CMBT-PILLAGER-01 | 57 | Equipment-based damage modifier | Iron sword check for melee detection | 2026-01-29 |
-| WRLD-EXEMPT-01 | 58 | BlockTags for exempt categories | Auto-covers all variants (flowers, beds, glass) | 2026-01-29 |
-| WRLD-GRAVEL-01 | 58 | Gravel in both isExemptBlock() AND loot table | Complete coverage for fatigue + flint | 2026-01-29 |
-| SPAWN-WITHER-01 | 59 | Wither skeleton at 15% weight in deepslate | Adds high-threat mob without overwhelming spawn rate | 2026-01-29 |
-| THRT-PROX-01 | 59 | 5 block radius centered on player | Tactical awareness zone, rewards positioning | 2026-01-29 |
-| THRT-CALC-01 | 59 | ceil(damage/4) for proximity threat | Scales with damage but prevents instant aggro | 2026-01-29 |
-| VILL-POI-01 | 60 | Intercept ServerLevel.updatePOIOnBlockStateChange | PoiManager lacks server access; ServerLevel is upstream caller | 2026-01-29 |
-| VILL-BRAIN-01 | 60 | ServerHolder singleton for Brain mixin | Brain has no owner reference; avoids ThreadLocal complexity | 2026-01-29 |
-| VILL-MEMORY-01 | 60 | Filter POI memory types (HOME/JOB_SITE/etc) | Prevents over-blocking non-POI brain memories | 2026-01-29 |
-| SMTH-BARRIER-01 | 61 | Barrier block as dummy template in recipes | Mixin bypasses template requirement for tier upgrades | 2026-01-29 |
-| SMTH-COUNT-01 | 61 | Material counts match vanilla crafting costs (5/8/7/4) | Players provide equivalent materials to crafting new armor | 2026-01-29 |
-| SMTH-COMPONENT-01 | 61 | Component copying for enchantment preservation | Preserves all data components while resetting durability | 2026-01-29 |
-| SMTH-COPPER-01 | 61 | Alternative recipe pattern with mod namespace | thc:smithing_table_copper does not override vanilla | 2026-01-29 |
-| SMTH-TOOL-01 | 61 | Smooth stone for wooden->stone tool upgrades | Matches crafting-equivalent feel, adds processing step | 2026-01-29 |
-| QOL-FATIGUE-01 | 62 | Cap mining fatigue at amplifier 9 (level 10) | Prevents extreme slowdown while maintaining penalty | 2026-01-29 |
-| QOL-BELL-01 | 62 | Use InteractionResult.PASS instead of SUCCESS | Allows vanilla bell ringing to continue after our handler | 2026-01-29 |
-| QOL-POISE-01 | 62 | 0.92f scale with 9px spacing | ~8% smaller icons with visible gaps between them | 2026-01-29 |
-| CMBT-ARROW-02 | 63 | Arrow recipe yields 16 (4x vanilla) | Improves arrow economy for ranged combat | 2026-01-30 |
-| CMBT-PILLAGER-02 | 63 | Pillager arrow damage 0.667x | Reduces 5-7 to 3-5, less frustrating | 2026-01-30 |
-| CMBT-STRAY-01 | 63 | Stray arrow damage 0.5x | Reduces 4-8 to 2-4 | 2026-01-30 |
-| FOOD-DOUGH-01 | 64 | Dough requires water bucket (iron or copper) not just wheat | Adds processing step to bread creation | 2026-01-30 |
-| FOOD-LEATHER-01 | 64 | Leather pool as first pool in pig/sheep loot tables | Consistency with cow.json structure | 2026-01-30 |
-| ENCH-STACK-01 | 65 | Data-driven tag override vs mixin approach | Tag override is simpler, no code required | 2026-01-30 |
-| ENCH-DAMAGE-01 | 65 | Empty entire damage exclusive set including impaling/density/breach | Impaling/density in REMOVED_ENCHANTMENTS; breach stacking consistent | 2026-01-30 |
-
 See milestone archives for full decision logs:
-- .planning/milestones/v1.0-ROADMAP.md
-- .planning/milestones/v1.1-ROADMAP.md
-- .planning/milestones/v1.2-ROADMAP.md
-- .planning/milestones/v1.3-ROADMAP.md
-- .planning/milestones/v2.0-ROADMAP.md
-- .planning/milestones/v2.1-ROADMAP.md
-- .planning/milestones/v2.2-ROADMAP.md
-- .planning/milestones/v2.3-ROADMAP.md
-- .planning/milestones/v2.4-ROADMAP.md
-- .planning/milestones/v2.5-ROADMAP.md
-- .planning/milestones/v2.6-ROADMAP.md
-- .planning/milestones/v2.7-ROADMAP.md
+- .planning/milestones/v2.7-ROADMAP.md (most recent)
 
-Key patterns established:
-- ItemAttributeModifiers.builder() for armor attribute modification
-- Fractional armor values (1.5, 2.0, 3.0) for smooth progression
-- SavedDataType with Codec for persistent state
-- Multi-position sampling for structure detection
-- Mixin + event-driven architecture for vanilla behavior modification
-- Accessor mixin pattern for immutable component modification
-- Counter-based damage rate modification via hurtServer mixin
-- REMOVED_RECIPE_PATHS: Set-based recipe filtering in RecipeManagerMixin
-- removedItems: Combined set for multi-item loot table filtering
-- Projectile hit modification via onHitEntity inject with owner check
-- Projectile physics: shoot TAIL + tick HEAD injections with @Unique spawn tracking
-- Vec3 directional knockback with hurtMarked for velocity sync
-- XP blocking: HEAD cancellation for method-level blocking, @Redirect for ExperienceOrb.award interception
-- Anvil recipe interception: HEAD injection on createResult with @Shadow field access
-- Post-hit modification: TAIL injection on onHitEntity for velocity/knockback changes after vanilla processing
-- MobCategory filtering for monster-only effects
-- @ModifyVariable damage reduction: ordinal=0 STORE for first float in method
-- @Redirect enchantment nullification: intercept helper method to return 0
-- TAIL injection for post-explosion velocity modification with hurtMarked sync
-- Boolean attachment for one-time state tracking (wind charge boost)
-- Non-persistent Map<UUID, Double> attachment for session-scoped threat storage
-- Static utility class pattern for attachment CRUD operations (ThreatManager)
-- Timestamp attachment for rate-limiting operations (THREAT_LAST_DECAY pattern)
-- Lazy decay via method call (vs tick mixin) for efficient threat decay
-- LivingEntity mixin with Mob filter for inherited method targeting
-- AABB.inflate for area-based entity queries with MobCategory filtering
-- TargetGoal extension with Flag.TARGET for custom targeting AI
-- @Shadow @Final for protected GoalSelector access in Mob mixin
-- Type check in mixin callback for class-specific goal injection (Monster filter)
-- GameRules boolean modification: world.gameRules.set(GameRules.RULE_NAME, value, server)
-- Silk touch conditional loot: minecraft:alternatives with match_tool predicate
-- Natural spawn blocking: HEAD inject on NaturalSpawner.isValidSpawnPostitionForType
-- Chunk claim check from Java: ClaimManager.INSTANCE.isClaimed(server, chunkPos)
-- Difficulty override: HEAD inject on getCurrentDifficultyAt returning custom DifficultyInstance
-- Client visual override: Level mixin with instanceof ClientLevel check for client-only effects
-- Interface method targeting: Fabric Loom remapping warning expected when method from interface (LevelTimeAccess)
-- Sun burn prevention: HEAD inject on Mob.isSunBurnTick with cancellable=true returning false
-- Sky light spawn bypass: HEAD inject on Monster.isDarkEnoughToSpawn with block light preservation via DimensionType
-- Environment attribute redirect: @Redirect on EnvironmentAttributeReader.getValue for attribute-specific behavior override (BEES_STAY_IN_HIVE)
-- Brain schedule time redirect: @Redirect on Brain.updateActivityFromSchedule with constant time for forced activity
-- BedRule redirect: @Redirect on EnvironmentAttributeSystem.getValue for sleep restriction bypass
-- Sleep time skip prevention: @Redirect on GameRules.get for ADVANCE_TIME in sleep block
-- Loot table item replacement: detect before remove, add replacement after (MODIFY_DROPS pattern)
-- ServerHolder singleton: Static server reference for mixin contexts without server access
-- Brain.setMemory GlobalPos filtering: Type check + memory type check for POI-specific blocking
-- @Redirect setBlock for structure block filtering: intercept ServerLevelAccessor.setBlock in placeInWorld
-- Position-based structure protection: getStructureWithPieceAt(pos) for precise bounding box checks
-- ThreadLocal for paired injection state: store in HEAD, use in RETURN (eating saturation cap)
-- HEAD cancellation with ci.cancel() for complete method replacement (FoodData.tick)
-- Accessor interface expansion for multiple private fields on same target class
-- getSaturationLevel() tier mapping for variable healing rates (descending threshold checks)
-- Fixed interval (5 ticks) + variable heal amount for smoother tiered healing
-- Loot table override for universal item drops (apples from all leaves)
-- CropBlock performBonemeal HEAD injection for instant crop maturation
-- DefaultItemComponentEvents.MODIFY for vanilla item component modification at startup
-- FoodProperties.Builder saturationModifier formula: targetSat / (nutrition * 2)
-- Context.modify for custom THC items in FoodStatsModifier (not just vanilla Items)
-- Translation override for vanilla item rename (item.minecraft.rabbit_stew)
-- Persistent string attachment for player class selection (PLAYER_CLASS)
-- Class selection permanence via hasClass() check in setClass()
-- Base chunk restriction for class selection command
-- @Redirect on getAttributeValue for attribute-specific modification (SWEEPING_DAMAGE_RATIO in MC 1.21.11)
-- Post-reduction multiplier application: class multipliers applied after base damage reduction
-- Server-only class lookup: instanceof ServerPlayer check for attachment access
-- Integer attachment with copyOnDeath: BOON_LEVEL persistent state surviving respawn
-- Static utility for dual state management: StageManager handles server-wide stage + per-player boon level
-- Actionbar broadcast pattern: displayClientMessage(message, true) for server-wide announcements
-- Null-safe integer attachment getter: return default 0 when attachment is null
-- Operator command pattern: .requires(source -> source.permissions().hasPermission(Permissions.COMMANDS_GAMEMASTER)) for MC 1.21.11
-- Late-joiner initialization: JOIN event with hasClass() check to distinguish new vs returning players
-- Minecraft 1.21.11 permission system: Permissions constants (COMMANDS_GAMEMASTER, COMMANDS_ADMIN, etc.) replace hasPermissionLevel()
-- ServerEntityEvents.ENTITY_LOAD for entity spawn modification (monster speed in v2.3)
-- Transient AttributeModifiers for runtime-only stat changes (no save bloat)
-- EntityType comparison for type-specific behavior in MC 1.21.11 (`mob.type == EntityType.ZOMBIE` not `instanceof`)
-- Identifier API replaces ResourceLocation in MC 1.21.11 (Identifier.fromNamespaceAndPath)
-- Counter-modifiers for negating vanilla bonuses (baby zombie speed normalization)
-- @Redirect on addFreshEntityWithPassengers for spawn-time entity replacement (NaturalSpawner)
-- canSeeSky(BlockPos) for surface vs underground determination
-- Entity subpackage paths in MC 1.21.11: monster.zombie.Zombie, monster.skeleton.Skeleton
-- snapTo() replaces moveTo() for entity positioning in MC 1.21.11
-- Passenger check for jockey preservation (!getPassengers().isEmpty() || getVehicle() != null)
-- HEAD cancellation on custom spawners for complete spawn removal (PhantomSpawner, PatrolSpawner)
-- Stage-conditional spawning via StageManager.getCurrentStage check in mixin
-- Block pattern detection + cancellation for summon prevention (CarvedPumpkinBlock.trySpawnGolem)
-- Level.isClientSide() method in MC 1.21.11 (not field access)
-- BaseValue modification for permanent health changes (simpler than AttributeModifier for idempotent operations)
-- Equipment removal via setItemSlot(EquipmentSlot, ItemStack.EMPTY) for idempotent gear clearing
-- SimpleEntityBehaviors pattern: separate object for simple entity-specific modifications
-- Inner class mixin target: targets = "pkg.Outer$InnerClass" syntax for inner class modification
-- @ModifyConstant for single constant value replacement in methods
-- ENTITY_LOAD for projectile velocity modification at spawn time
-- TAIL inject on onHit for post-explosion fire placement
-- Invoker accessor pattern: @Invoker annotation for calling private methods in mixin targets (EnderManAccessor)
-- Vec3 behind-position calculation: playerPos.subtract(playerLook.scale(distance)) for flanking behavior
-- Random chance behavior: level.random.nextBoolean() for 50% probability checks
-- Mob.finalizeSpawn TAIL injection for spawn-time attachment setting
-- getHeight(Heightmap.Types.MOTION_BLOCKING, x, z) for surface detection
-- Persistent String attachment with null default (absence = not tagged)
-- Weighted random selection for spawn distributions (cumulative weight matching)
-- SpawnPlacements.isSpawnPositionOk for pack spawn collision checks
-- SpawnGroupData threading through pack members for consistent equipment
-- Pillager equipment variants (MELEE/RANGED) applied after finalizeSpawn to avoid overwrite
-- canSeeSky(pos) for spawn distribution region detection (FR-18 isSkyVisible semantics)
-- Pack spawning with offset positions (-5 to +5 X/Z from previous position)
-- monster.illager.Pillager import path in MC 1.21.11 (not monster.Pillager)
-- Equipment-based variant detection via Items.IRON_SWORD check in mainhand
-- GoalSelector.getAvailableGoals().removeIf() for goal removal by type
-- Pillager.finalizeSpawn TAIL for AI modification after equipment applied
-- ThreadLocal for spawn cycle state (HEAD init, RETURN cleanup) in regional cap counting
-- List<MobCategory> parameter for spawnForChunk method signature in MC 1.21.11
-- RegionalCapManager utility for independent regional monster caps (21/28/35)
-- @ModifyArg index=1 for hurt() float damage parameter (SmallFireball, EvokerFangs)
-- CrossbowItem TAIL injection for shooter-specific projectile modification (Piglin arrow boost)
-- ATTACK_DAMAGE attribute modifier for melee mob damage (Vex, Vindicator, Magma Cube)
-- RegionDetector static utility for shared heightmap-based region detection (replaces canSeeSky mismatches)
-- Heightmap.Types.MOTION_BLOCKING for surface detection (excludes leaves, matches player intuition)
-- Custom entity type registration with ResourceKey in MC 1.21.11 (build() requires ResourceKey not String)
-- Supplier parameter in Boat constructor for drop item (MC 1.21.11 AbstractBoat)
-- Mixin on parent class checking instanceof for subclass-specific behavior
-- Companion object for deferred initialization to avoid circular dependencies
-- DataComponents.DAMAGE_RESISTANT with DamageTypeTags.IS_FIRE for item fire/lava immunity
-- Injection into private methods via parent class mixin with instanceof check
-- EntityRenderer<T, EntityRenderState> basic pattern for entity registration (MC 1.21.11 rendering API)
-- Separate entity vs item textures: entity/boat/ for world rendering, item/ for inventory icons
-- Item icon texture pattern: {item}_icon.png for inventory display vs full texture for entities
-- Loot table data pack overrides for complete item removal (saddles from 8 sources)
-- Custom bucket pattern: Extend Item (not BucketItem), override use(), check FluidState with FluidTags
-- UseEntityCallback for entity-specific item interactions (cow milking with copper bucket)
-- Cow class import path in MC 1.21.11: net.minecraft.world.entity.animal.cow.Cow (cow subpackage)
-- HEAD cancellation with InteractionResult.FAIL for item use blocking (lava bucket)
-- FlowingFluid.LEVEL setValue for water flow level control (level 8 = max height/falling)
-- FluidState.createLegacyBlock() for proper fluid block placement
-- scheduleTick for fluid physics activation after placement
-- @Redirect on setDeltaMovement for velocity boost cancellation (FireworkRocketEntity)
-- HEAD+TAIL velocity capture on travel() for delta calculation and multiplier application
-- Pitch-based multiplier selection: getXRot() >= 0 for diving vs ascending behavior
-- Loot table data pack override for gameplay loot tables (piglin bartering without fire resistance potions)
-- ItemEnchantments.Mutable builder pattern for modifying enchantments immutably (v2.5)
-- DataComponents.ENCHANTMENTS and STORED_ENCHANTMENTS for item/book enchantment handling (v2.5)
-- EnchantmentEnforcement.correctStack() pattern for enchantment filtering (v2.5)
-- holder.unwrapKey().orElse(null)?.identifier()?.toString() for enchantment ID from Holder (v2.5)
-- Non-persistent attachment for temporary state (FIRE_SOURCE for fire damage tracking)
-- Accumulator pattern for fractional damage (0.5 extra/s for Fire Aspect 1.5 dmg/s)
-- baseTick HEAD injection for fire damage rate modification
-- UseBlockCallback for lectern enchanting: book placement, gear enchanting, stage validation (v2.5)
-- LecternBlockEntity.book field for enchanted book persistence (drops on break automatically)
-- EnchantmentHelper.updateEnchantments() for applying enchantments to gear (v2.5)
-- Stage-gated enchantment sets: STAGE_1_2_ENCHANTMENTS for lectern validation (v2.5)
-- STAGE_4_5_ENCHANTMENTS set for high-tier enchantment classification (v2.5)
-- getStageForEnchantment(): Returns 1/3/4 based on enchantment tier (v2.5)
-- getLevelRequirementForStage(): Returns 10/20/30 based on stage tier (v2.5)
-- EnchantmentMenu HEAD cancellation: method_17411 and clickMenuButton for complete behavior replacement (v2.5)
-- Bookshelf counting via EnchantingTableBlock.BOOKSHELF_OFFSETS iteration (v2.5)
-- ResourceKey.identifier() for ID extraction in MC 1.21.11 (not location())
-- isStage3Plus() for enchantment tier classification (stage 3+ = not in STAGE_1_2 and not REMOVED)
-- hasStage3PlusEnchantment() for ItemEnchantments stage 3+ checking
-- MODIFY_DROPS stage 3+ filtering: removeIf with ENCHANTED_BOOK branch and enchants check (v2.5)
-- random_chance_with_enchanted_bonus with flat Looting bonus: per_level_above_first: 0.0 for +1% regardless of level (v2.5)
-- Mob enchanted book drops: independent pools per enchantment with is_baby:false or size>=2 conditions (v2.5)
-- isExemptBlock(): BlockTags-based category checking for mining fatigue exemptions (v2.6)
-- Loot table match_tool predicate with #minecraft:shovels item tag for tool-specific drops (v2.6)
-- Player-centered AABB for proximity checks: player.getBoundingBox().inflate(5.0) for tactical positioning rewards (v2.6)
-- Direct target exclusion in threat propagation: if (nearby == damagedMob) continue for cleaner combat (v2.6)
-- ServerHolder singleton for server access in Brain mixin: Brain lacks owner reference, ServerHolder.setServer() called in SERVER_STARTED event (v2.6)
-- POI registration blocking: HEAD cancellation on ServerLevel.updatePOIOnBlockStateChange for claimed chunk filtering (v2.6)
-- Brain memory filtering: instanceof GlobalPos + MemoryModuleType whitelist for POI-specific blocking (v2.6)
-- SmithingMenu HEAD injection for tier upgrade result override with material count validation (v2.6)
-- SmithingMenu onTake RETURN injection for extra material consumption beyond vanilla (v2.6)
-- applyComponents() + remove(DataComponents.DAMAGE) for enchantment preservation with durability restoration (v2.6)
-- Barrier template in smithing recipes for mixin-only validation (template slot required by UI) (v2.6)
-- InteractionResult.PASS for vanilla passthrough in UseBlockCallback (v2.7)
-- Matrix3x2fStack transformations for HUD icon scaling (v2.7)
-- minOf() for capping incremental values (v2.7)
-- EntityType owner check for mob-specific arrow damage modification (v2.7)
-- Tag override with replace:true for emptying vanilla tags (v2.7)
-- Data-driven enchantment exclusivity via exclusive_set tags (v2.7)
+Key patterns established for v2.8:
+- UseEntityCallback for emerald interactions (proven in cow milking)
+- POI blocking via ServerLevelPoiMixin (proven in village deregistration)
+- StageManager.getCurrentStage() for level gates (proven in patrol spawning)
+- Brain memory filtering (proven in v2.6 villager deregistration)
 
 ### Pending Todos
 
@@ -329,20 +122,12 @@ None.
 ### Blockers/Concerns
 
 **Minecraft 1.21.11 Mixin Compatibility**
-- PlayerSleepMixin broken after MC version upgrade (PlayerAttackMixin fixed in 35-01)
-- Build succeeds but runtime smoke test cannot complete
-- Class system fully implemented (35-01, 35-02) but in-game testing blocked
-- Status: Non-blocking for compilation and development, blocks in-game testing
-
-### Quick Tasks Completed
-
-| # | Description | Date | Commit | Directory |
-|---|-------------|------|--------|-----------|
-| 001 | Update honey apple recipe to 8x batch | 2026-01-23 | d53a983 | [001-honey-apple-recipe-8x](./quick/001-honey-apple-recipe-8x/) |
+- PlayerSleepMixin broken after MC version upgrade
+- Status: Non-blocking for compilation and development
 
 ## Session Continuity
 
 Last session: 2026-01-30
-Stopped at: Milestone v2.8 research started
+Stopped at: Roadmap created for v2.8 Villager Overhaul
 Resume file: None
-Next: Complete research, define requirements
+Next: `/gsd:plan-phase 66` to plan Structure Locators phase

@@ -120,21 +120,74 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| VJOB-01 to VJOB-04 | TBD | Pending |
-| VLEV-01 to VLEV-05 | TBD | Pending |
-| VCYC-01 to VCYC-03 | TBD | Pending |
-| SLOC-01 to SLOC-10 | TBD | Pending |
-| TLIB-01 to TLIB-09 | TBD | Pending |
-| TBUT-01 to TBUT-08 | TBD | Pending |
-| TMAS-01 to TMAS-10 | TBD | Pending |
-| TCRT-01 to TCRT-10 | TBD | Pending |
-| RAIL-01 to RAIL-03 | TBD | Pending |
+| SLOC-01 | 66 | Pending |
+| SLOC-02 | 66 | Pending |
+| SLOC-03 | 66 | Pending |
+| SLOC-04 | 66 | Pending |
+| SLOC-05 | 66 | Pending |
+| SLOC-06 | 66 | Pending |
+| SLOC-07 | 66 | Pending |
+| SLOC-08 | 66 | Pending |
+| SLOC-09 | 66 | Pending |
+| SLOC-10 | 66 | Pending |
+| VJOB-01 | 67 | Pending |
+| VJOB-02 | 67 | Pending |
+| VJOB-03 | 67 | Pending |
+| VJOB-04 | 67 | Pending |
+| TLIB-01 | 68 | Pending |
+| TLIB-02 | 68 | Pending |
+| TLIB-03 | 68 | Pending |
+| TLIB-04 | 68 | Pending |
+| TLIB-05 | 68 | Pending |
+| TLIB-06 | 68 | Pending |
+| TLIB-07 | 68 | Pending |
+| TLIB-08 | 68 | Pending |
+| TLIB-09 | 68 | Pending |
+| TBUT-01 | 68 | Pending |
+| TBUT-02 | 68 | Pending |
+| TBUT-03 | 68 | Pending |
+| TBUT-04 | 68 | Pending |
+| TBUT-05 | 68 | Pending |
+| TBUT-06 | 68 | Pending |
+| TBUT-07 | 68 | Pending |
+| TBUT-08 | 68 | Pending |
+| TMAS-01 | 68 | Pending |
+| TMAS-02 | 68 | Pending |
+| TMAS-03 | 68 | Pending |
+| TMAS-04 | 68 | Pending |
+| TMAS-05 | 68 | Pending |
+| TMAS-06 | 68 | Pending |
+| TMAS-07 | 68 | Pending |
+| TMAS-08 | 68 | Pending |
+| TMAS-09 | 68 | Pending |
+| TMAS-10 | 68 | Pending |
+| TCRT-01 | 68 | Pending |
+| TCRT-02 | 68 | Pending |
+| TCRT-03 | 68 | Pending |
+| TCRT-04 | 68 | Pending |
+| TCRT-05 | 68 | Pending |
+| TCRT-06 | 68 | Pending |
+| TCRT-07 | 68 | Pending |
+| TCRT-08 | 68 | Pending |
+| TCRT-09 | 68 | Pending |
+| TCRT-10 | 68 | Pending |
+| VLEV-01 | 69 | Pending |
+| VLEV-02 | 69 | Pending |
+| VLEV-03 | 69 | Pending |
+| VLEV-04 | 69 | Pending |
+| VLEV-05 | 69 | Pending |
+| VCYC-01 | 70 | Pending |
+| VCYC-02 | 70 | Pending |
+| VCYC-03 | 70 | Pending |
+| RAIL-01 | 71 | Pending |
+| RAIL-02 | 71 | Pending |
+| RAIL-03 | 71 | Pending |
 
 **Coverage:**
 - v2.8 requirements: 59 total
-- Mapped to phases: 0
-- Unmapped: 59
+- Mapped to phases: 59
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-01-30*
-*Last updated: 2026-01-30 after initial definition*
+*Last updated: 2026-01-30 after roadmap creation*

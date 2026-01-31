@@ -8,10 +8,14 @@ import net.minecraft.core.registries.Registries
 import net.minecraft.resources.Identifier
 import net.minecraft.resources.ResourceKey
 import net.minecraft.tags.DamageTypeTags
+import net.minecraft.tags.StructureTags
+import net.minecraft.tags.TagKey
 import net.minecraft.world.item.CreativeModeTab
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.component.DamageResistant
 import net.minecraft.world.food.FoodProperties
+import net.minecraft.world.level.Level
+import net.minecraft.world.level.levelgen.structure.Structure
 
 object THCItems {
     private val toolsTabKey: ResourceKey<CreativeModeTab> = ResourceKey.create(
@@ -22,6 +26,24 @@ object THCItems {
     private val foodTabKey: ResourceKey<CreativeModeTab> = ResourceKey.create(
         Registries.CREATIVE_MODE_TAB,
         Identifier.withDefaultNamespace("food_and_drinks")
+    )
+
+    // Structure tags for locators (custom tags for structures without StructureTags constants)
+    private val FORTRESS_TAG: TagKey<Structure> = TagKey.create(
+        Registries.STRUCTURE,
+        Identifier.withDefaultNamespace("fortress")
+    )
+    private val BASTION_TAG: TagKey<Structure> = TagKey.create(
+        Registries.STRUCTURE,
+        Identifier.withDefaultNamespace("bastion_remnant")
+    )
+    private val PILLAGER_OUTPOST_TAG: TagKey<Structure> = TagKey.create(
+        Registries.STRUCTURE,
+        Identifier.withDefaultNamespace("pillager_outpost")
+    )
+    private val ANCIENT_CITY_TAG: TagKey<Structure> = TagKey.create(
+        Registries.STRUCTURE,
+        Identifier.withDefaultNamespace("ancient_city")
     )
 
     @JvmField
@@ -112,6 +134,61 @@ object THCItems {
         )
     }
 
+    // Structure Locators - compass-style items that point to structures
+    @JvmField
+    val FORTRESS_LOCATOR: Item = register("fortress_locator") { key ->
+        StructureLocatorItem(
+            Item.Properties().setId(key).stacksTo(1),
+            FORTRESS_TAG,
+            Level.NETHER
+        )
+    }
+
+    @JvmField
+    val BASTION_LOCATOR: Item = register("bastion_locator") { key ->
+        StructureLocatorItem(
+            Item.Properties().setId(key).stacksTo(1),
+            BASTION_TAG,
+            Level.NETHER
+        )
+    }
+
+    @JvmField
+    val TRIAL_CHAMBER_LOCATOR: Item = register("trial_chamber_locator") { key ->
+        StructureLocatorItem(
+            Item.Properties().setId(key).stacksTo(1),
+            StructureTags.ON_TRIAL_CHAMBERS_MAPS,
+            Level.OVERWORLD
+        )
+    }
+
+    @JvmField
+    val PILLAGER_OUTPOST_LOCATOR: Item = register("pillager_outpost_locator") { key ->
+        StructureLocatorItem(
+            Item.Properties().setId(key).stacksTo(1),
+            PILLAGER_OUTPOST_TAG,
+            Level.OVERWORLD
+        )
+    }
+
+    @JvmField
+    val ANCIENT_CITY_LOCATOR: Item = register("ancient_city_locator") { key ->
+        StructureLocatorItem(
+            Item.Properties().setId(key).stacksTo(1),
+            ANCIENT_CITY_TAG,
+            Level.OVERWORLD
+        )
+    }
+
+    @JvmField
+    val STRONGHOLD_LOCATOR: Item = register("stronghold_locator") { key ->
+        StructureLocatorItem(
+            Item.Properties().setId(key).stacksTo(1),
+            StructureTags.EYE_OF_ENDER_LOCATED,
+            Level.OVERWORLD
+        )
+    }
+
     fun init() {
         // Set the drop item for IronBoat entity after items are initialized
         thc.entity.IronBoat.ironBoatDropItem = IRON_BOAT
@@ -124,6 +201,13 @@ object THCItems {
             entries.accept(COPPER_BUCKET)
             entries.accept(COPPER_BUCKET_OF_WATER)
             entries.accept(COPPER_BUCKET_OF_MILK)
+            // Structure locators
+            entries.accept(FORTRESS_LOCATOR)
+            entries.accept(BASTION_LOCATOR)
+            entries.accept(TRIAL_CHAMBER_LOCATOR)
+            entries.accept(PILLAGER_OUTPOST_LOCATOR)
+            entries.accept(ANCIENT_CITY_LOCATOR)
+            entries.accept(STRONGHOLD_LOCATOR)
         }
         ItemGroupEvents.modifyEntriesEvent(foodTabKey).register { entries ->
             entries.accept(HONEY_APPLE)

@@ -85,12 +85,90 @@ public final class CustomTradeTables {
             ServerLevel serverLevel,
             RandomSource random) {
 
+        if (profession.equals(VillagerProfession.LIBRARIAN)) {
+            return getLibrarianTrades(level, serverLevel, random);
+        }
         if (profession.equals(VillagerProfession.BUTCHER)) {
             return getButcherTrades(level);
         }
+        if (profession.equals(VillagerProfession.MASON)) {
+            return getMasonTrades(level, random);
+        }
 
-        // Placeholder - remaining professions added in subsequent tasks
+        // Placeholder - CARTOGRAPHER added next
         return List.of();
+    }
+
+    // =====================================================================
+    // Librarian trades (TLIB-01 through TLIB-09)
+    // =====================================================================
+
+    /**
+     * Get librarian trades for a specific level.
+     * All slots have 50/50 variants per REQUIREMENTS.md TLIB-01 through TLIB-09.
+     *
+     * <p>Enchanted book trades use createEnchantedBookTrade() which looks up
+     * internal levels from EnchantmentEnforcement.INTERNAL_LEVELS.
+     */
+    private static List<MerchantOffer> getLibrarianTrades(int level, ServerLevel serverLevel, RandomSource random) {
+        return switch (level) {
+            case 1 -> List.of(
+                // TLIB-01: 24 paper -> 1e OR 1e -> 8 lanterns (50/50)
+                getVariantTrade(random,
+                    () -> createSimpleTrade(Items.PAPER, 24, Items.EMERALD, 1),
+                    () -> createSimpleTrade(Items.EMERALD, 1, Items.LANTERN, 8)
+                ),
+                // TLIB-02: 5e + book -> mending OR 5e + book -> unbreaking (50/50)
+                getVariantTrade(random,
+                    () -> createEnchantedBookTrade(5, "mending", serverLevel),
+                    () -> createEnchantedBookTrade(5, "unbreaking", serverLevel)
+                )
+            );
+            case 2 -> List.of(
+                // TLIB-03: 10e + book -> efficiency OR 10e + book -> fortune (50/50)
+                getVariantTrade(random,
+                    () -> createEnchantedBookTrade(10, "efficiency", serverLevel),
+                    () -> createEnchantedBookTrade(10, "fortune", serverLevel)
+                ),
+                // TLIB-04: 10e + book -> silk touch OR 4 books -> 1e (50/50)
+                getVariantTrade(random,
+                    () -> createEnchantedBookTrade(10, "silk_touch", serverLevel),
+                    () -> createSimpleTrade(Items.BOOK, 4, Items.EMERALD, 1)
+                )
+            );
+            case 3 -> List.of(
+                // TLIB-05: 15e + book -> protection OR 15e + book -> projectile_protection (50/50)
+                getVariantTrade(random,
+                    () -> createEnchantedBookTrade(15, "protection", serverLevel),
+                    () -> createEnchantedBookTrade(15, "projectile_protection", serverLevel)
+                ),
+                // TLIB-06: 15e + book -> looting OR 9e -> 3 bookshelves (50/50)
+                getVariantTrade(random,
+                    () -> createEnchantedBookTrade(15, "looting", serverLevel),
+                    () -> createSimpleTrade(Items.EMERALD, 9, Items.BOOKSHELF, 3)
+                )
+            );
+            case 4 -> List.of(
+                // TLIB-07: 20e + book -> sharpness OR 20e + book -> power (50/50)
+                getVariantTrade(random,
+                    () -> createEnchantedBookTrade(20, "sharpness", serverLevel),
+                    () -> createEnchantedBookTrade(20, "power", serverLevel)
+                ),
+                // TLIB-08: 20e + book -> blast_protection OR 20e + book -> feather_falling (50/50)
+                getVariantTrade(random,
+                    () -> createEnchantedBookTrade(20, "blast_protection", serverLevel),
+                    () -> createEnchantedBookTrade(20, "feather_falling", serverLevel)
+                )
+            );
+            case 5 -> List.of(
+                // TLIB-09: 30e + book -> breach OR 30e + book -> piercing (50/50)
+                getVariantTrade(random,
+                    () -> createEnchantedBookTrade(30, "breach", serverLevel),
+                    () -> createEnchantedBookTrade(30, "piercing", serverLevel)
+                )
+            );
+            default -> List.of();
+        };
     }
 
     // =====================================================================

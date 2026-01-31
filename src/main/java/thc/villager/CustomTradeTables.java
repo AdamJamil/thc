@@ -52,6 +52,80 @@ public final class CustomTradeTables {
     }
 
     /**
+     * Returns the number of trades for a profession at a specific level.
+     * Based on Phase 68 trade structure.
+     *
+     * @param profession the profession ResourceKey
+     * @param level the villager level (1-5)
+     * @return number of trades at that level, or 0 for unknown
+     */
+    public static int getTradeCount(ResourceKey<VillagerProfession> profession, int level) {
+        if (profession == null) {
+            return 0;
+        }
+        // LIBRARIAN: levels 1-4 = 2 trades, level 5 = 1 trade
+        if (profession.equals(VillagerProfession.LIBRARIAN)) {
+            return switch (level) {
+                case 1, 2, 3, 4 -> 2;
+                case 5 -> 1;
+                default -> 0;
+            };
+        }
+        // BUTCHER: levels 1-3 = 2 trades, levels 4-5 = 1 trade
+        if (profession.equals(VillagerProfession.BUTCHER)) {
+            return switch (level) {
+                case 1, 2, 3 -> 2;
+                case 4, 5 -> 1;
+                default -> 0;
+            };
+        }
+        // MASON: level 1 = 4 trades, levels 2-3 = 2 trades, levels 4-5 = 1 trade
+        if (profession.equals(VillagerProfession.MASON)) {
+            return switch (level) {
+                case 1 -> 4;
+                case 2, 3 -> 2;
+                case 4, 5 -> 1;
+                default -> 0;
+            };
+        }
+        // CARTOGRAPHER: levels 1-2 = 3 trades, level 3 = 2 trades, levels 4-5 = 1 trade
+        if (profession.equals(VillagerProfession.CARTOGRAPHER)) {
+            return switch (level) {
+                case 1, 2 -> 3;
+                case 3 -> 2;
+                case 4, 5 -> 1;
+                default -> 0;
+            };
+        }
+        return 0;
+    }
+
+    /**
+     * Returns the trade pool size (number of distinct options) for cycling.
+     * Pool > 1 means cycling produces different results (50/50 variants exist).
+     * Pool = 1 means deterministic (cycling should be blocked).
+     *
+     * @param profession the profession ResourceKey
+     * @param level the villager level (1-5)
+     * @return pool size (2 for variants, 1 for deterministic)
+     */
+    public static int getTradePoolSize(ResourceKey<VillagerProfession> profession, int level) {
+        if (profession == null) {
+            return 0;
+        }
+        // LIBRARIAN: all levels have 50/50 variants
+        if (profession.equals(VillagerProfession.LIBRARIAN)) {
+            return 2;
+        }
+        // MASON: level 1 deterministic, levels 2-5 have 50/50 variants
+        if (profession.equals(VillagerProfession.MASON)) {
+            return level >= 2 ? 2 : 1;
+        }
+        // BUTCHER and CARTOGRAPHER: fully deterministic
+        return 1;
+    }
+
+    /**
      * Check if a profession has custom trade tables defined.
      *
      * @param profession the profession ResourceKey to check

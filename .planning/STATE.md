@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-01-30)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v2.8 Villager Overhaul — Phase 66 complete, ready for Phase 67
+**Current focus:** v2.8 Villager Overhaul — Phase 67 complete, ready for Phase 68
 
 ## Current Position
 
-Phase: 67 of 71 (Job Restriction)
-Plan: 1 of 2 in current phase (67-01 complete)
-Status: In progress
-Last activity: 2026-01-31 — Completed 67-01-PLAN.md
+Phase: 67 of 71 (Job Restriction) - COMPLETE
+Plan: 2 of 2 in current phase (67-02 complete)
+Status: Phase complete
+Last activity: 2026-01-31 — Completed 67-02-PLAN.md
 
-Progress: [========================] 12 milestones shipped (65 phases, 102 plans)
+Progress: [========================] 12 milestones shipped (67 phases, 104 plans)
 
 ## Performance Metrics
 
@@ -95,11 +95,11 @@ Progress: [========================] 12 milestones shipped (65 phases, 102 plans
 - Phases: 66-71 (6 phases)
 - Requirements: 59 (SLOC/VJOB/VLEV/VCYC/TLIB/TBUT/TMAS/TCRT/RAIL)
 - Status: In progress
-- Plans completed: 3/11 (66-01, 66-02, 67-01)
-- Total execution time: ~16 min
+- Plans completed: 4/11 (66-01, 66-02, 67-01, 67-02)
+- Total execution time: ~19 min
 
 **Cumulative:**
-- 102 plans completed across 12 shipped milestones
+- 104 plans completed across 12 shipped milestones
 - ~8 hours total execution time
 - 17 days from project start
 
@@ -120,6 +120,7 @@ Key patterns established for v2.8:
 - range_dispatch with compass property for directional item rendering (proven in 66-02)
 - setVillagerData interception for profession filtering (proven in 67-01)
 - registryAccess().lookupOrThrow().getOrThrow() for Holder lookup in MC 1.21 (proven in 67-01)
+- POI blocking extended for disallowed job blocks via AllowedProfessions (proven in 67-02)
 
 ### Pending Todos
 
@@ -134,6 +135,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-31
-Stopped at: Completed 67-01-PLAN.md
+Stopped at: Completed 67-02-PLAN.md
 Resume file: None
-Next: 67-02 (POI blocking for job blocks)
+Next: 68-01 (Custom Trade Tables)

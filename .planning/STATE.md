@@ -134,4 +134,4 @@ None.
 Last session: 2026-01-31
 Stopped at: Completed 66-02-PLAN.md (Phase 66 complete)
 Resume file: None
-Next: `/gsd:execute-phase` to run Phase 67 (Villager Jobs)
+Next: `/gsd:plan-phase 67` to plan Job Restriction phase

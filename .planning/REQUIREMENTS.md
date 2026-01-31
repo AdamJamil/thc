@@ -30,16 +30,16 @@ Requirements for villager system overhaul. Each maps to roadmap phases.
 
 ### Structure Locators
 
-- [ ] **SLOC-01**: Structure locator item class (compass-style behavior pointing to nearest structure)
-- [ ] **SLOC-02**: Search radius capped at 100 chunks (performance protection)
-- [ ] **SLOC-03**: Dimension-aware (Nether locators work in Nether, Overworld in Overworld)
-- [ ] **SLOC-04**: Trial chamber locator item (Overworld)
-- [ ] **SLOC-05**: Pillager outpost locator item (Overworld)
-- [ ] **SLOC-06**: Nether fortress locator item (Nether)
-- [ ] **SLOC-07**: Bastion locator item (Nether)
-- [ ] **SLOC-08**: Ancient city locator item (Overworld)
-- [ ] **SLOC-09**: Stronghold locator item (Overworld)
-- [ ] **SLOC-10**: 6 locator textures (one per structure type)
+- [x] **SLOC-01**: Structure locator item class (compass-style behavior pointing to nearest structure)
+- [x] **SLOC-02**: Search radius capped at 100 chunks (performance protection)
+- [x] **SLOC-03**: Dimension-aware (Nether locators work in Nether, Overworld in Overworld)
+- [x] **SLOC-04**: Trial chamber locator item (Overworld)
+- [x] **SLOC-05**: Pillager outpost locator item (Overworld)
+- [x] **SLOC-06**: Nether fortress locator item (Nether)
+- [x] **SLOC-07**: Bastion locator item (Nether)
+- [x] **SLOC-08**: Ancient city locator item (Overworld)
+- [x] **SLOC-09**: Stronghold locator item (Overworld)
+- [x] **SLOC-10**: 6 locator textures (one per structure type)
 
 ### Custom Trade Tables — Librarian
 
@@ -120,16 +120,16 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SLOC-01 | 66 | Pending |
-| SLOC-02 | 66 | Pending |
-| SLOC-03 | 66 | Pending |
-| SLOC-04 | 66 | Pending |
-| SLOC-05 | 66 | Pending |
-| SLOC-06 | 66 | Pending |
-| SLOC-07 | 66 | Pending |
-| SLOC-08 | 66 | Pending |
-| SLOC-09 | 66 | Pending |
-| SLOC-10 | 66 | Pending |
+| SLOC-01 | 66 | Complete |
+| SLOC-02 | 66 | Complete |
+| SLOC-03 | 66 | Complete |
+| SLOC-04 | 66 | Complete |
+| SLOC-05 | 66 | Complete |
+| SLOC-06 | 66 | Complete |
+| SLOC-07 | 66 | Complete |
+| SLOC-08 | 66 | Complete |
+| SLOC-09 | 66 | Complete |
+| SLOC-10 | 66 | Complete |
 | VJOB-01 | 67 | Pending |
 | VJOB-02 | 67 | Pending |
 | VJOB-03 | 67 | Pending |

@@ -13,7 +13,6 @@ import net.minecraft.world.entity.npc.villager.Villager
 import net.minecraft.world.entity.npc.villager.VillagerProfession
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
-import thc.mixin.access.VillagerAccessor
 import thc.stage.StageManager
 
 /**
@@ -57,8 +56,7 @@ object VillagerInteraction {
     ): InteractionResult {
         val data = villager.villagerData
         val currentLevel = data.level
-        val accessor = villager as VillagerAccessor
-        val currentXp = accessor.tradingXp
+        val currentXp = villager.villagerXp
 
         // Already master - cannot level further
         if (currentLevel >= 5) {
@@ -96,7 +94,7 @@ object VillagerInteraction {
         villager.villagerData = data.withLevel(targetLevel)
 
         // Reset XP to 0
-        accessor.tradingXp = 0
+        villager.setVillagerXp(0)
 
         // Play success effects
         level.sendParticles(

@@ -27,10 +27,13 @@ import thc.villager.VillagerXpConfig;
 public abstract class VillagerLevelingMixin {
 
     @Shadow
-    private int tradingXp;
+    public abstract VillagerData getVillagerData();
 
     @Shadow
-    public abstract VillagerData getVillagerData();
+    public abstract int getVillagerXp();
+
+    @Shadow
+    public abstract void setVillagerXp(int xp);
 
     /**
      * Block automatic villager leveling (VLEV-01).
@@ -60,9 +63,10 @@ public abstract class VillagerLevelingMixin {
     private void thc$capXpAtLevelMax(MerchantOffer offer, CallbackInfo ci) {
         int currentLevel = this.getVillagerData().level();
         int maxXp = VillagerXpConfig.getMaxXpForLevel(currentLevel);
+        int currentXp = this.getVillagerXp();
 
-        if (maxXp > 0 && this.tradingXp > maxXp) {
-            this.tradingXp = maxXp;
+        if (maxXp > 0 && currentXp > maxXp) {
+            this.setVillagerXp(maxXp);
         }
     }
 }

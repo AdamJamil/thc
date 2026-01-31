@@ -229,13 +229,7 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ### Active
 
-**v2.8 Villager Overhaul:**
-- [ ] Villager job restrictions (mason/librarian/butcher/cartographer only)
-- [ ] Manual villager leveling with stage gates and emerald cost
-- [ ] Trade cycling (reroll current rank trades with emerald)
-- [ ] Custom trade tables for all 4 allowed villager types
-- [ ] Structure locator items for cartographer trades
-- [ ] Rail recipe changes (copper alternative, 64x yields)
+(None — planning next milestone)
 
 ### Out of Scope
 
@@ -306,16 +300,16 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ## Current Milestone
 
-**v2.8 Villager Overhaul** — Restrict villagers to 4 useful professions, add manual leveling with stage gates, implement trade cycling, and create deterministic trade tables with structure locators.
+(None — planning next milestone)
 
 ## Current State
 
-**Latest Ship:** v2.7 Extra Features Batch 11 (2026-01-30)
+**Latest Ship:** v2.8 Villager Overhaul (2026-01-31)
 
 **Codebase:**
-- ~9,823 LOC Kotlin/Java
+- ~11,314 LOC Kotlin/Java
 - Mixed mixin + event-driven architecture
-- 99 plans across 65 phases in 12 milestones
+- 110 plans across 71 phases in 13 milestones
 - Attachment patterns for player state, mob threat, one-time effects, class, boon level, spawn region, fire source
 - Client visual overrides for twilight sky
 - Comprehensive spawn/behavior modifications (10+ mob types)
@@ -349,6 +343,12 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 - Leather drops from pigs and sheep — v2.7
 - Protection enchantments stackable (all 4 types) — v2.7
 - Damage enchantments stackable (smite/sharpness/bane) — v2.7
+- Villager job restrictions (mason/librarian/butcher/cartographer only) — v2.8
+- Manual villager leveling with stage gates and emerald cost — v2.8
+- Trade cycling (reroll current rank trades with emerald) — v2.8
+- Custom trade tables for all 4 allowed villager types — v2.8
+- Structure locator items for cartographer trades — v2.8
+- Rail recipe changes (copper alternative, 64x yields) — v2.8
 
 **Known issues:**
 - PlayerSleepMixin broken from MC 1.21.11 upgrade (blocks smoke test, not functionality)
@@ -356,4 +356,4 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 **Technical debt:** None identified
 
 ---
-*Last updated: 2026-01-30 after v2.7 milestone shipped*
+*Last updated: 2026-01-31 after v2.8 milestone shipped*

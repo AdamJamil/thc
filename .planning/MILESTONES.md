@@ -1,5 +1,33 @@
 # Project Milestones: THC (True Hardcore)
 
+## v2.8 Villager Overhaul (Shipped: 2026-01-31)
+
+**Delivered:** Complete villager trading system overhaul with profession restrictions (only mason, librarian, butcher, cartographer allowed), deterministic trade tables replacing vanilla RNG, manual emerald-based leveling with stage gates, trade cycling for enchantment hunting, structure locator items for cartographer trades, and rail recipe improvements.
+
+**Phases completed:** 66-71 (11 plans total)
+
+**Key accomplishments:**
+
+- Structure locator items: 6 compass-style items pointing to major structures (Trial Chamber, Pillager Outpost, Nether Fortress, Bastion, Ancient City, Stronghold)
+- Villager profession restriction: Only 4 professions allowed (mason, librarian, butcher, cartographer); all others forced to unemployed
+- Deterministic trade tables: 37 custom trades across 4 professions replacing vanilla RNG pools (librarian books, butcher meat, mason building blocks, cartographer locators)
+- Stage-gated manual leveling: Villagers cannot auto-level; emerald payment required with Stage 2/3/4/5 gates for Apprentice/Journeyman/Expert/Master
+- Trade cycling: Right-click with emerald at 0 XP rerolls current-rank trades for finding desired enchantments
+- Rail transportation: 4x yield on rails (64/craft), 10x yield on powered rails (64/craft), copper alternative recipe
+
+**Stats:**
+
+- 252 files created/modified
+- ~11,314 lines of Kotlin/Java (cumulative)
+- 6 phases, 11 plans, 59 requirements
+- 1 day (2026-01-31)
+
+**Git range:** `feat(66-01)` → `feat(71-01)`
+
+**What's next:** To be determined
+
+---
+
 ## v2.7 Extra Features Batch 11 (Shipped: 2026-01-30)
 
 **Delivered:** QoL fixes (mining fatigue cap, poise meter scaling, bell ringing, XP bottles), combat balancing (arrow recipe buff, Pillager/Stray damage nerfs), dough crafting system replacing direct bread, leather drops from pigs/sheep, and enchantment compatibility allowing protection and damage enchantment stacking.

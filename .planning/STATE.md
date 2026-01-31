@@ -2,19 +2,19 @@
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-01-30)
+See: .planning/PROJECT.md (updated 2026-01-31)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v2.8 Villager Overhaul — Complete
+**Current focus:** Planning next milestone
 
 ## Current Position
 
-Phase: 71 of 71 (Rail Transportation)
-Plan: 1 of 1 in current phase
-Status: Phase 71 complete (v2.8 complete)
-Last activity: 2026-01-31 — Completed 71-01-PLAN.md
+Phase: 71 of 71 (complete)
+Plan: N/A
+Status: v2.8 SHIPPED
+Last activity: 2026-01-31 — v2.8 milestone complete
 
-Progress: [==========================] 12 milestones shipped (71 phases, 111 plans)
+Progress: [==========================] 13 milestones shipped (71 phases, 110 plans)
 
 ## Performance Metrics
 
@@ -94,12 +94,12 @@ Progress: [==========================] 12 milestones shipped (71 phases, 111 pla
 **v2.8 Milestone:**
 - Phases: 66-71 (6 phases)
 - Requirements: 59 (SLOC/VJOB/VLEV/VCYC/TLIB/TBUT/TMAS/TCRT/RAIL)
-- Status: COMPLETE
+- Status: SHIPPED 2026-01-31
 - Plans completed: 11/11 (66-01, 66-02, 67-01, 67-02, 68-01, 68-02, 68-03, 69-01, 69-02, 70-01, 71-01)
 - Total execution time: ~45 min
 
 **Cumulative:**
-- 111 plans completed across 12 shipped milestones
+- 110 plans completed across 13 shipped milestones
 - ~8 hours total execution time
 - 17 days from project start
 
@@ -147,6 +147,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-31
-Stopped at: Completed 71-01-PLAN.md (Phase 71 complete, v2.8 complete)
+Stopped at: v2.8 milestone archived
 Resume file: None
-Next: None (milestone complete)
+Next: /gsd:new-milestone for v2.9 planning

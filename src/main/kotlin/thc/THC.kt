@@ -41,6 +41,7 @@ import thc.world.VillageProtection
 import thc.world.WorldRestrictions
 import thc.enchant.EnchantmentEnforcement
 import thc.lectern.LecternEnchanting
+import thc.villager.JobBlockAssignment
 import thc.villager.VillagerInteraction
 
 object THC : ModInitializer {
@@ -74,6 +75,7 @@ object THC : ModInitializer {
 		SimpleEntityBehaviors.register()
 		DamageRebalancing.register()
 		VillagerInteraction.register()
+		JobBlockAssignment.register()
 		PayloadTypeRegistry.playS2C().register(BucklerStatePayload.TYPE, BucklerStatePayload.STREAM_CODEC)
 
 		// Cow milking with copper bucket

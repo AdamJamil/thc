@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-01-31)
 Phase: 72 - Core Downed State
 Plan: Not started
 Status: Ready for planning
-Last activity: 2026-01-31 — Roadmap created for v3.0
+Last activity: 2026-01-31 — Completed quick task 002: Auto-assign villager jobs on block place
 
 Progress: [==========================] 13 milestones shipped (71 phases, 110 plans)
 
@@ -129,6 +129,12 @@ None.
 **Minecraft 1.21.11 Mixin Compatibility**
 - PlayerSleepMixin broken after MC version upgrade
 - Status: Non-blocking for compilation and development
+
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 002 | Auto-assign villager jobs when job block placed | 2026-01-31 | 682e3e2 | [002-auto-assign-villager-jobs-on-block-place](./quick/002-auto-assign-villager-jobs-on-block-place/) |
 
 ## Session Continuity
 

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "thc:item/pillager_outpost_locator_07"
+  }
+}

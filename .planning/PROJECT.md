@@ -229,7 +229,13 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ### Active
 
-(None — planning next milestone)
+**v3.0 Revival System:**
+- Downed state on lethal damage (laying on ground, no actions, invulnerable, ignored by mobs)
+- Revival via sneaking within 2 blocks (must stay still)
+- Revival progress: 0.5/tick (Support: 1.0/tick), preserved on interruption
+- Progress bar: radial ring around cursor with custom textures
+- Revived with 50% HP, 0 hunger
+- Green particles on completion
 
 ### Out of Scope
 
@@ -300,7 +306,15 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ## Current Milestone
 
-(None — planning next milestone)
+**v3.0 Revival System**
+
+**Goal:** Replace instant death with downed state and cooperative revival mechanic
+
+**Target features:**
+- Downed state replacing death (laying pose, invulnerable, no actions)
+- Revival progress system (0.5/tick, Support class 1.0/tick)
+- Radial progress bar UI around cursor
+- Revival outcome (50% HP, 0 hunger)
 
 ## Current State
 
@@ -356,4 +370,4 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 **Technical debt:** None identified
 
 ---
-*Last updated: 2026-01-31 after v2.8 milestone shipped*
+*Last updated: 2026-01-31 after v3.0 milestone started*

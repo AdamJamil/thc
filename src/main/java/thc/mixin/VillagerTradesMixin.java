@@ -39,9 +39,6 @@ public abstract class VillagerTradesMixin {
     @Shadow
     public abstract VillagerData getVillagerData();
 
-    @Shadow
-    public abstract MerchantOffers getOffers();
-
     /**
      * Intercept trade generation to replace vanilla random pools with
      * THC deterministic trade tables for allowed professions.

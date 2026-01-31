@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-01-30)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v2.8 Villager Overhaul — Phase 66 (Structure Locators)
+**Current focus:** v2.8 Villager Overhaul — Phase 66 complete, ready for Phase 67
 
 ## Current Position
 
-Phase: 66 of 71 (Structure Locators)
-Plan: 1 of 2 in current phase
-Status: In progress
-Last activity: 2026-01-31 — Completed 66-01-PLAN.md
+Phase: 66 of 71 (Structure Locators) - COMPLETE
+Plan: 2 of 2 in current phase (66-02 complete)
+Status: Phase complete
+Last activity: 2026-01-31 — Completed 66-02-PLAN.md
 
-Progress: [========================] 12 milestones shipped (65 phases, 100 plans)
+Progress: [========================] 12 milestones shipped (65 phases, 101 plans)
 
 ## Performance Metrics
 
@@ -95,11 +95,11 @@ Progress: [========================] 12 milestones shipped (65 phases, 100 plans
 - Phases: 66-71 (6 phases)
 - Requirements: 59 (SLOC/VJOB/VLEV/VCYC/TLIB/TBUT/TMAS/TCRT/RAIL)
 - Status: In progress
-- Plans completed: 1/11 (66-01)
-- Total execution time: ~6 min
+- Plans completed: 2/11 (66-01, 66-02)
+- Total execution time: ~11 min
 
 **Cumulative:**
-- 100 plans completed across 12 shipped milestones
+- 101 plans completed across 12 shipped milestones
 - ~8 hours total execution time
 - 17 days from project start
 
@@ -117,6 +117,7 @@ Key patterns established for v2.8:
 - Brain memory filtering (proven in v2.6 villager deregistration)
 - lodestone_tracker with tracked=false for compass items (proven in structure locators)
 - Custom TagKey creation for structures without StructureTags constants (proven in 66-01)
+- range_dispatch with compass property for directional item rendering (proven in 66-02)
 
 ### Pending Todos
 
@@ -131,6 +132,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-31
-Stopped at: Completed 66-01-PLAN.md
+Stopped at: Completed 66-02-PLAN.md (Phase 66 complete)
 Resume file: None
-Next: `/gsd:execute-phase` to run 66-02-PLAN.md (item models and textures)
+Next: `/gsd:execute-phase` to run Phase 67 (Villager Jobs)

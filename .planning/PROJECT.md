@@ -229,7 +229,13 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ### Active
 
-None — ready for next milestone planning
+**v2.8 Villager Overhaul:**
+- [ ] Villager job restrictions (mason/librarian/butcher/cartographer only)
+- [ ] Manual villager leveling with stage gates and emerald cost
+- [ ] Trade cycling (reroll current rank trades with emerald)
+- [ ] Custom trade tables for all 4 allowed villager types
+- [ ] Structure locator items for cartographer trades
+- [ ] Rail recipe changes (copper alternative, 64x yields)
 
 ### Out of Scope
 
@@ -300,7 +306,7 @@ None — ready for next milestone planning
 
 ## Current Milestone
 
-None — ready for next milestone planning
+**v2.8 Villager Overhaul** — Restrict villagers to 4 useful professions, add manual leveling with stage gates, implement trade cycling, and create deterministic trade tables with structure locators.
 
 ## Current State
 

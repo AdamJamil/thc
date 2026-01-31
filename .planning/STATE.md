@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-01-30)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** Ready for next milestone planning
+**Current focus:** v2.8 Villager Overhaul — Researching
 
 ## Current Position
 
-Phase: None (milestone complete)
-Plan: N/A
-Status: Ready for next milestone
-Last activity: 2026-01-30 — v2.7 milestone complete
+Phase: Not started (researching)
+Plan: —
+Status: Researching villager system
+Last activity: 2026-01-30 — Milestone v2.8 started
 
 Progress: [========================] 12 milestones shipped (65 phases, 99 plans)
 
@@ -343,6 +343,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-30
-Stopped at: v2.7 milestone archived
+Stopped at: Milestone v2.8 research started
 Resume file: None
-Next: New milestone (/gsd:new-milestone)
+Next: Complete research, define requirements

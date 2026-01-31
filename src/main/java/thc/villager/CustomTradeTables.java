@@ -1,5 +1,9 @@
 package thc.villager;
 
+import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -7,8 +11,11 @@ import net.minecraft.world.entity.npc.villager.VillagerProfession;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.item.trading.ItemCost;
 import net.minecraft.world.item.trading.MerchantOffer;
+import thc.enchant.EnchantmentEnforcement;
 
 import java.util.List;
 import java.util.Optional;
@@ -78,9 +85,53 @@ public final class CustomTradeTables {
             ServerLevel serverLevel,
             RandomSource random) {
 
-        // Placeholder - trade content will be added in subsequent plans
-        // (68-02 through 68-05)
+        if (profession.equals(VillagerProfession.BUTCHER)) {
+            return getButcherTrades(level);
+        }
+
+        // Placeholder - remaining professions added in subsequent tasks
         return List.of();
+    }
+
+    // =====================================================================
+    // Butcher trades (TBUT-01 through TBUT-08)
+    // =====================================================================
+
+    /**
+     * Get butcher trades for a specific level.
+     * All butcher trades are deterministic (no 50/50 variants).
+     * Per REQUIREMENTS.md TBUT-01 through TBUT-08.
+     */
+    private static List<MerchantOffer> getButcherTrades(int level) {
+        return switch (level) {
+            case 1 -> List.of(
+                // TBUT-01: 4 raw chicken -> 1e
+                createSimpleTrade(Items.CHICKEN, 4, Items.EMERALD, 1),
+                // TBUT-02: 5 raw porkchop -> 1e
+                createSimpleTrade(Items.PORKCHOP, 5, Items.EMERALD, 1)
+            );
+            case 2 -> List.of(
+                // TBUT-03: 5 raw beef -> 1e
+                createSimpleTrade(Items.BEEF, 5, Items.EMERALD, 1),
+                // TBUT-04: 3 raw mutton -> 1e
+                createSimpleTrade(Items.MUTTON, 3, Items.EMERALD, 1)
+            );
+            case 3 -> List.of(
+                // TBUT-05: 1e -> 6 cooked porkchop
+                createSimpleTrade(Items.EMERALD, 1, Items.COOKED_PORKCHOP, 6),
+                // TBUT-06: 1e -> 5 steak
+                createSimpleTrade(Items.EMERALD, 1, Items.COOKED_BEEF, 5)
+            );
+            case 4 -> List.of(
+                // TBUT-07: 10 dried kelp blocks -> 1e
+                createSimpleTrade(Items.DRIED_KELP_BLOCK, 10, Items.EMERALD, 1)
+            );
+            case 5 -> List.of(
+                // TBUT-08: 10 sweet berries -> 1e
+                createSimpleTrade(Items.SWEET_BERRIES, 10, Items.EMERALD, 1)
+            );
+            default -> List.of();
+        };
     }
 
     // =====================================================================
@@ -161,5 +212,55 @@ public final class CustomTradeTables {
             Supplier<MerchantOffer> optionA,
             Supplier<MerchantOffer> optionB) {
         return random.nextBoolean() ? optionA.get() : optionB.get();
+    }
+
+    /**
+     * Creates an enchanted book trade for librarian.
+     * Uses THC's internal enchantment levels from EnchantmentEnforcement.
+     *
+     * <p>The enchantment level is looked up from EnchantmentEnforcement.INTERNAL_LEVELS,
+     * defaulting to level 1 if not specified.
+     *
+     * @param emeraldCost Emerald cost for the trade
+     * @param enchantmentId Enchantment ID without namespace (e.g., "mending")
+     * @param serverLevel Server level for registry access
+     * @return MerchantOffer for the enchanted book trade
+     */
+    public static MerchantOffer createEnchantedBookTrade(
+            int emeraldCost,
+            String enchantmentId,
+            ServerLevel serverLevel) {
+
+        // Create enchanted book with specific enchantment
+        ItemStack book = new ItemStack(Items.ENCHANTED_BOOK);
+
+        // Get enchantment holder from registry
+        Registry<Enchantment> registry = serverLevel.registryAccess()
+            .lookupOrThrow(Registries.ENCHANTMENT);
+        var enchantKey = ResourceKey.create(Registries.ENCHANTMENT,
+            Identifier.withDefaultNamespace(enchantmentId));
+        var enchantHolder = registry.get(enchantKey);
+
+        if (enchantHolder.isPresent()) {
+            // Get internal level from EnchantmentEnforcement
+            String fullId = "minecraft:" + enchantmentId;
+            int enchantLevel = EnchantmentEnforcement.INSTANCE.getINTERNAL_LEVELS()
+                .getOrDefault(fullId, 1);
+
+            // Build enchantments
+            ItemEnchantments.Mutable builder = new ItemEnchantments.Mutable(ItemEnchantments.EMPTY);
+            builder.set(enchantHolder.get(), enchantLevel);
+            book.set(DataComponents.STORED_ENCHANTMENTS, builder.toImmutable());
+        }
+
+        return new MerchantOffer(
+            new ItemCost(Items.EMERALD, emeraldCost),
+            Optional.of(new ItemCost(Items.BOOK, 1)),
+            book,
+            0,                   // uses (starts at 0)
+            Integer.MAX_VALUE,   // maxUses (unlimited)
+            0,                   // xp (no XP gain, manual leveling in Phase 69)
+            0.05f                // priceMultiplier (standard)
+        );
     }
 }

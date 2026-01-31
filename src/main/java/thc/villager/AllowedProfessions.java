@@ -8,6 +8,7 @@ import net.minecraft.world.entity.npc.villager.VillagerProfession;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -41,6 +42,17 @@ public final class AllowedProfessions {
         VillagerProfession.CARTOGRAPHER,
         VillagerProfession.NONE,
         VillagerProfession.NITWIT
+    );
+
+    /**
+     * Mapping from job blocks to their corresponding profession.
+     * Used for auto-assigning professions when placing job blocks.
+     */
+    private static final Map<Block, ResourceKey<VillagerProfession>> JOB_BLOCK_TO_PROFESSION = Map.of(
+        Blocks.STONECUTTER, VillagerProfession.MASON,
+        Blocks.SMOKER, VillagerProfession.BUTCHER,
+        Blocks.CARTOGRAPHY_TABLE, VillagerProfession.CARTOGRAPHER,
+        Blocks.LECTERN, VillagerProfession.LIBRARIAN
     );
 
     /**
@@ -95,5 +107,15 @@ public final class AllowedProfessions {
     public static Holder<VillagerProfession> getNoneHolder(RegistryAccess registryAccess) {
         return registryAccess.lookupOrThrow(Registries.VILLAGER_PROFESSION)
             .getOrThrow(VillagerProfession.NONE);
+    }
+
+    /**
+     * Get the profession associated with a job block.
+     *
+     * @param block the block to check
+     * @return the profession ResourceKey, or null if not an allowed job block
+     */
+    public static ResourceKey<VillagerProfession> getProfessionForJobBlock(Block block) {
+        return JOB_BLOCK_TO_PROFESSION.get(block);
     }
 }

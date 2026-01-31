@@ -1,0 +1,31 @@
+{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "property": "minecraft:compass",
+    "target": "lodestone",
+    "wobble": true,
+    "scale": 1.0,
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "thc:item/fortress_locator_00"
+    },
+    "entries": [
+      { "threshold": 0.0, "model": { "type": "minecraft:model", "model": "thc:item/fortress_locator_00" } },
+      { "threshold": 0.0625, "model": { "type": "minecraft:model", "model": "thc:item/fortress_locator_01" } },
+      { "threshold": 0.125, "model": { "type": "minecraft:model", "model": "thc:item/fortress_locator_02" } },
+      { "threshold": 0.1875, "model": { "type": "minecraft:model", "model": "thc:item/fortress_locator_03" } },
+      { "threshold": 0.25, "model": { "type": "minecraft:model", "model": "thc:item/fortress_locator_04" } },
+      { "threshold": 0.3125, "model": { "type": "minecraft:model", "model": "thc:item/fortress_locator_05" } },
+      { "threshold": 0.375, "model": { "type": "minecraft:model", "model": "thc:item/fortress_locator_06" } },
+      { "threshold": 0.4375, "model": { "type": "minecraft:model", "model": "thc:item/fortress_locator_07" } },
+      { "threshold": 0.5, "model": { "type": "minecraft:model", "model": "thc:item/fortress_locator_08" } },
+      { "threshold": 0.5625, "model": { "type": "minecraft:model", "model": "thc:item/fortress_locator_09" } },
+      { "threshold": 0.625, "model": { "type": "minecraft:model", "model": "thc:item/fortress_locator_10" } },
+      { "threshold": 0.6875, "model": { "type": "minecraft:model", "model": "thc:item/fortress_locator_11" } },
+      { "threshold": 0.75, "model": { "type": "minecraft:model", "model": "thc:item/fortress_locator_12" } },
+      { "threshold": 0.8125, "model": { "type": "minecraft:model", "model": "thc:item/fortress_locator_13" } },
+      { "threshold": 0.875, "model": { "type": "minecraft:model", "model": "thc:item/fortress_locator_14" } },
+      { "threshold": 0.9375, "model": { "type": "minecraft:model", "model": "thc:item/fortress_locator_15" } }
+    ]
+  }
+}

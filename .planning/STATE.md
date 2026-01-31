@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-01-30)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v2.8 Villager Overhaul — Phase 70 complete, Phase 71 next
+**Current focus:** v2.8 Villager Overhaul — Complete
 
 ## Current Position
 
-Phase: 70 of 71 (Trade Cycling)
+Phase: 71 of 71 (Rail Transportation)
 Plan: 1 of 1 in current phase
-Status: Phase 70 complete
-Last activity: 2026-01-31 — Completed 70-01-PLAN.md
+Status: Phase 71 complete (v2.8 complete)
+Last activity: 2026-01-31 — Completed 71-01-PLAN.md
 
-Progress: [=========================] 12 milestones shipped (69 phases, 110 plans)
+Progress: [==========================] 12 milestones shipped (71 phases, 111 plans)
 
 ## Performance Metrics
 
@@ -94,12 +94,12 @@ Progress: [=========================] 12 milestones shipped (69 phases, 110 plan
 **v2.8 Milestone:**
 - Phases: 66-71 (6 phases)
 - Requirements: 59 (SLOC/VJOB/VLEV/VCYC/TLIB/TBUT/TMAS/TCRT/RAIL)
-- Status: In progress
-- Plans completed: 10/11 (66-01, 66-02, 67-01, 67-02, 68-01, 68-02, 68-03, 69-01, 69-02, 70-01)
-- Total execution time: ~43 min
+- Status: COMPLETE
+- Plans completed: 11/11 (66-01, 66-02, 67-01, 67-02, 68-01, 68-02, 68-03, 69-01, 69-02, 70-01, 71-01)
+- Total execution time: ~45 min
 
 **Cumulative:**
-- 107 plans completed across 12 shipped milestones
+- 111 plans completed across 12 shipped milestones
 - ~8 hours total execution time
 - 17 days from project start
 
@@ -131,6 +131,8 @@ Key patterns established for v2.8:
 - Emerald level-up via UseEntityCallback with stage gates (proven in 69-02)
 - Trade cycling via 0 XP path with pool size validation (proven in 70-01)
 - Trade index calculation: sum getTradeCount(1..currentLevel-1) for earlier trade preservation (proven in 70-01)
+- Vanilla recipe override for yield changes (proven in 71-01)
+- Alternative recipe in thc namespace for ingredient variants (proven in 71-01)
 
 ### Pending Todos
 
@@ -145,6 +147,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-01-31
-Stopped at: Completed 70-01-PLAN.md (Phase 70 complete)
+Stopped at: Completed 71-01-PLAN.md (Phase 71 complete, v2.8 complete)
 Resume file: None
-Next: Phase 71 (Rail Transportation)
+Next: None (milestone complete)

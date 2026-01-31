@@ -16,11 +16,11 @@ Requirements for villager system overhaul. Each maps to roadmap phases.
 
 ### Manual Leveling
 
-- [ ] **VLEV-01**: Villagers cannot level up automatically (vanilla XP → level progression disabled)
-- [ ] **VLEV-02**: Stage gates: stage 2=apprentice, 3=journeyman, 4=expert, 5=master
-- [ ] **VLEV-03**: Right-click with emerald at max XP + stage requirement to level up
-- [ ] **VLEV-04**: Emerald consumed on level up
-- [ ] **VLEV-05**: Reduced XP: 2/3/4/5 trades per level to reach max XP (5 XP per trade)
+- [x] **VLEV-01**: Villagers cannot level up automatically (vanilla XP → level progression disabled)
+- [x] **VLEV-02**: Stage gates: stage 2=apprentice, 3=journeyman, 4=expert, 5=master
+- [x] **VLEV-03**: Right-click with emerald at max XP + stage requirement to level up
+- [x] **VLEV-04**: Emerald consumed on level up
+- [x] **VLEV-05**: Reduced XP: 2/3/4/5 trades per level to reach max XP (5 XP per trade)
 
 ### Trade Cycling
 
@@ -134,48 +134,48 @@ Which phases cover which requirements. Updated during roadmap creation.
 | VJOB-02 | 67 | Complete |
 | VJOB-03 | 67 | Complete |
 | VJOB-04 | 67 | Complete |
-| TLIB-01 | 68 | Pending |
-| TLIB-02 | 68 | Pending |
-| TLIB-03 | 68 | Pending |
-| TLIB-04 | 68 | Pending |
-| TLIB-05 | 68 | Pending |
-| TLIB-06 | 68 | Pending |
-| TLIB-07 | 68 | Pending |
-| TLIB-08 | 68 | Pending |
-| TLIB-09 | 68 | Pending |
-| TBUT-01 | 68 | Pending |
-| TBUT-02 | 68 | Pending |
-| TBUT-03 | 68 | Pending |
-| TBUT-04 | 68 | Pending |
-| TBUT-05 | 68 | Pending |
-| TBUT-06 | 68 | Pending |
-| TBUT-07 | 68 | Pending |
-| TBUT-08 | 68 | Pending |
-| TMAS-01 | 68 | Pending |
-| TMAS-02 | 68 | Pending |
-| TMAS-03 | 68 | Pending |
-| TMAS-04 | 68 | Pending |
-| TMAS-05 | 68 | Pending |
-| TMAS-06 | 68 | Pending |
-| TMAS-07 | 68 | Pending |
-| TMAS-08 | 68 | Pending |
-| TMAS-09 | 68 | Pending |
-| TMAS-10 | 68 | Pending |
-| TCRT-01 | 68 | Pending |
-| TCRT-02 | 68 | Pending |
-| TCRT-03 | 68 | Pending |
-| TCRT-04 | 68 | Pending |
-| TCRT-05 | 68 | Pending |
-| TCRT-06 | 68 | Pending |
-| TCRT-07 | 68 | Pending |
-| TCRT-08 | 68 | Pending |
-| TCRT-09 | 68 | Pending |
-| TCRT-10 | 68 | Pending |
-| VLEV-01 | 69 | Pending |
-| VLEV-02 | 69 | Pending |
-| VLEV-03 | 69 | Pending |
-| VLEV-04 | 69 | Pending |
-| VLEV-05 | 69 | Pending |
+| TLIB-01 | 68 | Complete |
+| TLIB-02 | 68 | Complete |
+| TLIB-03 | 68 | Complete |
+| TLIB-04 | 68 | Complete |
+| TLIB-05 | 68 | Complete |
+| TLIB-06 | 68 | Complete |
+| TLIB-07 | 68 | Complete |
+| TLIB-08 | 68 | Complete |
+| TLIB-09 | 68 | Complete |
+| TBUT-01 | 68 | Complete |
+| TBUT-02 | 68 | Complete |
+| TBUT-03 | 68 | Complete |
+| TBUT-04 | 68 | Complete |
+| TBUT-05 | 68 | Complete |
+| TBUT-06 | 68 | Complete |
+| TBUT-07 | 68 | Complete |
+| TBUT-08 | 68 | Complete |
+| TMAS-01 | 68 | Complete |
+| TMAS-02 | 68 | Complete |
+| TMAS-03 | 68 | Complete |
+| TMAS-04 | 68 | Complete |
+| TMAS-05 | 68 | Complete |
+| TMAS-06 | 68 | Complete |
+| TMAS-07 | 68 | Complete |
+| TMAS-08 | 68 | Complete |
+| TMAS-09 | 68 | Complete |
+| TMAS-10 | 68 | Complete |
+| TCRT-01 | 68 | Complete |
+| TCRT-02 | 68 | Complete |
+| TCRT-03 | 68 | Complete |
+| TCRT-04 | 68 | Complete |
+| TCRT-05 | 68 | Complete |
+| TCRT-06 | 68 | Complete |
+| TCRT-07 | 68 | Complete |
+| TCRT-08 | 68 | Complete |
+| TCRT-09 | 68 | Complete |
+| TCRT-10 | 68 | Complete |
+| VLEV-01 | 69 | Complete |
+| VLEV-02 | 69 | Complete |
+| VLEV-03 | 69 | Complete |
+| VLEV-04 | 69 | Complete |
+| VLEV-05 | 69 | Complete |
 | VCYC-01 | 70 | Pending |
 | VCYC-02 | 70 | Pending |
 | VCYC-03 | 70 | Pending |

@@ -24,9 +24,9 @@ Requirements for villager system overhaul. Each maps to roadmap phases.
 
 ### Trade Cycling
 
-- [ ] **VCYC-01**: Right-click with emerald at 0 XP to reroll current rank trades
-- [ ] **VCYC-02**: Only current rank trades affected (earlier ranks preserved)
-- [ ] **VCYC-03**: Emerald consumed on cycle
+- [x] **VCYC-01**: Right-click with emerald at 0 XP to reroll current rank trades
+- [x] **VCYC-02**: Only current rank trades affected (earlier ranks preserved)
+- [x] **VCYC-03**: Emerald consumed on cycle
 
 ### Structure Locators
 
@@ -176,9 +176,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | VLEV-03 | 69 | Complete |
 | VLEV-04 | 69 | Complete |
 | VLEV-05 | 69 | Complete |
-| VCYC-01 | 70 | Pending |
-| VCYC-02 | 70 | Pending |
-| VCYC-03 | 70 | Pending |
+| VCYC-01 | 70 | Complete |
+| VCYC-02 | 70 | Complete |
+| VCYC-03 | 70 | Complete |
 | RAIL-01 | 71 | Pending |
 | RAIL-02 | 71 | Pending |
 | RAIL-03 | 71 | Pending |

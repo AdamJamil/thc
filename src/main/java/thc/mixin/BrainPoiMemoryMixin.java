@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import thc.claim.ClaimManager;
 import thc.village.ServerHolder;
+import thc.villager.JobAssignmentBypass;
 
 /**
  * Block villagers from storing POI memories for locations in claimed chunks.
@@ -19,6 +20,9 @@ import thc.village.ServerHolder;
  * <p>Intercepts Brain.setMemory to check if the value being stored is a
  * GlobalPos (used for HOME, JOB_SITE, MEETING_POINT memories). If the
  * position is in a claimed chunk, the memory setting is cancelled.
+ *
+ * <p>Use {@link JobAssignmentBypass#allowPosition(BlockPos)} to bypass this check
+ * for explicit player-triggered job assignments.
  */
 @Mixin(Brain.class)
 public class BrainPoiMemoryMixin {
@@ -42,6 +46,11 @@ public class BrainPoiMemoryMixin {
         // Only process GlobalPos values (HOME, JOB_SITE, MEETING_POINT use GlobalPos)
         if (!(value instanceof GlobalPos globalPos)) {
             return;
+        }
+
+        // Check position-based bypass (for explicit job assignments)
+        if (JobAssignmentBypass.isAllowed(globalPos.pos())) {
+            return; // Allow through - this position was explicitly assigned by player
         }
 
         // Check if this is a POI-related memory type

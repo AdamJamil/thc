@@ -17,6 +17,7 @@ import net.minecraft.world.item.trading.ItemCost;
 import net.minecraft.world.item.trading.MerchantOffer;
 import thc.enchant.EnchantmentEnforcement;
 import thc.item.THCItems;
+import thc.villager.VillagerXpConfig;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +33,7 @@ import java.util.function.Supplier;
  * <p>Key design decisions (per CONTEXT.md):
  * <ul>
  *   <li>Unlimited trades - maxUses = Integer.MAX_VALUE</li>
- *   <li>No XP gain from trading - xp = 0 (manual leveling in Phase 69)</li>
+ *   <li>XP gain from trading - uses VillagerXpConfig.XP_PER_TRADE</li>
  *   <li>50/50 variants reroll on each trade cycle (Phase 70)</li>
  *   <li>Existing villagers are grandfathered (trades unchanged)</li>
  * </ul>
@@ -448,7 +449,7 @@ public final class CustomTradeTables {
             new ItemStack(resultItem, resultCount),
             0,                                         // uses (starts at 0)
             Integer.MAX_VALUE,                         // maxUses (unlimited)
-            0,                                         // xp (no XP gain)
+            VillagerXpConfig.XP_PER_TRADE,             // xp per trade
             0.05f                                      // priceMultiplier (standard)
         );
     }
@@ -474,7 +475,7 @@ public final class CustomTradeTables {
             new ItemStack(resultItem, resultCount),
             0,                                         // uses (starts at 0)
             Integer.MAX_VALUE,                         // maxUses (unlimited)
-            0,                                         // xp (no XP gain)
+            VillagerXpConfig.XP_PER_TRADE,             // xp per trade
             0.05f                                      // priceMultiplier (standard)
         );
     }
@@ -541,10 +542,10 @@ public final class CustomTradeTables {
             new ItemCost(Items.EMERALD, emeraldCost),
             Optional.of(new ItemCost(Items.BOOK, 1)),
             book,
-            0,                   // uses (starts at 0)
-            Integer.MAX_VALUE,   // maxUses (unlimited)
-            0,                   // xp (no XP gain, manual leveling in Phase 69)
-            0.05f                // priceMultiplier (standard)
+            0,                                   // uses (starts at 0)
+            Integer.MAX_VALUE,                   // maxUses (unlimited)
+            VillagerXpConfig.XP_PER_TRADE,       // xp per trade
+            0.05f                                // priceMultiplier (standard)
         );
     }
 }

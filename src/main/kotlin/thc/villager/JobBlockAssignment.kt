@@ -25,6 +25,16 @@ object JobBlockAssignment {
 
     private val logger = LoggerFactory.getLogger("THC-JobBlockAssignment")
 
+    private fun scheduleDelayed(level: ServerLevel, ticks: Int, action: () -> Unit) {
+        if (ticks <= 0) {
+            action()
+        } else {
+            level.server.execute {
+                scheduleDelayed(level, ticks - 1, action)
+            }
+        }
+    }
+
     fun register() {
         UseBlockCallback.EVENT.register { player, world, hand, hitResult ->
             if (world.isClientSide) return@register InteractionResult.PASS
@@ -44,8 +54,8 @@ object JobBlockAssignment {
 
             logger.info("Job block placed: {} at {}", block, placementPos)
 
-            // Schedule for next tick (after block is placed and POI registered)
-            level.server.execute {
+            // Schedule with delay - POI registration needs time after block placement
+            scheduleDelayed(level, 5) {
                 try {
                     assignNearestVillagerToJobSite(level, placementPos, professionKey, serverPlayer)
                 } catch (e: Exception) {

@@ -2,11 +2,9 @@ package thc.villager
 
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.minecraft.core.BlockPos
-import net.minecraft.core.GlobalPos
 import net.minecraft.core.registries.Registries
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionResult
-import net.minecraft.world.entity.ai.memory.MemoryModuleType
 import net.minecraft.world.entity.npc.villager.Villager
 import net.minecraft.world.entity.npc.villager.VillagerProfession
 import net.minecraft.world.item.BlockItem
@@ -69,38 +67,34 @@ object JobBlockAssignment {
             return
         }
 
-        logger.info("Assigning villager at {} to job site at {}", villager.blockPosition(), jobBlockPos)
+        logger.info("Assigning villager at {} to job block at {}", villager.blockPosition(), jobBlockPos)
 
-        // 1. Claim the POI so no other villager takes it
-        val poiManager = level.poiManager
-        val claimed = poiManager.take(
-            { true }, // Accept any POI type at this position
-            { _, pos -> pos == jobBlockPos }, // Only this exact position
-            jobBlockPos,
-            1 // Search radius
-        )
-
-        if (claimed.isEmpty) {
-            logger.warn("Failed to claim POI at {} - may not be registered yet", jobBlockPos)
-        }
-
-        // 2. Set JOB_SITE memory (direct claim, not potential)
-        val globalPos = GlobalPos.of(level.dimension(), jobBlockPos)
-        villager.brain.setMemory(MemoryModuleType.JOB_SITE, globalPos)
-
-        // 3. Directly set the profession and level 1
+        // 1. Set profession and level 1
         val registry = level.registryAccess().lookupOrThrow(Registries.VILLAGER_PROFESSION)
         val profHolder = registry.getOrThrow(professionKey)
-        villager.villagerData = villager.villagerData
+        val oldData = villager.villagerData
+        villager.villagerData = oldData
             .withProfession(profHolder)
             .withLevel(1)
 
-        // 4. Generate level 1 trades
-        (villager as VillagerAccessor).invokeUpdateTrades(level)
+        // Verify the data was set
+        val newData = villager.villagerData
+        logger.info("Data set: profession={}, level={} (was profession={}, level={})",
+            newData.profession.unwrapKey().orElse(null),
+            newData.level,
+            oldData.profession.unwrapKey().orElse(null),
+            oldData.level
+        )
 
-        // 5. Refresh brain to pick up new profession behaviors
+        // 2. Generate level 1 trades
+        val offersBefore = villager.offers.size
+        (villager as VillagerAccessor).invokeUpdateTrades(level)
+        val offersAfter = villager.offers.size
+        logger.info("Trades: {} before, {} after updateTrades()", offersBefore, offersAfter)
+
+        // 3. Refresh brain for new profession AI behaviors
         villager.refreshBrain(level)
 
-        logger.info("Villager assigned profession: {}", professionKey)
+        logger.info("Assignment complete for {}", professionKey)
     }
 }

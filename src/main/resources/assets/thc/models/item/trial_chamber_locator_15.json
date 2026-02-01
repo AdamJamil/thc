@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "thc:item/trial_chamber_locator_15"
+    "layer0": "minecraft:item/compass_30"
   }
 }

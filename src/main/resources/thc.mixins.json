@@ -67,8 +67,7 @@
 		"access.EnderManAccessor",
 		"access.FoodDataAccessor",
 		"access.MobAccessor",
-		"access.EntityAccessor",
-		"access.VillagerAccessor"
+		"access.EntityAccessor"
 	],
 	"injectors": {
 		"defaultRequire": 1

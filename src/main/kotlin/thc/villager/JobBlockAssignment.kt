@@ -134,9 +134,6 @@ object JobBlockAssignment {
             .withProfession(profHolder)
             .withLevel(1)
 
-        // 4. Give 1 XP to LOCK the profession (villagers with XP can't lose their job)
-        villager.villagerXp = 1
-
         // Verify the data was set
         val newData = villager.villagerData
         msg("§7Set: $professionKey lv${newData.level}")

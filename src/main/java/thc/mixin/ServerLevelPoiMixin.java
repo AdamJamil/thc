@@ -40,10 +40,14 @@ public class ServerLevelPoiMixin {
         ServerLevel self = (ServerLevel) (Object) this;
         ChunkPos chunkPos = new ChunkPos(pos);
 
-        // Block all POI in claimed chunks
+        // Block POI in claimed chunks, EXCEPT for allowed job blocks
         if (ClaimManager.INSTANCE.isClaimed(self.getServer(), chunkPos)) {
-            ci.cancel();
-            return;
+            Block newBlock = newState.getBlock();
+            // Allow POI registration for explicitly allowed job blocks (stonecutter, smoker, etc.)
+            if (AllowedProfessions.getProfessionForJobBlock(newBlock) == null) {
+                ci.cancel();
+                return;
+            }
         }
 
         // Block disallowed job site POI everywhere

@@ -43,19 +43,14 @@ class StructureLocatorItem(
         entity: Entity,
         slot: EquipmentSlot?
     ) {
-        // Players only
         if (entity !is Player) return
-
-        // Throttle: search once per second
         if (serverLevel.gameTime % SEARCH_INTERVAL_TICKS != 0L) return
 
-        // Dimension check - wrong dimension = spinning needle
         if (serverLevel.dimension() != expectedDimension) {
             clearTarget(stack)
             return
         }
 
-        // Find the true closest structure by searching at multiple radii
         val found = findClosestStructure(serverLevel, entity.blockPosition())
 
         if (found != null) {
@@ -70,8 +65,6 @@ class StructureLocatorItem(
      * This ensures we find truly nearby structures before distant ones.
      */
     private fun findClosestStructure(level: ServerLevel, origin: BlockPos): BlockPos? {
-        // Search at increasing radii: 16, 32, 64, 100 chunks
-        // Once we find a structure, search one more radius tier to ensure it's closest
         val radii = listOf(16, 32, 64, MAX_SEARCH_RADIUS)
         var bestPos: BlockPos? = null
         var bestDistSq = Double.MAX_VALUE
@@ -92,7 +85,7 @@ class StructureLocatorItem(
                 }
             }
 
-            // If we found something in this radius, check one more tier then stop
+            // If we found something, check one more tier to ensure closest
             if (bestPos != null && radius < MAX_SEARCH_RADIUS) {
                 val nextRadius = radii.getOrNull(radii.indexOf(radius) + 1) ?: break
                 val nextFound = level.findNearestMapStructure(
@@ -114,20 +107,14 @@ class StructureLocatorItem(
         return bestPos
     }
 
-    /**
-     * Set lodestone tracker target position.
-     */
-    private fun setTarget(stack: ItemStack, dimension: ResourceKey<Level>, pos: net.minecraft.core.BlockPos) {
+    private fun setTarget(stack: ItemStack, dimension: ResourceKey<Level>, pos: BlockPos) {
         val tracker = LodestoneTracker(
             Optional.of(GlobalPos.of(dimension, pos)),
-            false  // tracked=false: keep component even without lodestone
+            false
         )
         stack.set(DataComponents.LODESTONE_TRACKER, tracker)
     }
 
-    /**
-     * Clear lodestone tracker target (causes random spin).
-     */
     private fun clearTarget(stack: ItemStack) {
         val tracker = LodestoneTracker(Optional.empty(), false)
         stack.set(DataComponents.LODESTONE_TRACKER, tracker)

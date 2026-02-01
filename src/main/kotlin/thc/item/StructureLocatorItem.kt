@@ -1,5 +1,6 @@
 package thc.item
 
+import net.minecraft.core.BlockPos
 import net.minecraft.core.GlobalPos
 import net.minecraft.core.component.DataComponents
 import net.minecraft.resources.ResourceKey
@@ -33,7 +34,7 @@ class StructureLocatorItem(
 
     companion object {
         private const val SEARCH_INTERVAL_TICKS = 20L  // Search once per second
-        private const val SEARCH_RADIUS_CHUNKS = 100   // 100 chunk radius
+        private const val MAX_SEARCH_RADIUS = 100      // Max search radius in chunks
     }
 
     override fun inventoryTick(
@@ -54,19 +55,63 @@ class StructureLocatorItem(
             return
         }
 
-        // Search for nearest structure within radius
-        val found = serverLevel.findNearestMapStructure(
-            structureTag,
-            entity.blockPosition(),
-            SEARCH_RADIUS_CHUNKS,
-            false  // skipKnownStructures
-        )
+        // Find the true closest structure by searching at multiple radii
+        val found = findClosestStructure(serverLevel, entity.blockPosition())
 
         if (found != null) {
             setTarget(stack, serverLevel.dimension(), found)
         } else {
             clearTarget(stack)
         }
+    }
+
+    /**
+     * Find the closest structure by searching at increasing radii.
+     * This ensures we find truly nearby structures before distant ones.
+     */
+    private fun findClosestStructure(level: ServerLevel, origin: BlockPos): BlockPos? {
+        // Search at increasing radii: 16, 32, 64, 100 chunks
+        // Once we find a structure, search one more radius tier to ensure it's closest
+        val radii = listOf(16, 32, 64, MAX_SEARCH_RADIUS)
+        var bestPos: BlockPos? = null
+        var bestDistSq = Double.MAX_VALUE
+
+        for (radius in radii) {
+            val found = level.findNearestMapStructure(
+                structureTag,
+                origin,
+                radius,
+                false
+            )
+
+            if (found != null) {
+                val distSq = origin.distSqr(found)
+                if (distSq < bestDistSq) {
+                    bestDistSq = distSq
+                    bestPos = found
+                }
+            }
+
+            // If we found something in this radius, check one more tier then stop
+            if (bestPos != null && radius < MAX_SEARCH_RADIUS) {
+                val nextRadius = radii.getOrNull(radii.indexOf(radius) + 1) ?: break
+                val nextFound = level.findNearestMapStructure(
+                    structureTag,
+                    origin,
+                    nextRadius,
+                    false
+                )
+                if (nextFound != null) {
+                    val nextDistSq = origin.distSqr(nextFound)
+                    if (nextDistSq < bestDistSq) {
+                        bestPos = nextFound
+                    }
+                }
+                break
+            }
+        }
+
+        return bestPos
     }
 
     /**

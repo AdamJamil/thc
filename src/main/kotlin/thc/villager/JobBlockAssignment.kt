@@ -3,6 +3,7 @@ package thc.villager
 import net.fabricmc.fabric.api.event.player.UseBlockCallback
 import net.minecraft.core.BlockPos
 import net.minecraft.core.GlobalPos
+import net.minecraft.core.registries.Registries
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.ai.memory.MemoryModuleType
@@ -10,15 +11,19 @@ import net.minecraft.world.entity.npc.villager.Villager
 import net.minecraft.world.entity.npc.villager.VillagerProfession
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.phys.AABB
+import org.slf4j.LoggerFactory
+import thc.mixin.access.VillagerAccessor
 
 /**
  * Auto-assigns villager professions when placing job blocks.
  *
  * When a player places a stonecutter, smoker, cartography table, or lectern,
- * the nearest unemployed villager within 5 blocks is pointed to that job site
- * via brain memory. Vanilla AI then handles profession assignment naturally.
+ * the nearest unemployed villager within 5 blocks claims that job site and
+ * gets the corresponding profession.
  */
 object JobBlockAssignment {
+
+    private val logger = LoggerFactory.getLogger("THC-JobBlockAssignment")
 
     fun register() {
         UseBlockCallback.EVENT.register { player, world, hand, hitResult ->
@@ -30,7 +35,7 @@ object JobBlockAssignment {
 
             val block = item.block
             // Only process allowed job blocks
-            AllowedProfessions.getProfessionForJobBlock(block)
+            val professionKey = AllowedProfessions.getProfessionForJobBlock(block)
                 ?: return@register InteractionResult.PASS
 
             val level = world as? ServerLevel ?: return@register InteractionResult.PASS
@@ -38,14 +43,18 @@ object JobBlockAssignment {
 
             // Schedule for next tick (after block is placed and POI registered)
             level.server.execute {
-                assignNearestVillagerToJobSite(level, placementPos)
+                assignNearestVillagerToJobSite(level, placementPos, professionKey)
             }
 
             InteractionResult.PASS
         }
     }
 
-    private fun assignNearestVillagerToJobSite(level: ServerLevel, jobBlockPos: BlockPos) {
+    private fun assignNearestVillagerToJobSite(
+        level: ServerLevel,
+        jobBlockPos: BlockPos,
+        professionKey: net.minecraft.resources.ResourceKey<VillagerProfession>
+    ) {
         val center = jobBlockPos.center
         val searchBox = AABB.ofSize(center, 10.0, 10.0, 10.0)
 
@@ -54,10 +63,44 @@ object JobBlockAssignment {
             val profKey = v.villagerData.profession.unwrapKey().orElse(null)
             profKey == VillagerProfession.NONE
         }.minByOrNull { it.position().distanceToSqr(center) }
-            ?: return
 
-        // Set POTENTIAL_JOB_SITE memory - vanilla AI will handle the rest
+        if (villager == null) {
+            logger.debug("No unemployed villager found near {}", jobBlockPos)
+            return
+        }
+
+        logger.info("Assigning villager at {} to job site at {}", villager.blockPosition(), jobBlockPos)
+
+        // 1. Claim the POI so no other villager takes it
+        val poiManager = level.poiManager
+        val claimed = poiManager.take(
+            { true }, // Accept any POI type at this position
+            { _, pos -> pos == jobBlockPos }, // Only this exact position
+            jobBlockPos,
+            1 // Search radius
+        )
+
+        if (claimed.isEmpty) {
+            logger.warn("Failed to claim POI at {} - may not be registered yet", jobBlockPos)
+        }
+
+        // 2. Set JOB_SITE memory (direct claim, not potential)
         val globalPos = GlobalPos.of(level.dimension(), jobBlockPos)
-        villager.brain.setMemory(MemoryModuleType.POTENTIAL_JOB_SITE, globalPos)
+        villager.brain.setMemory(MemoryModuleType.JOB_SITE, globalPos)
+
+        // 3. Directly set the profession and level 1
+        val registry = level.registryAccess().lookupOrThrow(Registries.VILLAGER_PROFESSION)
+        val profHolder = registry.getOrThrow(professionKey)
+        villager.villagerData = villager.villagerData
+            .withProfession(profHolder)
+            .withLevel(1)
+
+        // 4. Generate level 1 trades
+        (villager as VillagerAccessor).invokeUpdateTrades(level)
+
+        // 5. Refresh brain to pick up new profession behaviors
+        villager.refreshBrain(level)
+
+        logger.info("Villager assigned profession: {}", professionKey)
     }
 }

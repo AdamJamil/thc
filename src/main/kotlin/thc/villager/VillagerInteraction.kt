@@ -96,6 +96,18 @@ object VillagerInteraction {
         // Reset XP to 0
         villager.setVillagerXp(0)
 
+        // Add trades for the new level
+        val profKey = data.profession.unwrapKey().orElse(null)
+        if (profKey != null && CustomTradeTables.hasCustomTrades(profKey)) {
+            val newTrades = CustomTradeTables.getTradesFor(
+                profKey,
+                targetLevel,
+                level,
+                level.random
+            )
+            villager.offers.addAll(newTrades)
+        }
+
         // Play success effects
         level.sendParticles(
             ParticleTypes.HAPPY_VILLAGER,

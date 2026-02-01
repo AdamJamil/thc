@@ -11,6 +11,7 @@ import net.minecraft.world.entity.npc.villager.Villager
 import net.minecraft.world.entity.npc.villager.VillagerProfession
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.phys.AABB
+import thc.mixin.access.VillagerAccessor
 
 /**
  * Auto-assigns villager professions when placing job blocks.
@@ -60,10 +61,15 @@ object JobBlockAssignment {
                 .firstOrNull()
                 ?: return@register InteractionResult.PASS
 
-            // Assign profession
+            // Assign profession and set to level 1
             val registry = level.registryAccess().lookupOrThrow(Registries.VILLAGER_PROFESSION)
             val profHolder = registry.getOrThrow(professionKey)
-            nearestVillager.villagerData = nearestVillager.villagerData.withProfession(profHolder)
+            nearestVillager.villagerData = nearestVillager.villagerData
+                .withProfession(profHolder)
+                .withLevel(1)
+
+            // Generate level 1 trades via accessor
+            (nearestVillager as VillagerAccessor).invokeUpdateTrades(level)
 
             // Play feedback
             level.sendParticles(

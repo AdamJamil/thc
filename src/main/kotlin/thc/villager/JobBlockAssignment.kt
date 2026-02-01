@@ -103,8 +103,13 @@ object JobBlockAssignment {
         val offersAfter = villager.offers.size
         msg("§7Trades: $offersBefore -> $offersAfter")
 
-        // 3. Refresh brain for new profession AI behaviors
-        villager.refreshBrain(level)
+        // Debug: check final state
+        val finalData = villager.villagerData
+        val finalOffers = villager.offers.size
+        msg("§7Final: ${finalData.profession.unwrapKey().orElse(null)} lv${finalData.level} offers=$finalOffers")
+
+        // Skip refreshBrain - it might be resetting things
+        // villager.refreshBrain(level)
 
         msg("§aJob assigned!")
     }

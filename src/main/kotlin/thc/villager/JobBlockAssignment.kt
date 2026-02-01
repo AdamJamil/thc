@@ -38,10 +38,20 @@ object JobBlockAssignment {
 
             val level = world as? ServerLevel ?: return@register InteractionResult.PASS
             val placementPos = hitResult.blockPos.relative(hitResult.direction)
+            val serverPlayer = player as? net.minecraft.server.level.ServerPlayer
+
+            logger.info("Job block placed: {} at {}", block, placementPos)
 
             // Schedule for next tick (after block is placed and POI registered)
             level.server.execute {
-                assignNearestVillagerToJobSite(level, placementPos, professionKey)
+                try {
+                    assignNearestVillagerToJobSite(level, placementPos, professionKey, serverPlayer)
+                } catch (e: Exception) {
+                    logger.error("Error in job assignment", e)
+                    serverPlayer?.sendSystemMessage(
+                        net.minecraft.network.chat.Component.literal("§cError: ${e.message}")
+                    )
+                }
             }
 
             InteractionResult.PASS
@@ -51,8 +61,14 @@ object JobBlockAssignment {
     private fun assignNearestVillagerToJobSite(
         level: ServerLevel,
         jobBlockPos: BlockPos,
-        professionKey: net.minecraft.resources.ResourceKey<VillagerProfession>
+        professionKey: net.minecraft.resources.ResourceKey<VillagerProfession>,
+        player: net.minecraft.server.level.ServerPlayer?
     ) {
+        fun msg(text: String) {
+            logger.info(text)
+            player?.sendSystemMessage(net.minecraft.network.chat.Component.literal(text))
+        }
+
         val center = jobBlockPos.center
         val searchBox = AABB.ofSize(center, 10.0, 10.0, 10.0)
 
@@ -63,11 +79,11 @@ object JobBlockAssignment {
         }.minByOrNull { it.position().distanceToSqr(center) }
 
         if (villager == null) {
-            logger.debug("No unemployed villager found near {}", jobBlockPos)
+            msg("§7No unemployed villager within 5 blocks")
             return
         }
 
-        logger.info("Assigning villager at {} to job block at {}", villager.blockPosition(), jobBlockPos)
+        msg("§aFound villager, assigning job...")
 
         // 1. Set profession and level 1
         val registry = level.registryAccess().lookupOrThrow(Registries.VILLAGER_PROFESSION)
@@ -79,22 +95,17 @@ object JobBlockAssignment {
 
         // Verify the data was set
         val newData = villager.villagerData
-        logger.info("Data set: profession={}, level={} (was profession={}, level={})",
-            newData.profession.unwrapKey().orElse(null),
-            newData.level,
-            oldData.profession.unwrapKey().orElse(null),
-            oldData.level
-        )
+        msg("§7Set: $professionKey lv${newData.level}")
 
         // 2. Generate level 1 trades
         val offersBefore = villager.offers.size
         (villager as VillagerAccessor).invokeUpdateTrades(level)
         val offersAfter = villager.offers.size
-        logger.info("Trades: {} before, {} after updateTrades()", offersBefore, offersAfter)
+        msg("§7Trades: $offersBefore -> $offersAfter")
 
         // 3. Refresh brain for new profession AI behaviors
         villager.refreshBrain(level)
 
-        logger.info("Assignment complete for {}", professionKey)
+        msg("§aJob assigned!")
     }
 }

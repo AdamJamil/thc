@@ -28,6 +28,8 @@ import thc.item.THCBucklers
 import thc.item.THCItems
 import thc.network.BucklerSync
 import thc.network.BucklerStatePayload
+import thc.network.RevivalStatePayload
+import thc.network.RevivalSync
 import thc.armor.ArmorRebalancing
 import thc.food.FoodStatsModifier
 import thc.monster.DamageRebalancing
@@ -84,6 +86,7 @@ object THC : ModInitializer {
 		JobBlockAssignment.register()
 		DownedManager.register()
 		PayloadTypeRegistry.playS2C().register(BucklerStatePayload.TYPE, BucklerStatePayload.STREAM_CODEC)
+		PayloadTypeRegistry.playS2C().register(RevivalStatePayload.TYPE, RevivalStatePayload.STREAM_CODEC)
 
 		// Cow milking with copper bucket
 		UseEntityCallback.EVENT.register { player, level, hand, entity, _ ->
@@ -112,10 +115,17 @@ object THC : ModInitializer {
 		ServerTickEvents.END_SERVER_TICK.register(ServerTickEvents.EndTick { server ->
 			updateBucklerState(server)
 			processRevival(server)
+
+			// Sync revival state to all players for HUD rendering
+			val players = server.playerList.players
+			for (player in players) {
+				RevivalSync.sync(player, players)
+			}
 		})
 
 		ServerPlayConnectionEvents.DISCONNECT.register(ServerPlayConnectionEvents.Disconnect { handler, _ ->
 			BucklerSync.clear(handler.player)
+			RevivalSync.clear(handler.player)
 		})
 
 		ServerPlayConnectionEvents.JOIN.register(ServerPlayConnectionEvents.Join { handler, sender, server ->

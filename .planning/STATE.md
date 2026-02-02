@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-01-31)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v3.0 Revival System — Phase 73 complete, Phase 74 next
+**Current focus:** v3.0 Revival System — Phase 74 in progress
 
 ## Current Position
 
-Phase: 73 - Revival Mechanics (COMPLETE)
-Plan: 02 of 2
-Status: Phase complete
-Last activity: 2026-02-02 — Completed 73-02-PLAN.md (Revival Completion)
+Phase: 74 - Revival UI (In Progress)
+Plan: 01 of 1
+Status: Plan 01 complete
+Last activity: 2026-02-02 — Completed 74-01-PLAN.md (Revival Progress UI)
 
-Progress: [==========================] 13 milestones shipped (72 phases, 114 plans)
+Progress: [==========================] 13 milestones shipped (72 phases, 115 plans)
 
 ## Performance Metrics
 
@@ -101,10 +101,10 @@ Progress: [==========================] 13 milestones shipped (72 phases, 114 pla
 **v3.0 Revival System (In Progress):**
 - Phase 72: Core Downed State - COMPLETE (72-01)
 - Phase 73: Revival Mechanics - COMPLETE (73-01, 73-02)
-- Phase 74: Revival UI - PLANNED
+- Phase 74: Revival UI - COMPLETE (74-01)
 
 **Cumulative:**
-- 114 plans completed across 13 shipped milestones + v3.0 progress
+- 115 plans completed across 13 shipped milestones + v3.0 progress
 - ~8 hours total execution time
 - 18 days from project start
 
@@ -130,6 +130,11 @@ Key patterns established for v3.0 (from research):
 - Separate completion pass in tick processor (avoids concurrent modification)
 - HAPPY_VILLAGER particles for revival completion (30 count, green, visible)
 
+### Phase 74 Decisions
+- Look direction: 60-degree cone (cos(60) = 0.5 dot product threshold)
+- Vertical top-down fill instead of radial pie (MC 1.21.x API limitations)
+- HUD element registered before crosshair for center-screen overlay
+
 ### Pending Todos
 
 None.
@@ -140,6 +145,10 @@ None.
 - PlayerSleepMixin broken after MC version upgrade
 - Status: Non-blocking for compilation and development
 
+**Revival UI Radial Fill**
+- Plan specified radial pie fill, implemented vertical fill
+- Status: Functional but visually different; can be enhanced later
+
 ### Quick Tasks Completed
 
 | # | Description | Date | Commit | Directory |
@@ -149,6 +158,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-02
-Stopped at: Completed 73-02-PLAN.md
+Stopped at: Completed 74-01-PLAN.md
 Resume file: None
-Next: Phase 74 - Revival UI
+Next: Phase 74 complete (only plan in phase)

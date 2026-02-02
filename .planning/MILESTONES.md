@@ -1,5 +1,33 @@
 # Project Milestones: THC (True Hardcore)
 
+## v3.0 Revival System (Shipped: 2026-02-02)
+
+**Delivered:** Cooperative revival system replacing instant death with downed state - players enter spectator mode on lethal damage, tethered near their death location, and can be revived by teammates sneaking nearby with a progress-based revival mechanic.
+
+**Phases completed:** 72-74 (4 plans total)
+
+**Key accomplishments:**
+
+- Death interception via Fabric API ALLOW_DEATH event, converting instant death to spectator-based downed state
+- 50-block tether enforcement keeping downed players near their death location for revival
+- Revival progress system (0.5/tick base, 1.0/tick for Support class) with natural multi-reviver stacking
+- Revival completion restoring players to survival mode at 50% HP, 6 hunger with green particle feedback
+- Server-to-client revival state sync with 60-degree look cone detection for target selection
+- Radial progress ring HUD centered on cursor displaying revival progress
+
+**Stats:**
+
+- 21 files created/modified
+- ~12,156 lines of Kotlin/Java (cumulative)
+- 3 phases, 4 plans, 18 requirements
+- 1 day (2026-02-02)
+
+**Git range:** `feat(72-01)` → `feat(74-01)`
+
+**What's next:** To be determined
+
+---
+
 ## v2.8 Villager Overhaul (Shipped: 2026-01-31)
 
 **Delivered:** Complete villager trading system overhaul with profession restrictions (only mason, librarian, butcher, cartographer allowed), deterministic trade tables replacing vanilla RNG, manual emerald-based leveling with stage gates, trade cycling for enchantment hunting, structure locator items for cartographer trades, and rail recipe improvements.

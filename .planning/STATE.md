@@ -2,19 +2,19 @@
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-01-31)
+See: .planning/PROJECT.md (updated 2026-02-02)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v3.0 Revival System — Phase 74 in progress
+**Current focus:** Planning next milestone
 
 ## Current Position
 
-Phase: 74 - Revival UI (In Progress)
-Plan: 01 of 1
-Status: Plan 01 complete
-Last activity: 2026-02-02 — Completed 74-01-PLAN.md (Revival Progress UI)
+Phase: 74 complete
+Plan: Complete
+Status: v3.0 milestone shipped
+Last activity: 2026-02-02 — v3.0 Revival System shipped
 
-Progress: [==========================] 13 milestones shipped (72 phases, 115 plans)
+Progress: [===========================] 14 milestones shipped (74 phases, 115 plans)
 
 ## Performance Metrics
 
@@ -98,42 +98,32 @@ Progress: [==========================] 13 milestones shipped (72 phases, 115 pla
 - Plans completed: 11/11 (66-01, 66-02, 67-01, 67-02, 68-01, 68-02, 68-03, 69-01, 69-02, 70-01, 71-01)
 - Total execution time: ~45 min
 
-**v3.0 Revival System (In Progress):**
-- Phase 72: Core Downed State - COMPLETE (72-01)
-- Phase 73: Revival Mechanics - COMPLETE (73-01, 73-02)
-- Phase 74: Revival UI - COMPLETE (74-01)
+**v3.0 Milestone:**
+- Phases: 72-74 (3 phases)
+- Requirements: 18 (DOWN/REVV/RVUI/RVOU)
+- Status: SHIPPED 2026-02-02
+- Plans completed: 4/4 (72-01, 73-01, 73-02, 74-01)
+- Total execution time: ~23 min
 
 **Cumulative:**
-- 115 plans completed across 13 shipped milestones + v3.0 progress
-- ~8 hours total execution time
-- 18 days from project start
+- 115 plans completed across 14 shipped milestones
+- ~8.5 hours total execution time
+- 19 days from project start
 
 ## Accumulated Context
 
 ### Decisions
 
 See milestone archives for full decision logs:
-- .planning/milestones/v2.8-ROADMAP.md (most recent)
+- .planning/milestones/v3.0-ROADMAP.md (most recent)
 
-Key patterns established for v3.0 (from research):
+Key patterns established for v3.0:
 - Fabric API `ServerLivingEntityEvents.ALLOW_DEATH` for death interception (not mixin)
 - Non-persistent attachment for downed state (session-scoped)
-- `LivingEntity.canBeSeenAsEnemy()` mixin for mob targeting exclusion
-- `LivingEntity.isInvulnerableTo(DamageSource)` mixin for invulnerability
 - `Pose.SWIMMING` for laying visual (crawling pose)
 - Existing BucklerSync pattern for revival state sync
 - Existing BucklerHudRenderer pattern for radial progress rendering
 - ClassManager integration for Support 2x revival speed
-
-### Phase 73 Decisions
-- clearDowned cascades to clear revival progress (prevents orphaned data)
-- Separate completion pass in tick processor (avoids concurrent modification)
-- HAPPY_VILLAGER particles for revival completion (30 count, green, visible)
-
-### Phase 74 Decisions
-- Look direction: 60-degree cone (cos(60) = 0.5 dot product threshold)
-- Vertical top-down fill instead of radial pie (MC 1.21.x API limitations)
-- HUD element registered before crosshair for center-screen overlay
 
 ### Pending Todos
 
@@ -145,10 +135,6 @@ None.
 - PlayerSleepMixin broken after MC version upgrade
 - Status: Non-blocking for compilation and development
 
-**Revival UI Radial Fill**
-- Plan specified radial pie fill, implemented vertical fill
-- Status: Functional but visually different; can be enhanced later
-
 ### Quick Tasks Completed
 
 | # | Description | Date | Commit | Directory |
@@ -158,6 +144,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-02
-Stopped at: Completed 74-01-PLAN.md
+Stopped at: v3.0 milestone complete
 Resume file: None
-Next: Phase 74 complete (only plan in phase)
+Next: /gsd:new-milestone for next version

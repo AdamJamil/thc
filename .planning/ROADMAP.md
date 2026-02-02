@@ -2,7 +2,7 @@
 
 ## Current Milestone
 
-- **v3.0** — Revival System (phases 72-74) (in progress)
+Planning next milestone...
 
 ## Completed Milestones
 
@@ -19,6 +19,7 @@
 - [v2.6](milestones/v2.6-ROADMAP.md) — Extra Features Batch 10 (phases 57-61)
 - [v2.7](milestones/v2.7-ROADMAP.md) — Extra Features Batch 11 (phases 62-65)
 - [v2.8](milestones/v2.8-ROADMAP.md) — Villager Overhaul (phases 66-71)
+- [v3.0](milestones/v3.0-ROADMAP.md) — Revival System (phases 72-74)
 
 ## Progress
 
@@ -37,7 +38,7 @@
 | v2.6 | 57-61 | 7 | Complete | 2026-01-29 |
 | v2.7 | 62-65 | 5 | Complete | 2026-01-30 |
 | v2.8 | 66-71 | 11 | Complete | 2026-01-31 |
-| v3.0 | 72-74 | 4 | In progress | - |
+| v3.0 | 72-74 | 4 | Complete | 2026-02-02 |
 
 **Total:** 74 phases, 115 plans across 14 milestones
 

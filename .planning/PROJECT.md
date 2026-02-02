@@ -226,16 +226,17 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
   - Wooden→stone→copper→iron→diamond tool upgrades with crafting-equivalent costs
   - Diamond→netherite unchanged (vanilla passthrough)
   - Alternative copper recipe for smithing table
+- Revival system — v3.0
+  - Death interception via Fabric API ALLOW_DEATH event
+  - Downed state with spectator mode and 50-block tether
+  - Revival progress (0.5/tick, Support 1.0/tick) preserved on interruption
+  - Revival completion: 50% HP, 6 hunger, green particles
+  - Server-to-client sync with 60-degree look cone
+  - Radial progress ring HUD centered on cursor
 
 ### Active
 
-**v3.0 Revival System:**
-- Downed state on lethal damage (laying on ground, no actions, invulnerable, ignored by mobs)
-- Revival via sneaking within 2 blocks (must stay still)
-- Revival progress: 0.5/tick (Support: 1.0/tick), preserved on interruption
-- Progress bar: radial ring around cursor with custom textures
-- Revived with 50% HP, 0 hunger
-- Green particles on completion
+(No active requirements - planning next milestone)
 
 ### Out of Scope
 
@@ -306,24 +307,16 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ## Current Milestone
 
-**v3.0 Revival System**
-
-**Goal:** Replace instant death with downed state and cooperative revival mechanic
-
-**Target features:**
-- Downed state replacing death (laying pose, invulnerable, no actions)
-- Revival progress system (0.5/tick, Support class 1.0/tick)
-- Radial progress bar UI around cursor
-- Revival outcome (50% HP, 0 hunger)
+Planning next milestone...
 
 ## Current State
 
-**Latest Ship:** v2.8 Villager Overhaul (2026-01-31)
+**Latest Ship:** v3.0 Revival System (2026-02-02)
 
 **Codebase:**
-- ~11,314 LOC Kotlin/Java
+- ~12,156 LOC Kotlin/Java
 - Mixed mixin + event-driven architecture
-- 110 plans across 71 phases in 13 milestones
+- 115 plans across 74 phases in 14 milestones
 - Attachment patterns for player state, mob threat, one-time effects, class, boon level, spawn region, fire source
 - Client visual overrides for twilight sky
 - Comprehensive spawn/behavior modifications (10+ mob types)
@@ -369,5 +362,9 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 **Technical debt:** None identified
 
+- Downed state attachment and death interception — v3.0
+- Revival progress system with class-based speed bonus — v3.0
+- Revival progress HUD with server-client sync — v3.0
+
 ---
-*Last updated: 2026-01-31 after v3.0 milestone started*
+*Last updated: 2026-02-02 after v3.0 milestone*

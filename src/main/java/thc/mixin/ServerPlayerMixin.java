@@ -5,7 +5,9 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.phys.Vec3;
 import thc.THCAttachments;
+import thc.downed.DownedState;
 import thc.playerclass.PlayerClass;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -49,6 +51,23 @@ public abstract class ServerPlayerMixin implements ServerPlayerHealthAccess {
 	private void thc$ensureMaxHealthApplied(CallbackInfo ci) {
 		if (!this.thcAppliedMaxHealth) {
 			this.thcAppliedMaxHealth = this.thc$applyMaxHealth();
+		}
+	}
+
+	@Inject(method = "tick", at = @At("HEAD"))
+	private void thc$enforceTether(CallbackInfo ci) {
+		ServerPlayer self = (ServerPlayer) (Object) this;
+		Vec3 downedLoc = DownedState.getDownedLocation(self);
+
+		// Only enforce tether for downed players
+		if (downedLoc == null) {
+			return;
+		}
+
+		// 50 block tether radius (squared to avoid sqrt)
+		double distSq = self.position().distanceToSqr(downedLoc);
+		if (distSq > 2500.0) { // 50 * 50 = 2500
+			self.teleportTo(downedLoc.x, downedLoc.y, downedLoc.z);
 		}
 	}
 

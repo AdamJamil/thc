@@ -11,8 +11,11 @@ import thc.client.BucklerClientState
 import thc.client.BucklerHudRenderer
 import thc.client.BucklerUseHandler
 import thc.client.IronBoatRenderer
+import thc.client.RevivalClientState
+import thc.client.RevivalProgressRenderer
 import thc.entity.THCEntities
 import thc.network.BucklerStatePayload
+import thc.network.RevivalStatePayload
 
 object THCClient : ClientModInitializer {
 	private val logger = LoggerFactory.getLogger("thc")
@@ -31,6 +34,20 @@ object THCClient : ClientModInitializer {
 			context.client().execute {
 				BucklerClientState.update(payload.poise, payload.maxPoise, payload.broken, payload.lastFullTick)
 			}
+		}
+		ClientPlayNetworking.registerGlobalReceiver(RevivalStatePayload.TYPE) { payload, context ->
+			context.client().execute {
+				RevivalClientState.update(
+					payload.downedPlayerUUID(),
+					payload.downedX(),
+					payload.downedY(),
+					payload.downedZ(),
+					payload.progress()
+				)
+			}
+		}
+		HudElementRegistry.attachElementBefore(VanillaHudElements.CROSSHAIR, RevivalProgressRenderer.REVIVAL_PROGRESS_ID) { guiGraphics, _ ->
+			RevivalProgressRenderer.render(guiGraphics)
 		}
 		HudElementRegistry.attachElementAfter(VanillaHudElements.ARMOR_BAR, BucklerHudRenderer.POISE_ID) { guiGraphics, _ ->
 			BucklerHudRenderer.render(guiGraphics)

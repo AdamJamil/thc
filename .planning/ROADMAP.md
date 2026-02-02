@@ -37,10 +37,10 @@
 | v2.6 | 57-61 | 7 | Complete | 2026-01-29 |
 | v2.7 | 62-65 | 5 | Complete | 2026-01-30 |
 | v2.8 | 66-71 | 11 | Complete | 2026-01-31 |
-| v3.0 | 72-74 | 5 | In progress | - |
+| v3.0 | 72-74 | 4 | In progress | - |
 
-**Total:** 74 phases, 115 plans across 14 milestones
+**Total:** 74 phases, 114 plans across 14 milestones
 
 ---
 
-*Roadmap last updated: 2026-01-31*
+*Roadmap last updated: 2026-02-02*

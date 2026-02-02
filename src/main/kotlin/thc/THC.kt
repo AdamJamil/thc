@@ -7,9 +7,11 @@ import net.fabricmc.fabric.api.event.player.UseEntityCallback
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents
+import net.minecraft.core.particles.ParticleTypes
 import net.minecraft.server.MinecraftServer
 import net.minecraft.server.level.ServerLevel
 import net.minecraft.sounds.SoundEvents
+import net.minecraft.world.level.GameType
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.animal.cow.Cow
 import net.minecraft.world.item.ItemStack
@@ -318,6 +320,46 @@ object THC : ModInitializer {
 				RevivalState.addProgress(downed, progressRate)
 			}
 		}
+
+		// Check for revival completion (separate pass to avoid concurrent modification)
+		for (downed in downedPlayers) {
+			if (RevivalState.getProgress(downed) >= 1.0) {
+				val downedLoc = DownedState.getDownedLocation(downed)
+				if (downedLoc != null) {
+					completeRevival(downed, downedLoc)
+				}
+			}
+		}
+	}
+
+	private fun completeRevival(player: net.minecraft.server.level.ServerPlayer, downedLocation: net.minecraft.world.phys.Vec3) {
+		// Clear downed state (also clears revival progress)
+		DownedState.clearDowned(player)
+
+		// Restore to survival mode
+		player.setGameMode(GameType.SURVIVAL)
+
+		// Teleport to downed location
+		player.teleportTo(downedLocation.x, downedLocation.y, downedLocation.z)
+
+		// Set health to 50% of max
+		val maxHealth = player.maxHealth
+		player.health = maxHealth * 0.5f
+
+		// Set food level to 6 (CONTEXT.md override: not 0)
+		player.foodData.foodLevel = 6
+
+		// Spawn green particles (HAPPY_VILLAGER)
+		val level = player.level() as ServerLevel
+		level.sendParticles(
+			ParticleTypes.HAPPY_VILLAGER,
+			downedLocation.x,
+			downedLocation.y + 1.0,
+			downedLocation.z,
+			30,           // count
+			0.5, 0.5, 0.5, // spread (x, y, z)
+			0.0           // speed
+		)
 	}
 
 }

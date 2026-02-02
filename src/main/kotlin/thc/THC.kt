@@ -42,6 +42,9 @@ import thc.world.WorldRestrictions
 import thc.enchant.EnchantmentEnforcement
 import thc.lectern.LecternEnchanting
 import thc.downed.DownedManager
+import thc.downed.DownedState
+import thc.downed.RevivalState
+import thc.playerclass.PlayerClass
 import thc.villager.JobBlockAssignment
 import thc.villager.VillagerInteraction
 
@@ -106,6 +109,7 @@ object THC : ModInitializer {
 
 		ServerTickEvents.END_SERVER_TICK.register(ServerTickEvents.EndTick { server ->
 			updateBucklerState(server)
+			processRevival(server)
 		})
 
 		ServerPlayConnectionEvents.DISCONNECT.register(ServerPlayConnectionEvents.Disconnect { handler, _ ->
@@ -278,6 +282,41 @@ object THC : ModInitializer {
 			}
 
 			BucklerSync.sync(player)
+		}
+	}
+
+	private fun processRevival(server: MinecraftServer) {
+		val players = server.playerList.players
+
+		// Find all downed players first
+		val downedPlayers = players.filter { DownedState.isDowned(it) }
+		if (downedPlayers.isEmpty()) return
+
+		// For each alive player who is sneaking, check proximity to downed players
+		for (reviver in players) {
+			// Must be alive (not downed) and sneaking
+			if (DownedState.isDowned(reviver)) continue
+			if (!reviver.isShiftKeyDown) continue
+
+			// Determine progress rate based on class
+			val playerClass = ClassManager.getClass(reviver)
+			val progressRate = if (playerClass == PlayerClass.SUPPORT) {
+				1.0 / 100.0  // 100 ticks = 5 seconds to reach 1.0
+			} else {
+				0.5 / 100.0  // 200 ticks = 10 seconds (0.5 per tick scaled to 0-1 range)
+			}
+
+			// Check each downed player
+			for (downed in downedPlayers) {
+				val downedLoc = DownedState.getDownedLocation(downed) ?: continue
+
+				// 2 block radius = 4.0 squared distance
+				val distSq = reviver.position().distanceToSqr(downedLoc)
+				if (distSq > 4.0) continue
+
+				// Accumulate progress on the downed player
+				RevivalState.addProgress(downed, progressRate)
+			}
 		}
 	}
 

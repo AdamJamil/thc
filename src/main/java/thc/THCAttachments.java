@@ -107,6 +107,15 @@ public final class THCAttachments {
 		Identifier.fromNamespaceAndPath("thc", "downed_location"),
 		builder -> builder.initializer(() -> null)
 	);
+	/**
+	 * Tracks revival progress for a downed player (0.0 to 1.0).
+	 * Non-persistent - revival state should not survive server restart.
+	 * 0.0 when no progress, 1.0 when fully revived.
+	 */
+	public static final AttachmentType<Double> REVIVAL_PROGRESS = AttachmentRegistry.create(
+		Identifier.fromNamespaceAndPath("thc", "revival_progress"),
+		builder -> builder.initializer(() -> 0.0D)
+	);
 
 	private THCAttachments() {
 	}

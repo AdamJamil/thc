@@ -50,6 +50,9 @@ public final class DownedState {
 	 * Called when the player is revived.
 	 */
 	public static void clearDowned(ServerPlayer player) {
+		// Clear downed location
 		target(player).setAttached(THCAttachments.DOWNED_LOCATION, null);
+		// Also clear revival progress
+		RevivalState.clearProgress(player);
 	}
 }

@@ -5,6 +5,8 @@ import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
 import net.minecraft.resources.Identifier;
 
+import net.minecraft.world.phys.Vec3;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -94,6 +96,15 @@ public final class THCAttachments {
 	 */
 	public static final AttachmentType<String> FIRE_SOURCE = AttachmentRegistry.create(
 		Identifier.fromNamespaceAndPath("thc", "fire_source"),
+		builder -> builder.initializer(() -> null)
+	);
+	/**
+	 * Tracks the location where a player was downed (for tether enforcement and revival).
+	 * Non-persistent - downed state should not survive server restart.
+	 * Null when player is not downed.
+	 */
+	public static final AttachmentType<Vec3> DOWNED_LOCATION = AttachmentRegistry.create(
+		Identifier.fromNamespaceAndPath("thc", "downed_location"),
 		builder -> builder.initializer(() -> null)
 	);
 

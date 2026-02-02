@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-01-31)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v3.0 Revival System — Phase 73 (Revival Mechanics)
+**Current focus:** v3.0 Revival System — Phase 73 complete, Phase 74 next
 
 ## Current Position
 
-Phase: 73 - Revival Mechanics
-Plan: 01 of 2
-Status: In progress
-Last activity: 2026-02-02 — Completed 73-01-PLAN.md (Revival Progress System)
+Phase: 73 - Revival Mechanics (COMPLETE)
+Plan: 02 of 2
+Status: Phase complete
+Last activity: 2026-02-02 — Completed 73-02-PLAN.md (Revival Completion)
 
-Progress: [==========================] 13 milestones shipped (72 phases, 112 plans)
+Progress: [==========================] 13 milestones shipped (72 phases, 114 plans)
 
 ## Performance Metrics
 
@@ -98,8 +98,13 @@ Progress: [==========================] 13 milestones shipped (72 phases, 112 pla
 - Plans completed: 11/11 (66-01, 66-02, 67-01, 67-02, 68-01, 68-02, 68-03, 69-01, 69-02, 70-01, 71-01)
 - Total execution time: ~45 min
 
+**v3.0 Revival System (In Progress):**
+- Phase 72: Core Downed State - COMPLETE (72-01)
+- Phase 73: Revival Mechanics - COMPLETE (73-01, 73-02)
+- Phase 74: Revival UI - PLANNED
+
 **Cumulative:**
-- 112 plans completed across 13 shipped milestones
+- 114 plans completed across 13 shipped milestones + v3.0 progress
 - ~8 hours total execution time
 - 18 days from project start
 
@@ -120,6 +125,11 @@ Key patterns established for v3.0 (from research):
 - Existing BucklerHudRenderer pattern for radial progress rendering
 - ClassManager integration for Support 2x revival speed
 
+### Phase 73 Decisions
+- clearDowned cascades to clear revival progress (prevents orphaned data)
+- Separate completion pass in tick processor (avoids concurrent modification)
+- HAPPY_VILLAGER particles for revival completion (30 count, green, visible)
+
 ### Pending Todos
 
 None.
@@ -139,6 +149,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-02
-Stopped at: Completed 73-01-PLAN.md
+Stopped at: Completed 73-02-PLAN.md
 Resume file: None
-Next: 73-02-PLAN.md (Revival Completion)
+Next: Phase 74 - Revival UI

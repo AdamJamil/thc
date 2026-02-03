@@ -3,15 +3,15 @@ package thc.client;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderContext;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.EntityRenderer;
+import net.minecraft.client.renderer.state.CameraRenderState;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
-import net.minecraft.client.renderer.SubmitNodeCollector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.Method;
+import java.lang.reflect.Field;
 
 /**
  * Helper class to handle entity rendering with proper generics.
@@ -19,18 +19,18 @@ import java.lang.reflect.Method;
  */
 public final class DownedBodyRendererHelper {
     private static final Logger LOGGER = LoggerFactory.getLogger("thc.DownedBodyRendererHelper");
-    private static boolean submitMethodChecked = false;
-    private static Method submitMethod = null;
+    private static Field cameraStateField = null;
+    private static boolean fieldSearched = false;
 
     private DownedBodyRendererHelper() {}
 
     /**
-     * Renders a DummyDownedPlayer entity using the entity dispatcher.
-     * Uses the new MC 1.21+ rendering system with SubmitNodeCollector.
+     * Renders a DummyDownedPlayer entity using the entity renderer.
+     * Uses the new MC 1.21+ render state system with SubmitNodeCollector.
      *
      * @param dummy The dummy player to render
      * @param poseStack The pose stack for transformations
-     * @param context The world render context (provides collector and camera state)
+     * @param context The world render context
      * @param partialTick The partial tick for interpolation
      */
     @SuppressWarnings({"unchecked", "rawtypes"})
@@ -43,9 +43,8 @@ public final class DownedBodyRendererHelper {
         Minecraft client = Minecraft.getInstance();
         EntityRenderDispatcher dispatcher = client.getEntityRenderDispatcher();
 
-        // Use raw type to avoid generic issues
+        // Get the renderer for this entity type
         EntityRenderer renderer = dispatcher.getRenderer(dummy);
-
         if (renderer == null) {
             LOGGER.warn("No renderer found for DummyDownedPlayer");
             return;
@@ -55,63 +54,48 @@ public final class DownedBodyRendererHelper {
         SubmitNodeCollector collector = context.commandQueue();
         var worldState = context.worldState();
 
-        // Create render state and extract from entity
+        // Find camera state field on worldState
+        CameraRenderState cameraState = findCameraState(worldState);
+        if (cameraState == null) {
+            LOGGER.warn("Could not find camera state on world state");
+            return;
+        }
+
+        // Create and populate render state
         EntityRenderState state = renderer.createRenderState();
         renderer.extractRenderState(dummy, state, partialTick);
 
-        // Try to find and call the submit method using reflection to discover signature
-        try {
-            if (!submitMethodChecked) {
-                submitMethodChecked = true;
-                // Log available submit methods for debugging
-                for (Method m : renderer.getClass().getMethods()) {
-                    if (m.getName().equals("submit")) {
-                        LOGGER.info("Found submit method: {} with {} params: {}",
-                            m.getReturnType().getSimpleName(),
-                            m.getParameterCount(),
-                            java.util.Arrays.toString(m.getParameterTypes()));
-                    }
+        // Submit for rendering
+        renderer.submit(state, poseStack, collector, cameraState);
+    }
+
+    private static CameraRenderState findCameraState(Object worldState) {
+        if (!fieldSearched) {
+            fieldSearched = true;
+            // Search for a field of type CameraRenderState
+            for (Field f : worldState.getClass().getFields()) {
+                if (CameraRenderState.class.isAssignableFrom(f.getType())) {
+                    LOGGER.info("Found camera state field: {} of type {}", f.getName(), f.getType().getSimpleName());
+                    cameraStateField = f;
+                    break;
                 }
             }
-
-            // Try calling submit with different signatures
-            // First try: state, poseStack, collector (3 args)
-            try {
-                var submitMethod3 = renderer.getClass().getMethod("submit",
-                    EntityRenderState.class, PoseStack.class, SubmitNodeCollector.class);
-                submitMethod3.invoke(renderer, state, poseStack, collector);
-                return;
-            } catch (NoSuchMethodException e) {
-                // Try other signatures
-            }
-
-            // If 3-arg didn't work, try finding a 4-arg version with reflection
-            for (Method m : renderer.getClass().getMethods()) {
-                if (m.getName().equals("submit") && m.getParameterCount() == 4) {
-                    Class<?>[] params = m.getParameterTypes();
-                    if (params[0].isAssignableFrom(state.getClass()) &&
-                        params[1].isAssignableFrom(PoseStack.class) &&
-                        params[2].isAssignableFrom(SubmitNodeCollector.class)) {
-                        // Found a 4-arg submit, try to get the 4th param from worldState
-                        Object fourthArg = null;
-                        for (var field : worldState.getClass().getFields()) {
-                            if (params[3].isAssignableFrom(field.getType())) {
-                                fourthArg = field.get(worldState);
-                                break;
-                            }
-                        }
-                        if (fourthArg != null) {
-                            m.invoke(renderer, state, poseStack, collector, fourthArg);
-                            return;
-                        }
-                    }
+            if (cameraStateField == null) {
+                // Log all fields for debugging
+                LOGGER.info("No CameraRenderState field found. Available fields on {}:", worldState.getClass().getSimpleName());
+                for (Field f : worldState.getClass().getFields()) {
+                    LOGGER.info("  {} : {}", f.getName(), f.getType().getSimpleName());
                 }
             }
-
-            LOGGER.warn("Could not find suitable submit method for renderer {}", renderer.getClass().getName());
-
-        } catch (Exception e) {
-            LOGGER.error("Error calling submit on renderer", e);
         }
+
+        if (cameraStateField != null) {
+            try {
+                return (CameraRenderState) cameraStateField.get(worldState);
+            } catch (IllegalAccessException e) {
+                LOGGER.error("Failed to access camera state field", e);
+            }
+        }
+        return null;
     }
 }

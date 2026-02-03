@@ -236,7 +236,14 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ### Active
 
-(No active requirements - planning next milestone)
+- Bastion class boons (4 boons gated by stage progression)
+  - Boon 1: Buckler restriction (class + stage gate)
+  - Boon 2: Parry aggro + sweeping edge (Bastion only)
+  - Boon 3: Enhanced snowball (AoE slowness + knockback)
+  - Boon 4: Land boat placement + mob trapping
+- Tank → Bastion rename throughout codebase
+- Wooden boat recipe changes (copper requirement)
+- Boat stack size increase to 16
 
 ### Out of Scope
 
@@ -305,9 +312,16 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 | HEAD cancellation for FoodData.tick() | Complete control over exhaustion and healing logic | Good |
 | Fixed interval + variable heal amount | Simpler than variable intervals for saturation tier healing | Good |
 
-## Current Milestone
+## Current Milestone: v3.1 Bastion
 
-Planning next milestone...
+**Goal:** Introduce Bastion class identity through stage-gated boons that reward progression with unique defensive and crowd-control capabilities.
+
+**Target features:**
+- Tank → Bastion rename throughout codebase
+- Boon 1 (Stage 2+): Buckler restriction — only Bastion class can equip bucklers
+- Boon 2 (Stage 3+): Parry aggro + sweeping edge — threat propagation and sweeping enabled for Bastion
+- Boon 3 (Stage 4+): Enhanced snowballs — AoE slowness and knockback on hit
+- Boon 4 (Stage 5+): Boat mastery — land placement, mob trapping, recipe/stack changes
 
 ## Current State
 
@@ -367,4 +381,4 @@ Planning next milestone...
 - Revival progress HUD with server-client sync — v3.0
 
 ---
-*Last updated: 2026-02-02 after v3.0 milestone*
+*Last updated: 2026-02-03 after v3.1 milestone started*

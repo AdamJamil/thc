@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-02-02)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** Planning next milestone
+**Current focus:** v3.1 Bastion class boons
 
 ## Current Position
 
-Phase: 74 complete
-Plan: Complete
-Status: v3.0 milestone shipped
-Last activity: 2026-02-02 — v3.0 Revival System shipped
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-02-03 — Milestone v3.1 Bastion started
 
 Progress: [===========================] 14 milestones shipped (74 phases, 115 plans)
 

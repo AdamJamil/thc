@@ -1,13 +1,11 @@
 package thc.mixin;
 
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,8 +17,6 @@ import thc.threat.ThreatManager;
 
 @Mixin(Projectile.class)
 public abstract class ProjectileEntityMixin {
-	private static final int THC_EFFECT_DURATION_TICKS = 120;
-
 	@Unique private double thc$spawnX = Double.NaN;
 	@Unique private double thc$spawnY = Double.NaN;
 	@Unique private double thc$spawnZ = Double.NaN;
@@ -29,6 +25,12 @@ public abstract class ProjectileEntityMixin {
 	@Inject(method = "onHitEntity", at = @At("HEAD"))
 	private void thc$applyHitEffects(EntityHitResult entityHitResult, CallbackInfo ci) {
 		Projectile self = (Projectile) (Object) this;
+
+		// Skip arrows - they have their own handler in AbstractArrowMixin
+		if (self instanceof AbstractArrow) {
+			return;
+		}
+
 		Entity owner = self.getOwner();
 
 		if (!(owner instanceof ServerPlayer player)) {
@@ -36,14 +38,11 @@ public abstract class ProjectileEntityMixin {
 		}
 
 		Entity hitEntity = entityHitResult.getEntity();
-		if (!(hitEntity instanceof LivingEntity target)) {
-			return;
-		}
 
-		target.addEffect(new MobEffectInstance(MobEffects.SPEED, THC_EFFECT_DURATION_TICKS, 3), player);
-		target.addEffect(new MobEffectInstance(MobEffects.GLOWING, THC_EFFECT_DURATION_TICKS, 0), player);
+		// Speed and Glowing effects are arrow-only (see AbstractArrowMixin)
+		// Non-arrow projectiles (snowballs, eggs, etc.) do not apply these effects
 
-		if (target instanceof Mob mob) {
+		if (hitEntity instanceof Mob mob) {
 			mob.setTarget(player);
 			// Add +10 bonus threat to struck mob (THREAT-04)
 			ThreatManager.addThreat(mob, player.getUUID(), 10.0);

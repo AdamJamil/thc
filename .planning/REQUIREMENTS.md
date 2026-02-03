@@ -19,9 +19,9 @@ Requirements for Bastion class boons milestone.
 
 ### Boon 2 — Parry Aggro & Sweeping (Stage 3+)
 
-- [ ] **PRRY-01**: Parry threat propagation requires Bastion class + Stage 3+
-- [ ] **PRRY-02**: Sweeping edge enabled for Bastion class + Stage 3+
-- [ ] **PRRY-03**: Non-Bastion players cannot use sweeping edge (remains disabled)
+- [x] **PRRY-01**: Parry threat propagation requires Bastion class + Stage 3+
+- [x] **PRRY-02**: Sweeping edge enabled for Bastion class + Stage 3+
+- [x] **PRRY-03**: Non-Bastion players cannot use sweeping edge (remains disabled)
 
 ### Boon 3 — Snowball Enhancement (Stage 4+)
 
@@ -68,9 +68,9 @@ Deferred to future milestones.
 | BUCK-01 | Phase 76 | Complete |
 | BUCK-02 | Phase 76 | Complete |
 | BUCK-03 | Phase 76 | Complete |
-| PRRY-01 | Phase 77 | Pending |
-| PRRY-02 | Phase 77 | Pending |
-| PRRY-03 | Phase 77 | Pending |
+| PRRY-01 | Phase 77 | Complete |
+| PRRY-02 | Phase 77 | Complete |
+| PRRY-03 | Phase 77 | Complete |
 | SNOW-01 | Phase 78 | Pending |
 | SNOW-02 | Phase 78 | Pending |
 | SNOW-03 | Phase 78 | Pending |

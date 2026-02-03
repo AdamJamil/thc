@@ -358,6 +358,81 @@ object ArmorRebalancing {
                             EquipmentSlotGroup.FEET)
                         .build())
             }
+
+            // ===== ENDER HELMETS (half protection of regular helmets) =====
+            // Ender Copper: 0.75 armor (half of copper's 1.5)
+            context.modify(thc.item.EnderArmor.ENDER_COPPER_HELMET) { builder ->
+                builder.set(DataComponents.ATTRIBUTE_MODIFIERS,
+                    ItemAttributeModifiers.builder()
+                        .add(Attributes.ARMOR,
+                            AttributeModifier(
+                                Identifier.fromNamespaceAndPath("thc", "ender_copper_helmet_armor"),
+                                0.75,
+                                AttributeModifier.Operation.ADD_VALUE
+                            ),
+                            EquipmentSlotGroup.HEAD)
+                        .build())
+            }
+            // Ender Iron: 1.0 armor (half of iron's 2.0)
+            context.modify(thc.item.EnderArmor.ENDER_IRON_HELMET) { builder ->
+                builder.set(DataComponents.ATTRIBUTE_MODIFIERS,
+                    ItemAttributeModifiers.builder()
+                        .add(Attributes.ARMOR,
+                            AttributeModifier(
+                                Identifier.fromNamespaceAndPath("thc", "ender_iron_helmet_armor"),
+                                1.0,
+                                AttributeModifier.Operation.ADD_VALUE
+                            ),
+                            EquipmentSlotGroup.HEAD)
+                        .build())
+            }
+            // Ender Diamond: 1.5 armor + 0.5 toughness (half of diamond's 3.0 + 1.0)
+            context.modify(thc.item.EnderArmor.ENDER_DIAMOND_HELMET) { builder ->
+                builder.set(DataComponents.ATTRIBUTE_MODIFIERS,
+                    ItemAttributeModifiers.builder()
+                        .add(Attributes.ARMOR,
+                            AttributeModifier(
+                                Identifier.fromNamespaceAndPath("thc", "ender_diamond_helmet_armor"),
+                                1.5,
+                                AttributeModifier.Operation.ADD_VALUE
+                            ),
+                            EquipmentSlotGroup.HEAD)
+                        .add(Attributes.ARMOR_TOUGHNESS,
+                            AttributeModifier(
+                                Identifier.fromNamespaceAndPath("thc", "ender_diamond_helmet_toughness"),
+                                0.5,
+                                AttributeModifier.Operation.ADD_VALUE
+                            ),
+                            EquipmentSlotGroup.HEAD)
+                        .build())
+            }
+            // Ender Netherite: 1.5 armor + 0.75 toughness + 0.05 knockback (half of netherite's 3.0 + 1.5 + 0.1)
+            context.modify(thc.item.EnderArmor.ENDER_NETHERITE_HELMET) { builder ->
+                builder.set(DataComponents.ATTRIBUTE_MODIFIERS,
+                    ItemAttributeModifiers.builder()
+                        .add(Attributes.ARMOR,
+                            AttributeModifier(
+                                Identifier.fromNamespaceAndPath("thc", "ender_netherite_helmet_armor"),
+                                1.5,
+                                AttributeModifier.Operation.ADD_VALUE
+                            ),
+                            EquipmentSlotGroup.HEAD)
+                        .add(Attributes.ARMOR_TOUGHNESS,
+                            AttributeModifier(
+                                Identifier.fromNamespaceAndPath("thc", "ender_netherite_helmet_toughness"),
+                                0.75,
+                                AttributeModifier.Operation.ADD_VALUE
+                            ),
+                            EquipmentSlotGroup.HEAD)
+                        .add(Attributes.KNOCKBACK_RESISTANCE,
+                            AttributeModifier(
+                                Identifier.fromNamespaceAndPath("thc", "ender_netherite_helmet_knockback"),
+                                0.05,
+                                AttributeModifier.Operation.ADD_VALUE
+                            ),
+                            EquipmentSlotGroup.HEAD)
+                        .build())
+            }
         }
     }
 }

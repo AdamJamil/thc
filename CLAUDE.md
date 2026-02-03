@@ -1,5 +1,37 @@
 # Claude Instructions for THC
 
+## MC 1.21+ Item Model System (CRITICAL)
+
+**When adding new items, you MUST create THREE files:**
+
+1. **Item Definition** - `assets/thc/items/<name>.json`
+   ```json
+   {
+     "model": {
+       "type": "minecraft:model",
+       "model": "thc:item/<name>"
+     }
+   }
+   ```
+
+2. **Model** - `assets/thc/models/item/<name>.json`
+   ```json
+   {
+     "parent": "minecraft:item/generated",
+     "textures": {
+       "layer0": "thc:item/<name>"
+     }
+   }
+   ```
+
+3. **Texture** - `assets/thc/textures/item/<name>.png`
+
+**Without the `items/*.json` file, the item icon will NOT display.** This is different from older MC versions which only needed `models/item/`.
+
+For armor worn textures, also need:
+- `assets/thc/equipment/<material>.json` - equipment definition
+- `assets/thc/textures/entity/equipment/humanoid/<material>.png` - worn texture
+
 ## Gradle Build Errors
 
 If you see **"Gradle could not start your build"** with IO errors, it means the user is already running Gradle (e.g., `runClient`). **STOP IMMEDIATELY** and notify the user. Do not:

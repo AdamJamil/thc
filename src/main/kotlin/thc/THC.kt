@@ -25,6 +25,7 @@ import thc.buckler.BucklerStatsRegistry
 import thc.item.BucklerItem
 import thc.item.THCArrows
 import thc.item.THCBucklers
+import thc.item.EnderArmor
 import thc.item.THCItems
 import thc.network.BucklerSync
 import thc.network.BucklerStatePayload
@@ -69,6 +70,7 @@ object THC : ModInitializer {
 		THCBucklers.init()
 		thc.entity.THCEntities.init()
 		THCItems.init()
+		EnderArmor.init()
 		THCSounds.init()
 		BellHandler.register()
 		LecternEnchanting.register()

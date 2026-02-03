@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "H": "minecraft:iron_helmet",
+    "E": "minecraft:ender_eye"
+  },
+  "pattern": [
+    "EHE"
+  ],
+  "result": {
+    "count": 1,
+    "id": "thc:ender_iron_helmet"
+  }
+}

@@ -23,5 +23,12 @@
   "item.thc.trial_chamber_locator": "Trial Chamber Locator",
   "item.thc.pillager_outpost_locator": "Outpost Locator",
   "item.thc.ancient_city_locator": "Ancient City Locator",
-  "item.thc.stronghold_locator": "Stronghold Locator"
+  "item.thc.stronghold_locator": "Stronghold Locator",
+  "item.thc.ender_copper_helmet": "Ender Copper Helmet",
+  "item.thc.ender_copper_chestplate": "Ender Copper Chestplate",
+  "item.thc.ender_copper_leggings": "Ender Copper Leggings",
+  "item.thc.ender_copper_boots": "Ender Copper Boots",
+  "item.thc.ender_iron_helmet": "Ender Iron Helmet",
+  "item.thc.ender_diamond_helmet": "Ender Diamond Helmet",
+  "item.thc.ender_netherite_helmet": "Ender Netherite Helmet"
 }

@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "thc:ender_iron"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "thc:ender_iron"
+      }
+    ]
+  }
+}

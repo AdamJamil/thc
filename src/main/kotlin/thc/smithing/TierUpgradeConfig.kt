@@ -2,6 +2,7 @@ package thc.smithing
 
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.Items
+import thc.item.EnderArmor
 
 /**
  * Configuration for tier upgrades at smithing tables.
@@ -36,7 +37,13 @@ object TierUpgradeConfig {
         Items.DIAMOND_HELMET to 5,
         Items.DIAMOND_CHESTPLATE to 8,
         Items.DIAMOND_LEGGINGS to 7,
-        Items.DIAMOND_BOOTS to 4
+        Items.DIAMOND_BOOTS to 4,
+
+        // Ender helmets (for tier upgrades)
+        EnderArmor.ENDER_COPPER_HELMET to 5,
+        EnderArmor.ENDER_IRON_HELMET to 5,
+        EnderArmor.ENDER_DIAMOND_HELMET to 5,
+        EnderArmor.ENDER_NETHERITE_HELMET to 5
     )
 
     /**
@@ -125,7 +132,15 @@ object TierUpgradeConfig {
         Pair(Items.IRON_AXE, Items.DIAMOND) to Items.DIAMOND_AXE,
         Pair(Items.IRON_SHOVEL, Items.DIAMOND) to Items.DIAMOND_SHOVEL,
         Pair(Items.IRON_HOE, Items.DIAMOND) to Items.DIAMOND_HOE,
-        Pair(Items.IRON_SWORD, Items.DIAMOND) to Items.DIAMOND_SWORD
+        Pair(Items.IRON_SWORD, Items.DIAMOND) to Items.DIAMOND_SWORD,
+
+        // ENDER HELMET UPGRADES
+        // Ender Copper -> Ender Iron (using iron ingots)
+        Pair(EnderArmor.ENDER_COPPER_HELMET, Items.IRON_INGOT) to EnderArmor.ENDER_IRON_HELMET,
+        // Ender Iron -> Ender Diamond (using diamonds)
+        Pair(EnderArmor.ENDER_IRON_HELMET, Items.DIAMOND) to EnderArmor.ENDER_DIAMOND_HELMET,
+        // Ender Diamond -> Ender Netherite (using netherite ingots)
+        Pair(EnderArmor.ENDER_DIAMOND_HELMET, Items.NETHERITE_INGOT) to EnderArmor.ENDER_NETHERITE_HELMET
     )
 
     /**

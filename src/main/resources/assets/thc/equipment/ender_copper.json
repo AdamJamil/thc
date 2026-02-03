@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "thc:ender_copper"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "thc:ender_copper"
+      }
+    ]
+  }
+}

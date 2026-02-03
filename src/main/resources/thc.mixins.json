@@ -55,6 +55,7 @@
 		"SnowballItemMixin",
 		"BoatPlacementMixin",
 		"BoatStackSizeMixin",
+		"BoatTrappingMixin",
 		"SpawnReplacementMixin",
 		"StructureTemplateMixin",
 		"VillagerLevelingMixin",

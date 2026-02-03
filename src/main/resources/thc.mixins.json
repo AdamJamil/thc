@@ -61,6 +61,7 @@
 		"WindChargePlayerBoostMixin",
 		"FireworkRocketEntityMixin",
 		"PlayerElytraMixin",
+		"SpectatorCollisionMixin",
 		"access.ItemAccessor",
 		"access.AbstractArrowAccessor",
 		"access.AbstractBoatAccessor",

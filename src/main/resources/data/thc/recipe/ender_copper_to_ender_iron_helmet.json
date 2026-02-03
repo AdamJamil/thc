@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": "minecraft:barrier",
+  "base": "thc:ender_copper_helmet",
+  "addition": "minecraft:iron_ingot",
+  "result": {
+    "id": "thc:ender_iron_helmet"
+  }
+}

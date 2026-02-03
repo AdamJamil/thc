@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "template": "minecraft:barrier",
+  "base": "thc:ender_iron_helmet",
+  "addition": "minecraft:diamond",
+  "result": {
+    "id": "thc:ender_diamond_helmet"
+  }
+}

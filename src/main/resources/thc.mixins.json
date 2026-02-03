@@ -53,6 +53,7 @@
 		"SmithingMenuMixin",
 		"SnowballHitMixin",
 		"SnowballItemMixin",
+		"BoatPlacementMixin",
 		"BoatStackSizeMixin",
 		"SpawnReplacementMixin",
 		"StructureTemplateMixin",

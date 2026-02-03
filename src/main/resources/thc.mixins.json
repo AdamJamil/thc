@@ -51,6 +51,7 @@
 		"ServerPlayerMixin",
 		"SmallFireballMixin",
 		"SmithingMenuMixin",
+		"SnowballHitMixin",
 		"SnowballItemMixin",
 		"SpawnReplacementMixin",
 		"StructureTemplateMixin",

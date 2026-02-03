@@ -13,9 +13,9 @@ Requirements for Bastion class boons milestone.
 
 ### Boon 1 — Buckler (Stage 2+)
 
-- [ ] **BUCK-01**: Buckler raising blocked for non-Bastion players
-- [ ] **BUCK-02**: Buckler raising blocked at Stage 1 (even for Bastion)
-- [ ] **BUCK-03**: Action bar message "Your wimpy arms cannot lift the buckler." on failed raise
+- [x] **BUCK-01**: Buckler raising blocked for non-Bastion players
+- [x] **BUCK-02**: Buckler raising blocked at Stage 1 (even for Bastion)
+- [x] **BUCK-03**: Action bar message "Your wimpy arms cannot lift the buckler." on failed raise
 
 ### Boon 2 — Parry Aggro & Sweeping (Stage 3+)
 
@@ -65,9 +65,9 @@ Deferred to future milestones.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | RNAM-01 | Phase 75 | Complete |
-| BUCK-01 | Phase 76 | Pending |
-| BUCK-02 | Phase 76 | Pending |
-| BUCK-03 | Phase 76 | Pending |
+| BUCK-01 | Phase 76 | Complete |
+| BUCK-02 | Phase 76 | Complete |
+| BUCK-03 | Phase 76 | Complete |
 | PRRY-01 | Phase 77 | Pending |
 | PRRY-02 | Phase 77 | Pending |
 | PRRY-03 | Phase 77 | Pending |

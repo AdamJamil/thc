@@ -25,22 +25,22 @@ Requirements for Bastion class boons milestone.
 
 ### Boon 3 — Snowball Enhancement (Stage 4+)
 
-- [ ] **SNOW-01**: Snowball hit applies Slowness III (2s) to target mob
-- [ ] **SNOW-02**: Snowball hit applies Slowness III (2s) to mobs within 1.5 blocks
-- [ ] **SNOW-03**: Snowball hit knocks back target mob by 1 block
-- [ ] **SNOW-04**: Enhancement requires Bastion class + Stage 4+
-- [ ] **SNOW-05**: Snowballs work normally for non-Bastion or lower stages
+- [x] **SNOW-01**: Snowball hit applies Slowness III (2s) to target mob
+- [x] **SNOW-02**: Snowball hit applies Slowness III (2s) to mobs within 1.5 blocks
+- [x] **SNOW-03**: Snowball hit knocks back target mob by 1 block
+- [x] **SNOW-04**: Enhancement requires Bastion class + Stage 4+
+- [x] **SNOW-05**: Snowballs work normally for non-Bastion or lower stages
 
 ### Boon 4 — Boat Mastery (Stage 5+)
 
-- [ ] **BOAT-01**: Bastion + Stage 5+ can place wooden boats on land
-- [ ] **BOAT-02**: Non-Bastion or lower stage cannot place boats on land
-- [ ] **BOAT-03**: Water boat placement unchanged for all players
-- [ ] **BOAT-04**: Hostile mobs can be trapped inside boats
-- [ ] **BOAT-05**: Hostile mobs break out of boats after 4 seconds
-- [ ] **BOAT-06**: Boat drops as item when mob breaks out
-- [ ] **BOAT-07**: All 9 wooden boat recipes require 2 copper (bottom corners)
-- [ ] **BOAT-08**: Boat max stack size increased to 16
+- [x] **BOAT-01**: Bastion + Stage 5+ can place wooden boats on land
+- [x] **BOAT-02**: Non-Bastion or lower stage cannot place boats on land
+- [x] **BOAT-03**: Water boat placement unchanged for all players
+- [x] **BOAT-04**: Hostile mobs can be trapped inside boats
+- [x] **BOAT-05**: Hostile mobs break out of boats after 4 seconds
+- [x] **BOAT-06**: Boat drops as item when mob breaks out
+- [x] **BOAT-07**: All 9 wooden boat recipes require 2 copper (bottom corners)
+- [x] **BOAT-08**: Boat max stack size increased to 16
 
 ## Future Requirements
 
@@ -71,19 +71,19 @@ Deferred to future milestones.
 | PRRY-01 | Phase 77 | Complete |
 | PRRY-02 | Phase 77 | Complete |
 | PRRY-03 | Phase 77 | Complete |
-| SNOW-01 | Phase 78 | Pending |
-| SNOW-02 | Phase 78 | Pending |
-| SNOW-03 | Phase 78 | Pending |
-| SNOW-04 | Phase 78 | Pending |
-| SNOW-05 | Phase 78 | Pending |
-| BOAT-01 | Phase 79 | Pending |
-| BOAT-02 | Phase 79 | Pending |
-| BOAT-03 | Phase 79 | Pending |
-| BOAT-04 | Phase 79 | Pending |
-| BOAT-05 | Phase 79 | Pending |
-| BOAT-06 | Phase 79 | Pending |
-| BOAT-07 | Phase 79 | Pending |
-| BOAT-08 | Phase 79 | Pending |
+| SNOW-01 | Phase 78 | Complete |
+| SNOW-02 | Phase 78 | Complete |
+| SNOW-03 | Phase 78 | Complete |
+| SNOW-04 | Phase 78 | Complete |
+| SNOW-05 | Phase 78 | Complete |
+| BOAT-01 | Phase 79 | Complete |
+| BOAT-02 | Phase 79 | Complete |
+| BOAT-03 | Phase 79 | Complete |
+| BOAT-04 | Phase 79 | Complete |
+| BOAT-05 | Phase 79 | Complete |
+| BOAT-06 | Phase 79 | Complete |
+| BOAT-07 | Phase 79 | Complete |
+| BOAT-08 | Phase 79 | Complete |
 
 **Coverage:**
 - v3.1 requirements: 18 total

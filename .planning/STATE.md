@@ -12,7 +12,7 @@ See: .planning/PROJECT.md (updated 2026-02-03)
 Phase: 79 - Boat Mastery (COMPLETE ✓)
 Plan: All plans complete
 Status: Verified, Milestone v3.1 ready for audit
-Last activity: 2026-02-03 — Phase 79 verified and complete
+Last activity: 2026-02-03 — Quick task 006: Fix snowball effects
 
 Progress: [===========================] 14 milestones shipped (79 phases, 122 plans)
          [===========================] v3.1 COMPLETE (all phases 75-79 done)
@@ -157,6 +157,7 @@ None.
 | 002 | Auto-assign villager jobs when job block placed | 2026-01-31 | 682e3e2 | [002-auto-assign-villager-jobs-on-block-place](./quick/002-auto-assign-villager-jobs-on-block-place/) |
 | 003 | Render downed player body with red particles | 2026-02-02 | 915f156 | [003-render-downed-player-body](./quick/003-render-downed-player-body/) |
 | 004 | Add red beacon beam at downed player location | 2026-02-03 | 971faea | [004-when-a-player-is-downed-on-top-of-the-re](./quick/004-when-a-player-is-downed-on-top-of-the-re/) |
+| 006 | Fix snowballs proccing arrow-only effects | 2026-02-03 | 8e3c3e2 | [006-fix-snowball-proccing-arrow-effects](./quick/006-fix-snowball-proccing-arrow-effects/) |
 
 ## Session Continuity
 

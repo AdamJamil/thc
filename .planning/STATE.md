@@ -9,13 +9,13 @@ See: .planning/PROJECT.md (updated 2026-02-03)
 
 ## Current Position
 
-Phase: 77 - Boon 2 Parry Aggro & Sweeping (COMPLETE ✓)
-Plan: All plans complete
-Status: Verified, Ready for Phase 78
-Last activity: 2026-02-03 — Phase 77 verified and complete
+Phase: 78 - Snowball Enhancement (COMPLETE)
+Plan: 01/01 complete
+Status: Ready for Phase 79
+Last activity: 2026-02-03 — Completed 78-01-PLAN.md
 
-Progress: [===========================] 14 milestones shipped (77 phases, 118 plans)
-         [===========                ] v3.1 in progress (phases 75-77 done, phases 78-79 remaining)
+Progress: [===========================] 14 milestones shipped (78 phases, 119 plans)
+         [=============              ] v3.1 in progress (phases 75-78 done, phase 79 remaining)
 
 ## Performance Metrics
 
@@ -110,12 +110,12 @@ Progress: [===========================] 14 milestones shipped (77 phases, 118 pl
 - Phases: 75-79 (5 phases)
 - Requirements: 18 (RNAM/BUCK/PRRY/SNOW/BOAT)
 - Status: ACTIVE
-- Plans completed: 3 (75-01, 76-01, 77-01)
-- Total execution time: ~10 min
+- Plans completed: 4 (75-01, 76-01, 77-01, 78-01)
+- Total execution time: ~18 min
 
 **Cumulative:**
-- 118 plans completed across 14 shipped milestones
-- ~8.5 hours total execution time
+- 119 plans completed across 14 shipped milestones
+- ~8.6 hours total execution time
 - 20 days from project start
 
 ## Accumulated Context
@@ -134,6 +134,8 @@ Key patterns established for v3.1:
 - Class + stage gate in item use(): Check ClassManager.getClass() and StageManager.getBoonLevel() before item functionality (see 76-01)
 - BoonGate utility: Shared class for Stage 3+ checks (see 77-01)
 - Replicate vanilla private methods in mixins when redirect cannot call through
+- Throwable projectile mixin: target specific class not Projectile.class (see 78-01)
+- Hostile mob filter: MobCategory.MONSTER + getTarget() instanceof Player (see 78-01)
 
 ### Pending Todos
 
@@ -156,6 +158,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-03
-Stopped at: Phase 77 verified and complete
+Stopped at: Completed 78-01-PLAN.md
 Resume file: None
-Next: `/gsd:discuss-phase 78` or `/gsd:plan-phase 78`
+Next: `/gsd:plan-phase 79` or `/gsd:execute-phase 79`

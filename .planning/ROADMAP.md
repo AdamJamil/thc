@@ -2,7 +2,9 @@
 
 ## Current Milestone
 
-Planning next milestone...
+**v3.1 Bastion** — Bastion class boons (phases 75-79)
+
+See [v3.1-ROADMAP.md](milestones/v3.1-ROADMAP.md)
 
 ## Completed Milestones
 
@@ -39,9 +41,10 @@ Planning next milestone...
 | v2.7 | 62-65 | 5 | Complete | 2026-01-30 |
 | v2.8 | 66-71 | 11 | Complete | 2026-01-31 |
 | v3.0 | 72-74 | 4 | Complete | 2026-02-02 |
+| v3.1 | 75-79 | TBD | **Active** | — |
 
-**Total:** 74 phases, 115 plans across 14 milestones
+**Total:** 79 phases, 115+ plans across 15 milestones
 
 ---
 
-*Roadmap last updated: 2026-02-02*
+*Roadmap last updated: 2026-02-03*

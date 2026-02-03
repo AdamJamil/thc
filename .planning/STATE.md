@@ -2,19 +2,20 @@
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-02-02)
+See: .planning/PROJECT.md (updated 2026-02-03)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
 **Current focus:** v3.1 Bastion class boons
 
 ## Current Position
 
-Phase: Not started (defining requirements)
-Plan: —
-Status: Defining requirements
-Last activity: 2026-02-03 — Milestone v3.1 Bastion started
+Phase: 75 - Rename
+Plan: Not started
+Status: Ready for Phase 75
+Last activity: 2026-02-03 — Roadmap created for v3.1 Bastion
 
 Progress: [===========================] 14 milestones shipped (74 phases, 115 plans)
+         [ ] v3.1 in progress (phases 75-79)
 
 ## Performance Metrics
 
@@ -105,6 +106,12 @@ Progress: [===========================] 14 milestones shipped (74 phases, 115 pl
 - Plans completed: 4/4 (72-01, 73-01, 73-02, 74-01)
 - Total execution time: ~23 min
 
+**v3.1 Milestone:**
+- Phases: 75-79 (5 phases)
+- Requirements: 18 (RNAM/BUCK/PRRY/SNOW/BOAT)
+- Status: ACTIVE
+- Plans completed: 0
+
 **Cumulative:**
 - 115 plans completed across 14 shipped milestones
 - ~8.5 hours total execution time
@@ -115,15 +122,14 @@ Progress: [===========================] 14 milestones shipped (74 phases, 115 pl
 ### Decisions
 
 See milestone archives for full decision logs:
-- .planning/milestones/v3.0-ROADMAP.md (most recent)
+- .planning/milestones/v3.0-ROADMAP.md (previous)
+- .planning/milestones/v3.1-ROADMAP.md (current)
 
-Key patterns established for v3.0:
-- Fabric API `ServerLivingEntityEvents.ALLOW_DEATH` for death interception (not mixin)
-- Non-persistent attachment for downed state (session-scoped)
-- `Pose.SWIMMING` for laying visual (crawling pose)
-- Existing BucklerSync pattern for revival state sync
-- Existing BucklerHudRenderer pattern for radial progress rendering
-- ClassManager integration for Support 2x revival speed
+Key patterns established for v3.1:
+- Stage-gated boons follow established ClassManager + StageManager pattern
+- Boon gates use getBoonLevel() for player-specific stage progression
+- Sweeping edge toggle requires combat system integration
+- Snowball enhancement uses projectile hit event
 
 ### Pending Todos
 
@@ -146,6 +152,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-03
-Stopped at: Quick task 004 complete
+Stopped at: Roadmap created for v3.1 Bastion
 Resume file: None
-Next: Test beacon beam visibility in-game
+Next: `/gsd:plan-phase 75`

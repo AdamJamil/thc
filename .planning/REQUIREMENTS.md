@@ -64,32 +64,32 @@ Deferred to future milestones.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| RNAM-01 | TBD | Pending |
-| BUCK-01 | TBD | Pending |
-| BUCK-02 | TBD | Pending |
-| BUCK-03 | TBD | Pending |
-| PRRY-01 | TBD | Pending |
-| PRRY-02 | TBD | Pending |
-| PRRY-03 | TBD | Pending |
-| SNOW-01 | TBD | Pending |
-| SNOW-02 | TBD | Pending |
-| SNOW-03 | TBD | Pending |
-| SNOW-04 | TBD | Pending |
-| SNOW-05 | TBD | Pending |
-| BOAT-01 | TBD | Pending |
-| BOAT-02 | TBD | Pending |
-| BOAT-03 | TBD | Pending |
-| BOAT-04 | TBD | Pending |
-| BOAT-05 | TBD | Pending |
-| BOAT-06 | TBD | Pending |
-| BOAT-07 | TBD | Pending |
-| BOAT-08 | TBD | Pending |
+| RNAM-01 | Phase 75 | Pending |
+| BUCK-01 | Phase 76 | Pending |
+| BUCK-02 | Phase 76 | Pending |
+| BUCK-03 | Phase 76 | Pending |
+| PRRY-01 | Phase 77 | Pending |
+| PRRY-02 | Phase 77 | Pending |
+| PRRY-03 | Phase 77 | Pending |
+| SNOW-01 | Phase 78 | Pending |
+| SNOW-02 | Phase 78 | Pending |
+| SNOW-03 | Phase 78 | Pending |
+| SNOW-04 | Phase 78 | Pending |
+| SNOW-05 | Phase 78 | Pending |
+| BOAT-01 | Phase 79 | Pending |
+| BOAT-02 | Phase 79 | Pending |
+| BOAT-03 | Phase 79 | Pending |
+| BOAT-04 | Phase 79 | Pending |
+| BOAT-05 | Phase 79 | Pending |
+| BOAT-06 | Phase 79 | Pending |
+| BOAT-07 | Phase 79 | Pending |
+| BOAT-08 | Phase 79 | Pending |
 
 **Coverage:**
 - v3.1 requirements: 18 total
-- Mapped to phases: 0
-- Unmapped: 18 ⚠️
+- Mapped to phases: 18
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-02-03*
-*Last updated: 2026-02-03 after initial definition*
+*Last updated: 2026-02-03 after roadmap creation*

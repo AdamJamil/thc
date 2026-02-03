@@ -64,6 +64,7 @@ object DownedBodyRenderer {
 
             val stack = context.matrices()
             val partialTick = client.deltaTracker.getGameTimeDeltaTicks()
+            val gameTime = level.gameTime
 
             for ((uuid, info) in DownedPlayersClientState.getDownedPlayers()) {
                 val dummy = getOrCreateDummy(level, uuid, info.name)
@@ -100,6 +101,20 @@ object DownedBodyRenderer {
                 }
 
                 stack.popPose()
+
+                // Render beacon beam at downed player location (visible from distance)
+                try {
+                    BeaconBeamHelper.renderBeam(
+                        stack,
+                        info.x - cameraPos.x,
+                        info.y - cameraPos.y,
+                        info.z - cameraPos.z,
+                        BeaconBeamHelper.DOWNED_RED,
+                        gameTime
+                    )
+                } catch (e: Exception) {
+                    LOGGER.error("[RENDERER] Error rendering beacon beam for {}: {}", info.name, e.message, e)
+                }
             }
         }
     }

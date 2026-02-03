@@ -2,15 +2,11 @@ package thc.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
-import net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.ARGB;
-import net.minecraft.util.Mth;
-import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 
 /**
@@ -25,13 +21,16 @@ public final class BeaconBeamHelper {
     private static final float OUTER_GLOW_RADIUS = 0.25f;
     private static final int BEAM_HEIGHT = 256;  // Blocks tall
 
+    // Red color for downed players (matching particle color)
+    public static final int DOWNED_RED = 0xFFE61919;
+
     private BeaconBeamHelper() {}
 
     /**
      * Renders a beacon-style beam at the given world position.
+     * Uses the immediate buffer source from Minecraft's render buffers.
      *
-     * @param stack The pose stack for transformations (already translated relative to camera)
-     * @param bufferSource Buffer source for getting vertex consumers
+     * @param stack The pose stack for transformations
      * @param x World X position (relative to camera)
      * @param y World Y position (relative to camera)
      * @param z World Z position (relative to camera)
@@ -40,11 +39,12 @@ public final class BeaconBeamHelper {
      */
     public static void renderBeam(
             PoseStack stack,
-            MultiBufferSource bufferSource,
             double x, double y, double z,
             int color,
             long gameTime
     ) {
+        // Get the buffer source from Minecraft's render buffers
+        MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
         float red = ARGB.redFloat(color);
         float green = ARGB.greenFloat(color);
         float blue = ARGB.blueFloat(color);
@@ -75,6 +75,9 @@ public final class BeaconBeamHelper {
         );
 
         stack.popPose();
+
+        // Flush the buffer to ensure rendering
+        bufferSource.endBatch();
     }
 
     /**
@@ -93,7 +96,6 @@ public final class BeaconBeamHelper {
 
         PoseStack.Pose pose = stack.last();
         Matrix4f matrix = pose.pose();
-        Matrix3f normal = pose.normal();
 
         // Height and UV calculations
         int height = yEnd - yStart;
@@ -104,7 +106,7 @@ public final class BeaconBeamHelper {
         // Each face is a quad from yStart to yEnd
 
         // Face 1: -X facing (normal: -1, 0, 0)
-        renderQuadFace(buffer, matrix, normal,
+        renderQuadFace(buffer, matrix, pose,
             -radius, yStart, radius,   // bottom-left
             -radius, yEnd, radius,     // top-left
             -radius, yEnd, -radius,    // top-right
@@ -114,7 +116,7 @@ public final class BeaconBeamHelper {
             -1, 0, 0);
 
         // Face 2: +X facing (normal: 1, 0, 0)
-        renderQuadFace(buffer, matrix, normal,
+        renderQuadFace(buffer, matrix, pose,
             radius, yStart, -radius,
             radius, yEnd, -radius,
             radius, yEnd, radius,
@@ -124,7 +126,7 @@ public final class BeaconBeamHelper {
             1, 0, 0);
 
         // Face 3: -Z facing (normal: 0, 0, -1)
-        renderQuadFace(buffer, matrix, normal,
+        renderQuadFace(buffer, matrix, pose,
             radius, yStart, -radius,
             radius, yEnd, -radius,
             -radius, yEnd, -radius,
@@ -134,7 +136,7 @@ public final class BeaconBeamHelper {
             0, 0, -1);
 
         // Face 4: +Z facing (normal: 0, 0, 1)
-        renderQuadFace(buffer, matrix, normal,
+        renderQuadFace(buffer, matrix, pose,
             -radius, yStart, radius,
             -radius, yEnd, radius,
             radius, yEnd, radius,
@@ -149,7 +151,7 @@ public final class BeaconBeamHelper {
      */
     private static void renderQuadFace(
             VertexConsumer buffer,
-            Matrix4f matrix, Matrix3f normal,
+            Matrix4f matrix, PoseStack.Pose pose,
             float x1, float y1, float z1,  // bottom-left
             float x2, float y2, float z2,  // top-left
             float x3, float y3, float z3,  // top-right
@@ -164,27 +166,27 @@ public final class BeaconBeamHelper {
               .setUv(u1, v1)
               .setOverlay(0)
               .setLight(15728880)  // Full bright
-              .setNormal(normal, nx, ny, nz);
+              .setNormal(pose, nx, ny, nz);
 
         buffer.addVertex(matrix, x2, y2, z2)
               .setColor(r, g, b, a)
               .setUv(u1, v2)
               .setOverlay(0)
               .setLight(15728880)
-              .setNormal(normal, nx, ny, nz);
+              .setNormal(pose, nx, ny, nz);
 
         buffer.addVertex(matrix, x3, y3, z3)
               .setColor(r, g, b, a)
               .setUv(u2, v2)
               .setOverlay(0)
               .setLight(15728880)
-              .setNormal(normal, nx, ny, nz);
+              .setNormal(pose, nx, ny, nz);
 
         buffer.addVertex(matrix, x4, y4, z4)
               .setColor(r, g, b, a)
               .setUv(u2, v1)
               .setOverlay(0)
               .setLight(15728880)
-              .setNormal(normal, nx, ny, nz);
+              .setNormal(pose, nx, ny, nz);
     }
 }

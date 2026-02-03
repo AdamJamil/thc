@@ -1,6 +1,9 @@
 package thc.mixin;
 
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -9,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.Slice;
+import thc.boon.BoonGate;
 import thc.playerclass.ClassManager;
 import thc.playerclass.PlayerClass;
 
@@ -57,8 +61,9 @@ public abstract class PlayerAttackMixin {
 	}
 
 	/**
-	 * Disable sweep attacks by making isSweepAttack always return false.
-	 * This completely prevents sweeping edge from triggering.
+	 * Conditionally enable sweep attacks.
+	 * Bastion at Stage 3+ gets vanilla sweeping edge; everyone else has it disabled.
+	 * We replicate vanilla isSweepAttack logic since the original is private.
 	 */
 	@Redirect(
 		method = "attack",
@@ -68,6 +73,20 @@ public abstract class PlayerAttackMixin {
 		)
 	)
 	private boolean thc$disableSweepAttack(Player instance, boolean bl, boolean bl2, boolean bl3) {
+		// Only allow sweeping for Bastion Stage 3+
+		if (!(instance instanceof ServerPlayer serverPlayer) || !BoonGate.hasStage3Boon(serverPlayer)) {
+			return false;  // Default: sweeping disabled
+		}
+
+		// Replicate vanilla isSweepAttack logic (private method, can't call directly)
+		// bl = charged attack, bl2 = sprinting, bl3 = player flag
+		if (bl && !bl2 && !bl3 && instance.onGround()) {
+			double movementSqr = instance.getKnownMovement().horizontalDistanceSqr();
+			double threshold = instance.getSpeed() * 2.5;
+			if (movementSqr < Mth.square(threshold)) {
+				return instance.getItemInHand(InteractionHand.MAIN_HAND).is(ItemTags.SWORDS);
+			}
+		}
 		return false;
 	}
 }

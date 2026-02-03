@@ -18,4 +18,11 @@ public class DummyDownedPlayer extends RemotePlayer {
     public boolean isSpectator() {
         return false;
     }
+
+    @Override
+    public boolean shouldShowName() {
+        // Disable automatic nametag - it rotates with the body and looks wrong
+        // The red particles already indicate the downed player location
+        return false;
+    }
 }

@@ -24,7 +24,7 @@ public final class SelectClassCommand {
 			dispatcher.register(Commands.literal("selectClass")
 				.then(Commands.argument("class", StringArgumentType.string())
 					.suggests((context, builder) -> {
-						builder.suggest("tank");
+						builder.suggest("bastion");
 						builder.suggest("melee");
 						builder.suggest("ranged");
 						builder.suggest("support");

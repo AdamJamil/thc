@@ -1,7 +1,7 @@
 package thc.playerclass;
 
 public enum PlayerClass {
-	TANK(2.0, 2.5, 1.0),      // +1 heart, x2.5 melee, x1 ranged
+	BASTION(2.0, 2.5, 1.0),   // +1 heart, x2.5 melee, x1 ranged
 	MELEE(1.0, 4.0, 1.0),     // +0.5 hearts, x4 melee, x1 ranged
 	RANGED(0.0, 1.0, 5.0),    // no health change, x1 melee, x5 ranged
 	SUPPORT(0.0, 1.0, 3.0);   // no health change, x1 melee, x3 ranged

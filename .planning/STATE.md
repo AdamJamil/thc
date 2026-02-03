@@ -141,10 +141,11 @@ None.
 |---|-------------|------|--------|-----------|
 | 002 | Auto-assign villager jobs when job block placed | 2026-01-31 | 682e3e2 | [002-auto-assign-villager-jobs-on-block-place](./quick/002-auto-assign-villager-jobs-on-block-place/) |
 | 003 | Render downed player body with red particles | 2026-02-02 | 915f156 | [003-render-downed-player-body](./quick/003-render-downed-player-body/) |
+| 004 | Add red beacon beam at downed player location | 2026-02-03 | 971faea | [004-when-a-player-is-downed-on-top-of-the-re](./quick/004-when-a-player-is-downed-on-top-of-the-re/) |
 
 ## Session Continuity
 
-Last session: 2026-02-02
-Stopped at: Quick task 003 complete
+Last session: 2026-02-03
+Stopped at: Quick task 004 complete
 Resume file: None
-Next: Test downed player visibility
+Next: Test beacon beam visibility in-game

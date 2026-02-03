@@ -9,7 +9,7 @@ Requirements for Bastion class boons milestone.
 
 ### Rename
 
-- [ ] **RNAM-01**: Tank class renamed to Bastion throughout codebase (code, UI, commands)
+- [x] **RNAM-01**: Tank class renamed to Bastion throughout codebase (code, UI, commands)
 
 ### Boon 1 — Buckler (Stage 2+)
 
@@ -64,7 +64,7 @@ Deferred to future milestones.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| RNAM-01 | Phase 75 | Pending |
+| RNAM-01 | Phase 75 | Complete |
 | BUCK-01 | Phase 76 | Pending |
 | BUCK-02 | Phase 76 | Pending |
 | BUCK-03 | Phase 76 | Pending |

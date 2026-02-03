@@ -6,7 +6,9 @@
 		"ClientLevelTimeMixin",
 		"EnchantmentScreenMixin",
 		"ExampleClientMixin",
-		"IronBoatRendererMixin"
+		"IronBoatRendererMixin",
+		"SpectatorXrayMixin",
+		"access.CameraAccessor"
 	],
 	"injectors": {
 		"defaultRequire": 1

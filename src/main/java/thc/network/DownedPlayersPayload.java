@@ -20,12 +20,13 @@ public record DownedPlayersPayload(List<DownedPlayerEntry> entries) implements C
 
     public static final DownedPlayersPayload EMPTY = new DownedPlayersPayload(List.of());
 
-    public record DownedPlayerEntry(UUID uuid, double x, double y, double z, String name) {
+    public record DownedPlayerEntry(UUID uuid, double x, double y, double z, float yaw, String name) {
         public void write(RegistryFriendlyByteBuf buf) {
             buf.writeUUID(uuid);
             buf.writeDouble(x);
             buf.writeDouble(y);
             buf.writeDouble(z);
+            buf.writeFloat(yaw);
             buf.writeUtf(name);
         }
 
@@ -35,6 +36,7 @@ public record DownedPlayersPayload(List<DownedPlayerEntry> entries) implements C
                 buf.readDouble(),
                 buf.readDouble(),
                 buf.readDouble(),
+                buf.readFloat(),
                 buf.readUtf()
             );
         }

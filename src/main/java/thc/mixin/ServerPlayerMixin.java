@@ -5,6 +5,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.level.GameType;
 import net.minecraft.world.phys.Vec3;
 import thc.THCAttachments;
 import thc.downed.DownedState;
@@ -45,6 +46,16 @@ public abstract class ServerPlayerMixin implements ServerPlayerHealthAccess {
 			}
 		}
 		this.thcAppliedMaxHealth = true;
+
+		// Restore downed state if old player was downed
+		Vec3 downedLoc = DownedState.getDownedLocation(oldPlayer);
+		if (downedLoc != null) {
+			ServerPlayer self = (ServerPlayer) (Object) this;
+			// Re-apply downed state to the new player entity
+			DownedState.setDownedLocation(self, downedLoc);
+			self.setGameMode(GameType.SPECTATOR);
+			self.teleportTo(downedLoc.x, downedLoc.y, downedLoc.z);
+		}
 	}
 
 	@Inject(method = "tick", at = @At("HEAD"))

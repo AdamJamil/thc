@@ -49,11 +49,15 @@ object THCClient : ClientModInitializer {
 				)
 			}
 		}
+		logger.info("[THCClient] Registering DownedPlayersPayload receiver")
 		ClientPlayNetworking.registerGlobalReceiver(DownedPlayersPayload.TYPE) { payload, context ->
+			logger.info("[THCClient] Received DownedPlayersPayload with {} entries", payload.entries().size)
 			context.client().execute {
+				logger.info("[THCClient] Executing update on client thread")
 				DownedPlayersClientState.update(payload.entries())
 			}
 		}
+		logger.info("[THCClient] Registering DownedBodyRenderer")
 		DownedBodyRenderer.register()
 		HudElementRegistry.attachElementBefore(VanillaHudElements.CROSSHAIR, RevivalProgressRenderer.REVIVAL_PROGRESS_ID) { guiGraphics, _ ->
 			RevivalProgressRenderer.render(guiGraphics)

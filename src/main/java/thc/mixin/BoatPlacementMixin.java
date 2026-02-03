@@ -2,14 +2,16 @@ package thc.mixin;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.vehicle.boat.Boat;
+import net.minecraft.world.entity.vehicle.boat.AbstractBoat;
 import net.minecraft.world.item.BoatItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -29,8 +31,6 @@ import thc.playerclass.ClassManager;
 import thc.playerclass.PlayerClass;
 import thc.stage.StageManager;
 
-import java.util.function.Supplier;
-
 /**
  * Mixin to gate land boat placement to Bastion class at Stage 5+.
  * Water placement unchanged for all players.
@@ -38,8 +38,7 @@ import java.util.function.Supplier;
 @Mixin(BoatItem.class)
 public abstract class BoatPlacementMixin {
 
-    @Shadow @Final private Supplier<EntityType<Boat>> entityTypeSupplier;
-    @Shadow @Final private Item dropItem;
+    @Shadow @Final private EntityType<? extends AbstractBoat> entityType;
 
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     private void thc$gateLandPlacement(Level level, Player player, InteractionHand hand,
@@ -87,16 +86,20 @@ public abstract class BoatPlacementMixin {
             double y = spawnPos.getY();
             double z = spawnPos.getZ() + 0.5;
 
-            // Create boat using the entity type supplier and drop item supplier
-            EntityType<Boat> entityType = this.entityTypeSupplier.get();
-            Boat boat = entityType.create(level, net.minecraft.world.entity.EntitySpawnReason.SPAWN_ITEM_USE);
+            // Create boat using the entity type
+            AbstractBoat boat = this.entityType.create(level, EntitySpawnReason.SPAWN_ITEM_USE);
             if (boat == null) {
                 cir.setReturnValue(InteractionResult.FAIL);
                 return;
             }
 
-            boat.setPos(x, y, z);
+            boat.setInitialPos(x, y, z);
             boat.setYRot(player.getYRot());
+
+            // Apply default stack config (handles custom name, etc.) - server-side only
+            if (level instanceof ServerLevel serverLevel) {
+                EntityType.createDefaultStackConfig(serverLevel, stack, player).accept(boat);
+            }
 
             // Check collision
             if (!level.noCollision(boat, boat.getBoundingBox())) {
@@ -111,7 +114,7 @@ public abstract class BoatPlacementMixin {
                 stack.consume(1, player);
             }
 
-            player.awardStat(Stats.ITEM_USED.get(this.dropItem));
+            player.awardStat(Stats.ITEM_USED.get((Item)(Object)this));
             cir.setReturnValue(InteractionResult.SUCCESS);
         }
     }

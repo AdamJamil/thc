@@ -21,11 +21,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import thc.boon.BoonGate;
 import thc.buckler.BucklerState;
 import thc.buckler.BucklerStats;
 import thc.buckler.BucklerStatsRegistry;
 import thc.item.BucklerItem;
 import thc.THCSounds;
+import thc.threat.ThreatManager;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
@@ -83,6 +85,9 @@ public abstract class LivingEntityMixin {
 			}
 			BucklerState.setRaiseTick(player, tick);
 			thc$stunNearby(level, player, stats);
+			if (player instanceof ServerPlayer serverPlayer && BoonGate.hasStage3Boon(serverPlayer)) {
+				thc$propagateParryThreat(level, serverPlayer);
+			}
 			level.playSound(null, player.blockPosition(), THCSounds.BUCKLER_PARRY, SoundSource.PLAYERS, 1.0F, 1.0F);
 		} else {
 			double reducedHearts = appliedReduction / 2.0D;
@@ -202,6 +207,15 @@ public abstract class LivingEntityMixin {
 			Vec3 direction = mob.position().subtract(player.position()).normalize();
 			mob.setDeltaMovement(direction.x * 0.5, 0.2, direction.z * 0.5);
 			mob.hurtMarked = true;
+		}
+	}
+
+	@Unique
+	private static void thc$propagateParryThreat(ServerLevel level, ServerPlayer player) {
+		// Use same 3-block radius as stunNearby
+		for (Mob mob : level.getEntitiesOfClass(Mob.class, player.getBoundingBox().inflate(3.0D),
+			entity -> entity.getType().getCategory() == MobCategory.MONSTER)) {
+			ThreatManager.addThreat(mob, player.getUUID(), 10.0);
 		}
 	}
 

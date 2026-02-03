@@ -10,11 +10,14 @@ import org.slf4j.LoggerFactory
 import thc.client.BucklerClientState
 import thc.client.BucklerHudRenderer
 import thc.client.BucklerUseHandler
+import thc.client.DownedBodyRenderer
+import thc.client.DownedPlayersClientState
 import thc.client.IronBoatRenderer
 import thc.client.RevivalClientState
 import thc.client.RevivalProgressRenderer
 import thc.entity.THCEntities
 import thc.network.BucklerStatePayload
+import thc.network.DownedPlayersPayload
 import thc.network.RevivalStatePayload
 
 object THCClient : ClientModInitializer {
@@ -46,6 +49,12 @@ object THCClient : ClientModInitializer {
 				)
 			}
 		}
+		ClientPlayNetworking.registerGlobalReceiver(DownedPlayersPayload.TYPE) { payload, context ->
+			context.client().execute {
+				DownedPlayersClientState.update(payload.entries())
+			}
+		}
+		DownedBodyRenderer.register()
 		HudElementRegistry.attachElementBefore(VanillaHudElements.CROSSHAIR, RevivalProgressRenderer.REVIVAL_PROGRESS_ID) { guiGraphics, _ ->
 			RevivalProgressRenderer.render(guiGraphics)
 		}

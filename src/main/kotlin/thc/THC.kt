@@ -28,6 +28,8 @@ import thc.item.THCBucklers
 import thc.item.THCItems
 import thc.network.BucklerSync
 import thc.network.BucklerStatePayload
+import thc.network.DownedPlayersPayload
+import thc.network.DownedPlayersSync
 import thc.network.RevivalStatePayload
 import thc.network.RevivalSync
 import thc.armor.ArmorRebalancing
@@ -87,6 +89,7 @@ object THC : ModInitializer {
 		DownedManager.register()
 		PayloadTypeRegistry.playS2C().register(BucklerStatePayload.TYPE, BucklerStatePayload.STREAM_CODEC)
 		PayloadTypeRegistry.playS2C().register(RevivalStatePayload.TYPE, RevivalStatePayload.STREAM_CODEC)
+		PayloadTypeRegistry.playS2C().register(DownedPlayersPayload.TYPE, DownedPlayersPayload.STREAM_CODEC)
 
 		// Cow milking with copper bucket
 		UseEntityCallback.EVENT.register { player, level, hand, entity, _ ->
@@ -120,12 +123,14 @@ object THC : ModInitializer {
 			val players = server.playerList.players
 			for (player in players) {
 				RevivalSync.sync(player, players)
+				DownedPlayersSync.sync(player, players)
 			}
 		})
 
 		ServerPlayConnectionEvents.DISCONNECT.register(ServerPlayConnectionEvents.Disconnect { handler, _ ->
 			BucklerSync.clear(handler.player)
 			RevivalSync.clear(handler.player)
+			DownedPlayersSync.clear(handler.player)
 		})
 
 		ServerPlayConnectionEvents.JOIN.register(ServerPlayConnectionEvents.Join { handler, sender, server ->

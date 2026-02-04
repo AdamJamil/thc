@@ -1,5 +1,32 @@
 # Project Milestones: THC (True Hardcore)
 
+## v3.1 Bastion (Shipped: 2026-02-03)
+
+**Delivered:** Bastion class identity through 4 stage-gated boons — buckler restriction (Stage 2+), parry threat propagation + sweeping edge (Stage 3+), enhanced snowballs with AoE slowness and knockback (Stage 4+), and boat mastery with land placement and mob trapping (Stage 5+).
+
+**Phases completed:** 75-79 (7 plans total)
+
+**Key accomplishments:**
+
+- Tank → Bastion rename establishing new class identity throughout codebase
+- Boon 1 (Stage 2+): Buckler restricted to Bastion class with humorous rejection message
+- Boon 2 (Stage 3+): Parry threat propagation (10.0 threat to nearby mobs) and vanilla sweeping edge via shared BoonGate utility
+- Boon 3 (Stage 4+): Enhanced snowballs with Slowness III (2s) AoE to target and 1.5-block radius plus directional knockback
+- Boon 4 (Stage 5+): Boat mastery with land placement gate, hostile mob trapping (4s breakout with boat drop), copper recipes (all 9 wooden boats), and 16-stack inventory
+
+**Stats:**
+
+- 55 files created/modified
+- ~14,050 lines of Kotlin/Java (cumulative)
+- 5 phases, 7 plans, 18 requirements
+- 1 day (2026-02-03)
+
+**Git range:** `feat(75-01)` → `feat(79-03)`
+
+**What's next:** To be determined
+
+---
+
 ## v3.0 Revival System (Shipped: 2026-02-02)
 
 **Delivered:** Cooperative revival system replacing instant death with downed state - players enter spectator mode on lethal damage, tethered near their death location, and can be revived by teammates sneaking nearby with a progress-based revival mechanic.

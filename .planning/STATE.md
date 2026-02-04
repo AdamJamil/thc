@@ -5,17 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-03)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v3.1 Bastion class boons
+**Current focus:** Planning next milestone
 
 ## Current Position
 
-Phase: 79 - Boat Mastery (COMPLETE ✓)
-Plan: All plans complete
-Status: Verified, Milestone v3.1 ready for audit
-Last activity: 2026-02-03 — Quick task 006: Fix snowball effects
+Phase: 79 of 79 (milestone complete)
+Plan: —
+Status: v3.1 SHIPPED, ready for next milestone
+Last activity: 2026-02-03 — v3.1 milestone complete
 
-Progress: [===========================] 14 milestones shipped (79 phases, 122 plans)
-         [===========================] v3.1 COMPLETE (all phases 75-79 done)
+Progress: [===========================] 15 milestones shipped (79 phases, 122 plans)
 
 ## Performance Metrics
 
@@ -126,19 +125,12 @@ See milestone archives for full decision logs:
 - .planning/milestones/v3.0-ROADMAP.md (previous)
 - .planning/milestones/v3.1-ROADMAP.md (current)
 
-Key patterns established for v3.1:
-- Stage-gated boons follow established ClassManager + StageManager pattern
-- Boon gates use getBoonLevel() for player-specific stage progression
-- Sweeping edge toggle requires combat system integration
-- Snowball enhancement uses projectile hit event
-- Class + stage gate in item use(): Check ClassManager.getClass() and StageManager.getBoonLevel() before item functionality (see 76-01)
-- BoonGate utility: Shared class for Stage 3+ checks (see 77-01)
-- Replicate vanilla private methods in mixins when redirect cannot call through
-- Throwable projectile mixin: target specific class not Projectile.class (see 78-01)
-- Hostile mob filter: MobCategory.MONSTER + getTarget() instanceof Player (see 78-01)
-- Multi-item stack size mixin: extract setStackSize helper method (see 79-01)
-- MC 1.21 BoatItem API: entityType field (not supplier), AbstractBoat base class (see 79-02)
-- Boat trapping: UUID-to-tick Map for ephemeral tracking, accessor invoker for protected methods (see 79-03)
+Key patterns established (see milestone archives for full logs):
+- Stage-gated boons follow ClassManager + StageManager pattern
+- BoonGate utility for shared class + stage checks
+- Projectile-specific mixin targeting (Snowball.class not Projectile.class)
+- UUID-to-tick Map for ephemeral tracking in mixins
+- Accessor invoker pattern for protected method access
 
 ### Pending Todos
 
@@ -162,6 +154,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-03
-Stopped at: Phase 79 verified and complete
+Stopped at: v3.1 milestone complete
 Resume file: None
-Next: `/gsd:audit-milestone` or `/gsd:complete-milestone`
+Next: `/gsd:new-milestone`

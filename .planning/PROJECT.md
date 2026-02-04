@@ -233,17 +233,16 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
   - Revival completion: 50% HP, 6 hunger, green particles
   - Server-to-client sync with 60-degree look cone
   - Radial progress ring HUD centered on cursor
+- Bastion class boons — v3.1
+  - Tank → Bastion rename throughout codebase
+  - Boon 1 (Stage 2+): Buckler restricted to Bastion class
+  - Boon 2 (Stage 3+): Parry threat propagation + sweeping edge enabled
+  - Boon 3 (Stage 4+): Enhanced snowballs with AoE Slowness III and knockback
+  - Boon 4 (Stage 5+): Land boat placement, hostile mob trapping (4s breakout), copper recipes, 16-stack
 
 ### Active
 
-- Bastion class boons (4 boons gated by stage progression)
-  - Boon 1: Buckler restriction (class + stage gate)
-  - Boon 2: Parry aggro + sweeping edge (Bastion only)
-  - Boon 3: Enhanced snowball (AoE slowness + knockback)
-  - Boon 4: Land boat placement + mob trapping
-- Tank → Bastion rename throughout codebase
-- Wooden boat recipe changes (copper requirement)
-- Boat stack size increase to 16
+(None — next milestone pending)
 
 ### Out of Scope
 
@@ -312,25 +311,18 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 | HEAD cancellation for FoodData.tick() | Complete control over exhaustion and healing logic | Good |
 | Fixed interval + variable heal amount | Simpler than variable intervals for saturation tier healing | Good |
 
-## Current Milestone: v3.1 Bastion
+## Current Milestone
 
-**Goal:** Introduce Bastion class identity through stage-gated boons that reward progression with unique defensive and crowd-control capabilities.
-
-**Target features:**
-- Tank → Bastion rename throughout codebase
-- Boon 1 (Stage 2+): Buckler restriction — only Bastion class can equip bucklers
-- Boon 2 (Stage 3+): Parry aggro + sweeping edge — threat propagation and sweeping enabled for Bastion
-- Boon 3 (Stage 4+): Enhanced snowballs — AoE slowness and knockback on hit
-- Boon 4 (Stage 5+): Boat mastery — land placement, mob trapping, recipe/stack changes
+(Planning next milestone — run `/gsd:new-milestone` to start)
 
 ## Current State
 
-**Latest Ship:** v3.0 Revival System (2026-02-02)
+**Latest Ship:** v3.1 Bastion Class Boons (2026-02-03)
 
 **Codebase:**
-- ~12,156 LOC Kotlin/Java
+- ~14,050 LOC Kotlin/Java
 - Mixed mixin + event-driven architecture
-- 115 plans across 74 phases in 14 milestones
+- 122 plans across 79 phases in 15 milestones
 - Attachment patterns for player state, mob threat, one-time effects, class, boon level, spawn region, fire source
 - Client visual overrides for twilight sky
 - Comprehensive spawn/behavior modifications (10+ mob types)
@@ -379,6 +371,14 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 - Downed state attachment and death interception — v3.0
 - Revival progress system with class-based speed bonus — v3.0
 - Revival progress HUD with server-client sync — v3.0
+- BoonGate utility for class + stage gate checks — v3.1
+- Buckler class + stage restriction (Bastion Stage 2+) — v3.1
+- Parry threat propagation (Bastion Stage 3+) — v3.1
+- Conditional sweeping edge (Bastion Stage 3+) — v3.1
+- Enhanced snowball with AoE slowness and knockback (Bastion Stage 4+) — v3.1
+- Boat land placement gate (Bastion Stage 5+) — v3.1
+- Hostile mob boat trapping with timed breakout — v3.1
+- Boat stack size increase (16) and copper recipes — v3.1
 
 ---
-*Last updated: 2026-02-03 after v3.1 milestone started*
+*Last updated: 2026-02-03 after v3.1 milestone completion*

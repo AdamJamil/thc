@@ -1,11 +1,5 @@
 # THC Roadmap
 
-## Current Milestone
-
-**v3.1 Bastion** — Bastion class boons (phases 75-79)
-
-See [v3.1-ROADMAP.md](milestones/v3.1-ROADMAP.md)
-
 ## Completed Milestones
 
 - [v1.0](milestones/v1.0-ROADMAP.md) — Base Claiming & Crafting Foundation (phases 1-13)
@@ -22,6 +16,7 @@ See [v3.1-ROADMAP.md](milestones/v3.1-ROADMAP.md)
 - [v2.7](milestones/v2.7-ROADMAP.md) — Extra Features Batch 11 (phases 62-65)
 - [v2.8](milestones/v2.8-ROADMAP.md) — Villager Overhaul (phases 66-71)
 - [v3.0](milestones/v3.0-ROADMAP.md) — Revival System (phases 72-74)
+- [v3.1](milestones/v3.1-ROADMAP.md) — Bastion Class Boons (phases 75-79)
 
 ## Progress
 
@@ -41,10 +36,10 @@ See [v3.1-ROADMAP.md](milestones/v3.1-ROADMAP.md)
 | v2.7 | 62-65 | 5 | Complete | 2026-01-30 |
 | v2.8 | 66-71 | 11 | Complete | 2026-01-31 |
 | v3.0 | 72-74 | 4 | Complete | 2026-02-02 |
-| v3.1 | 75-79 | TBD | **Active** | — |
+| v3.1 | 75-79 | 7 | Complete | 2026-02-03 |
 
-**Total:** 79 phases, 115+ plans across 15 milestones
+**Total:** 79 phases, 122 plans across 15 milestones
 
 ---
 
-*Roadmap last updated: 2026-02-03*
+*Roadmap last updated: 2026-02-03 after v3.1 milestone completion*

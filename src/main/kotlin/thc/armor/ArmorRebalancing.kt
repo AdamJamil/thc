@@ -360,7 +360,7 @@ object ArmorRebalancing {
             }
 
             // ===== ENDER HELMETS (half protection of regular helmets) =====
-            // Ender Copper: 0.75 armor (half of copper's 1.5)
+            // Ender Copper Helmet: 0.75 armor (half of copper's 1.5)
             context.modify(thc.item.EnderArmor.ENDER_COPPER_HELMET) { builder ->
                 builder.set(DataComponents.ATTRIBUTE_MODIFIERS,
                     ItemAttributeModifiers.builder()
@@ -371,6 +371,19 @@ object ArmorRebalancing {
                                 AttributeModifier.Operation.ADD_VALUE
                             ),
                             EquipmentSlotGroup.HEAD)
+                        .build())
+            }
+            // Ender Copper Boots: 0.75 armor (half of copper's 1.5)
+            context.modify(thc.item.EnderArmor.ENDER_COPPER_BOOTS) { builder ->
+                builder.set(DataComponents.ATTRIBUTE_MODIFIERS,
+                    ItemAttributeModifiers.builder()
+                        .add(Attributes.ARMOR,
+                            AttributeModifier(
+                                Identifier.fromNamespaceAndPath("thc", "ender_copper_boots_armor"),
+                                0.75,
+                                AttributeModifier.Operation.ADD_VALUE
+                            ),
+                            EquipmentSlotGroup.FEET)
                         .build())
             }
             // Ender Iron: 1.0 armor (half of iron's 2.0)

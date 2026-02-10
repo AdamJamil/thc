@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-02-09)
 ## Current Position
 
 Phase: 80 of 82 (Core HUD Rendering)
-Plan: Not started
-Status: Ready to plan
-Last activity: 2026-02-09 — Roadmap created for v3.2 Effects GUI
+Plan: 1 of 1 complete
+Status: Plan 80-01 complete
+Last activity: 2026-02-10 — Completed 80-01 Core HUD Rendering
 
-Progress: [░░░░░░░░░░] 0% (0/? plans)
+Progress: [##########] 100% (1/1 plans)
 
 ## Performance Metrics
 
@@ -41,6 +41,8 @@ Key patterns established:
 - Projectile-specific mixin targeting (Snowball.class not Projectile.class)
 - UUID-to-tick Map for ephemeral tracking in mixins
 - Accessor invoker pattern for protected method access
+- ResourceKey-based priority map for effect sorting in HUD rendering
+- Vanilla mob effect icon texture path: textures/mob_effect/{path}.png
 
 ### Pending Todos
 
@@ -63,7 +65,7 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-09
-Stopped at: Roadmap created for v3.2 Effects GUI milestone
+Last session: 2026-02-10
+Stopped at: Completed 80-01-PLAN.md (Core HUD Rendering)
 Resume file: None
-Next: `/gsd:plan-phase 80`
+Next: Phase 81 (Health HUD Rendering)

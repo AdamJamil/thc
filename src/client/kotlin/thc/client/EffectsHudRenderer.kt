@@ -13,12 +13,24 @@ object EffectsHudRenderer {
     val EFFECTS_HUD_ID: Identifier = Identifier.fromNamespaceAndPath("thc", "effects_hud")
 
     private val FRAME_TEXTURE = Identifier.fromNamespaceAndPath("thc", "textures/item/effect_frame.png")
+    private val NUMERALS_TEXTURE = Identifier.fromNamespaceAndPath("thc", "textures/item/numerals.png")
 
     private const val FRAME_SIZE = 44
     private const val ICON_RENDER_SIZE = 36
     private const val ICON_SOURCE_SIZE = 18
     private const val ICON_OFFSET = 4 // (44 - 36) / 2
     private const val MARGIN = 4
+
+    private const val NUMERAL_WIDTH = 13
+    private const val NUMERAL_HEIGHT = 9
+    private const val NUMERAL_SHEET_HEIGHT = 90 // 10 numerals * 9px each
+    private const val NUMERAL_OFFSET_X = 5 // from frame top-left
+    private const val NUMERAL_OFFSET_Y = 5 // from frame top-left
+
+    private const val OVERLAY_COLOR = 0x8000FF00.toInt() // Green with 50% alpha (ARGB)
+
+    /** Tracks the original duration for each effect to compute drain ratio. */
+    private val originalDurations = mutableMapOf<String, Int>()
 
     /** Lower number = higher priority = rendered closer to bottom (first in stack). */
     private val PRIORITY_MAP: Map<ResourceKey<MobEffect>, Int> = buildPriorityMap()
@@ -68,10 +80,16 @@ object EffectsHudRenderer {
 
         val activeEffects = player.activeEffects
         if (activeEffects.isEmpty()) {
+            // Clean up all tracked durations when no effects are active
+            originalDurations.clear()
             return
         }
 
+        val partialTick = client.deltaTracker.getGameTimeDeltaPartialTick(false)
         val sorted = activeEffects.sortedWith(effectComparator)
+
+        // Build set of currently active effect keys for cleanup
+        val activeKeys = mutableSetOf<String>()
 
         val startX = MARGIN
         val screenHeight = guiGraphics.guiHeight()
@@ -99,6 +117,9 @@ object EffectsHudRenderer {
             val effectKey = effectInstance.effect.unwrapKey().orElse(null)
             if (effectKey != null) {
                 val loc = effectKey.identifier()
+                val effectName = loc.toString()
+                activeKeys.add(effectName)
+
                 val iconTexture = Identifier.fromNamespaceAndPath(
                     loc.namespace,
                     "textures/mob_effect/${loc.path}.png"
@@ -115,7 +136,86 @@ object EffectsHudRenderer {
                     ICON_SOURCE_SIZE,
                     ICON_SOURCE_SIZE
                 )
+
+                // Duration overlay
+                renderDurationOverlay(guiGraphics, effectInstance, effectName, startX, y, partialTick)
+
+                // Roman numeral for amplifier >= 1
+                renderAmplifierNumeral(guiGraphics, effectInstance, startX, y)
             }
         }
+
+        // Clean up stale entries from originalDurations
+        originalDurations.keys.retainAll(activeKeys)
+    }
+
+    private fun renderDurationOverlay(
+        guiGraphics: GuiGraphics,
+        effectInstance: MobEffectInstance,
+        effectName: String,
+        frameX: Int,
+        frameY: Int,
+        partialTick: Float
+    ) {
+        val ratio: Float = if (effectInstance.isInfiniteDuration) {
+            1.0f
+        } else {
+            val remaining = effectInstance.duration
+            // Update original duration tracking:
+            // Store when first seen or when re-applied with higher duration
+            val stored = originalDurations[effectName]
+            if (stored == null || remaining > stored) {
+                originalDurations[effectName] = remaining
+            }
+            val original = originalDurations[effectName]!!.toFloat()
+            if (original <= 0f) {
+                0f
+            } else {
+                // Sub-tick interpolation: subtract fractional tick not yet elapsed
+                val effectiveRemaining = (remaining.toFloat() - (1.0f - partialTick)).coerceAtLeast(0f)
+                (effectiveRemaining / original).coerceIn(0f, 1f)
+            }
+        }
+
+        val overlayHeight = (ICON_RENDER_SIZE * ratio).toInt()
+        if (overlayHeight <= 0) return
+
+        val iconX = frameX + ICON_OFFSET
+        val iconY = frameY + ICON_OFFSET
+
+        // Fill from bottom upward within the icon area
+        guiGraphics.fill(
+            iconX,
+            iconY + ICON_RENDER_SIZE - overlayHeight,
+            iconX + ICON_RENDER_SIZE,
+            iconY + ICON_RENDER_SIZE,
+            OVERLAY_COLOR
+        )
+    }
+
+    private fun renderAmplifierNumeral(
+        guiGraphics: GuiGraphics,
+        effectInstance: MobEffectInstance,
+        frameX: Int,
+        frameY: Int
+    ) {
+        val amplifier = effectInstance.amplifier
+        if (amplifier < 1 || amplifier > 9) return
+
+        val numeralX = frameX + NUMERAL_OFFSET_X
+        val numeralY = frameY + NUMERAL_OFFSET_Y
+
+        guiGraphics.blit(
+            RenderPipelines.GUI_TEXTURED,
+            NUMERALS_TEXTURE,
+            numeralX,
+            numeralY,
+            0.0f,
+            (amplifier * NUMERAL_HEIGHT).toFloat(),
+            NUMERAL_WIDTH,
+            NUMERAL_HEIGHT,
+            NUMERAL_WIDTH,
+            NUMERAL_SHEET_HEIGHT
+        )
     }
 }

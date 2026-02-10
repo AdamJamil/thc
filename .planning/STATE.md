@@ -69,10 +69,11 @@ None.
 | 004 | Add red beacon beam at downed player location | 2026-02-03 | 971faea | [004](./quick/004-when-a-player-is-downed-on-top-of-the-re/) |
 | 006 | Fix snowballs proccing arrow-only effects | 2026-02-03 | 8e3c3e2 | [006](./quick/006-fix-snowball-proccing-arrow-effects/) |
 | 007 | Fix effects GUI scaling, overlay, infinite filter, vanilla HUD | 2026-02-10 | 209be5c | [007](./quick/7-fix-v3-2-effects-gui-scaling-math-green-/) |
+| 008 | Fix effects GUI overlay alpha (35%) and frame-relative positioning | 2026-02-10 | b25f91a | [008](./quick/8-fix-effects-gui-overlay-transparency-mid/) |
 
 ## Session Continuity
 
 Last session: 2026-02-10
-Stopped at: Completed quick-7 (effects GUI fixes)
+Stopped at: Completed quick-8 (effects GUI overlay alpha + positioning)
 Resume file: None
 Next: /gsd:new-milestone for next milestone

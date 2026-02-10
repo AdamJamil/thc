@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory
 import thc.client.BucklerClientState
 import thc.client.BucklerHudRenderer
 import thc.client.BucklerUseHandler
+import thc.client.EffectsHudRenderer
 import thc.client.DownedBodyRenderer
 import thc.client.DownedPlayersClientState
 import thc.client.IronBoatRenderer
@@ -67,6 +68,9 @@ object THCClient : ClientModInitializer {
 		}
 		HudStatusBarHeightRegistry.addLeft(BucklerHudRenderer.POISE_ID) { player ->
 			BucklerHudRenderer.getRenderHeight(player)
+		}
+		HudElementRegistry.attachElementAfter(VanillaHudElements.CHAT, EffectsHudRenderer.EFFECTS_HUD_ID) { guiGraphics, _ ->
+			EffectsHudRenderer.render(guiGraphics)
 		}
 	}
 }

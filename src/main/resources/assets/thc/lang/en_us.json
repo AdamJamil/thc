@@ -30,5 +30,6 @@
   "item.thc.ender_copper_boots": "Ender Copper Boots",
   "item.thc.ender_iron_helmet": "Ender Iron Helmet",
   "item.thc.ender_diamond_helmet": "Ender Diamond Helmet",
-  "item.thc.ender_netherite_helmet": "Ender Netherite Helmet"
+  "item.thc.ender_netherite_helmet": "Ender Netherite Helmet",
+  "thc.options.effectsGuiScale": "Effects GUI Scaling"
 }

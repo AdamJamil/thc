@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory
 import thc.client.BucklerClientState
 import thc.client.BucklerHudRenderer
 import thc.client.BucklerUseHandler
+import thc.client.EffectsGuiConfig
 import thc.client.EffectsHudRenderer
 import thc.client.DownedBodyRenderer
 import thc.client.DownedPlayersClientState
@@ -27,6 +28,9 @@ object THCClient : ClientModInitializer {
 	override fun onInitializeClient() {
 		logger.info("THC client init")
 		// This entrypoint is suitable for setting up client-specific logic, such as rendering.
+
+		// Load effects GUI scale config
+		EffectsGuiConfig.load()
 
 		// Entity renderers
 		EntityRendererRegistry.register(THCEntities.IRON_BOAT) { context ->

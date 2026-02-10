@@ -16,7 +16,7 @@ Requirements for Effects GUI milestone. Each maps to roadmap phases.
 ### Frame Rendering
 
 - [ ] **FRAM-01**: Each effect is rendered inside a frame using effect_frame.png (44x44 base)
-- [ ] **FRAM-02**: Vanilla mob effect icon is scaled 2x (18x18 → 36x36) and centered inside the frame with 4px border
+- [ ] **FRAM-02**: Vanilla mob effect icon is scaled 2x (18x18 -> 36x36) and centered inside the frame with 4px border
 - [ ] **FRAM-03**: Green 50% transparent overlay covers the effect icon from the bottom, proportional to remaining duration (smooth per-tick updates)
 - [ ] **FRAM-04**: Roman numeral (I through X) from numeral.png (13x9 subsections) is drawn at 5px right and 5px down from top-left of frame
 
@@ -45,27 +45,25 @@ None identified.
 
 ## Traceability
 
-Which phases cover which requirements. Updated during roadmap creation.
-
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| HUD-01 | — | Pending |
-| HUD-02 | — | Pending |
-| HUD-03 | — | Pending |
-| FRAM-01 | — | Pending |
-| FRAM-02 | — | Pending |
-| FRAM-03 | — | Pending |
-| FRAM-04 | — | Pending |
-| SCAL-01 | — | Pending |
-| SCAL-02 | — | Pending |
-| LIFE-01 | — | Pending |
-| LIFE-02 | — | Pending |
+| HUD-01 | Phase 80 | Pending |
+| HUD-02 | Phase 80 | Pending |
+| HUD-03 | Phase 80 | Pending |
+| FRAM-01 | Phase 80 | Pending |
+| FRAM-02 | Phase 80 | Pending |
+| FRAM-03 | Phase 81 | Pending |
+| FRAM-04 | Phase 81 | Pending |
+| SCAL-01 | Phase 82 | Pending |
+| SCAL-02 | Phase 82 | Pending |
+| LIFE-01 | Phase 81 | Pending |
+| LIFE-02 | Phase 81 | Pending |
 
 **Coverage:**
 - v3.2 requirements: 11 total
-- Mapped to phases: 0
-- Unmapped: 11 (pending roadmap)
+- Mapped to phases: 11
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-02-09*
-*Last updated: 2026-02-09 after initial definition*
+*Last updated: 2026-02-09 after roadmap creation*

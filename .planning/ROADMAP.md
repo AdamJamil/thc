@@ -18,6 +18,10 @@
 - [v3.0](milestones/v3.0-ROADMAP.md) — Revival System (phases 72-74)
 - [v3.1](milestones/v3.1-ROADMAP.md) — Bastion Class Boons (phases 75-79)
 
+## Active Milestone
+
+- [v3.2](milestones/v3.2-ROADMAP.md) — Effects GUI (phases 80-82)
+
 ## Progress
 
 | Milestone | Phases | Plans | Status | Shipped |
@@ -37,9 +41,10 @@
 | v2.8 | 66-71 | 11 | Complete | 2026-01-31 |
 | v3.0 | 72-74 | 4 | Complete | 2026-02-02 |
 | v3.1 | 75-79 | 7 | Complete | 2026-02-03 |
+| v3.2 | 80-82 | TBD | In progress | - |
 
-**Total:** 79 phases, 122 plans across 15 milestones
+**Total:** 82 phases, 122+ plans across 16 milestones
 
 ---
 
-*Roadmap last updated: 2026-02-03 after v3.1 milestone completion*
+*Roadmap last updated: 2026-02-09 after v3.2 roadmap creation*

@@ -76,5 +76,7 @@ object THCClient : ClientModInitializer {
 		HudElementRegistry.attachElementAfter(VanillaHudElements.CHAT, EffectsHudRenderer.EFFECTS_HUD_ID) { guiGraphics, _ ->
 			EffectsHudRenderer.render(guiGraphics)
 		}
+		// Remove vanilla status effects from HUD (inventory GUI effects remain)
+		HudElementRegistry.removeElement(VanillaHudElements.STATUS_EFFECTS)
 	}
 }

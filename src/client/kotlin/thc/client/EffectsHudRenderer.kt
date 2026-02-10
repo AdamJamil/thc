@@ -31,7 +31,7 @@ object EffectsHudRenderer {
     private const val NUMERAL_OX_RATIO = 5.0 / 44.0  // numeral offset X relative to frame
     private const val NUMERAL_OY_RATIO = 5.0 / 44.0  // numeral offset Y relative to frame
 
-    private const val OVERLAY_COLOR = 0x8000FF00.toInt() // Green with 50% alpha (ARGB)
+    private const val OVERLAY_COLOR = 0x3300FF00.toInt() // Green with 20% alpha (ARGB)
 
     /** Tracks the original duration for each effect to compute drain ratio. */
     private val originalDurations = mutableMapOf<String, Int>()
@@ -90,7 +90,14 @@ object EffectsHudRenderer {
         }
 
         val partialTick = client.deltaTracker.getGameTimeDeltaPartialTick(false)
-        val sorted = activeEffects.sortedWith(effectComparator)
+        val sorted = activeEffects
+            .filter { !it.isInfiniteDuration }
+            .sortedWith(effectComparator)
+
+        if (sorted.isEmpty()) {
+            originalDurations.clear()
+            return
+        }
 
         // Build set of currently active effect keys for cleanup
         val activeKeys = mutableSetOf<String>()
@@ -114,7 +121,7 @@ object EffectsHudRenderer {
         for ((index, effectInstance) in sorted.withIndex()) {
             val y = baseY - (index * frameSize)
 
-            // Render frame
+            // Render frame (12-param blit: decouples render size from source region)
             guiGraphics.blit(
                 RenderPipelines.GUI_TEXTURED,
                 FRAME_TEXTURE,
@@ -122,10 +129,9 @@ object EffectsHudRenderer {
                 y,
                 0.0f,
                 0.0f,
-                frameSize,
-                frameSize,
-                BASE_FRAME_SIZE,
-                BASE_FRAME_SIZE
+                frameSize, frameSize,                   // render size (dynamic)
+                BASE_FRAME_SIZE, BASE_FRAME_SIZE,       // source region (44x44 = full texture)
+                BASE_FRAME_SIZE, BASE_FRAME_SIZE        // texture dimensions (44x44)
             )
 
             // Render vanilla mob effect icon scaled and centered in frame
@@ -146,10 +152,9 @@ object EffectsHudRenderer {
                     y + iconOffset,
                     0.0f,
                     0.0f,
-                    iconRenderSize,
-                    iconRenderSize,
-                    ICON_SOURCE_SIZE,
-                    ICON_SOURCE_SIZE
+                    iconRenderSize, iconRenderSize,     // render size (dynamic)
+                    ICON_SOURCE_SIZE, ICON_SOURCE_SIZE, // source region (18x18 = full texture)
+                    ICON_SOURCE_SIZE, ICON_SOURCE_SIZE  // texture dimensions (18x18)
                 )
 
                 // Duration overlay
@@ -174,24 +179,21 @@ object EffectsHudRenderer {
         iconRenderSize: Int,
         iconOffset: Int
     ) {
-        val ratio: Float = if (effectInstance.isInfiniteDuration) {
-            1.0f
+        // Infinite effects are filtered out before rendering, so only finite effects reach here
+        val remaining = effectInstance.duration
+        // Update original duration tracking:
+        // Store when first seen or when re-applied with higher duration
+        val stored = originalDurations[effectName]
+        if (stored == null || remaining > stored) {
+            originalDurations[effectName] = remaining
+        }
+        val original = originalDurations[effectName]!!.toFloat()
+        val ratio: Float = if (original <= 0f) {
+            0f
         } else {
-            val remaining = effectInstance.duration
-            // Update original duration tracking:
-            // Store when first seen or when re-applied with higher duration
-            val stored = originalDurations[effectName]
-            if (stored == null || remaining > stored) {
-                originalDurations[effectName] = remaining
-            }
-            val original = originalDurations[effectName]!!.toFloat()
-            if (original <= 0f) {
-                0f
-            } else {
-                // Sub-tick interpolation: subtract fractional tick not yet elapsed
-                val effectiveRemaining = (remaining.toFloat() - (1.0f - partialTick)).coerceAtLeast(0f)
-                (effectiveRemaining / original).coerceIn(0f, 1f)
-            }
+            // Sub-tick interpolation: subtract fractional tick not yet elapsed
+            val effectiveRemaining = (remaining.toFloat() - (1.0f - partialTick)).coerceAtLeast(0f)
+            (effectiveRemaining / original).coerceIn(0f, 1f)
         }
 
         val overlayHeight = (iconRenderSize * ratio).toInt()
@@ -234,10 +236,9 @@ object EffectsHudRenderer {
             numeralY,
             0.0f,
             (amplifier * NUMERAL_SRC_HEIGHT).toFloat(),
-            numeralWidth,
-            numeralHeight,
-            NUMERAL_SRC_WIDTH,
-            NUMERAL_SHEET_HEIGHT
+            numeralWidth, numeralHeight,                // render size (dynamic)
+            NUMERAL_SRC_WIDTH, NUMERAL_SRC_HEIGHT,      // source region (13x9 = one numeral)
+            NUMERAL_SRC_WIDTH, NUMERAL_SHEET_HEIGHT     // texture dimensions (13x90 = full sheet)
         )
     }
 }

@@ -22,14 +22,12 @@ object EffectsHudRenderer {
     private const val NUMERAL_SRC_HEIGHT = 9
     private const val NUMERAL_SHEET_HEIGHT = 90 // 10 numerals * 9px each
 
-    // Ratios derived from original 44px base design
-    private const val ICON_RATIO = 36.0 / 44.0       // icon render size relative to frame
-    private const val ICON_OFFSET_RATIO = 4.0 / 44.0 // icon offset relative to frame
-    private const val MARGIN_RATIO = 4.0 / 44.0      // margin relative to frame
-    private const val NUMERAL_W_RATIO = 13.0 / 44.0  // numeral width relative to frame
-    private const val NUMERAL_H_RATIO = 9.0 / 44.0   // numeral height relative to frame
-    private const val NUMERAL_OX_RATIO = 5.0 / 44.0  // numeral offset X relative to frame
-    private const val NUMERAL_OY_RATIO = 5.0 / 44.0  // numeral offset Y relative to frame
+    // Design-space constants (positions within the 44x44 frame)
+    private const val ICON_SIZE = 36         // icon render size in design space
+    private const val ICON_OFFSET = 4        // icon inset from frame edge
+    private const val MARGIN_RATIO = 4.0 / 44.0  // screen margin relative to frame
+    private const val NUMERAL_X = 5          // numeral X in design space
+    private const val NUMERAL_Y = 5          // numeral Y in design space
 
     private const val OVERLAY_COLOR = 0x5A00FF00.toInt() // Green with ~35% alpha (ARGB)
 
@@ -102,39 +100,36 @@ object EffectsHudRenderer {
         // Build set of currently active effect keys for cleanup
         val activeKeys = mutableSetOf<String>()
 
-        // Compute dynamic sizes from config scale percentage
+        // Compute screen-space positioning
         val screenWidth = guiGraphics.guiWidth()
         val frameSize = (screenWidth * EffectsGuiConfig.getScalePercent() / 100.0).toInt().coerceAtLeast(16)
-        val iconRenderSize = (frameSize * ICON_RATIO).toInt()
-        val iconOffset = (frameSize * ICON_OFFSET_RATIO).toInt()
+        val scaleFactor = frameSize.toFloat() / BASE_FRAME_SIZE.toFloat()
         val margin = (frameSize * MARGIN_RATIO).toInt().coerceAtLeast(2)
-        val numeralWidth = (frameSize * NUMERAL_W_RATIO).toInt()
-        val numeralHeight = (frameSize * NUMERAL_H_RATIO).toInt()
-        val numeralOffsetX = Math.round(frameSize * NUMERAL_OX_RATIO).toInt()
-        val numeralOffsetY = Math.round(frameSize * NUMERAL_OY_RATIO).toInt()
 
         val startX = margin
         val screenHeight = guiGraphics.guiHeight()
-        // Bottom of first (highest-priority) frame sits at screenHeight - margin
         val baseY = screenHeight - margin - frameSize
 
         for ((index, effectInstance) in sorted.withIndex()) {
             val y = baseY - (index * frameSize)
 
-            // Render frame (12-param blit: decouples render size from source region)
+            // Scale to design space — all drawing uses base 44x44 coordinates
+            val matrices = guiGraphics.pose()
+            matrices.pushMatrix()
+            matrices.translate(startX.toFloat(), y.toFloat())
+            matrices.scale(scaleFactor, scaleFactor)
+
+            // Render frame at design coordinates (1:1 with texture)
             guiGraphics.blit(
                 RenderPipelines.GUI_TEXTURED,
                 FRAME_TEXTURE,
-                startX,
-                y,
-                0.0f,
-                0.0f,
-                frameSize, frameSize,                   // render size (dynamic)
-                BASE_FRAME_SIZE, BASE_FRAME_SIZE,       // source region (44x44 = full texture)
-                BASE_FRAME_SIZE, BASE_FRAME_SIZE        // texture dimensions (44x44)
+                0, 0,
+                0.0f, 0.0f,
+                BASE_FRAME_SIZE, BASE_FRAME_SIZE,
+                BASE_FRAME_SIZE, BASE_FRAME_SIZE,
+                BASE_FRAME_SIZE, BASE_FRAME_SIZE
             )
 
-            // Render vanilla mob effect icon scaled and centered in frame
             val effectKey = effectInstance.effect.unwrapKey().orElse(null)
             if (effectKey != null) {
                 val loc = effectKey.identifier()
@@ -148,21 +143,21 @@ object EffectsHudRenderer {
                 guiGraphics.blit(
                     RenderPipelines.GUI_TEXTURED,
                     iconTexture,
-                    startX + iconOffset,
-                    y + iconOffset,
-                    0.0f,
-                    0.0f,
-                    iconRenderSize, iconRenderSize,     // render size (dynamic)
-                    ICON_SOURCE_SIZE, ICON_SOURCE_SIZE, // source region (18x18 = full texture)
-                    ICON_SOURCE_SIZE, ICON_SOURCE_SIZE  // texture dimensions (18x18)
+                    ICON_OFFSET, ICON_OFFSET,
+                    0.0f, 0.0f,
+                    ICON_SIZE, ICON_SIZE,
+                    ICON_SOURCE_SIZE, ICON_SOURCE_SIZE,
+                    ICON_SOURCE_SIZE, ICON_SOURCE_SIZE
                 )
 
-                // Duration overlay (covers the 36x36 icon area, not the full frame)
-                renderDurationOverlay(guiGraphics, effectInstance, effectName, startX + iconOffset, y + iconOffset, partialTick, iconRenderSize)
+                // Duration overlay (covers the 36x36 icon area)
+                renderDurationOverlay(guiGraphics, effectInstance, effectName, partialTick)
 
                 // Roman numeral for amplifier >= 1
-                renderAmplifierNumeral(guiGraphics, effectInstance, startX, y, numeralWidth, numeralHeight, numeralOffsetX, numeralOffsetY)
+                renderAmplifierNumeral(guiGraphics, effectInstance)
             }
+
+            matrices.popMatrix()
         }
 
         // Clean up stale entries from originalDurations
@@ -173,15 +168,9 @@ object EffectsHudRenderer {
         guiGraphics: GuiGraphics,
         effectInstance: MobEffectInstance,
         effectName: String,
-        iconX: Int,
-        iconY: Int,
-        partialTick: Float,
-        iconSize: Int
+        partialTick: Float
     ) {
-        // Infinite effects are filtered out before rendering, so only finite effects reach here
         val remaining = effectInstance.duration
-        // Update original duration tracking:
-        // Store when first seen or when re-applied with higher duration
         val stored = originalDurations[effectName]
         if (stored == null || remaining > stored) {
             originalDurations[effectName] = remaining
@@ -190,51 +179,40 @@ object EffectsHudRenderer {
         val ratio: Float = if (original <= 0f) {
             0f
         } else {
-            // Sub-tick interpolation: subtract fractional tick not yet elapsed
             val effectiveRemaining = (remaining.toFloat() - (1.0f - partialTick)).coerceAtLeast(0f)
             (effectiveRemaining / original).coerceIn(0f, 1f)
         }
 
-        val overlayHeight = (iconSize * ratio).toInt()
+        val overlayHeight = (ICON_SIZE * ratio).toInt()
         if (overlayHeight <= 0) return
 
-        // Fill from bottom upward within the icon area only
+        // Fill from bottom upward within the icon area (design-space coordinates)
         guiGraphics.fill(
-            iconX,
-            iconY + iconSize - overlayHeight,
-            iconX + iconSize,
-            iconY + iconSize,
+            ICON_OFFSET,
+            ICON_OFFSET + ICON_SIZE - overlayHeight,
+            ICON_OFFSET + ICON_SIZE,
+            ICON_OFFSET + ICON_SIZE,
             OVERLAY_COLOR
         )
     }
 
     private fun renderAmplifierNumeral(
         guiGraphics: GuiGraphics,
-        effectInstance: MobEffectInstance,
-        frameX: Int,
-        frameY: Int,
-        numeralWidth: Int,
-        numeralHeight: Int,
-        numeralOffsetX: Int,
-        numeralOffsetY: Int
+        effectInstance: MobEffectInstance
     ) {
         val amplifier = effectInstance.amplifier
         if (amplifier < 1 || amplifier > 9) return
 
-        val numeralX = frameX + numeralOffsetX
-        val numeralY = frameY + numeralOffsetY
-
-        // Source sheet uses original 13x9 per numeral, 10 rows = 90px total
+        // All coordinates in design space — pose stack handles scaling
         guiGraphics.blit(
             RenderPipelines.GUI_TEXTURED,
             NUMERALS_TEXTURE,
-            numeralX,
-            numeralY,
+            NUMERAL_X, NUMERAL_Y,
             0.0f,
             (amplifier * NUMERAL_SRC_HEIGHT).toFloat(),
-            numeralWidth, numeralHeight,                // render size (dynamic)
-            NUMERAL_SRC_WIDTH, NUMERAL_SRC_HEIGHT,      // source region (13x9 = one numeral)
-            NUMERAL_SRC_WIDTH, NUMERAL_SHEET_HEIGHT     // texture dimensions (13x90 = full sheet)
+            NUMERAL_SRC_WIDTH, NUMERAL_SRC_HEIGHT,
+            NUMERAL_SRC_WIDTH, NUMERAL_SRC_HEIGHT,
+            NUMERAL_SRC_WIDTH, NUMERAL_SHEET_HEIGHT
         )
     }
 }

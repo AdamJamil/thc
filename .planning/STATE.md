@@ -9,17 +9,17 @@ See: .planning/PROJECT.md (updated 2026-02-09)
 
 ## Current Position
 
-Phase: 80 of 82 (Core HUD Rendering) — COMPLETE
+Phase: 81 of 82 (Duration Overlay and Numerals) — COMPLETE
 Plan: 1/1 complete
 Status: Phase verified ✓
-Last activity: 2026-02-10 — Phase 80 verified and complete
+Last activity: 2026-02-10 — Phase 81 complete
 
 Progress: [██████████] 100% (1/1 plans)
 
 ## Performance Metrics
 
 **Cumulative:**
-- 122 plans completed across 15 shipped milestones
+- 123 plans completed across 15 shipped milestones
 - ~8.9 hours total execution time
 - 20 days from project start
 
@@ -43,6 +43,8 @@ Key patterns established:
 - Accessor invoker pattern for protected method access
 - ResourceKey-based priority map for effect sorting in HUD rendering
 - Vanilla mob effect icon texture path: textures/mob_effect/{path}.png
+- originalDurations mutableMap pattern for tracking initial effect duration and computing drain ratio
+- Sub-tick interpolation via deltaTracker.getGameTimeDeltaPartialTick for smooth HUD animations
 
 ### Pending Todos
 
@@ -66,6 +68,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-10
-Stopped at: Phase 80 complete and verified
+Stopped at: Completed 81-01-PLAN.md
 Resume file: None
-Next: `/gsd:plan-phase 81`
+Next: `/gsd:plan-phase 82`

@@ -48,6 +48,7 @@ Key patterns established:
 - Sub-tick interpolation via deltaTracker.getGameTimeDeltaPartialTick for smooth HUD animations
 - OptionInstance IntRange slider with save-on-change for Video Settings injection
 - Ratio-based proportional HUD scaling (all sizes derived from frame size via ratios)
+- 12-param blit overload when render size differs from texture source size (decouples UV sampling from screen pixels)
 
 ### Pending Todos
 
@@ -67,10 +68,11 @@ None.
 | 003 | Render downed player body with red particles | 2026-02-02 | 915f156 | [003](./quick/003-render-downed-player-body/) |
 | 004 | Add red beacon beam at downed player location | 2026-02-03 | 971faea | [004](./quick/004-when-a-player-is-downed-on-top-of-the-re/) |
 | 006 | Fix snowballs proccing arrow-only effects | 2026-02-03 | 8e3c3e2 | [006](./quick/006-fix-snowball-proccing-arrow-effects/) |
+| 007 | Fix effects GUI scaling, overlay, infinite filter, vanilla HUD | 2026-02-10 | 209be5c | [007](./quick/7-fix-v3-2-effects-gui-scaling-math-green-/) |
 
 ## Session Continuity
 
 Last session: 2026-02-10
-Stopped at: v3.2 milestone archived
+Stopped at: Completed quick-7 (effects GUI fixes)
 Resume file: None
 Next: /gsd:new-milestone for next milestone

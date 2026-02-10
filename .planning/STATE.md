@@ -9,10 +9,10 @@ See: .planning/PROJECT.md (updated 2026-02-09)
 
 ## Current Position
 
-Phase: 81 of 82 (Duration Overlay and Numerals) — COMPLETE
+Phase: 82 of 82 (Scaling Settings) — COMPLETE
 Plan: 1/1 complete
-Status: Phase verified ✓
-Last activity: 2026-02-10 — Phase 81 complete
+Status: Phase verified
+Last activity: 2026-02-10 — Phase 82 complete
 
 Progress: [██████████] 100% (1/1 plans)
 
@@ -45,6 +45,8 @@ Key patterns established:
 - Vanilla mob effect icon texture path: textures/mob_effect/{path}.png
 - originalDurations mutableMap pattern for tracking initial effect duration and computing drain ratio
 - Sub-tick interpolation via deltaTracker.getGameTimeDeltaPartialTick for smooth HUD animations
+- OptionInstance IntRange slider with save-on-change for Video Settings injection
+- Ratio-based proportional HUD scaling (all sizes derived from frame size via ratios)
 
 ### Pending Todos
 
@@ -68,6 +70,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-10
-Stopped at: Completed 81-01-PLAN.md
+Stopped at: Completed 82-01-PLAN.md
 Resume file: None
-Next: `/gsd:plan-phase 82`
+Next: Phase 82 complete - milestone ready

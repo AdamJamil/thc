@@ -110,8 +110,8 @@ object EffectsHudRenderer {
         val margin = (frameSize * MARGIN_RATIO).toInt().coerceAtLeast(2)
         val numeralWidth = (frameSize * NUMERAL_W_RATIO).toInt()
         val numeralHeight = (frameSize * NUMERAL_H_RATIO).toInt()
-        val numeralOffsetX = (frameSize * NUMERAL_OX_RATIO).toInt()
-        val numeralOffsetY = (frameSize * NUMERAL_OY_RATIO).toInt()
+        val numeralOffsetX = Math.round(frameSize * NUMERAL_OX_RATIO).toInt()
+        val numeralOffsetY = Math.round(frameSize * NUMERAL_OY_RATIO).toInt()
 
         val startX = margin
         val screenHeight = guiGraphics.guiHeight()
@@ -157,8 +157,8 @@ object EffectsHudRenderer {
                     ICON_SOURCE_SIZE, ICON_SOURCE_SIZE  // texture dimensions (18x18)
                 )
 
-                // Duration overlay
-                renderDurationOverlay(guiGraphics, effectInstance, effectName, startX, y, partialTick, frameSize)
+                // Duration overlay (covers the 36x36 icon area, not the full frame)
+                renderDurationOverlay(guiGraphics, effectInstance, effectName, startX + iconOffset, y + iconOffset, partialTick, iconRenderSize)
 
                 // Roman numeral for amplifier >= 1
                 renderAmplifierNumeral(guiGraphics, effectInstance, startX, y, numeralWidth, numeralHeight, numeralOffsetX, numeralOffsetY)
@@ -173,10 +173,10 @@ object EffectsHudRenderer {
         guiGraphics: GuiGraphics,
         effectInstance: MobEffectInstance,
         effectName: String,
-        frameX: Int,
-        frameY: Int,
+        iconX: Int,
+        iconY: Int,
         partialTick: Float,
-        frameSize: Int
+        iconSize: Int
     ) {
         // Infinite effects are filtered out before rendering, so only finite effects reach here
         val remaining = effectInstance.duration
@@ -195,15 +195,15 @@ object EffectsHudRenderer {
             (effectiveRemaining / original).coerceIn(0f, 1f)
         }
 
-        val overlayHeight = (frameSize * ratio).toInt()
+        val overlayHeight = (iconSize * ratio).toInt()
         if (overlayHeight <= 0) return
 
-        // Fill from bottom upward within the full frame area
+        // Fill from bottom upward within the icon area only
         guiGraphics.fill(
-            frameX,
-            frameY + frameSize - overlayHeight,
-            frameX + frameSize,
-            frameY + frameSize,
+            iconX,
+            iconY + iconSize - overlayHeight,
+            iconX + iconSize,
+            iconY + iconSize,
             OVERLAY_COLOR
         )
     }

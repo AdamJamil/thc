@@ -31,7 +31,7 @@ object EffectsHudRenderer {
     private const val NUMERAL_OX_RATIO = 5.0 / 44.0  // numeral offset X relative to frame
     private const val NUMERAL_OY_RATIO = 5.0 / 44.0  // numeral offset Y relative to frame
 
-    private const val OVERLAY_COLOR = 0x3300FF00.toInt() // Green with 20% alpha (ARGB)
+    private const val OVERLAY_COLOR = 0x5A00FF00.toInt() // Green with ~35% alpha (ARGB)
 
     /** Tracks the original duration for each effect to compute drain ratio. */
     private val originalDurations = mutableMapOf<String, Int>()
@@ -158,7 +158,7 @@ object EffectsHudRenderer {
                 )
 
                 // Duration overlay
-                renderDurationOverlay(guiGraphics, effectInstance, effectName, startX, y, partialTick, iconRenderSize, iconOffset)
+                renderDurationOverlay(guiGraphics, effectInstance, effectName, startX, y, partialTick, frameSize)
 
                 // Roman numeral for amplifier >= 1
                 renderAmplifierNumeral(guiGraphics, effectInstance, startX, y, numeralWidth, numeralHeight, numeralOffsetX, numeralOffsetY)
@@ -176,8 +176,7 @@ object EffectsHudRenderer {
         frameX: Int,
         frameY: Int,
         partialTick: Float,
-        iconRenderSize: Int,
-        iconOffset: Int
+        frameSize: Int
     ) {
         // Infinite effects are filtered out before rendering, so only finite effects reach here
         val remaining = effectInstance.duration
@@ -196,18 +195,15 @@ object EffectsHudRenderer {
             (effectiveRemaining / original).coerceIn(0f, 1f)
         }
 
-        val overlayHeight = (iconRenderSize * ratio).toInt()
+        val overlayHeight = (frameSize * ratio).toInt()
         if (overlayHeight <= 0) return
 
-        val iconX = frameX + iconOffset
-        val iconY = frameY + iconOffset
-
-        // Fill from bottom upward within the icon area
+        // Fill from bottom upward within the full frame area
         guiGraphics.fill(
-            iconX,
-            iconY + iconRenderSize - overlayHeight,
-            iconX + iconRenderSize,
-            iconY + iconRenderSize,
+            frameX,
+            frameY + frameSize - overlayHeight,
+            frameX + frameSize,
+            frameY + frameSize,
             OVERLAY_COLOR
         )
     }

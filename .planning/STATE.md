@@ -2,28 +2,29 @@
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-02-09)
+See: .planning/PROJECT.md (updated 2026-02-10)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v3.2 Effects GUI
+**Current focus:** Planning next milestone
 
 ## Current Position
 
 Phase: 82 of 82 (Scaling Settings) — COMPLETE
 Plan: 1/1 complete
-Status: Phase verified
-Last activity: 2026-02-10 — Phase 82 complete
+Status: Milestone v3.2 shipped
+Last activity: 2026-02-10 — v3.2 Effects GUI milestone archived
 
-Progress: [██████████] 100% (1/1 plans)
+Progress: [██████████] 100% — milestone complete
 
 ## Performance Metrics
 
 **Cumulative:**
-- 123 plans completed across 15 shipped milestones
-- ~8.9 hours total execution time
-- 20 days from project start
+- 128 plans completed across 16 shipped milestones
+- ~9 hours total execution time
+- 24 days from project start
 
 **Recent Milestones:**
+- v3.2: 3 plans, ~15 min (3 phases)
 - v3.1: 7 plans, ~33 min (5 phases)
 - v3.0: 4 plans, ~23 min (3 phases)
 - v2.8: 11 plans, ~45 min (6 phases)
@@ -33,7 +34,7 @@ Progress: [██████████] 100% (1/1 plans)
 ### Decisions
 
 See milestone archives for full decision logs:
-- .planning/milestones/v3.1-ROADMAP.md (previous)
+- .planning/milestones/v3.2-ROADMAP.md (previous)
 
 Key patterns established:
 - Stage-gated boons follow ClassManager + StageManager pattern
@@ -70,6 +71,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-10
-Stopped at: Completed 82-01-PLAN.md
+Stopped at: v3.2 milestone archived
 Resume file: None
-Next: Phase 82 complete - milestone ready
+Next: /gsd:new-milestone for next milestone

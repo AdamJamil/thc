@@ -17,9 +17,6 @@
 - [v2.8](milestones/v2.8-ROADMAP.md) — Villager Overhaul (phases 66-71)
 - [v3.0](milestones/v3.0-ROADMAP.md) — Revival System (phases 72-74)
 - [v3.1](milestones/v3.1-ROADMAP.md) — Bastion Class Boons (phases 75-79)
-
-## Active Milestone
-
 - [v3.2](milestones/v3.2-ROADMAP.md) — Effects GUI (phases 80-82)
 
 ## Progress
@@ -41,10 +38,10 @@
 | v2.8 | 66-71 | 11 | Complete | 2026-01-31 |
 | v3.0 | 72-74 | 4 | Complete | 2026-02-02 |
 | v3.1 | 75-79 | 7 | Complete | 2026-02-03 |
-| v3.2 | 80-82 | 3 | In progress | - |
+| v3.2 | 80-82 | 3 | Complete | 2026-02-10 |
 
-**Total:** 82 phases, 125 plans across 16 milestones
+**Total:** 82 phases, 128 plans across 16 milestones
 
 ---
 
-*Roadmap last updated: 2026-02-10 after phase 82 execution*
+*Roadmap last updated: 2026-02-10 after v3.2 milestone completion*

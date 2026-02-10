@@ -422,3 +422,32 @@
 **What's next:** To be determined (v1.1 planning)
 
 ---
+
+## v3.2 Effects GUI (Shipped: 2026-02-10)
+
+**Delivered:** Client-side effects HUD showing active status effects with priority sorting, duration overlays with smooth per-tick drain, roman numeral amplifier labels, and configurable scaling via Video Settings slider.
+
+**Phases completed:** 80-82 (3 plans total)
+
+**Key accomplishments:**
+
+- Effects HUD renderer with priority-sorted status effect icons (Wither > Poison > Resistance > Absorption > Strength > Slowness > Weakness > Speed > others) stacked vertically from bottom-left
+- Layered frame rendering: effect_frame.png background, 2x vanilla mob effect icon centered with 4px border
+- Green 50% alpha duration overlay with smooth per-tick drain using sub-tick interpolation (partialTick)
+- Roman numeral amplifier labels (II-X) from spritesheet at top-left of each frame
+- Video Settings "Effects GUI Scaling" slider (2-20% range) with file persistence
+- Ratio-based proportional HUD sizing — all dimensions derived from frame size for smooth scaling
+
+**Stats:**
+
+- 6 files created/modified
+- ~14,401 lines of Kotlin/Java (cumulative)
+- 3 phases, 3 plans, 5 tasks
+- 1 day (2026-02-09)
+
+**Git range:** `feat(80-01)` → `feat(82-01)`
+
+**What's next:** To be determined
+
+---
+

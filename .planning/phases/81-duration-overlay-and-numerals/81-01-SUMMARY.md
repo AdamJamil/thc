@@ -63,7 +63,7 @@ Each task was committed atomically:
 
 1. **Task 1: Add duration overlay and numeral rendering to EffectsHudRenderer** - `0fd11e4` (feat)
 
-**Plan metadata:** [pending] (docs: complete plan)
+**Plan metadata:** `dbef6e3` (docs: complete plan)
 
 ## Files Created/Modified
 - `src/client/kotlin/thc/client/EffectsHudRenderer.kt` - Added renderDurationOverlay() and renderAmplifierNumeral() methods, originalDurations tracking map, NUMERALS_TEXTURE constant, sub-tick interpolation

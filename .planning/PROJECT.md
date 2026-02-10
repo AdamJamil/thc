@@ -242,11 +242,7 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ### Active
 
-- [ ] Effects GUI HUD displaying active status effects in bottom-left corner
-- [ ] Priority-sorted effect display (Wither > Poison > Resistance > Absorption > Strength > Slowness > Weakness > Speed > others)
-- [ ] Effect frame rendering: frame image, scaled vanilla icon, green duration overlay, roman numeral
-- [ ] Smooth per-tick duration drain with 50% transparent green overlay
-- [ ] Video Settings scaling option (2%-20% of screen width)
+(None — next milestone not yet planned)
 
 ### Out of Scope
 
@@ -314,26 +310,22 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 | ThreadLocal for cross-injection state | Store saturation in HEAD, compare in RETURN for cap behavior | Good |
 | HEAD cancellation for FoodData.tick() | Complete control over exhaustion and healing logic | Good |
 | Fixed interval + variable heal amount | Simpler than variable intervals for saturation tier healing | Good |
+| ResourceKey-based priority map for effects | Stable identity comparison via unwrapKey() | Good |
+| originalDurations mutableMap pattern | Track initial duration for drain ratio, reset on refresh | Good |
+| Sub-tick interpolation for HUD animations | Smooth visual drain between ticks via partialTick | Good |
+| Ratio-based proportional HUD scaling | All sizes derived from frame size for smooth scaling at any % | Good |
+| Simple text file config persistence | Zero extra dependencies vs JSON/TOML for single value | Good |
 
-## Current Milestone: v3.2 Effects GUI
-
-**Goal:** Client-side HUD showing active status effects with priority sorting, duration overlays, and configurable scaling.
-
-**Target features:**
-- Effects GUI in bottom-left corner with vertical stacking
-- Priority-sorted display (Wither > Poison > Resistance > Absorption > Strength > Slowness > Weakness > Speed > others)
-- Layered frame rendering: effect_frame.png, 2x vanilla icon, green duration overlay, roman numeral
-- Smooth per-tick duration tracking
-- Video Settings scaling option (2%-20% of screen width)
+## Current Milestone: None (planning next)
 
 ## Current State
 
-**Latest Ship:** v3.1 Bastion Class Boons (2026-02-03)
+**Latest Ship:** v3.2 Effects GUI (2026-02-10)
 
 **Codebase:**
-- ~14,050 LOC Kotlin/Java
+- ~14,401 LOC Kotlin/Java
 - Mixed mixin + event-driven architecture
-- 122 plans across 79 phases in 15 milestones
+- 128 plans across 82 phases in 16 milestones
 - Attachment patterns for player state, mob threat, one-time effects, class, boon level, spawn region, fire source
 - Client visual overrides for twilight sky
 - Comprehensive spawn/behavior modifications (10+ mob types)
@@ -390,6 +382,10 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 - Boat land placement gate (Bastion Stage 5+) — v3.1
 - Hostile mob boat trapping with timed breakout — v3.1
 - Boat stack size increase (16) and copper recipes — v3.1
+- Effects GUI HUD with priority-sorted status effects in bottom-left corner — v3.2
+- Layered frame rendering: effect_frame.png, 2x vanilla icon, green duration overlay, roman numerals — v3.2
+- Smooth per-tick duration drain with sub-tick interpolation — v3.2
+- Video Settings scaling slider (2-20% of screen width) with file persistence — v3.2
 
 ---
-*Last updated: 2026-02-09 after v3.2 milestone start*
+*Last updated: 2026-02-10 after v3.2 milestone completion*

@@ -15,17 +15,21 @@ object EffectsHudRenderer {
     private val FRAME_TEXTURE = Identifier.fromNamespaceAndPath("thc", "textures/item/effect_frame.png")
     private val NUMERALS_TEXTURE = Identifier.fromNamespaceAndPath("thc", "textures/item/numerals.png")
 
-    private const val FRAME_SIZE = 44
-    private const val ICON_RENDER_SIZE = 36
+    // Base design / texture source constants
+    private const val BASE_FRAME_SIZE = 44
     private const val ICON_SOURCE_SIZE = 18
-    private const val ICON_OFFSET = 4 // (44 - 36) / 2
-    private const val MARGIN = 4
-
-    private const val NUMERAL_WIDTH = 13
-    private const val NUMERAL_HEIGHT = 9
+    private const val NUMERAL_SRC_WIDTH = 13
+    private const val NUMERAL_SRC_HEIGHT = 9
     private const val NUMERAL_SHEET_HEIGHT = 90 // 10 numerals * 9px each
-    private const val NUMERAL_OFFSET_X = 5 // from frame top-left
-    private const val NUMERAL_OFFSET_Y = 5 // from frame top-left
+
+    // Ratios derived from original 44px base design
+    private const val ICON_RATIO = 36.0 / 44.0       // icon render size relative to frame
+    private const val ICON_OFFSET_RATIO = 4.0 / 44.0 // icon offset relative to frame
+    private const val MARGIN_RATIO = 4.0 / 44.0      // margin relative to frame
+    private const val NUMERAL_W_RATIO = 13.0 / 44.0  // numeral width relative to frame
+    private const val NUMERAL_H_RATIO = 9.0 / 44.0   // numeral height relative to frame
+    private const val NUMERAL_OX_RATIO = 5.0 / 44.0  // numeral offset X relative to frame
+    private const val NUMERAL_OY_RATIO = 5.0 / 44.0  // numeral offset Y relative to frame
 
     private const val OVERLAY_COLOR = 0x8000FF00.toInt() // Green with 50% alpha (ARGB)
 
@@ -91,13 +95,24 @@ object EffectsHudRenderer {
         // Build set of currently active effect keys for cleanup
         val activeKeys = mutableSetOf<String>()
 
-        val startX = MARGIN
+        // Compute dynamic sizes from config scale percentage
+        val screenWidth = guiGraphics.guiWidth()
+        val frameSize = (screenWidth * EffectsGuiConfig.getScalePercent() / 100.0).toInt().coerceAtLeast(16)
+        val iconRenderSize = (frameSize * ICON_RATIO).toInt()
+        val iconOffset = (frameSize * ICON_OFFSET_RATIO).toInt()
+        val margin = (frameSize * MARGIN_RATIO).toInt().coerceAtLeast(2)
+        val numeralWidth = (frameSize * NUMERAL_W_RATIO).toInt()
+        val numeralHeight = (frameSize * NUMERAL_H_RATIO).toInt()
+        val numeralOffsetX = (frameSize * NUMERAL_OX_RATIO).toInt()
+        val numeralOffsetY = (frameSize * NUMERAL_OY_RATIO).toInt()
+
+        val startX = margin
         val screenHeight = guiGraphics.guiHeight()
-        // Bottom of first (highest-priority) frame sits at screenHeight - MARGIN
-        val baseY = screenHeight - MARGIN - FRAME_SIZE
+        // Bottom of first (highest-priority) frame sits at screenHeight - margin
+        val baseY = screenHeight - margin - frameSize
 
         for ((index, effectInstance) in sorted.withIndex()) {
-            val y = baseY - (index * FRAME_SIZE)
+            val y = baseY - (index * frameSize)
 
             // Render frame
             guiGraphics.blit(
@@ -107,13 +122,13 @@ object EffectsHudRenderer {
                 y,
                 0.0f,
                 0.0f,
-                FRAME_SIZE,
-                FRAME_SIZE,
-                FRAME_SIZE,
-                FRAME_SIZE
+                frameSize,
+                frameSize,
+                BASE_FRAME_SIZE,
+                BASE_FRAME_SIZE
             )
 
-            // Render vanilla mob effect icon at 2x scale centered in frame
+            // Render vanilla mob effect icon scaled and centered in frame
             val effectKey = effectInstance.effect.unwrapKey().orElse(null)
             if (effectKey != null) {
                 val loc = effectKey.identifier()
@@ -127,21 +142,21 @@ object EffectsHudRenderer {
                 guiGraphics.blit(
                     RenderPipelines.GUI_TEXTURED,
                     iconTexture,
-                    startX + ICON_OFFSET,
-                    y + ICON_OFFSET,
+                    startX + iconOffset,
+                    y + iconOffset,
                     0.0f,
                     0.0f,
-                    ICON_RENDER_SIZE,
-                    ICON_RENDER_SIZE,
+                    iconRenderSize,
+                    iconRenderSize,
                     ICON_SOURCE_SIZE,
                     ICON_SOURCE_SIZE
                 )
 
                 // Duration overlay
-                renderDurationOverlay(guiGraphics, effectInstance, effectName, startX, y, partialTick)
+                renderDurationOverlay(guiGraphics, effectInstance, effectName, startX, y, partialTick, iconRenderSize, iconOffset)
 
                 // Roman numeral for amplifier >= 1
-                renderAmplifierNumeral(guiGraphics, effectInstance, startX, y)
+                renderAmplifierNumeral(guiGraphics, effectInstance, startX, y, numeralWidth, numeralHeight, numeralOffsetX, numeralOffsetY)
             }
         }
 
@@ -155,7 +170,9 @@ object EffectsHudRenderer {
         effectName: String,
         frameX: Int,
         frameY: Int,
-        partialTick: Float
+        partialTick: Float,
+        iconRenderSize: Int,
+        iconOffset: Int
     ) {
         val ratio: Float = if (effectInstance.isInfiniteDuration) {
             1.0f
@@ -177,18 +194,18 @@ object EffectsHudRenderer {
             }
         }
 
-        val overlayHeight = (ICON_RENDER_SIZE * ratio).toInt()
+        val overlayHeight = (iconRenderSize * ratio).toInt()
         if (overlayHeight <= 0) return
 
-        val iconX = frameX + ICON_OFFSET
-        val iconY = frameY + ICON_OFFSET
+        val iconX = frameX + iconOffset
+        val iconY = frameY + iconOffset
 
         // Fill from bottom upward within the icon area
         guiGraphics.fill(
             iconX,
-            iconY + ICON_RENDER_SIZE - overlayHeight,
-            iconX + ICON_RENDER_SIZE,
-            iconY + ICON_RENDER_SIZE,
+            iconY + iconRenderSize - overlayHeight,
+            iconX + iconRenderSize,
+            iconY + iconRenderSize,
             OVERLAY_COLOR
         )
     }
@@ -197,24 +214,29 @@ object EffectsHudRenderer {
         guiGraphics: GuiGraphics,
         effectInstance: MobEffectInstance,
         frameX: Int,
-        frameY: Int
+        frameY: Int,
+        numeralWidth: Int,
+        numeralHeight: Int,
+        numeralOffsetX: Int,
+        numeralOffsetY: Int
     ) {
         val amplifier = effectInstance.amplifier
         if (amplifier < 1 || amplifier > 9) return
 
-        val numeralX = frameX + NUMERAL_OFFSET_X
-        val numeralY = frameY + NUMERAL_OFFSET_Y
+        val numeralX = frameX + numeralOffsetX
+        val numeralY = frameY + numeralOffsetY
 
+        // Source sheet uses original 13x9 per numeral, 10 rows = 90px total
         guiGraphics.blit(
             RenderPipelines.GUI_TEXTURED,
             NUMERALS_TEXTURE,
             numeralX,
             numeralY,
             0.0f,
-            (amplifier * NUMERAL_HEIGHT).toFloat(),
-            NUMERAL_WIDTH,
-            NUMERAL_HEIGHT,
-            NUMERAL_WIDTH,
+            (amplifier * NUMERAL_SRC_HEIGHT).toFloat(),
+            numeralWidth,
+            numeralHeight,
+            NUMERAL_SRC_WIDTH,
             NUMERAL_SHEET_HEIGHT
         )
     }

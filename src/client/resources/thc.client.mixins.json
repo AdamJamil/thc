@@ -9,6 +9,7 @@
 		"IronBoatRendererMixin",
 		"SpectatorCollisionClientMixin",
 		"SpectatorXrayMixin",
+		"VideoSettingsScreenMixin",
 		"access.CameraAccessor"
 	],
 	"injectors": {

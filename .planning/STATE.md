@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-02-03)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** Planning next milestone
+**Current focus:** v3.2 Effects GUI
 
 ## Current Position
 
-Phase: 79 of 79 (milestone complete)
+Phase: Not started (defining requirements)
 Plan: —
-Status: v3.1 SHIPPED, ready for next milestone
-Last activity: 2026-02-03 — v3.1 milestone complete
+Status: Defining requirements
+Last activity: 2026-02-09 — Milestone v3.2 started
 
 Progress: [===========================] 15 milestones shipped (79 phases, 122 plans)
 
@@ -153,7 +153,7 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-03
-Stopped at: v3.1 milestone complete
+Last session: 2026-02-09
+Stopped at: v3.2 milestone definition
 Resume file: None
-Next: `/gsd:new-milestone`
+Next: Define requirements → roadmap

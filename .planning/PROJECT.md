@@ -242,7 +242,11 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ### Active
 
-(None — next milestone pending)
+- [ ] Effects GUI HUD displaying active status effects in bottom-left corner
+- [ ] Priority-sorted effect display (Wither > Poison > Resistance > Absorption > Strength > Slowness > Weakness > Speed > others)
+- [ ] Effect frame rendering: frame image, scaled vanilla icon, green duration overlay, roman numeral
+- [ ] Smooth per-tick duration drain with 50% transparent green overlay
+- [ ] Video Settings scaling option (2%-20% of screen width)
 
 ### Out of Scope
 
@@ -311,9 +315,16 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 | HEAD cancellation for FoodData.tick() | Complete control over exhaustion and healing logic | Good |
 | Fixed interval + variable heal amount | Simpler than variable intervals for saturation tier healing | Good |
 
-## Current Milestone
+## Current Milestone: v3.2 Effects GUI
 
-(Planning next milestone — run `/gsd:new-milestone` to start)
+**Goal:** Client-side HUD showing active status effects with priority sorting, duration overlays, and configurable scaling.
+
+**Target features:**
+- Effects GUI in bottom-left corner with vertical stacking
+- Priority-sorted display (Wither > Poison > Resistance > Absorption > Strength > Slowness > Weakness > Speed > others)
+- Layered frame rendering: effect_frame.png, 2x vanilla icon, green duration overlay, roman numeral
+- Smooth per-tick duration tracking
+- Video Settings scaling option (2%-20% of screen width)
 
 ## Current State
 
@@ -381,4 +392,4 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 - Boat stack size increase (16) and copper recipes — v3.1
 
 ---
-*Last updated: 2026-02-03 after v3.1 milestone completion*
+*Last updated: 2026-02-09 after v3.2 milestone start*

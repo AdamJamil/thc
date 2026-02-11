@@ -122,9 +122,10 @@ object MobHealthBarRenderer {
             mobPos.z - cameraPos.z
         )
 
-        // Billboard rotation: face the camera
+        // Billboard rotation: face the camera, then flip X to correct mirroring
         stack.mulPose(Axis.YP.rotationDegrees(-cameraAccessor.yRot))
         stack.mulPose(Axis.XP.rotationDegrees(cameraAccessor.xRot))
+        stack.scale(-1f, 1f, 1f)
 
         val bufferSource = Minecraft.getInstance().renderBuffers().bufferSource()
 
@@ -138,7 +139,8 @@ object MobHealthBarRenderer {
             bufferSource, matrix, pose,
             EMPTY_TEXTURE,
             -halfW, -halfH, halfW, halfH,
-            0f, 0f, 1f, 1f
+            0f, 0f, 1f, 1f,
+            z = 0f
         )
 
         // Layer 2: Full bar (clipped to HP ratio)
@@ -151,7 +153,8 @@ object MobHealthBarRenderer {
                 bufferSource, matrix, pose,
                 FULL_TEXTURE,
                 -halfW, -halfH, -halfW + renderWidth, halfH,
-                0f, 0f, uEnd, 1f
+                0f, 0f, uEnd, 1f,
+                z = 0.001f
             )
         }
 
@@ -165,7 +168,8 @@ object MobHealthBarRenderer {
                 bufferSource, matrix, pose,
                 ABSORPTION_TEXTURE,
                 absLeft, -halfH, absLeft + absWidth, halfH,
-                0f, 0f, 1f, 1f
+                0f, 0f, 1f, 1f,
+                z = 0.002f
             )
         }
 
@@ -233,7 +237,8 @@ object MobHealthBarRenderer {
                 bufferSource, matrix, pose,
                 EffectsHudRenderer.FRAME_TEXTURE,
                 iconX, iconY, iconX + frameWorldSize, iconY + frameWorldSize,
-                0f, 0f, 1f, 1f
+                0f, 0f, 1f, 1f,
+                z = 0.003f
             )
 
             // Layer 2: Mob effect icon (inset within frame)
@@ -248,7 +253,8 @@ object MobHealthBarRenderer {
                 iconTexture,
                 iconX + iconOffset, iconY + iconOffset,
                 iconX + iconOffset + iconSize, iconY + iconOffset + iconSize,
-                0f, 0f, 1f, 1f
+                0f, 0f, 1f, 1f,
+                z = 0.004f
             )
 
             // Layer 3: Duration overlay (green, filling from bottom upward)
@@ -261,7 +267,8 @@ object MobHealthBarRenderer {
                     iconY + iconOffset + iconSize - overlayHeight,
                     iconX + iconOffset + iconSize,
                     iconY + iconOffset + iconSize,
-                    EffectsHudRenderer.OVERLAY_COLOR
+                    EffectsHudRenderer.OVERLAY_COLOR,
+                    z = 0.005f
                 )
             }
 
@@ -282,7 +289,8 @@ object MobHealthBarRenderer {
                     EffectsHudRenderer.NUMERALS_TEXTURE,
                     iconX + numeralOffsetX, iconY + numeralOffsetY,
                     iconX + numeralOffsetX + numeralWorldW, iconY + numeralOffsetY + numeralWorldH,
-                    0f, vStart, 1f, vEnd
+                    0f, vStart, 1f, vEnd,
+                    z = 0.006f
                 )
             }
         }
@@ -325,36 +333,33 @@ object MobHealthBarRenderer {
         pose: com.mojang.blaze3d.vertex.PoseStack.Pose,
         texture: Identifier,
         x1: Float, y1: Float, x2: Float, y2: Float,
-        u1: Float, v1: Float, u2: Float, v2: Float
+        u1: Float, v1: Float, u2: Float, v2: Float,
+        z: Float = 0f
     ) {
         val buffer = bufferSource.getBuffer(RenderTypes.entityTranslucent(texture))
 
-        // Bottom-left
-        buffer.addVertex(matrix, x1, y1, 0f)
+        buffer.addVertex(matrix, x1, y1, z)
             .setColor(1f, 1f, 1f, 1f)
             .setUv(u1, v2)
             .setOverlay(0)
             .setLight(15728880)
             .setNormal(pose, 0f, 0f, 1f)
 
-        // Bottom-right
-        buffer.addVertex(matrix, x2, y1, 0f)
+        buffer.addVertex(matrix, x2, y1, z)
             .setColor(1f, 1f, 1f, 1f)
             .setUv(u2, v2)
             .setOverlay(0)
             .setLight(15728880)
             .setNormal(pose, 0f, 0f, 1f)
 
-        // Top-right
-        buffer.addVertex(matrix, x2, y2, 0f)
+        buffer.addVertex(matrix, x2, y2, z)
             .setColor(1f, 1f, 1f, 1f)
             .setUv(u2, v1)
             .setOverlay(0)
             .setLight(15728880)
             .setNormal(pose, 0f, 0f, 1f)
 
-        // Top-left
-        buffer.addVertex(matrix, x1, y2, 0f)
+        buffer.addVertex(matrix, x1, y2, z)
             .setColor(1f, 1f, 1f, 1f)
             .setUv(u1, v1)
             .setOverlay(0)
@@ -371,45 +376,40 @@ object MobHealthBarRenderer {
         matrix: Matrix4f,
         pose: com.mojang.blaze3d.vertex.PoseStack.Pose,
         x1: Float, y1: Float, x2: Float, y2: Float,
-        argbColor: Int
+        argbColor: Int,
+        z: Float = 0f
     ) {
-        // Extract ARGB components
         val a = ((argbColor shr 24) and 0xFF) / 255f
         val r = ((argbColor shr 16) and 0xFF) / 255f
         val g = ((argbColor shr 8) and 0xFF) / 255f
         val b = (argbColor and 0xFF) / 255f
 
-        // Use the frame texture as a proxy (we only need vertex coloring, UVs map to a solid area)
-        // entityTranslucent with the frame texture — the overlay will tint with the green color
-        // Using a 1x1 white pixel would be ideal, but we can use any texture with vertex color override
         val buffer = bufferSource.getBuffer(RenderTypes.entityTranslucent(EffectsHudRenderer.FRAME_TEXTURE))
-
-        // Map all UVs to the center of the frame texture to get a roughly solid sample
         val uMid = 0.5f
         val vMid = 0.5f
 
-        buffer.addVertex(matrix, x1, y1, 0.001f)
+        buffer.addVertex(matrix, x1, y1, z)
             .setColor(r, g, b, a)
             .setUv(uMid, vMid)
             .setOverlay(0)
             .setLight(15728880)
             .setNormal(pose, 0f, 0f, 1f)
 
-        buffer.addVertex(matrix, x2, y1, 0.001f)
+        buffer.addVertex(matrix, x2, y1, z)
             .setColor(r, g, b, a)
             .setUv(uMid, vMid)
             .setOverlay(0)
             .setLight(15728880)
             .setNormal(pose, 0f, 0f, 1f)
 
-        buffer.addVertex(matrix, x2, y2, 0.001f)
+        buffer.addVertex(matrix, x2, y2, z)
             .setColor(r, g, b, a)
             .setUv(uMid, vMid)
             .setOverlay(0)
             .setLight(15728880)
             .setNormal(pose, 0f, 0f, 1f)
 
-        buffer.addVertex(matrix, x1, y2, 0.001f)
+        buffer.addVertex(matrix, x1, y2, z)
             .setColor(r, g, b, a)
             .setUv(uMid, vMid)
             .setOverlay(0)

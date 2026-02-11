@@ -242,7 +242,9 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ### Active
 
-(None — next milestone not yet planned)
+- [ ] Enemy mob health bars with three-layer rendering (empty/full/absorption)
+- [ ] Mob status effects displayed above health bar
+- [ ] Video Settings scaling slider for health bar size
 
 ### Out of Scope
 
@@ -316,7 +318,15 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 | Ratio-based proportional HUD scaling | All sizes derived from frame size for smooth scaling at any % | Good |
 | Simple text file config persistence | Zero extra dependencies vs JSON/TOML for single value | Good |
 
-## Current Milestone: None (planning next)
+## Current Milestone: v3.3 Enemy Health Bars
+
+**Goal:** Floating health bars above hostile mobs showing HP, absorption, and status effects with configurable scaling.
+
+**Target features:**
+- Three-layer health bar (empty → full → absorption) above mob heads
+- Mob status effects rendered left-to-right above health bar
+- Video Settings scaling slider
+- 32-block visibility radius, hostile mobs only
 
 ## Current State
 
@@ -388,4 +398,4 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 - Video Settings scaling slider (2-20% of screen width) with file persistence — v3.2
 
 ---
-*Last updated: 2026-02-10 after v3.2 milestone completion*
+*Last updated: 2026-02-10 after v3.3 milestone start*

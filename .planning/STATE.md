@@ -5,16 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-02-10)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** Planning next milestone
+**Current focus:** v3.3 Enemy Health Bars
 
 ## Current Position
 
-Phase: 82 of 82 (Scaling Settings) — COMPLETE
-Plan: 1/1 complete
-Status: Milestone v3.2 shipped
-Last activity: 2026-02-10 — v3.2 Effects GUI milestone archived
-
-Progress: [██████████] 100% — milestone complete
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-02-10 — Milestone v3.3 started
 
 ## Performance Metrics
 

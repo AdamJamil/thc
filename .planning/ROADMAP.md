@@ -19,6 +19,10 @@
 - [v3.1](milestones/v3.1-ROADMAP.md) — Bastion Class Boons (phases 75-79)
 - [v3.2](milestones/v3.2-ROADMAP.md) — Effects GUI (phases 80-82)
 
+## Active Milestone
+
+- [v3.3](milestones/v3.3-ROADMAP.md) — Enemy Health Bars (phases 83-85)
+
 ## Progress
 
 | Milestone | Phases | Plans | Status | Shipped |
@@ -39,9 +43,10 @@
 | v3.0 | 72-74 | 4 | Complete | 2026-02-02 |
 | v3.1 | 75-79 | 7 | Complete | 2026-02-03 |
 | v3.2 | 80-82 | 3 | Complete | 2026-02-10 |
+| v3.3 | 83-85 | TBD | In progress | - |
 
-**Total:** 82 phases, 128 plans across 16 milestones
+**Total:** 85 phases, 128+ plans across 17 milestones
 
 ---
 
-*Roadmap last updated: 2026-02-10 after v3.2 milestone completion*
+*Roadmap last updated: 2026-02-10 after v3.3 roadmap creation*

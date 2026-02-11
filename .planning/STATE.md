@@ -5,14 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-10)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v3.3 Enemy Health Bars
+**Current focus:** v3.3 Enemy Health Bars — Phase 83 Health Bar Rendering
 
 ## Current Position
 
-Phase: Not started (defining requirements)
-Plan: —
-Status: Defining requirements
-Last activity: 2026-02-10 — Milestone v3.3 started
+Phase: 83 of 85 (Health Bar Rendering)
+Plan: 0 of TBD in current phase
+Status: Ready to plan
+Last activity: 2026-02-10 — Roadmap created for v3.3
+
+Progress: [░░░░░░░░░░] 0%
 
 ## Performance Metrics
 
@@ -34,19 +36,13 @@ Last activity: 2026-02-10 — Milestone v3.3 started
 See milestone archives for full decision logs:
 - .planning/milestones/v3.2-ROADMAP.md (previous)
 
-Key patterns established:
-- Stage-gated boons follow ClassManager + StageManager pattern
-- BoonGate utility for shared class + stage checks
-- Projectile-specific mixin targeting (Snowball.class not Projectile.class)
-- UUID-to-tick Map for ephemeral tracking in mixins
-- Accessor invoker pattern for protected method access
+Key patterns established for v3.3:
 - ResourceKey-based priority map for effect sorting in HUD rendering
 - Vanilla mob effect icon texture path: textures/mob_effect/{path}.png
-- originalDurations mutableMap pattern for tracking initial effect duration and computing drain ratio
-- Sub-tick interpolation via deltaTracker.getGameTimeDeltaPartialTick for smooth HUD animations
+- Sub-tick interpolation via deltaTracker.getGameTimeDeltaPartialTick for smooth animations
 - OptionInstance IntRange slider with save-on-change for Video Settings injection
 - Ratio-based proportional HUD scaling (all sizes derived from frame size via ratios)
-- 12-param blit overload when render size differs from texture source size (decouples UV sampling from screen pixels)
+- 12-param blit overload when render size differs from texture source size
 
 ### Pending Todos
 
@@ -72,6 +68,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-10
-Stopped at: Completed quick-8 (effects GUI overlay alpha + positioning)
+Stopped at: Created v3.3 roadmap (phases 83-85)
 Resume file: None
-Next: /gsd:new-milestone for next milestone
+Next: /gsd:plan-phase 83

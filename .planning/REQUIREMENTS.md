@@ -46,23 +46,23 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| HBAR-01 | — | Pending |
-| HBAR-02 | — | Pending |
-| HBAR-03 | — | Pending |
-| HBAR-04 | — | Pending |
-| HBAR-05 | — | Pending |
-| HBAR-06 | — | Pending |
-| MEFF-01 | — | Pending |
-| MEFF-02 | — | Pending |
-| MEFF-03 | — | Pending |
-| SCAL-01 | — | Pending |
-| SCAL-02 | — | Pending |
+| HBAR-01 | Phase 83 | Pending |
+| HBAR-02 | Phase 83 | Pending |
+| HBAR-03 | Phase 83 | Pending |
+| HBAR-04 | Phase 83 | Pending |
+| HBAR-05 | Phase 83 | Pending |
+| HBAR-06 | Phase 83 | Pending |
+| MEFF-01 | Phase 84 | Pending |
+| MEFF-02 | Phase 84 | Pending |
+| MEFF-03 | Phase 84 | Pending |
+| SCAL-01 | Phase 85 | Pending |
+| SCAL-02 | Phase 85 | Pending |
 
 **Coverage:**
 - v3.3 requirements: 11 total
-- Mapped to phases: 0
-- Unmapped: 11
+- Mapped to phases: 11
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-02-10*
-*Last updated: 2026-02-10 after initial definition*
+*Last updated: 2026-02-10 after roadmap creation*

@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-02-10)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v3.3 Enemy Health Bars — Phase 84 Mob Effects Display
+**Current focus:** v3.3 Enemy Health Bars — All phases complete (83, 84, 85)
 
 ## Current Position
 
 Phase: 85 of 85 (Scaling)
 Plan: 1 of 1 in current phase
 Status: Phase 85 complete
-Last activity: 2026-02-11 — Completed 85-01 scaling config and slider
+Last activity: 2026-02-11 — Completed 84-01 mob effects display (all v3.3 phases done)
 
 Progress: [██████████] 100%
 
@@ -47,6 +47,9 @@ Key patterns established for v3.3:
 - CameraAccessor yRot/xRot for billboard rotation in world-space rendering
 - RenderTypes.entityTranslucent for alpha-blended textured quads
 - EntityTypeTest.forClass(Monster::class.java) for area-based mob querying
+- Internal visibility for shared constants across Kotlin object renderers
+- Per-entity duration tracking keyed by entityId + effect name for mob-specific drain ratios
+- Vertex-colored quads with center UV for solid color overlays in world-space rendering
 
 ### Pending Todos
 
@@ -72,6 +75,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-11
-Stopped at: Completed 85-01-PLAN.md
+Stopped at: Completed 84-01-PLAN.md (all v3.3 phases complete)
 Resume file: None
-Next: /gsd:execute-phase 84
+Next: v3.3 milestone verification and ship

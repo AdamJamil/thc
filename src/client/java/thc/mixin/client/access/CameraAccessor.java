@@ -6,11 +6,17 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
 /**
- * Accessor mixin to expose Camera's private position field.
- * Used for calculating render positions relative to camera.
+ * Accessor mixin to expose Camera's private fields.
+ * Used for calculating render positions relative to camera and billboard rotations.
  */
 @Mixin(Camera.class)
 public interface CameraAccessor {
     @Accessor("position")
     Vec3 getPosition();
+
+    @Accessor("yRot")
+    float getYRot();
+
+    @Accessor("xRot")
+    float getXRot();
 }

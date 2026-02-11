@@ -3,6 +3,7 @@ package thc
 import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
+import net.fabricmc.fabric.api.client.rendering.v1.world.WorldRenderEvents
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.hud.HudStatusBarHeightRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements
@@ -12,8 +13,10 @@ import thc.client.BucklerHudRenderer
 import thc.client.BucklerUseHandler
 import thc.client.EffectsGuiConfig
 import thc.client.EffectsHudRenderer
+import thc.client.MobHealthBarConfig
 import thc.client.DownedBodyRenderer
 import thc.client.DownedPlayersClientState
+import thc.client.MobHealthBarRenderer
 import thc.client.IronBoatRenderer
 import thc.client.RevivalClientState
 import thc.client.RevivalProgressRenderer
@@ -31,6 +34,7 @@ object THCClient : ClientModInitializer {
 
 		// Load effects GUI scale config
 		EffectsGuiConfig.load()
+		MobHealthBarConfig.load()
 
 		// Entity renderers
 		EntityRendererRegistry.register(THCEntities.IRON_BOAT) { context ->
@@ -64,6 +68,9 @@ object THCClient : ClientModInitializer {
 		}
 		logger.info("[THCClient] Registering DownedBodyRenderer")
 		DownedBodyRenderer.register()
+		WorldRenderEvents.AFTER_ENTITIES.register { context ->
+			MobHealthBarRenderer.render(context)
+		}
 		HudElementRegistry.attachElementBefore(VanillaHudElements.CROSSHAIR, RevivalProgressRenderer.REVIVAL_PROGRESS_ID) { guiGraphics, _ ->
 			RevivalProgressRenderer.render(guiGraphics)
 		}

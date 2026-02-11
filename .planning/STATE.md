@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-10)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v3.3 Enemy Health Bars — Phase 83 Health Bar Rendering
+**Current focus:** v3.3 Enemy Health Bars — Phase 84 Mob Effects Display
 
 ## Current Position
 
 Phase: 83 of 85 (Health Bar Rendering)
-Plan: 0 of TBD in current phase
-Status: Ready to plan
-Last activity: 2026-02-10 — Roadmap created for v3.3
+Plan: 1 of 1 in current phase
+Status: Phase 83 complete
+Last activity: 2026-02-10 — Completed 83-01 health bar rendering
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [███░░░░░░░] 33%
 
 ## Performance Metrics
 
@@ -43,6 +43,9 @@ Key patterns established for v3.3:
 - OptionInstance IntRange slider with save-on-change for Video Settings injection
 - Ratio-based proportional HUD scaling (all sizes derived from frame size via ratios)
 - 12-param blit overload when render size differs from texture source size
+- CameraAccessor yRot/xRot for billboard rotation in world-space rendering
+- RenderTypes.entityTranslucent for alpha-blended textured quads
+- EntityTypeTest.forClass(Monster::class.java) for area-based mob querying
 
 ### Pending Todos
 
@@ -68,6 +71,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-10
-Stopped at: Created v3.3 roadmap (phases 83-85)
+Stopped at: Completed 83-01-PLAN.md
 Resume file: None
-Next: /gsd:plan-phase 83
+Next: /gsd:execute-phase 84

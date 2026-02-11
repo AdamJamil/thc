@@ -11,9 +11,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import thc.client.EffectsGuiConfig;
+import thc.client.MobHealthBarConfig;
 
 /**
- * Injects the "Effects GUI Scaling" slider into the Video Settings screen.
+ * Injects THC option sliders into the Video Settings screen.
  * Appends after all vanilla options at the bottom of the list.
  */
 @Mixin(VideoSettingsScreen.class)
@@ -24,9 +25,10 @@ public abstract class VideoSettingsScreenMixin extends OptionsSubScreen {
     }
 
     @Inject(method = "addOptions", at = @At("TAIL"))
-    private void thc$addEffectsGuiScale(CallbackInfo ci) {
+    private void thc$addTHCOptions(CallbackInfo ci) {
         if (this.list != null) {
             this.list.addSmall(EffectsGuiConfig.INSTANCE.getEffectsGuiScale());
+            this.list.addSmall(MobHealthBarConfig.INSTANCE.getMobHealthBarScale());
         }
     }
 }

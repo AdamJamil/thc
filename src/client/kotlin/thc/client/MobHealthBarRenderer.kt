@@ -122,10 +122,9 @@ object MobHealthBarRenderer {
             mobPos.z - cameraPos.z
         )
 
-        // Billboard rotation: face the camera, then flip X to correct mirroring
+        // Billboard rotation: face the camera
         stack.mulPose(Axis.YP.rotationDegrees(-cameraAccessor.yRot))
         stack.mulPose(Axis.XP.rotationDegrees(cameraAccessor.xRot))
-        stack.scale(-1f, 1f, 1f)
 
         val bufferSource = Minecraft.getInstance().renderBuffers().bufferSource()
 
@@ -139,8 +138,7 @@ object MobHealthBarRenderer {
             bufferSource, matrix, pose,
             EMPTY_TEXTURE,
             -halfW, -halfH, halfW, halfH,
-            0f, 0f, 1f, 1f,
-            z = 0f
+            0f, 0f, 1f, 1f
         )
 
         // Layer 2: Full bar (clipped to HP ratio)
@@ -154,7 +152,7 @@ object MobHealthBarRenderer {
                 FULL_TEXTURE,
                 -halfW, -halfH, -halfW + renderWidth, halfH,
                 0f, 0f, uEnd, 1f,
-                z = 0.001f
+                z = -0.001f
             )
         }
 
@@ -169,7 +167,7 @@ object MobHealthBarRenderer {
                 ABSORPTION_TEXTURE,
                 absLeft, -halfH, absLeft + absWidth, halfH,
                 0f, 0f, 1f, 1f,
-                z = 0.002f
+                z = -0.002f
             )
         }
 
@@ -238,7 +236,7 @@ object MobHealthBarRenderer {
                 EffectsHudRenderer.FRAME_TEXTURE,
                 iconX, iconY, iconX + frameWorldSize, iconY + frameWorldSize,
                 0f, 0f, 1f, 1f,
-                z = 0.003f
+                z = -0.003f
             )
 
             // Layer 2: Mob effect icon (inset within frame)
@@ -254,7 +252,7 @@ object MobHealthBarRenderer {
                 iconX + iconOffset, iconY + iconOffset,
                 iconX + iconOffset + iconSize, iconY + iconOffset + iconSize,
                 0f, 0f, 1f, 1f,
-                z = 0.004f
+                z = -0.004f
             )
 
             // Layer 3: Duration overlay (green, filling from bottom upward)
@@ -268,7 +266,7 @@ object MobHealthBarRenderer {
                     iconX + iconOffset + iconSize,
                     iconY + iconOffset + iconSize,
                     EffectsHudRenderer.OVERLAY_COLOR,
-                    z = 0.005f
+                    z = -0.005f
                 )
             }
 
@@ -290,7 +288,7 @@ object MobHealthBarRenderer {
                     iconX + numeralOffsetX, iconY + numeralOffsetY,
                     iconX + numeralOffsetX + numeralWorldW, iconY + numeralOffsetY + numeralWorldH,
                     0f, vStart, 1f, vEnd,
-                    z = 0.006f
+                    z = -0.006f
                 )
             }
         }

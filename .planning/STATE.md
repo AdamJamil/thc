@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-02-10)
 
 ## Current Position
 
-Phase: 83 of 85 (Health Bar Rendering)
+Phase: 85 of 85 (Scaling)
 Plan: 1 of 1 in current phase
-Status: Phase 83 complete
-Last activity: 2026-02-10 — Completed 83-01 health bar rendering
+Status: Phase 85 complete
+Last activity: 2026-02-11 — Completed 85-01 scaling config and slider
 
-Progress: [███░░░░░░░] 33%
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
@@ -41,6 +41,7 @@ Key patterns established for v3.3:
 - Vanilla mob effect icon texture path: textures/mob_effect/{path}.png
 - Sub-tick interpolation via deltaTracker.getGameTimeDeltaPartialTick for smooth animations
 - OptionInstance IntRange slider with save-on-change for Video Settings injection
+- Per-feature config objects: MobHealthBarConfig follows EffectsGuiConfig pattern exactly
 - Ratio-based proportional HUD scaling (all sizes derived from frame size via ratios)
 - 12-param blit overload when render size differs from texture source size
 - CameraAccessor yRot/xRot for billboard rotation in world-space rendering
@@ -70,7 +71,7 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-10
-Stopped at: Completed 83-01-PLAN.md
+Last session: 2026-02-11
+Stopped at: Completed 85-01-PLAN.md
 Resume file: None
 Next: /gsd:execute-phase 84

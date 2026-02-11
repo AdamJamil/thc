@@ -12,30 +12,30 @@ import net.minecraft.world.effect.MobEffects
 object EffectsHudRenderer {
     val EFFECTS_HUD_ID: Identifier = Identifier.fromNamespaceAndPath("thc", "effects_hud")
 
-    private val FRAME_TEXTURE = Identifier.fromNamespaceAndPath("thc", "textures/item/effect_frame.png")
-    private val NUMERALS_TEXTURE = Identifier.fromNamespaceAndPath("thc", "textures/item/numerals.png")
+    internal val FRAME_TEXTURE = Identifier.fromNamespaceAndPath("thc", "textures/item/effect_frame.png")
+    internal val NUMERALS_TEXTURE = Identifier.fromNamespaceAndPath("thc", "textures/item/numerals.png")
 
     // Base design / texture source constants
-    private const val BASE_FRAME_SIZE = 44
-    private const val ICON_SOURCE_SIZE = 18
-    private const val NUMERAL_SRC_WIDTH = 13
-    private const val NUMERAL_SRC_HEIGHT = 9
-    private const val NUMERAL_SHEET_HEIGHT = 90 // 10 numerals * 9px each
+    internal const val BASE_FRAME_SIZE = 44
+    internal const val ICON_SOURCE_SIZE = 18
+    internal const val NUMERAL_SRC_WIDTH = 13
+    internal const val NUMERAL_SRC_HEIGHT = 9
+    internal const val NUMERAL_SHEET_HEIGHT = 90 // 10 numerals * 9px each
 
     // Design-space constants (positions within the 44x44 frame)
-    private const val ICON_SIZE = 36         // icon render size in design space
-    private const val ICON_OFFSET = 4        // icon inset from frame edge
+    internal const val ICON_SIZE = 36         // icon render size in design space
+    internal const val ICON_OFFSET = 4        // icon inset from frame edge
     private const val MARGIN_RATIO = 4.0 / 44.0  // screen margin relative to frame
-    private const val NUMERAL_X = 5          // numeral X in design space
-    private const val NUMERAL_Y = 5          // numeral Y in design space
+    internal const val NUMERAL_X = 5          // numeral X in design space
+    internal const val NUMERAL_Y = 5          // numeral Y in design space
 
-    private const val OVERLAY_COLOR = 0x5A00FF00.toInt() // Green with ~35% alpha (ARGB)
+    internal const val OVERLAY_COLOR = 0x5A00FF00.toInt() // Green with ~35% alpha (ARGB)
 
     /** Tracks the original duration for each effect to compute drain ratio. */
     private val originalDurations = mutableMapOf<String, Int>()
 
     /** Lower number = higher priority = rendered closer to bottom (first in stack). */
-    private val PRIORITY_MAP: Map<ResourceKey<MobEffect>, Int> = buildPriorityMap()
+    internal val PRIORITY_MAP: Map<ResourceKey<MobEffect>, Int> = buildPriorityMap()
 
     private fun buildPriorityMap(): Map<ResourceKey<MobEffect>, Int> {
         val map = mutableMapOf<ResourceKey<MobEffect>, Int>()
@@ -58,7 +58,7 @@ object EffectsHudRenderer {
         return map
     }
 
-    private val effectComparator = Comparator<MobEffectInstance> { a, b ->
+    internal val effectComparator = Comparator<MobEffectInstance> { a, b ->
         val keyA = a.effect.unwrapKey().orElse(null)
         val keyB = b.effect.unwrapKey().orElse(null)
         val priorityA = if (keyA != null) PRIORITY_MAP.getOrDefault(keyA, 100) else 100

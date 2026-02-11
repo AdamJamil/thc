@@ -35,9 +35,10 @@ object MobHealthBarRenderer {
     private const val TEX_WIDTH = 328f
     private const val TEX_HEIGHT = 64f
 
-    // World-space render size: ~1.5 blocks wide, height derived from aspect ratio
-    private const val BAR_WIDTH = 1.5f
-    private const val BAR_HEIGHT = BAR_WIDTH * (TEX_HEIGHT / TEX_WIDTH) // ~0.293f
+    // World-space render size: derived from config scale percent (default 6% = 1.5 blocks wide)
+    private const val WIDTH_PER_PERCENT = 0.25f // 1.5f / 6% default
+    private val barWidth: Float get() = MobHealthBarConfig.getScalePercent() * WIDTH_PER_PERCENT
+    private val barHeight: Float get() = barWidth * (TEX_HEIGHT / TEX_WIDTH)
 
     // Range filter: 32 blocks (squared to avoid sqrt)
     private const val RANGE_SQ = 1024.0
@@ -127,8 +128,8 @@ object MobHealthBarRenderer {
 
         val bufferSource = Minecraft.getInstance().renderBuffers().bufferSource()
 
-        val halfW = BAR_WIDTH / 2f
-        val halfH = BAR_HEIGHT / 2f
+        val halfW = barWidth / 2f
+        val halfH = barHeight / 2f
         val pose = stack.last()
         val matrix = pose.pose()
 
@@ -143,7 +144,7 @@ object MobHealthBarRenderer {
         // Layer 2: Full bar (clipped to HP ratio)
         val hpRatio = (mob.health / mob.maxHealth).coerceIn(0f, 1f)
         if (hpRatio > 0f) {
-            val renderWidth = (INSET_PX / TEX_WIDTH) * BAR_WIDTH + hpRatio * (FILL_REGION_PX / TEX_WIDTH) * BAR_WIDTH
+            val renderWidth = (INSET_PX / TEX_WIDTH) * barWidth + hpRatio * (FILL_REGION_PX / TEX_WIDTH) * barWidth
             val uEnd = (INSET_PX + hpRatio * FILL_REGION_PX) / TEX_WIDTH
 
             renderQuad(
@@ -157,8 +158,8 @@ object MobHealthBarRenderer {
         // Layer 3: Absorption overlay (only if mob has absorption)
         if (mob.absorptionAmount > 0f) {
             val absRatio = (mob.absorptionAmount / mob.maxHealth).coerceIn(0f, 1f)
-            val absWidth = absRatio * (FILL_REGION_PX / TEX_WIDTH) * BAR_WIDTH
-            val absLeft = -halfW + (INSET_PX / TEX_WIDTH) * BAR_WIDTH
+            val absWidth = absRatio * (FILL_REGION_PX / TEX_WIDTH) * barWidth
+            val absLeft = -halfW + (INSET_PX / TEX_WIDTH) * barWidth
 
             renderQuad(
                 bufferSource, matrix, pose,
@@ -206,7 +207,7 @@ object MobHealthBarRenderer {
 
         // Effect frame world-space size: proportional to health bar height
         // Health bar is BAR_HEIGHT tall (~0.293), frame is 44px in design, bar is 64px in texture
-        val frameWorldSize = BAR_HEIGHT * (EffectsHudRenderer.BASE_FRAME_SIZE.toFloat() / TEX_HEIGHT)
+        val frameWorldSize = barHeight * (EffectsHudRenderer.BASE_FRAME_SIZE.toFloat() / TEX_HEIGHT)
 
         // Calculate total width of all effect icons and centering offset
         val totalWidth = effects.size * frameWorldSize

@@ -2,13 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "R": "minecraft:breeze_rod",
-    "S": "minecraft:string"
+    "S": "minecraft:stick",
+    "T": "minecraft:string"
   },
   "pattern": [
-    " RS",
-    "R S",
-    " RS"
+    " ST",
+    "S T",
+    " ST"
   ],
   "result": {
     "id": "minecraft:bow"

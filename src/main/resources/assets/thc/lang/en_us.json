@@ -32,5 +32,6 @@
   "item.thc.ender_diamond_helmet": "Ender Diamond Helmet",
   "item.thc.ender_netherite_helmet": "Ender Netherite Helmet",
   "thc.options.effectsGuiScale": "Effects GUI Scaling",
-  "thc.options.mobHealthBarScale": "Mob Health Bar"
+  "thc.options.mobHealthBarScale": "Mob Health Bar",
+  "item.minecraft.bow": "Wooden Bow"
 }

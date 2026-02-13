@@ -4,6 +4,7 @@
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
 		"AbstractArrowMixin",
+		"BowItemMixin",
 		"EnchantmentMenuMixin",
 		"CarvedPumpkinBlockMixin",
 		"CropBlockMixin",

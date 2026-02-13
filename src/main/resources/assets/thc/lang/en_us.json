@@ -33,5 +33,6 @@
   "item.thc.ender_netherite_helmet": "Ender Netherite Helmet",
   "thc.options.effectsGuiScale": "Effects GUI Scaling",
   "thc.options.mobHealthBarScale": "Mob Health Bar",
-  "item.minecraft.bow": "Wooden Bow"
+  "item.minecraft.bow": "Wooden Bow",
+  "thc.bow.tipped_blocked": "Your bow can't fire tipped arrows"
 }

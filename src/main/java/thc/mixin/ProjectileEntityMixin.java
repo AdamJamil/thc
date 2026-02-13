@@ -14,10 +14,11 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import thc.bow.BowType;
+import thc.bow.BowTypeTagAccess;
 import thc.threat.ThreatManager;
 
 @Mixin(Projectile.class)
-public abstract class ProjectileEntityMixin {
+public abstract class ProjectileEntityMixin implements BowTypeTagAccess {
 	@Unique private String thc$bowTypeTag = null;
 	@Unique private double thc$bowDragFactor = 0.0;
 	@Unique private int thc$ticksInFlight = 0;
@@ -117,6 +118,7 @@ public abstract class ProjectileEntityMixin {
 	 * Returns the bow type tag for this projectile, or null if not shot from a tagged bow.
 	 * Used by AbstractArrowMixin for damage multiplier lookup.
 	 */
+	@Override
 	@Unique
 	public String thc$getBowTypeTag() {
 		return thc$bowTypeTag;

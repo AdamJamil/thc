@@ -17,6 +17,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import thc.bow.BowTypeTagAccess;
 import thc.playerclass.ClassManager;
 import thc.playerclass.PlayerClass;
 import thc.threat.ThreatManager;
@@ -69,16 +70,21 @@ public abstract class AbstractArrowMixin {
 			reducedDamage *= playerClass.getRangedMultiplier();
 		}
 
-		baseDamage = reducedDamage;
+		// Apply bow-type damage multiplier (wooden bow = 50% additional reduction)
+		double bowDamageMultiplier = 1.0;
+		String bowTypeTag = ((BowTypeTagAccess) self).thc$getBowTypeTag();
+		if ("wooden_bow".equals(bowTypeTag)) {
+			bowDamageMultiplier = 0.5;
+		}
+		baseDamage = reducedDamage * bowDamageMultiplier;
 
 		Entity hitEntity = entityHitResult.getEntity();
 		if (!(hitEntity instanceof LivingEntity target)) {
 			return;
 		}
 
-		// Apply Speed 3 and Glowing for 6 seconds
+		// Apply Speed 3 for 6 seconds (Glowing removed per DMG-05)
 		target.addEffect(new MobEffectInstance(MobEffects.SPEED, THC_EFFECT_DURATION_TICKS, 2), player);
-		target.addEffect(new MobEffectInstance(MobEffects.GLOWING, THC_EFFECT_DURATION_TICKS, 0), player);
 
 		if (target instanceof Mob mob) {
 			mob.setTarget(player);

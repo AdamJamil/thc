@@ -5,7 +5,7 @@
 See: .planning/PROJECT.md (updated 2026-02-12)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v3.4 Bow Overhaul — Phase 86 (Wooden Bow Foundation)
+**Current focus:** v3.4 Bow Overhaul — Phase 87 (Blaze Bow)
 
 ## Current Position
 
@@ -67,4 +67,4 @@ None.
 Last session: 2026-02-13
 Stopped at: Completed 86-02-PLAN.md (phase 86 complete)
 Resume file: None
-Next: Phase 87 (Blaze Bow) or Phase 88 (Breeze Bow)
+Next: Plan phase 87 (Blaze Bow)

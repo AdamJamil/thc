@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-02-12)
 
 ## Current Position
 
-Phase: 86 of 88 (Wooden Bow Foundation)
-Plan: 1 of 2 complete
-Status: Executing phase 86
-Last activity: 2026-02-13 — Completed 86-01 (Wooden Bow identity, recipe, drag physics)
+Phase: 86 of 88 (Wooden Bow Foundation) -- COMPLETE
+Plan: 2 of 2 complete
+Status: Phase 86 complete
+Last activity: 2026-02-13 — Completed 86-02 (Wooden Bow damage, glowing removal, tipped arrow gating)
 
-Progress: 18 milestones (17 shipped + 1 active), 132 plans across 86 phases
+Progress: 18 milestones (17 shipped + 1 active), 134 plans across 86 phases
 
 ## Performance Metrics
 
@@ -37,6 +37,9 @@ See PROJECT.md Key Decisions table and milestone archives for full decision logs
 
 - **86-01:** BowType stored as @Unique fields on ProjectileEntityMixin (runtime-only, no serialization)
 - **86-01:** Drag applied multiplicatively per tick: max(0.8, 1.0 - dragFactor * ticks)
+- **86-02:** BowTypeTagAccess duck interface for cross-mixin bow type data (standard Mixin practice)
+- **86-02:** TippedArrowItem instanceof for tipped detection (simpler than PotionContents component check)
+- **86-02:** Actionbar message only shown when no regular arrow fallback available
 
 ### Pending Todos
 
@@ -62,6 +65,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-13
-Stopped at: Completed 86-01-PLAN.md
+Stopped at: Completed 86-02-PLAN.md (phase 86 complete)
 Resume file: None
-Next: Execute 86-02-PLAN.md
+Next: Phase 87 (Blaze Bow) or Phase 88 (Breeze Bow)

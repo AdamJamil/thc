@@ -20,6 +20,10 @@
 - [v3.2](milestones/v3.2-ROADMAP.md) — Effects GUI (phases 80-82)
 - [v3.3](milestones/v3.3-ROADMAP.md) — Enemy Health Bars (phases 83-85)
 
+## Active Milestone
+
+- [v3.4](milestones/v3.4-ROADMAP.md) — Bow Overhaul (phases 86-88)
+
 ## Progress
 
 | Milestone | Phases | Plans | Status | Shipped |
@@ -41,9 +45,10 @@
 | v3.1 | 75-79 | 7 | Complete | 2026-02-03 |
 | v3.2 | 80-82 | 3 | Complete | 2026-02-10 |
 | v3.3 | 83-85 | 3 | Complete | 2026-02-12 |
+| v3.4 | 86-88 | TBD | In progress | - |
 
-**Total:** 85 phases, 131 plans across 17 milestones
+**Total:** 88 phases, 131+ plans across 18 milestones
 
 ---
 
-*Roadmap last updated: 2026-02-12 after v3.3 milestone completion*
+*Roadmap last updated: 2026-02-12 after v3.4 roadmap creation*

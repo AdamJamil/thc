@@ -59,32 +59,32 @@ None — milestone is self-contained.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| ITEM-01 | — | Pending |
-| ITEM-02 | — | Pending |
-| ITEM-03 | — | Pending |
-| ITEM-04 | — | Pending |
-| ITEM-05 | — | Pending |
-| ITEM-06 | — | Pending |
-| PHYS-01 | — | Pending |
-| PHYS-02 | — | Pending |
-| PHYS-03 | — | Pending |
-| DMG-01 | — | Pending |
-| DMG-02 | — | Pending |
-| DMG-03 | — | Pending |
-| DMG-04 | — | Pending |
-| DMG-05 | — | Pending |
-| MECH-01 | — | Pending |
-| MECH-02 | — | Pending |
-| MECH-03 | — | Pending |
-| MECH-04 | — | Pending |
-| GATE-01 | — | Pending |
-| GATE-02 | — | Pending |
+| ITEM-01 | Phase 86 | Pending |
+| ITEM-02 | Phase 86 | Pending |
+| ITEM-03 | Phase 87 | Pending |
+| ITEM-04 | Phase 87 | Pending |
+| ITEM-05 | Phase 88 | Pending |
+| ITEM-06 | Phase 88 | Pending |
+| PHYS-01 | Phase 86 | Pending |
+| PHYS-02 | Phase 86 | Pending |
+| PHYS-03 | Phase 86 | Pending |
+| DMG-01 | Phase 86 | Pending |
+| DMG-02 | Phase 88 | Pending |
+| DMG-03 | Phase 87 | Pending |
+| DMG-04 | Phase 88 | Pending |
+| DMG-05 | Phase 86 | Pending |
+| MECH-01 | Phase 87 | Pending |
+| MECH-02 | Phase 88 | Pending |
+| MECH-03 | Phase 86 | Pending |
+| MECH-04 | Phase 88 | Pending |
+| GATE-01 | Phase 87 | Pending |
+| GATE-02 | Phase 88 | Pending |
 
 **Coverage:**
 - v3.4 requirements: 20 total
-- Mapped to phases: 0
-- Unmapped: 20
+- Mapped to phases: 20
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-02-12*
-*Last updated: 2026-02-12 after initial definition*
+*Last updated: 2026-02-12 after roadmap creation*

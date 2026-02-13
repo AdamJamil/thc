@@ -479,3 +479,32 @@
 
 ---
 
+
+## v3.4 Bow Overhaul (Shipped: 2026-02-13)
+
+**Delivered:** Three-bow ranged combat system with class-specific bows featuring unique arrow physics, damage profiles, draw speeds, and special abilities — replacing the universal vanilla bow with differentiated Wooden/Blaze/Breeze bows gated behind class and stage progression.
+
+**Phases completed:** 86-88 (4 plans total)
+
+**Key accomplishments:**
+
+- Renamed vanilla bow to "Wooden Bow" with sticks+string recipe and 50% damage reduction
+- New horizontal drag arrow physics replacing gravity-over-time system with per-bow drag coefficients
+- Blaze Bow (Ranged Stage 2+): 1.5x slow draw, fire-on-hit (3s), 100% damage, flaming arrow visual
+- Breeze Bow (Support Stage 2+): 0.75x fast draw, extended range (0.01 drag), 75% damage, knockback
+- Class/stage gating with actionbar messages for denied players
+- Tipped arrow restrictions on Wooden Bow with inventory search fallback
+
+**Stats:**
+
+- 31 files created/modified (878 insertions, 70 deletions)
+- ~15,180 lines of Kotlin/Java (cumulative)
+- 3 phases, 4 plans, 8 tasks
+- 1 day (2026-02-12 → 2026-02-13)
+
+**Git range:** `feat(86-01)` → `feat(88-01)`
+
+**What's next:** To be determined
+
+---
+

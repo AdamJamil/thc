@@ -2,50 +2,38 @@
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-02-12)
+See: .planning/PROJECT.md (updated 2026-02-13)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v3.4 Bow Overhaul — Phase 88 complete (milestone complete)
+**Current focus:** Planning next milestone
 
 ## Current Position
 
-Phase: 88 of 88 (Breeze Bow) -- COMPLETE
-Plan: 1 of 1 complete
-Status: Phase 88 complete, v3.4 milestone complete
-Last activity: 2026-02-13 — Completed 88-01 (Breeze Bow item, damage, knockback, class gate)
+Phase: 88 of 88 (all complete)
+Plan: N/A
+Status: v3.4 Bow Overhaul shipped
+Last activity: 2026-02-13 — Completed v3.4 milestone archival
 
-Progress: 18 milestones (17 shipped + 1 active), 136 plans across 88 phases
+Progress: 18 milestones shipped, 136 plans across 88 phases
 
 ## Performance Metrics
 
 **Cumulative:**
-- 132 plans completed across 17 shipped milestones
+- 136 plans completed across 18 shipped milestones
 - ~9 hours total execution time
-- 28 days from project start
+- 29 days from project start
 
 **Recent Milestones:**
+- v3.4: 4 plans, ~16 min (3 phases)
 - v3.3: 3 plans, ~10 min (3 phases)
 - v3.2: 3 plans, ~15 min (3 phases)
 - v3.1: 7 plans, ~33 min (5 phases)
-- v3.0: 4 plans, ~23 min (3 phases)
 
 ## Accumulated Context
 
 ### Decisions
 
 See PROJECT.md Key Decisions table and milestone archives for full decision logs.
-
-- **86-01:** BowType stored as @Unique fields on ProjectileEntityMixin (runtime-only, no serialization)
-- **86-01:** Drag applied multiplicatively per tick: max(0.8, 1.0 - dragFactor * ticks)
-- **86-02:** BowTypeTagAccess duck interface for cross-mixin bow type data (standard Mixin practice)
-- **86-02:** TippedArrowItem instanceof for tipped detection (simpler than PotionContents component check)
-- **86-02:** Actionbar message only shown when no regular arrow fallback available
-- **87-01:** Draw speed 1.5x via releaseUsing charge scaling (dividing actualCharge by 1.5f)
-- **87-01:** Fire-on-hit via setRemainingFireTicks(60) -- refreshes on re-hit naturally
-- **87-01:** 100% damage for blaze_bow arrows -- no bow-specific multiplier entry defaults to 1.0
-- **88-01:** THCBows registration object for Breeze Bow (separate from THCItems)
-- **88-01:** Draw speed 0.75x via releaseUsing charge scaling (dividing actualCharge by 0.75f)
-- **88-01:** Knockback preserved by early return in thc$removeArrowKnockback for breeze_bow tag
 
 ### Pending Todos
 
@@ -71,6 +59,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-13
-Stopped at: Completed 88-01-PLAN.md (phase 88 complete, v3.4 milestone complete)
+Stopped at: v3.4 milestone archived
 Resume file: None
-Next: Next milestone planning
+Next: /gsd:new-milestone

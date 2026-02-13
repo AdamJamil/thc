@@ -247,21 +247,18 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
   - Mob status effects rendered left-to-right above health bar
   - Duration overlay with sub-tick drain and per-mob duration tracking
   - Video Settings scaling slider (2-20%) with file persistence
+- Bow overhaul — v3.4
+  - Vanilla bow renamed to "Wooden Bow" with sticks+string recipe, 50% damage
+  - Horizontal drag arrow physics replacing gravity-over-time (per-bow drag coefficients)
+  - Blaze Bow (Ranged Stage 2+): 1.5x slow draw, fire-on-hit 3s, 100% damage
+  - Breeze Bow (Support Stage 2+): 0.75x fast draw, 75% damage, knockback, extended range
+  - Class/stage gating with actionbar messages for denied players
+  - Tipped arrow restriction on Wooden Bow with inventory search fallback
+  - Glowing removed from all player projectile hits
 
 ### Active
 
-## Current Milestone: v3.4 Bow Overhaul
-
-**Goal:** Differentiate ranged combat through three class-specific bow tiers with unique arrow physics, damage profiles, and special abilities.
-
-**Target features:**
-- Wooden bow (renamed vanilla bow) with half damage and vanilla recipe
-- Blaze bow (Ranged class, Stage 2+) with fire damage and 1.5x draw time
-- Breeze bow (Support class, Stage 2+) with knockback, splash tipped arrows, and 0.75x draw time
-- New horizontal drag arrow physics replacing gravity-over-time
-- Class/stage gating with actionbar messages
-- Tipped arrow restrictions (wooden bow) and splash effects (breeze bow)
-- Glowing removal from projectile hits
+(No active milestone — planning next)
 
 ### Out of Scope
 
@@ -269,6 +266,7 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 - Multiplayer territory conflict resolution — focus is single-player or cooperative server experience for now
 - Buckler visual effects beyond existing implementation — parry system complete as-is
 - Tipped tiered arrows — complexity deferred
+- Breeze bow splash AoE tipped arrows — deferred from v3.4 (MECH-04), may revisit
 - Threat persistence across chunk unload — threat is ephemeral by design
 - Weather visual override — rain during dusk is atmospheric, acceptable
 - Nether/End twilight — these dimensions have their own aesthetics
@@ -338,15 +336,20 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 | EntityTypeTest.forClass for mob querying | Efficient area-based entity filtering by type | Good |
 | Per-entity duration tracking keyed by entityId + effect name | Accurate drain ratios per mob without global state | Good |
 | WIDTH_PER_PERCENT dynamic scaling | Slider value * constant = world-space width, simple and proportional | Good |
+| BowType enum on ProjectileEntityMixin | Runtime-only bow type tagging, no serialization needed | Good |
+| Horizontal drag replacing gravity-over-time | Per-tick multiplicative drag on x/z, vertical untouched, cleaner physics | Good |
+| BowTypeTagAccess duck interface | Standard Mixin pattern for cross-mixin data, avoids reflection | Good |
+| releaseUsing charge scaling for draw speed | Dividing actualCharge by speed factor scales power curve without getUseDuration changes | Good |
+| THCBows separate registration object | Bow items in thc.bow package, separate from THCItems | Good |
 
 ## Current State
 
-**Latest Ship:** v3.4 Bow Overhaul (in progress)
+**Latest Ship:** v3.4 Bow Overhaul (shipped 2026-02-13)
 
 **Codebase:**
-- ~14,865 LOC Kotlin/Java
+- ~15,180 LOC Kotlin/Java
 - Mixed mixin + event-driven architecture
-- 131 plans across 85 phases in 17 milestones
+- 136 plans across 88 phases in 18 milestones
 - Attachment patterns for player state, mob threat, one-time effects, class, boon level, spawn region, fire source
 - Client visual overrides for twilight sky
 - Comprehensive spawn/behavior modifications (10+ mob types)
@@ -405,6 +408,13 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 - World-space status effect icons above health bar with shared rendering constants — v3.3
 - Per-mob effect duration tracking with sub-tick interpolation — v3.3
 - MobHealthBarConfig with Video Settings slider and dynamic renderer scaling — v3.3
+- BowType enum with per-bow drag factors and bow type tagging on projectile shoot — v3.4
+- Wooden Bow identity (renamed vanilla bow) with sticks+string recipe and 50% damage — v3.4
+- Horizontal drag arrow physics replacing gravity-over-time — v3.4
+- BowTypeTagAccess duck interface for cross-mixin bow type data — v3.4
+- BlazeBowItem with Ranged Stage 2+ gate, 1.5x slow draw, fire-on-hit — v3.4
+- BreezeBowItem with Support Stage 2+ gate, 0.75x fast draw, 75% damage, knockback — v3.4
+- Tipped arrow restriction on Wooden Bow with inventory search fallback — v3.4
 
 **Known issues:**
 - PlayerSleepMixin broken from MC 1.21.11 upgrade (blocks smoke test, not functionality)
@@ -412,4 +422,4 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 **Technical debt:** None identified
 
 ---
-*Last updated: 2026-02-12 after v3.4 milestone start*
+*Last updated: 2026-02-13 after v3.4 milestone*

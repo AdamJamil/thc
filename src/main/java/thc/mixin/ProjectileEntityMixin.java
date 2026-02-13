@@ -13,14 +13,14 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import thc.bow.BowType;
 import thc.threat.ThreatManager;
 
 @Mixin(Projectile.class)
 public abstract class ProjectileEntityMixin {
-	@Unique private double thc$spawnX = Double.NaN;
-	@Unique private double thc$spawnY = Double.NaN;
-	@Unique private double thc$spawnZ = Double.NaN;
-	@Unique private boolean thc$spawnRecorded = false;
+	@Unique private String thc$bowTypeTag = null;
+	@Unique private double thc$bowDragFactor = 0.0;
+	@Unique private int thc$ticksInFlight = 0;
 
 	@Inject(method = "onHitEntity", at = @At("HEAD"))
 	private void thc$applyHitEffects(EntityHitResult entityHitResult, CallbackInfo ci) {
@@ -75,29 +75,22 @@ public abstract class ProjectileEntityMixin {
 	}
 
 	@Inject(method = "shoot", at = @At("TAIL"))
-	private void thc$applyVelocityBoost(double x, double y, double z, float speed, float divergence, CallbackInfo ci) {
+	private void thc$tagBowTypeOnShoot(double x, double y, double z, float speed, float divergence, CallbackInfo ci) {
 		Projectile self = (Projectile) (Object) this;
 
-		// Only boost player-shot projectiles
-		if (!(self.getOwner() instanceof ServerPlayer)) {
+		// Only tag player-shot projectiles
+		if (!(self.getOwner() instanceof ServerPlayer player)) {
 			return;
 		}
 
-		// Record spawn position for gravity calculations
-		if (!thc$spawnRecorded) {
-			thc$spawnX = self.getX();
-			thc$spawnY = self.getY();
-			thc$spawnZ = self.getZ();
-			thc$spawnRecorded = true;
-		}
-
-		// Apply 20% velocity boost
-		Vec3 velocity = self.getDeltaMovement();
-		self.setDeltaMovement(velocity.scale(1.2));
+		// Determine bow type from the player's active use item (the bow being drawn)
+		BowType bowType = BowType.fromBowItem(player.getUseItem());
+		thc$bowTypeTag = bowType.getTag();
+		thc$bowDragFactor = bowType.getDragFactor();
 	}
 
 	@Inject(method = "tick", at = @At("HEAD"))
-	private void thc$applyEnhancedGravity(CallbackInfo ci) {
+	private void thc$applyHorizontalDrag(CallbackInfo ci) {
 		Projectile self = (Projectile) (Object) this;
 
 		// Only affect player-shot projectiles
@@ -105,27 +98,27 @@ public abstract class ProjectileEntityMixin {
 			return;
 		}
 
-		// Skip if spawn not recorded yet
-		if (!thc$spawnRecorded || Double.isNaN(thc$spawnX)) {
+		// Only apply drag if bow type was set (means this was shot from a bow)
+		if (thc$bowDragFactor <= 0) {
 			return;
 		}
 
-		// Calculate distance from spawn
-		double dx = self.getX() - thc$spawnX;
-		double dy = self.getY() - thc$spawnY;
-		double dz = self.getZ() - thc$spawnZ;
-		double distance = Math.sqrt(dx * dx + dy * dy + dz * dz);
+		thc$ticksInFlight++;
 
-		// After 4 blocks, apply additional downward velocity
-		if (distance >= 4.0) {
-			double extraBlocks = distance - 4.0;
-			// Enhanced gravity: 0.6 * (extraBlocks)^1.5
-			double gravityMultiplier = 0.6 * Math.pow(extraBlocks, 1.5);
-			// Cap at reasonable maximum
-			gravityMultiplier = Math.min(gravityMultiplier, 0.1);
+		// Calculate drag coefficient: max(0.8, 1.0 - dragFactor * ticksInFlight)
+		double dragCoefficient = Math.max(0.8, 1.0 - thc$bowDragFactor * thc$ticksInFlight);
 
-			Vec3 velocity = self.getDeltaMovement();
-			self.setDeltaMovement(velocity.x, velocity.y - gravityMultiplier, velocity.z);
-		}
+		// Apply drag to horizontal components only, leave vertical (y) untouched
+		Vec3 velocity = self.getDeltaMovement();
+		self.setDeltaMovement(velocity.x * dragCoefficient, velocity.y, velocity.z * dragCoefficient);
+	}
+
+	/**
+	 * Returns the bow type tag for this projectile, or null if not shot from a tagged bow.
+	 * Used by AbstractArrowMixin for damage multiplier lookup.
+	 */
+	@Unique
+	public String thc$getBowTypeTag() {
+		return thc$bowTypeTag;
 	}
 }

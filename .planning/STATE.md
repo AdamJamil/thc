@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-12)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v3.4 Bow Overhaul — Phase 87 (Blaze Bow)
+**Current focus:** v3.4 Bow Overhaul — Phase 88 (Breeze Bow)
 
 ## Current Position
 
-Phase: 86 of 88 (Wooden Bow Foundation) -- COMPLETE
-Plan: 2 of 2 complete
-Status: Phase 86 complete
-Last activity: 2026-02-13 — Completed 86-02 (Wooden Bow damage, glowing removal, tipped arrow gating)
+Phase: 87 of 88 (Blaze Bow) -- COMPLETE
+Plan: 1 of 1 complete
+Status: Phase 87 complete
+Last activity: 2026-02-13 — Completed 87-01 (Blaze Bow item, class gate, fire-on-hit)
 
-Progress: 18 milestones (17 shipped + 1 active), 134 plans across 86 phases
+Progress: 18 milestones (17 shipped + 1 active), 135 plans across 87 phases
 
 ## Performance Metrics
 
@@ -40,6 +40,9 @@ See PROJECT.md Key Decisions table and milestone archives for full decision logs
 - **86-02:** BowTypeTagAccess duck interface for cross-mixin bow type data (standard Mixin practice)
 - **86-02:** TippedArrowItem instanceof for tipped detection (simpler than PotionContents component check)
 - **86-02:** Actionbar message only shown when no regular arrow fallback available
+- **87-01:** Draw speed 1.5x via releaseUsing charge scaling (dividing actualCharge by 1.5f)
+- **87-01:** Fire-on-hit via setRemainingFireTicks(60) -- refreshes on re-hit naturally
+- **87-01:** 100% damage for blaze_bow arrows -- no bow-specific multiplier entry defaults to 1.0
 
 ### Pending Todos
 
@@ -65,6 +68,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-13
-Stopped at: Completed 86-02-PLAN.md (phase 86 complete)
+Stopped at: Completed 87-01-PLAN.md (phase 87 complete)
 Resume file: None
-Next: Plan phase 87 (Blaze Bow)
+Next: Plan phase 88 (Breeze Bow)

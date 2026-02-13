@@ -37,6 +37,26 @@ public abstract class AbstractArrowMixin {
 	@Unique
 	private double thc$originalBaseDamage;
 
+	@Unique
+	private boolean thc$blazeFireApplied = false;
+
+	/**
+	 * Make blaze_bow arrows appear flaming in flight.
+	 * One-time check: once applied, the arrow burns visually for its entire lifetime.
+	 */
+	@Inject(method = "tick", at = @At("HEAD"))
+	private void thc$applyBlazeFireVisual(CallbackInfo ci) {
+		if (thc$blazeFireApplied) {
+			return;
+		}
+		AbstractArrow self = (AbstractArrow) (Object) this;
+		String bowTypeTag = ((BowTypeTagAccess) self).thc$getBowTypeTag();
+		if ("blaze_bow".equals(bowTypeTag)) {
+			self.setRemainingFireTicks(2000);
+			thc$blazeFireApplied = true;
+		}
+	}
+
 	@Inject(method = "onHitEntity", at = @At("HEAD"))
 	private void thc$applyArrowHitEffects(EntityHitResult entityHitResult, CallbackInfo ci) {
 		AbstractArrow self = (AbstractArrow) (Object) this;
@@ -70,17 +90,24 @@ public abstract class AbstractArrowMixin {
 			reducedDamage *= playerClass.getRangedMultiplier();
 		}
 
-		// Apply bow-type damage multiplier (wooden bow = 50% additional reduction)
+		// Apply bow-type damage multiplier
 		double bowDamageMultiplier = 1.0;
 		String bowTypeTag = ((BowTypeTagAccess) self).thc$getBowTypeTag();
 		if ("wooden_bow".equals(bowTypeTag)) {
-			bowDamageMultiplier = 0.5;
+			bowDamageMultiplier = 0.5;  // Wooden bow: 50% additional reduction
+		} else if ("breeze_bow".equals(bowTypeTag)) {
+			bowDamageMultiplier = 0.75; // Breeze bow: 75% of final damage (DMG-02)
 		}
 		baseDamage = reducedDamage * bowDamageMultiplier;
 
 		Entity hitEntity = entityHitResult.getEntity();
 		if (!(hitEntity instanceof LivingEntity target)) {
 			return;
+		}
+
+		// Blaze Bow: set target on fire for 3 seconds (0.5 damage/second = 1.5 HP total)
+		if ("blaze_bow".equals(bowTypeTag)) {
+			target.setRemainingFireTicks(60);
 		}
 
 		// Apply Speed 3 for 6 seconds (Glowing removed per DMG-05)
@@ -104,6 +131,12 @@ public abstract class AbstractArrowMixin {
 		}
 
 		if (!(owner instanceof ServerPlayer)) {
+			return;
+		}
+
+		// Breeze Bow arrows preserve vanilla knockback on monsters (DMG-04)
+		String bowTypeTag = ((BowTypeTagAccess) self).thc$getBowTypeTag();
+		if ("breeze_bow".equals(bowTypeTag)) {
 			return;
 		}
 

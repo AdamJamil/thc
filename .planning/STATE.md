@@ -2,54 +2,37 @@
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-02-10)
+See: .planning/PROJECT.md (updated 2026-02-12)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v3.3 Enemy Health Bars — All phases complete (83, 84, 85)
+**Current focus:** Planning next milestone
 
 ## Current Position
 
-Phase: 85 of 85 (Scaling)
-Plan: 1 of 1 in current phase
-Status: Phase 85 complete
-Last activity: 2026-02-11 — Completed 84-01 mob effects display (all v3.3 phases done)
+Milestone: v3.3 shipped (2026-02-12)
+Status: Between milestones
+Last activity: 2026-02-12 — Completed v3.3 Enemy Health Bars milestone
 
-Progress: [██████████] 100%
+Progress: 17 milestones shipped, 131 plans across 85 phases
 
 ## Performance Metrics
 
 **Cumulative:**
-- 128 plans completed across 16 shipped milestones
+- 131 plans completed across 17 shipped milestones
 - ~9 hours total execution time
-- 24 days from project start
+- 28 days from project start
 
 **Recent Milestones:**
+- v3.3: 3 plans, ~10 min (3 phases)
 - v3.2: 3 plans, ~15 min (3 phases)
 - v3.1: 7 plans, ~33 min (5 phases)
 - v3.0: 4 plans, ~23 min (3 phases)
-- v2.8: 11 plans, ~45 min (6 phases)
 
 ## Accumulated Context
 
 ### Decisions
 
-See milestone archives for full decision logs:
-- .planning/milestones/v3.2-ROADMAP.md (previous)
-
-Key patterns established for v3.3:
-- ResourceKey-based priority map for effect sorting in HUD rendering
-- Vanilla mob effect icon texture path: textures/mob_effect/{path}.png
-- Sub-tick interpolation via deltaTracker.getGameTimeDeltaPartialTick for smooth animations
-- OptionInstance IntRange slider with save-on-change for Video Settings injection
-- Per-feature config objects: MobHealthBarConfig follows EffectsGuiConfig pattern exactly
-- Ratio-based proportional HUD scaling (all sizes derived from frame size via ratios)
-- 12-param blit overload when render size differs from texture source size
-- CameraAccessor yRot/xRot for billboard rotation in world-space rendering
-- RenderTypes.entityTranslucent for alpha-blended textured quads
-- EntityTypeTest.forClass(Monster::class.java) for area-based mob querying
-- Internal visibility for shared constants across Kotlin object renderers
-- Per-entity duration tracking keyed by entityId + effect name for mob-specific drain ratios
-- Vertex-colored quads with center UV for solid color overlays in world-space rendering
+See PROJECT.md Key Decisions table and milestone archives for full decision logs.
 
 ### Pending Todos
 
@@ -74,7 +57,7 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-11
-Stopped at: Completed 84-01-PLAN.md (all v3.3 phases complete)
+Last session: 2026-02-12
+Stopped at: v3.3 milestone completed and archived
 Resume file: None
-Next: v3.3 milestone verification and ship
+Next: /gsd:new-milestone to plan next milestone

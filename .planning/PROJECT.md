@@ -240,11 +240,17 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
   - Boon 3 (Stage 4+): Enhanced snowballs with AoE Slowness III and knockback
   - Boon 4 (Stage 5+): Land boat placement, hostile mob trapping (4s breakout), copper recipes, 16-stack
 
+- Enemy mob health bars — v3.3
+  - Three-layer floating health bar (empty/full/absorption) above hostile mobs
+  - Billboard positioning 0.5 blocks above mob heads, 32-block range
+  - Visibility gating: hidden at full HP with no effects/absorption
+  - Mob status effects rendered left-to-right above health bar
+  - Duration overlay with sub-tick drain and per-mob duration tracking
+  - Video Settings scaling slider (2-20%) with file persistence
+
 ### Active
 
-- [ ] Enemy mob health bars with three-layer rendering (empty/full/absorption)
-- [ ] Mob status effects displayed above health bar
-- [ ] Video Settings scaling slider for health bar size
+(None — planning next milestone)
 
 ### Out of Scope
 
@@ -274,7 +280,7 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 - Game tests preferred for verification, manual testing as fallback
 
 **Existing Architecture:**
-- Kotlin + Java mixed codebase (~4,045 LOC)
+- Kotlin + Java mixed codebase (~14,865 LOC)
 - Mixins for vanilla behavior modification
 - Attachment API for player and mob state
 - Client/server networking for state sync
@@ -317,25 +323,19 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 | Sub-tick interpolation for HUD animations | Smooth visual drain between ticks via partialTick | Good |
 | Ratio-based proportional HUD scaling | All sizes derived from frame size for smooth scaling at any % | Good |
 | Simple text file config persistence | Zero extra dependencies vs JSON/TOML for single value | Good |
-
-## Current Milestone: v3.3 Enemy Health Bars
-
-**Goal:** Floating health bars above hostile mobs showing HP, absorption, and status effects with configurable scaling.
-
-**Target features:**
-- Three-layer health bar (empty → full → absorption) above mob heads
-- Mob status effects rendered left-to-right above health bar
-- Video Settings scaling slider
-- 32-block visibility radius, hostile mobs only
+| CameraAccessor yRot/xRot for billboard rotation | Direct camera rotation access for world-space billboard rendering | Good |
+| EntityTypeTest.forClass for mob querying | Efficient area-based entity filtering by type | Good |
+| Per-entity duration tracking keyed by entityId + effect name | Accurate drain ratios per mob without global state | Good |
+| WIDTH_PER_PERCENT dynamic scaling | Slider value * constant = world-space width, simple and proportional | Good |
 
 ## Current State
 
-**Latest Ship:** v3.2 Effects GUI (2026-02-10)
+**Latest Ship:** v3.3 Enemy Health Bars (2026-02-12)
 
 **Codebase:**
-- ~14,401 LOC Kotlin/Java
+- ~14,865 LOC Kotlin/Java
 - Mixed mixin + event-driven architecture
-- 128 plans across 82 phases in 16 milestones
+- 131 plans across 85 phases in 17 milestones
 - Attachment patterns for player state, mob threat, one-time effects, class, boon level, spawn region, fire source
 - Client visual overrides for twilight sky
 - Comprehensive spawn/behavior modifications (10+ mob types)
@@ -375,12 +375,6 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 - Custom trade tables for all 4 allowed villager types — v2.8
 - Structure locator items for cartographer trades — v2.8
 - Rail recipe changes (copper alternative, 64x yields) — v2.8
-
-**Known issues:**
-- PlayerSleepMixin broken from MC 1.21.11 upgrade (blocks smoke test, not functionality)
-
-**Technical debt:** None identified
-
 - Downed state attachment and death interception — v3.0
 - Revival progress system with class-based speed bonus — v3.0
 - Revival progress HUD with server-client sync — v3.0
@@ -396,6 +390,15 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 - Layered frame rendering: effect_frame.png, 2x vanilla icon, green duration overlay, roman numerals — v3.2
 - Smooth per-tick duration drain with sub-tick interpolation — v3.2
 - Video Settings scaling slider (2-20% of screen width) with file persistence — v3.2
+- Three-layer mob health bar renderer with billboard quads (empty/HP/absorption) — v3.3
+- World-space status effect icons above health bar with shared rendering constants — v3.3
+- Per-mob effect duration tracking with sub-tick interpolation — v3.3
+- MobHealthBarConfig with Video Settings slider and dynamic renderer scaling — v3.3
+
+**Known issues:**
+- PlayerSleepMixin broken from MC 1.21.11 upgrade (blocks smoke test, not functionality)
+
+**Technical debt:** None identified
 
 ---
-*Last updated: 2026-02-10 after v3.3 milestone start*
+*Last updated: 2026-02-12 after v3.3 milestone completion*

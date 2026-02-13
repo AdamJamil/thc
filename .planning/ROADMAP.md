@@ -2,13 +2,13 @@
 
 ## Completed Milestones
 
-- [v1.0](milestones/v1.0-ROADMAP.md) — Base Claiming & Crafting Foundation (phases 1-13)
-- [v1.1](milestones/v1.1-ROADMAP.md) — Combat Polish & Drowning (phases 14-17)
-- [v1.2](milestones/v1.2-ROADMAP.md) — XP Economy & Tiered Arrows (phases 18-22)
-- [v1.3](milestones/v1.3-ROADMAP.md) — Wind Charges, Threats & World Difficulty (phases 23-28)
-- [v2.0](milestones/v2.0-ROADMAP.md) — Twilight System (phases 29-36)
-- [v2.1](milestones/v2.1-ROADMAP.md) — Blast Totem & Structure Protection (phases 29-32)
-- [v2.2](milestones/v2.2-ROADMAP.md) — Food Economy & Class System (phases 33-36)
+- [v1.0](milestones/v1.0-ROADMAP.md) — Base Claiming & Crafting Foundation (phases 1-5)
+- [v1.1](milestones/v1.1-ROADMAP.md) — Combat Polish & Drowning (phases 6-8)
+- [v1.2](milestones/v1.2-ROADMAP.md) — XP Economy & Tiered Arrows (phases 9-11)
+- [v1.3](milestones/v1.3-ROADMAP.md) — Wind Charges, Threats & World Difficulty (phases 12-16)
+- [v2.0](milestones/v2.0-ROADMAP.md) — Twilight System (phases 17-23)
+- [v2.1](milestones/v2.1-ROADMAP.md) — Blast Totem & Structure Protection (phases 24-29)
+- [v2.2](milestones/v2.2-ROADMAP.md) — Food Economy & Class System (phases 30-36)
 - [v2.3](milestones/v2.3-ROADMAP.md) — Monster Overhaul (phases 37-45)
 - [v2.4](milestones/v2.4-ROADMAP.md) — Extra Features Batch 8 (phases 46-52)
 - [v2.5](milestones/v2.5-ROADMAP.md) — Enchantment Overhaul (phases 53-56)
@@ -18,9 +18,6 @@
 - [v3.0](milestones/v3.0-ROADMAP.md) — Revival System (phases 72-74)
 - [v3.1](milestones/v3.1-ROADMAP.md) — Bastion Class Boons (phases 75-79)
 - [v3.2](milestones/v3.2-ROADMAP.md) — Effects GUI (phases 80-82)
-
-## Active Milestone
-
 - [v3.3](milestones/v3.3-ROADMAP.md) — Enemy Health Bars (phases 83-85)
 
 ## Progress
@@ -43,10 +40,10 @@
 | v3.0 | 72-74 | 4 | Complete | 2026-02-02 |
 | v3.1 | 75-79 | 7 | Complete | 2026-02-03 |
 | v3.2 | 80-82 | 3 | Complete | 2026-02-10 |
-| v3.3 | 83-85 | TBD | In progress | - |
+| v3.3 | 83-85 | 3 | Complete | 2026-02-12 |
 
-**Total:** 85 phases, 128+ plans across 17 milestones
+**Total:** 85 phases, 131 plans across 17 milestones
 
 ---
 
-*Roadmap last updated: 2026-02-10 after v3.3 roadmap creation*
+*Roadmap last updated: 2026-02-12 after v3.3 milestone completion*

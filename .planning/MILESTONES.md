@@ -451,3 +451,31 @@
 
 ---
 
+
+## v3.3 Enemy Health Bars (Shipped: 2026-02-12)
+
+**Delivered:** Floating health bars above hostile mobs with three-layer HP/absorption rendering, world-space status effect icons with duration drain, and configurable Video Settings scaling — all using billboard quads in world-space with shared rendering constants from the Effects GUI.
+
+**Phases completed:** 83-85 (3 plans total)
+
+**Key accomplishments:**
+
+- Three-layer floating health bar renderer with billboard positioning above hostile mobs (empty background, HP-clipped fill, absorption overlay)
+- World-space status effect icons above health bar with 4-layer rendering (frame, vanilla icon, green duration overlay, roman numerals)
+- Per-mob duration tracking with sub-tick interpolation for smooth drain animation
+- Video Settings "Mob Health Bar" scaling slider (2-20%) with file persistence and dynamic renderer integration
+- Shared rendering constants extracted from Effects GUI (EffectsHudRenderer) for cross-renderer consistency
+
+**Stats:**
+
+- 7 files created/modified (507 insertions, 19 deletions)
+- ~14,865 lines of Kotlin/Java (cumulative)
+- 3 phases, 3 plans
+- 2 days (Feb 10-11, 2026)
+
+**Git range:** `feat(83-01)` → `fix: correct health bar layer ordering`
+
+**What's next:** To be determined
+
+---
+

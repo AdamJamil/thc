@@ -10,16 +10,16 @@ See: .planning/PROJECT.md (updated 2026-02-12)
 ## Current Position
 
 Phase: 86 of 88 (Wooden Bow Foundation)
-Plan: 0 — ready to plan
-Status: Ready to plan
-Last activity: 2026-02-12 — Roadmap created for v3.4
+Plan: 1 of 2 complete
+Status: Executing phase 86
+Last activity: 2026-02-13 — Completed 86-01 (Wooden Bow identity, recipe, drag physics)
 
-Progress: 18 milestones (17 shipped + 1 active), 131 plans across 85 phases
+Progress: 18 milestones (17 shipped + 1 active), 132 plans across 86 phases
 
 ## Performance Metrics
 
 **Cumulative:**
-- 131 plans completed across 17 shipped milestones
+- 132 plans completed across 17 shipped milestones
 - ~9 hours total execution time
 - 28 days from project start
 
@@ -34,6 +34,9 @@ Progress: 18 milestones (17 shipped + 1 active), 131 plans across 85 phases
 ### Decisions
 
 See PROJECT.md Key Decisions table and milestone archives for full decision logs.
+
+- **86-01:** BowType stored as @Unique fields on ProjectileEntityMixin (runtime-only, no serialization)
+- **86-01:** Drag applied multiplicatively per tick: max(0.8, 1.0 - dragFactor * ticks)
 
 ### Pending Todos
 
@@ -58,7 +61,7 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-02-12
-Stopped at: Roadmap created for v3.4 Bow Overhaul
+Last session: 2026-02-13
+Stopped at: Completed 86-01-PLAN.md
 Resume file: None
-Next: Plan phase 86
+Next: Execute 86-02-PLAN.md

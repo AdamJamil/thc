@@ -9,9 +9,10 @@ See: .planning/PROJECT.md (updated 2026-02-12)
 
 ## Current Position
 
-Milestone: v3.3 shipped (2026-02-12)
-Status: Between milestones
-Last activity: 2026-02-12 — Completed v3.3 Enemy Health Bars milestone
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-02-12 — Milestone v3.4 started
 
 Progress: 17 milestones shipped, 131 plans across 85 phases
 
@@ -58,6 +59,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-12
-Stopped at: v3.3 milestone completed and archived
+Stopped at: Defining v3.4 requirements
 Resume file: None
-Next: /gsd:new-milestone to plan next milestone
+Next: Define requirements, create roadmap

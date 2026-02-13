@@ -250,7 +250,18 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ### Active
 
-(None — planning next milestone)
+## Current Milestone: v3.4 Bow Overhaul
+
+**Goal:** Differentiate ranged combat through three class-specific bow tiers with unique arrow physics, damage profiles, and special abilities.
+
+**Target features:**
+- Wooden bow (renamed vanilla bow) with half damage and vanilla recipe
+- Blaze bow (Ranged class, Stage 2+) with fire damage and 1.5x draw time
+- Breeze bow (Support class, Stage 2+) with knockback, splash tipped arrows, and 0.75x draw time
+- New horizontal drag arrow physics replacing gravity-over-time
+- Class/stage gating with actionbar messages
+- Tipped arrow restrictions (wooden bow) and splash effects (breeze bow)
+- Glowing removal from projectile hits
 
 ### Out of Scope
 
@@ -330,7 +341,7 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 
 ## Current State
 
-**Latest Ship:** v3.3 Enemy Health Bars (2026-02-12)
+**Latest Ship:** v3.4 Bow Overhaul (in progress)
 
 **Codebase:**
 - ~14,865 LOC Kotlin/Java
@@ -401,4 +412,4 @@ Risk must be required for progress. No tedious grinding to avoid challenge - pla
 **Technical debt:** None identified
 
 ---
-*Last updated: 2026-02-12 after v3.3 milestone completion*
+*Last updated: 2026-02-12 after v3.4 milestone start*

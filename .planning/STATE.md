@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-02-12)
 
 **Core value:** Risk must be required for progress. No tedious grinding to avoid challenge.
-**Current focus:** v3.4 Bow Overhaul — Phase 88 (Breeze Bow)
+**Current focus:** v3.4 Bow Overhaul — Phase 88 complete (milestone complete)
 
 ## Current Position
 
-Phase: 87 of 88 (Blaze Bow) -- COMPLETE
+Phase: 88 of 88 (Breeze Bow) -- COMPLETE
 Plan: 1 of 1 complete
-Status: Phase 87 complete
-Last activity: 2026-02-13 — Completed 87-01 (Blaze Bow item, class gate, fire-on-hit)
+Status: Phase 88 complete, v3.4 milestone complete
+Last activity: 2026-02-13 — Completed 88-01 (Breeze Bow item, damage, knockback, class gate)
 
-Progress: 18 milestones (17 shipped + 1 active), 135 plans across 87 phases
+Progress: 18 milestones (17 shipped + 1 active), 136 plans across 88 phases
 
 ## Performance Metrics
 
@@ -43,6 +43,9 @@ See PROJECT.md Key Decisions table and milestone archives for full decision logs
 - **87-01:** Draw speed 1.5x via releaseUsing charge scaling (dividing actualCharge by 1.5f)
 - **87-01:** Fire-on-hit via setRemainingFireTicks(60) -- refreshes on re-hit naturally
 - **87-01:** 100% damage for blaze_bow arrows -- no bow-specific multiplier entry defaults to 1.0
+- **88-01:** THCBows registration object for Breeze Bow (separate from THCItems)
+- **88-01:** Draw speed 0.75x via releaseUsing charge scaling (dividing actualCharge by 0.75f)
+- **88-01:** Knockback preserved by early return in thc$removeArrowKnockback for breeze_bow tag
 
 ### Pending Todos
 
@@ -68,6 +71,6 @@ None.
 ## Session Continuity
 
 Last session: 2026-02-13
-Stopped at: Completed 87-01-PLAN.md (phase 87 complete)
+Stopped at: Completed 88-01-PLAN.md (phase 88 complete, v3.4 milestone complete)
 Resume file: None
-Next: Plan phase 88 (Breeze Bow)
+Next: Next milestone planning

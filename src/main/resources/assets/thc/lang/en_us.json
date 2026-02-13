@@ -34,5 +34,7 @@
   "thc.options.effectsGuiScale": "Effects GUI Scaling",
   "thc.options.mobHealthBarScale": "Mob Health Bar",
   "item.minecraft.bow": "Wooden Bow",
-  "thc.bow.tipped_blocked": "Your bow can't fire tipped arrows"
+  "thc.bow.tipped_blocked": "Your bow can't fire tipped arrows",
+  "item.thc.blaze_bow": "Blaze Bow",
+  "item.thc.breeze_bow": "Breeze Bow"
 }

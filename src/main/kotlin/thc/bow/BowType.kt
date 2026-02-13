@@ -2,6 +2,7 @@ package thc.bow
 
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.item.Items
+import thc.item.BlazeBowItem
 
 enum class BowType(val dragFactor: Double, val tag: String) {
     WOODEN(dragFactor = 0.015, tag = "wooden_bow"),
@@ -13,7 +14,8 @@ enum class BowType(val dragFactor: Double, val tag: String) {
         fun fromBowItem(stack: ItemStack): BowType {
             return when (stack.item) {
                 Items.BOW -> WOODEN
-                // Future custom bow items will be mapped here
+                is BlazeBowItem -> BLAZE
+                is BreezeBowItem -> BREEZE
                 else -> WOODEN
             }
         }

@@ -28,6 +28,11 @@ object THCItems {
         Identifier.withDefaultNamespace("food_and_drinks")
     )
 
+    private val combatTabKey: ResourceKey<CreativeModeTab> = ResourceKey.create(
+        Registries.CREATIVE_MODE_TAB,
+        Identifier.withDefaultNamespace("combat")
+    )
+
     // Structure tags for locators (custom tags for structures without StructureTags constants)
     private val FORTRESS_TAG: TagKey<Structure> = TagKey.create(
         Registries.STRUCTURE,
@@ -189,6 +194,16 @@ object THCItems {
         )
     }
 
+    @JvmField
+    val BLAZE_BOW: Item = register("blaze_bow") { key ->
+        BlazeBowItem(
+            Item.Properties()
+                .setId(key)
+                .stacksTo(1)
+                .durability(384)
+        )
+    }
+
     fun init() {
         // Set the drop item for IronBoat entity after items are initialized
         thc.entity.IronBoat.ironBoatDropItem = IRON_BOAT
@@ -212,6 +227,9 @@ object THCItems {
         ItemGroupEvents.modifyEntriesEvent(foodTabKey).register { entries ->
             entries.accept(HONEY_APPLE)
             entries.accept(DOUGH)
+        }
+        ItemGroupEvents.modifyEntriesEvent(combatTabKey).register { entries ->
+            entries.accept(BLAZE_BOW)
         }
     }
 

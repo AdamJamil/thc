@@ -68,6 +68,7 @@ object THC : ModInitializer {
 		THCAttachments.init()
 		THCArrows.init()
 		THCBucklers.init()
+		thc.bow.THCBows.init()
 		thc.entity.THCEntities.init()
 		THCItems.init()
 		EnderArmor.init()

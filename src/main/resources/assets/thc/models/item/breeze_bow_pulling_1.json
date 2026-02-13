@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "thc:item/breeze_bow_iron_pulling_1"
+  }
+}

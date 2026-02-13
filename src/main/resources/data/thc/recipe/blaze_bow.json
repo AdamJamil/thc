@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": "minecraft:blaze_rod",
+    "S": "minecraft:string"
+  },
+  "pattern": [
+    " BS",
+    "B S",
+    " BS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "thc:blaze_bow"
+  }
+}

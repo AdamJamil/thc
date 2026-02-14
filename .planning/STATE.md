@@ -55,10 +55,11 @@ None.
 | 006 | Fix snowballs proccing arrow-only effects | 2026-02-03 | 8e3c3e2 | [006](./quick/006-fix-snowball-proccing-arrow-effects/) |
 | 007 | Fix effects GUI scaling, overlay, infinite filter, vanilla HUD | 2026-02-10 | 209be5c | [007](./quick/7-fix-v3-2-effects-gui-scaling-math-green-/) |
 | 008 | Fix effects GUI overlay alpha (35%) and frame-relative positioning | 2026-02-10 | b25f91a | [008](./quick/8-fix-effects-gui-overlay-transparency-mid/) |
+| 009 | Add /allClasses override command with is<Class> API | 2026-02-14 | d3e0e39 | [009](./quick/9-add-allclasses-override-command-with-is-/) |
 
 ## Session Continuity
 
-Last session: 2026-02-13
-Stopped at: v3.4 milestone archived
+Last session: 2026-02-14
+Stopped at: Completed quick-9 (allClasses command)
 Resume file: None
 Next: /gsd:new-milestone

@@ -39,6 +39,7 @@ import thc.monster.DamageRebalancing
 import thc.monster.GhastModifications
 import thc.monster.MonsterModifications
 import thc.monster.SimpleEntityBehaviors
+import thc.playerclass.AllClassesCommand
 import thc.playerclass.ClassManager
 import thc.playerclass.SelectClassCommand
 import thc.stage.AdvanceStageCommand
@@ -82,6 +83,7 @@ object THC : ModInitializer {
 		ArmorRebalancing.register()
 		FoodStatsModifier.register()
 		SelectClassCommand.register()
+		AllClassesCommand.register()
 		AdvanceStageCommand.register()
 		MonsterModifications.register()
 		GhastModifications.register()

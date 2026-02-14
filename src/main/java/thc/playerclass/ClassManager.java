@@ -66,4 +66,51 @@ public final class ClassManager {
 			applyHealthModifier(player, playerClass);
 		}
 	}
+
+	// --- allClasses override mode ---
+
+	private static boolean allClassesEnabled = false;
+
+	/**
+	 * Check if player is Bastion class (or allClasses override is active).
+	 */
+	public static boolean isBastion(ServerPlayer player) {
+		return allClassesEnabled || getClass(player) == PlayerClass.BASTION;
+	}
+
+	/**
+	 * Check if player is Melee class (or allClasses override is active).
+	 */
+	public static boolean isMelee(ServerPlayer player) {
+		return allClassesEnabled || getClass(player) == PlayerClass.MELEE;
+	}
+
+	/**
+	 * Check if player is Ranged class (or allClasses override is active).
+	 */
+	public static boolean isRanged(ServerPlayer player) {
+		return allClassesEnabled || getClass(player) == PlayerClass.RANGED;
+	}
+
+	/**
+	 * Check if player is Support class (or allClasses override is active).
+	 */
+	public static boolean isSupport(ServerPlayer player) {
+		return allClassesEnabled || getClass(player) == PlayerClass.SUPPORT;
+	}
+
+	/**
+	 * Set the allClasses override mode.
+	 * When enabled, all is<Class>() checks return true for any player.
+	 */
+	public static void setAllClasses(boolean enabled) {
+		allClassesEnabled = enabled;
+	}
+
+	/**
+	 * Check if allClasses override mode is currently enabled.
+	 */
+	public static boolean isAllClassesEnabled() {
+		return allClassesEnabled;
+	}
 }

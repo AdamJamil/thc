@@ -19,7 +19,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import thc.bow.BowTypeTagAccess;
 import thc.playerclass.ClassManager;
-import thc.playerclass.PlayerClass;
 import thc.threat.ThreatManager;
 
 /**
@@ -85,10 +84,7 @@ public abstract class AbstractArrowMixin {
 		double reducedDamage = baseDamage * 0.13;
 
 		// Apply class-based ranged multiplier
-		PlayerClass playerClass = ClassManager.getClass(player);
-		if (playerClass != null) {
-			reducedDamage *= playerClass.getRangedMultiplier();
-		}
+		reducedDamage *= ClassManager.getEffectiveRangedMultiplier(player);
 
 		// Apply bow-type damage multiplier
 		double bowDamageMultiplier = 1.0;

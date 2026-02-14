@@ -13,11 +13,11 @@ public final class ClassManager {
 	}
 
 	/**
-	 * Get the player's selected class.
-	 * @param player The player to check
-	 * @return The player's class, or null if no class selected
+	 * Get the player's selected class (internal use only).
+	 * External callers should use is<Class>() for boolean gates
+	 * or getEffective*() for numeric values.
 	 */
-	public static PlayerClass getClass(ServerPlayer player) {
+	private static PlayerClass getClass(ServerPlayer player) {
 		String className = player.getAttached(THCAttachments.PLAYER_CLASS);
 		if (className == null) return null;
 		return PlayerClass.fromString(className);
@@ -41,17 +41,17 @@ public final class ClassManager {
 	public static boolean setClass(ServerPlayer player, PlayerClass playerClass) {
 		if (hasClass(player)) return false; // Already has class - permanent
 		player.setAttached(THCAttachments.PLAYER_CLASS, playerClass.name());
-		applyHealthModifier(player, playerClass);
+		applyHealthModifier(player);
 		return true;
 	}
 
 	/**
-	 * Apply health modifier based on class selection.
+	 * Apply health modifier based on effective class bonus.
 	 * Uses existing ServerPlayerHealthAccess interface.
 	 */
-	private static void applyHealthModifier(ServerPlayer player, PlayerClass playerClass) {
+	private static void applyHealthModifier(ServerPlayer player) {
 		double baseHealth = 8.0; // THC default (4 hearts)
-		double newHealth = baseHealth + playerClass.getHealthBonus();
+		double newHealth = baseHealth + getEffectiveHealthBonus(player);
 		((ServerPlayerHealthAccess) player).thc$setMaxHealth(newHealth);
 	}
 
@@ -61,9 +61,8 @@ public final class ClassManager {
 	 * @param player The player to restore health for
 	 */
 	public static void restoreHealthModifier(ServerPlayer player) {
-		PlayerClass playerClass = getClass(player);
-		if (playerClass != null) {
-			applyHealthModifier(player, playerClass);
+		if (hasClass(player)) {
+			applyHealthModifier(player);
 		}
 	}
 
@@ -112,5 +111,46 @@ public final class ClassManager {
 	 */
 	public static boolean isAllClassesEnabled() {
 		return allClassesEnabled;
+	}
+
+	// --- Effective numeric accessors (respect allClasses) ---
+
+	/**
+	 * Get effective melee multiplier. Checks is<Class>() in descending order
+	 * so allClasses mode yields the highest multiplier.
+	 * MELEE(4.0) > BASTION(2.5) > RANGED(1.0) = SUPPORT(1.0)
+	 */
+	public static double getEffectiveMeleeMultiplier(ServerPlayer player) {
+		if (isMelee(player)) return PlayerClass.MELEE.getMeleeMultiplier();
+		if (isBastion(player)) return PlayerClass.BASTION.getMeleeMultiplier();
+		if (isRanged(player)) return PlayerClass.RANGED.getMeleeMultiplier();
+		if (isSupport(player)) return PlayerClass.SUPPORT.getMeleeMultiplier();
+		return 1.0; // no class selected
+	}
+
+	/**
+	 * Get effective ranged multiplier. Checks is<Class>() in descending order
+	 * so allClasses mode yields the highest multiplier.
+	 * RANGED(5.0) > SUPPORT(3.0) > BASTION(1.0) = MELEE(1.0)
+	 */
+	public static double getEffectiveRangedMultiplier(ServerPlayer player) {
+		if (isRanged(player)) return PlayerClass.RANGED.getRangedMultiplier();
+		if (isSupport(player)) return PlayerClass.SUPPORT.getRangedMultiplier();
+		if (isBastion(player)) return PlayerClass.BASTION.getRangedMultiplier();
+		if (isMelee(player)) return PlayerClass.MELEE.getRangedMultiplier();
+		return 1.0; // no class selected
+	}
+
+	/**
+	 * Get effective health bonus. Checks is<Class>() in descending order
+	 * so allClasses mode yields the highest bonus.
+	 * BASTION(2.0) > MELEE(1.0) > RANGED(0.0) = SUPPORT(0.0)
+	 */
+	public static double getEffectiveHealthBonus(ServerPlayer player) {
+		if (isBastion(player)) return PlayerClass.BASTION.getHealthBonus();
+		if (isMelee(player)) return PlayerClass.MELEE.getHealthBonus();
+		if (isRanged(player)) return PlayerClass.RANGED.getHealthBonus();
+		if (isSupport(player)) return PlayerClass.SUPPORT.getHealthBonus();
+		return 0.0; // no class selected
 	}
 }

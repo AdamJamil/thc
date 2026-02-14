@@ -14,7 +14,6 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.Slice;
 import thc.boon.BoonGate;
 import thc.playerclass.ClassManager;
-import thc.playerclass.PlayerClass;
 
 @Mixin(Player.class)
 public abstract class PlayerAttackMixin {
@@ -35,10 +34,7 @@ public abstract class PlayerAttackMixin {
 		// Apply class-based melee multiplier
 		Player self = (Player) (Object) this;
 		if (self instanceof ServerPlayer serverPlayer) {
-			PlayerClass playerClass = ClassManager.getClass(serverPlayer);
-			if (playerClass != null) {
-				baseDamage *= (float) playerClass.getMeleeMultiplier();
-			}
+			baseDamage *= (float) ClassManager.getEffectiveMeleeMultiplier(serverPlayer);
 		}
 
 		return baseDamage;

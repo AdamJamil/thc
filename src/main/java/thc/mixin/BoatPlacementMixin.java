@@ -28,7 +28,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import thc.mixin.access.ItemAccessor;
 import thc.playerclass.ClassManager;
-import thc.playerclass.PlayerClass;
 import thc.stage.StageManager;
 
 /**
@@ -67,10 +66,9 @@ public abstract class BoatPlacementMixin {
 
         // This is a land placement attempt
         if (player instanceof ServerPlayer sp) {
-            PlayerClass playerClass = ClassManager.getClass(sp);
             int boonLevel = StageManager.getBoonLevel(sp);
 
-            if (playerClass != PlayerClass.BASTION || boonLevel < 5) {
+            if (!ClassManager.isBastion(sp) || boonLevel < 5) {
                 // Not qualified - show message and block
                 sp.displayClientMessage(
                     Component.literal("Boat Mastery requires Bastion at Stage 5+"),

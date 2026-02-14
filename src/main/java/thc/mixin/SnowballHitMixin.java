@@ -18,7 +18,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import thc.playerclass.ClassManager;
-import thc.playerclass.PlayerClass;
 import thc.stage.StageManager;
 
 /**
@@ -56,8 +55,7 @@ public abstract class SnowballHitMixin {
 		}
 
 		// Gate: Bastion class only
-		PlayerClass playerClass = ClassManager.getClass(player);
-		if (playerClass != PlayerClass.BASTION) {
+		if (!ClassManager.isBastion(player)) {
 			return;
 		}
 

@@ -13,7 +13,6 @@ import net.minecraft.world.item.ItemUseAnimation
 import net.minecraft.world.level.Level
 import thc.buckler.BucklerState
 import thc.playerclass.ClassManager
-import thc.playerclass.PlayerClass
 import thc.stage.StageManager
 
 class BucklerItem(properties: Properties) : Item(properties) {
@@ -23,9 +22,8 @@ class BucklerItem(properties: Properties) : Item(properties) {
         }
         if (player is ServerPlayer) {
             // Buckler gate: Bastion class at Stage 2+ only
-            val playerClass = ClassManager.getClass(player)
             val boonLevel = StageManager.getBoonLevel(player)
-            if (playerClass != PlayerClass.BASTION || boonLevel < 2) {
+            if (!ClassManager.isBastion(player) || boonLevel < 2) {
                 player.displayClientMessage(
                     Component.literal("Your wimpy arms cannot lift the buckler.")
                         .withStyle(ChatFormatting.RED),

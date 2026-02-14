@@ -52,7 +52,6 @@ import thc.lectern.LecternEnchanting
 import thc.downed.DownedManager
 import thc.downed.DownedState
 import thc.downed.RevivalState
-import thc.playerclass.PlayerClass
 import thc.villager.JobBlockAssignment
 import thc.villager.VillagerInteraction
 
@@ -321,8 +320,7 @@ object THC : ModInitializer {
 			if (!reviver.isShiftKeyDown) continue
 
 			// Determine progress rate based on class
-			val playerClass = ClassManager.getClass(reviver)
-			val progressRate = if (playerClass == PlayerClass.SUPPORT) {
+			val progressRate = if (ClassManager.isSupport(reviver)) {
 				1.0 / 100.0  // 100 ticks = 5 seconds to reach 1.0
 			} else {
 				0.5 / 100.0  // 200 ticks = 10 seconds (0.5 per tick scaled to 0-1 range)

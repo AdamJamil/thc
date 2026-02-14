@@ -2,7 +2,6 @@ package thc.boon;
 
 import net.minecraft.server.level.ServerPlayer;
 import thc.playerclass.ClassManager;
-import thc.playerclass.PlayerClass;
 import thc.stage.StageManager;
 
 /**
@@ -19,8 +18,7 @@ public final class BoonGate {
 	 * @return true if player is Bastion with boon level >= 3
 	 */
 	public static boolean hasStage3Boon(ServerPlayer player) {
-		PlayerClass playerClass = ClassManager.getClass(player);
-		if (playerClass != PlayerClass.BASTION) {
+		if (!ClassManager.isBastion(player)) {
 			return false;
 		}
 		return StageManager.getBoonLevel(player) >= 3;

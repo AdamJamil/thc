@@ -11,7 +11,6 @@ import net.minecraft.world.item.BowItem
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import thc.playerclass.ClassManager
-import thc.playerclass.PlayerClass
 import thc.stage.StageManager
 
 class BreezeBowItem(properties: Properties) : BowItem(properties) {
@@ -19,9 +18,8 @@ class BreezeBowItem(properties: Properties) : BowItem(properties) {
     override fun use(world: Level, player: Player, hand: InteractionHand): InteractionResult {
         if (player is ServerPlayer) {
             // Breeze Bow gate: Support class at Stage 2+ only
-            val playerClass = ClassManager.getClass(player)
             val boonLevel = StageManager.getBoonLevel(player)
-            if (playerClass != PlayerClass.SUPPORT || boonLevel < 2) {
+            if (!ClassManager.isSupport(player) || boonLevel < 2) {
                 player.displayClientMessage(
                     Component.literal("The bow gusts are beyond your control.")
                         .withStyle(ChatFormatting.RED),
